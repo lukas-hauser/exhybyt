@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  get 'html_pages/home'
-  get 'html_pages/help'
-  get 'html_pages/about'
-  get 'html_pages/howitworks'
-  get 'html_pages/terms'
-  get 'html_pages/privacypolicy'
-  get 'html_pages/cookiepolicy'
   root 'html_pages#home'
+  get '/home', to: 'html_pages#home'
+  get '/help', to: 'html_pages#help'
+  get '/about', to: 'html_pages#about'
+  get '/howitworks', to: 'html_pages#howitworks'
+  get '/terms', to: 'html_pages#terms'
+  get '/privacypolicy', to: 'html_pages#privacypolicy'
+  get '/cookiepolicy', to: 'html_pages#cookiepolicy'
+  get '/contact', to: 'html_pages#contact'
+
+  get '/signup', to: 'users#new'
+
 end
