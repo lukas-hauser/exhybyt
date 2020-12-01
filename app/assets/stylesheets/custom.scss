@@ -49,20 +49,3 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
-
-/* Header & Logo */
-
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #555;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
-    color: $light-gray;
-    text-decoration: none;
-  }
-}
