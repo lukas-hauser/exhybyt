@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/privacypolicy', to: 'html_pages#privacypolicy'
   get '/cookiepolicy', to: 'html_pages#cookiepolicy'
   get '/contact', to: 'html_pages#contact'
-
   get '/signup', to: 'users#new'
+  resources :users
 
 end
