@@ -4,13 +4,13 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "layout links" do
     get root_path
     assert_template 'html_pages/home'
-    assert_select "a[href=?]", "home"
+    assert_select "a[href=?]", root_path
 #    assert_select "a[href=?]", "help"
-    assert_select "a[href=?]", "about"
-    assert_select "a[href=?]", "howitworks"
-    assert_select "a[href=?]", "terms"
-    assert_select "a[href=?]", "privacypolicy"
-    assert_select "a[href=?]", "cookiepolicy"
-    assert_select "a[href=?]", "contact"
+    assert_select "a[href=?]", about_path
+    assert_select "a[href=?]", howitworks_path
+    assert_select "a[href=?]", terms_path
+    assert_select "a[href=?]", privacypolicy_path
+    assert_select "a[href=?]", cookiepolicy_path
+    assert_select "a[href=?]", contact_path
   end
 end
