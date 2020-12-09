@@ -1,12 +1,19 @@
 <% provide(:title, 'Home') %>
 
-<div class="center jumbotron">
-  <h1>We are making exhibition space more accessible.</h1>
-  <h2>
-    Showing art or photography to the public is an amazing experience. However, finding the right venue and organising an exhibition is often difficult, time-consuming and expensive.
-    <br>
-    We want to change that.
-  </h2>
+<% if logged_in? %>
+  <div class="col-md-8">
+    <h3>Spaces</h3>
+    <%= render 'shared/feed' %>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>We are making exhibition space more accessible.</h1>
+    <h2>
+      Showing art or photography to the public is an amazing experience. However, finding the right venue and organising an exhibition is often difficult, time-consuming and expensive.
+      <br>
+      We want to change that.
+    </h2>
 
-  <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
-</div>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>

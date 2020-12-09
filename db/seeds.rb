@@ -11,7 +11,7 @@ User.create!(firstname: "Test", lastname: "User", email: "test@testuser.com", pa
 end
 
 users = User.order(:created_at).take(5)
-20.times do
+40.times do
   venue_type = "Coffee Shop"
   category = "Wall Space"
   listing_name = Faker::Restaurant.name
@@ -31,3 +31,10 @@ users = User.order(:created_at).take(5)
     price: price
     ) }
 end
+
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

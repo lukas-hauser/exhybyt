@@ -70,8 +70,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_adverts: false,
         active: true} }
     end
-#    assert_redirected_to @space
-    follow_redirect!
+    #assert_redirected_to @space
+    #follow_redirect!
 
     # Delete Post
 #    assert_select 'a', text: 'delete'
