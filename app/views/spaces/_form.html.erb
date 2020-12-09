@@ -1,0 +1,50 @@
+<%= form_with(model: @space, local: true) do |f| %>
+  <h1>Create a Space</h1>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.select :category, [["Wall Space","Wall Space"],["Entire Gallery","Entire Gallery"]],
+  id: "category", prompt: "Category", class: "form-control" %>
+  <%= f.select :venue_type, [["Bar","Bar"],["Coffee Shop","Coffee Shop"],["Restaurant","Restaurant"]],
+  prompt: "Venue Type", class: "form-control" %>
+  <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
+  <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
+  <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+  <h2>Amenities</h2>
+  <%= f.check_box :is_wifi %> WiFi
+  <%= f.check_box :is_toilet %> Toilet
+  <%= f.check_box :is_dis_acc %> Disabled Access
+  <%= f.check_box :is_parking %> Parking
+  <%= f.check_box :is_sec_sys %> Security System
+  <%= f.check_box :is_storage %> Storage
+  <%= f.check_box :is_hang_sys %> Picture Hanging System
+  <%= f.check_box :is_adj_light %> Adjustabe Lighting
+  <%= f.check_box :is_nat_light %> Natural Light
+  <%= f.check_box :is_plugs %> Plug Sockets
+
+  <h2>Interested in:</h2>
+  <%= f.check_box :is_paintings %> Paintings
+  <%= f.check_box :is_photography %> Photography
+  <%= f.check_box :is_drawings %> Drawings
+  <%= f.check_box :is_sculptures %> Sculptures
+  <%= f.check_box :is_live_perf %> Live Performance
+  <%= f.check_box :is_adverts %> Advertisements
+
+  <%= f.text_field :wall_height, placeholder: "Wall Space Height cm", class: "form-control" %>
+  <%= f.text_field :wall_width, placeholder: "Wall Space Width cm", class: "form-control" %>
+
+  <%= f.text_field :price, placeholder: "Price per day", class: "form-control" %>
+
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <span class="image">
+    <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png" %>
+  </span>
+<% end %>
+
+<script type="text/javascript">
+  $("#space_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+    alert("image cannot exceet 5MB. Please choose a smaller file.");
+    }
+    $("#space_image").val("");
+  });
+</script>

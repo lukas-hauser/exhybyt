@@ -73,4 +73,19 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "associated spaces should be destroyed" do
+    @user.save
+    @user.spaces.create!(
+      venue_type: "Coffee Shop",
+      category: "Wall Space",
+      listing_name: "Lukas' Cafe",
+      description: "Cozy coffee shop in the town center",
+      address: "Main Street 1, City 10000, UK",
+      wall_height: "50.0",
+      wall_width: "60.5",
+      price: "25")
+    assert_difference 'Space.count', -1 do
+      @user.destroy
+    end
+  end
 end

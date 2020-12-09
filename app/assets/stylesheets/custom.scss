@@ -26,7 +26,6 @@ $light-gray: #777;
 
 body {
   padding-top: 0px;
-  text-align: center;
 }
 
 section {
@@ -143,5 +142,38 @@ input {
   @extend .has-error !optional;
   .form-control {
     color: $red;
+  }
+}
+
+/* Spaces */
+
+.spaces {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .listing_name {
+    display: block;
+    margin-left: 0px;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+  .timestamp {
+    color: $light-gray;
+    display: block;
+    margin-left: 60px;
+  }
+  .gravatar {
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
   }
 }

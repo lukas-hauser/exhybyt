@@ -1,0 +1,13 @@
+<li id="space-<%= space.id %>">
+  <%= link_to gravatar_for(space.user, size: 50), space.user %>
+  <span class="user"><%= link_to space.user.firstname + " " + space.user.lastname, space.user %></span>
+  <span class="listing_name"><%= space.listing_name %></span>
+  <span class="timestamp">Wall Space: <%= space.wall_width %> x <%= space.wall_height %> cm (w x h)</span>
+  <span class="timestamp">Price: £ <%= space.price %> per day</span>
+  <span class="listing_name"><%= space.description %>
+  <%= image_tag space.display_image if space.image.attached? %>
+  <% if current_user?(space.user) %>
+    | <%= link_to "delete", space, method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
+  </span>
+</li>

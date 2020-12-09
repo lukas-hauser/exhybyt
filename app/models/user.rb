@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :spaces, dependent: :destroy
   before_save { self.email = email.downcase}
   validates :firstname, presence: true, length: { maximum: 60 }
   validates :lastname, presence: true, length: { maximum: 60 }
