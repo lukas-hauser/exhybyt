@@ -1,24 +1,25 @@
 <%= form_with(model: @space, local: true) do |f| %>
   <h1>Create a Space</h1>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.select :category, [["Wall Space","Wall Space"],["Entire Gallery","Entire Gallery"]],
+  <%= f.select :category,space_categories,
   id: "category", prompt: "Category", class: "form-control" %>
-  <%= f.select :venue_type, [["Bar","Bar"],["Coffee Shop","Coffee Shop"],["Restaurant","Restaurant"]],
+  <%= f.select :venue_type, venue_types,
   prompt: "Venue Type", class: "form-control" %>
   <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
   <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
   <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+
   <h2>Amenities</h2>
-  <%= f.check_box :is_wifi %> WiFi
-  <%= f.check_box :is_toilet %> Toilet
-  <%= f.check_box :is_dis_acc %> Disabled Access
-  <%= f.check_box :is_parking %> Parking
-  <%= f.check_box :is_sec_sys %> Security System
-  <%= f.check_box :is_storage %> Storage
-  <%= f.check_box :is_hang_sys %> Picture Hanging System
-  <%= f.check_box :is_adj_light %> Adjustabe Lighting
-  <%= f.check_box :is_nat_light %> Natural Light
-  <%= f.check_box :is_plugs %> Plug Sockets
+    <%= f.check_box :is_wifi %> WiFi
+    <%= f.check_box :is_toilet %> Toilet
+    <%= f.check_box :is_dis_acc %> Disabled Access
+    <%= f.check_box :is_parking %> Parking
+    <%= f.check_box :is_sec_sys %> Security System
+    <%= f.check_box :is_storage %> Storage
+    <%= f.check_box :is_hang_sys %> Picture Hanging System
+    <%= f.check_box :is_adj_light %> Adjustabe Lighting
+    <%= f.check_box :is_nat_light %> Natural Light
+    <%= f.check_box :is_plugs %> Plug Sockets
 
   <h2>Interested in:</h2>
   <%= f.check_box :is_paintings %> Paintings

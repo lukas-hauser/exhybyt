@@ -17,6 +17,6 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :spaces,        only: [:create, :destroy]
+  resources :spaces,        only: [:new, :show, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
 end
