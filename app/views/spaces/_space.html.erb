@@ -1,5 +1,5 @@
 <li id="space-<%= space.id %>">
-  <span class="listing_name"><%= space.listing_name %>
+  <span class="listing_name"><%= link_to space.listing_name, space %>
     <% if current_user?(space.user) %>|
       <%= link_to "delete", space, method: :delete, data: { confirm: "Are you sure?" } %>
     <% end %>
