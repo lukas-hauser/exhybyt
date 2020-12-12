@@ -36,7 +36,7 @@
 
   <%= f.submit "Submit", class: "btn btn-primary" %>
   <span class="image">
-    <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png" %>
+    <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
   </span>
 <% end %>
 

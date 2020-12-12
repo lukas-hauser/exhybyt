@@ -1,6 +1,6 @@
 class Space < ApplicationRecord
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :listing_name, presence: true, length: { maximum: 60 }
@@ -12,11 +12,11 @@ class Space < ApplicationRecord
   validates :wall_width, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :price, presence: true, numericality: {only_float: true, :greater_than => 0}
 
-  validates :image, #presence: true,
+  validates :images, #presence: true,
                     content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)." },
                     size: { less_than: 5.megabytes, message: "exceeds 5MB." }
 
-  def display_image
-    image.variant(resize_to_limit: [500,500])
-  end
+#  def display_image
+#    image.variant(resize_to_limit: [500,500])
+#  end
 end

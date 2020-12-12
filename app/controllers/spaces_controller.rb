@@ -1,5 +1,5 @@
 class SpacesController < ApplicationController
-  before_action :set_space,       only: [:show, :edit, :update]
+  before_action :set_space,       only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
   before_action :correct_user, only: :destroy
 
@@ -16,7 +16,7 @@ class SpacesController < ApplicationController
 
   def create
     @space = current_user.spaces.build(space_params)
-    @space.image.attach(params[:space][:image])
+    @space.images.attach(params[:space][:images])
     if @space.save
       flash[:success] = "Space saved."
       redirect_to @space
@@ -40,7 +40,7 @@ class SpacesController < ApplicationController
   def destroy
     @space.destroy
     flash[:success] = "Space has been deleted"
-    redirect_to request.referrer || root_url
+    redirect_to request.referrer || root_path
   end
 
   private
@@ -75,7 +75,7 @@ class SpacesController < ApplicationController
       :is_sculptures,
       :is_live_perf,
       :is_adverts,
-      :image
+      :images
     )
   end
 
