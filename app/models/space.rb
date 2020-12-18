@@ -1,6 +1,10 @@
 class Space < ApplicationRecord
   belongs_to :user
   has_many_attached :images
+
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :listing_name, presence: true, length: { maximum: 60 }

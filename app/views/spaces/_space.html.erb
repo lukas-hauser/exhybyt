@@ -1,18 +1,24 @@
-<li id="space-<%= space.id %>">
-  <span class="listing_name"><%= link_to space.listing_name, space %>
-    <% if current_user?(space.user) %>|
-      <%= link_to "delete", space, method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end %>
-  </span>
-  <span class="user">Hosted by <%= link_to space.user.firstname + " " + space.user.lastname, space.user %></span>
-  <span class="timestamp">Wall Space: <%= space.wall_width %> x <%= space.wall_height %> cm (w x h)</span>
-  <span class="timestamp">Price: £ <%= space.price %> per day</span>
-  <span class="listing_name"><%= space.description %></span>
-  <span class="user">
-    <% if space.images.attached? %>
-      <% space.images.each do |image| %>
-        <%= image_tag image.variant(resize_to_limit: [500,500]) %>
+<div class="col-md">
+  <div class="row g-0 overflow-hidden flex-md-row mb-4 shadow-sm h-md-200 position-relative">
+    <div class="col-auto d-none d-lg-block">
+      <% if space.images.attached? %>
+        <%= image_tag space.images[0].variant(resize_to_limit: [200,200]) %>
       <% end %>
-    <% end %>
-  </span>
-</li>
+    </div>
+    <div class="col p-4 d-flex flex-column position-static">
+      <strong class="d-inline-block mb-2 text-primary"><%= space.venue_type %></strong>
+      <h3 class="mb-0"><%= link_to space.listing_name, space %></h3>
+      <div class="mb-1 text-muted">Hosted by <%= link_to space.user.firstname + " " + space.user.lastname, space.user, class:"mb-1 text-muted" %></div>
+      <p class="card-text mb-auto"><%= space.category %>: <%= space.wall_width %> x <%= space.wall_height %> cm (w x h)</p>
+      <p class="card-text mb-auto">Price: £ <%= space.price %> per day</p>
+    </div>
+    <div class="col p-4 d-flex flex-column position-static">
+      <p>
+        <% if current_user?(space.user) %>
+            <%= link_to "Edit", "#", class:"btn btn-primary" %>
+            <%= link_to "Delete", space, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-danger" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>

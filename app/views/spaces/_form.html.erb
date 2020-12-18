@@ -9,35 +9,146 @@
   <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
   <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
 
-  <h2>Amenities</h2>
-    <%= f.check_box :is_wifi %> WiFi
-    <%= f.check_box :is_toilet %> Toilet
-    <%= f.check_box :is_dis_acc %> Disabled Access
-    <%= f.check_box :is_parking %> Parking
-    <%= f.check_box :is_sec_sys %> Security System
-    <%= f.check_box :is_storage %> Storage
-    <%= f.check_box :is_hang_sys %> Picture Hanging System
-    <%= f.check_box :is_adj_light %> Adjustabe Lighting
-    <%= f.check_box :is_nat_light %> Natural Light
-    <%= f.check_box :is_plugs %> Plug Sockets
+  <hr class="my-4">
 
-  <h2>Interested in:</h2>
-  <%= f.check_box :is_paintings %> Paintings
-  <%= f.check_box :is_photography %> Photography
-  <%= f.check_box :is_drawings %> Drawings
-  <%= f.check_box :is_sculptures %> Sculptures
-  <%= f.check_box :is_live_perf %> Live Performance
-  <%= f.check_box :is_adverts %> Advertisements
+  <div class="container">
+    <h3>Amenities</h3>
+    <div class="row">
+      <div class="col">
+        <div class="form-check">
+          <%= f.check_box :is_wifi, class:"form-check-input", id:"wifi" %>
+          <label class="form-check-label" for="wifi">WiFi</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_toilet, class:"form-check-input", id:"toilet" %>
+          <label class="form-check-label" for="toilet">Toilet</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_dis_acc, class:"form-check-input", id:"dis_access" %>
+          <label class="form-check-label" for="dis_access">Disabled Access</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_parking, class:"form-check-input", id:"parking" %>
+          <label class="form-check-label" for="parking">Parking</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_sec_sys, class:"form-check-input", id:"sec_sys" %>
+          <label class="form-check-label" for="sec_sys">Security System</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check">
+          <%= f.check_box :is_storage, class:"form-check-input", id:"storage" %>
+          <label class="form-check-label" for="storage">Storage</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_hang_sys, class:"form-check-input", id:"hang_sys" %>
+          <label class="form-check-label" for="hang_sys">Picture Hanging System</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_adj_light, class:"form-check-input", id:"adj_light" %>
+          <label class="form-check-label" for="adj_light">Adjustable Lighting</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_nat_light, class:"form-check-input", id:"nat_light" %>
+          <label class="form-check-label" for="nat_light">Natural Light</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_plugs, class:"form-check-input", id:"plugs" %>
+          <label class="form-check-label" for="plugs">Power Plugs</label>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <%= f.text_field :wall_height, placeholder: "Wall Space Height cm", class: "form-control" %>
-  <%= f.text_field :wall_width, placeholder: "Wall Space Width cm", class: "form-control" %>
+  <hr class="my-4">
 
-  <%= f.text_field :price, placeholder: "Price per day", class: "form-control" %>
+  <div class="container">
+    <h3>Interested in:</h3>
+    <div class="row">
+      <div class="col">
+        <div class="form-check">
+          <%= f.check_box :is_adverts, class:"form-check-input", id:"adverts" %>
+          <label class="form-check-label" for="adverts">Advertisement</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_drawings, class:"form-check-input", id:"drawings" %>
+          <label class="form-check-label" for="drawings">Drawings</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_live_perf, class:"form-check-input", id:"live_perf" %>
+          <label class="form-check-label" for="live_perf">Live Performance</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check">
+          <%= f.check_box :is_paintings, class:"form-check-input", id:"paintings" %>
+          <label class="form-check-label" for="paintings">Paintings</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_photography, class:"form-check-input", id:"photography" %>
+          <label class="form-check-label" for="photography">Photography</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_sculptures, class:"form-check-input", id:"scultpures" %>
+          <label class="form-check-label" for="scultpures">Sculptures</label>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <hr class="my-4">
+
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="wall_width">Wall Space Width</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">cm</span>
+          </div>
+          <%= f.text_field :wall_width, placeholder: "e.g. 120", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="wall_height">Height</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">cm</span>
+          </div>
+          <%= f.text_field :wall_height, placeholder: "e.g. 120", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="price">Price per day</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <%= f.text_field :price, placeholder: "e.g. 12.50", class: "form-control" %>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="form-check">
+    <%= f.check_box :active, class:"form-check-input", id:"active", checked:true %>
+    <label class="form-check-label" for="active">Active</label>
+  </div>
+
+  <hr class="my-4">
+
+
   <span class="image">
+    <i class="fas fa-cloud-upload-alt fa-3x"></i> Upload Images
     <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
   </span>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
 
 <script type="text/javascript">

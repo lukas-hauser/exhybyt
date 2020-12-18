@@ -11,25 +11,34 @@ User.create!(firstname: "Test", lastname: "User", email: "test@testuser.com", pa
 end
 
 users = User.order(:created_at).take(5)
-40.times do
+5.times do
   venue_type = "Coffee Shop"
   category = "Wall Space"
   listing_name = Faker::Restaurant.name
   description = Faker::Lorem.sentence(word_count: 20)
   address = Faker::Address.full_address
+  latitude = Faker::Address.latitude
+  longitude = Faker::Address.longitude
   wall_height = Faker::Number.decimal(l_digits: 2, r_digits: 2)
   wall_width = Faker::Number.decimal(l_digits: 2, r_digits: 2)
   price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  users.each { |user| user.spaces.create!(
+  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
+  users.each { |user| space = user.spaces.build(
     venue_type: venue_type,
     category: category,
     listing_name: listing_name,
     description: description,
     address: address,
+    latitude: latitude,
+    longitude: longitude,
     wall_height: wall_height,
     wall_width: wall_width,
-    price: price
-    ) }
+    price: price)
+    space.images.attach(
+      io: File.open('app/assets/images/exhibition.jpg'),
+      filename: 'exhibition.jpg')
+      space.save!
+    }
 end
 
 users = User.all

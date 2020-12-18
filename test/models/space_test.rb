@@ -30,6 +30,9 @@ class SpaceTest < ActiveSupport::TestCase
       is_adverts: false,
       active: true,
       user_id: @user.id)
+      @space.images.attach(
+        io: File.open('app/assets/images/exhibition.jpg'),
+        filename: 'exhibition.jpg')
   end
 
   test "should be valid" do
