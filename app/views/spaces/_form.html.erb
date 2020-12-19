@@ -16,8 +16,8 @@
     <div class="row">
       <div class="col">
         <div class="form-check">
-          <%= f.check_box :is_wifi, class:"form-check-input", id:"wifi" %>
-          <label class="form-check-label" for="wifi">WiFi</label>
+          <%= f.check_box :is_adj_light, class:"form-check-input", id:"adj_light" %>
+          <label class="form-check-label" for="adj_light">Adjustable Lighting</label>
         </div>
         <div class="form-check">
           <%= f.check_box :is_toilet, class:"form-check-input", id:"toilet" %>
@@ -46,16 +46,16 @@
           <label class="form-check-label" for="hang_sys">Picture Hanging System</label>
         </div>
         <div class="form-check">
-          <%= f.check_box :is_adj_light, class:"form-check-input", id:"adj_light" %>
-          <label class="form-check-label" for="adj_light">Adjustable Lighting</label>
-        </div>
-        <div class="form-check">
           <%= f.check_box :is_nat_light, class:"form-check-input", id:"nat_light" %>
           <label class="form-check-label" for="nat_light">Natural Light</label>
         </div>
         <div class="form-check">
           <%= f.check_box :is_plugs, class:"form-check-input", id:"plugs" %>
           <label class="form-check-label" for="plugs">Power Plugs</label>
+        </div>
+        <div class="form-check">
+          <%= f.check_box :is_wifi, class:"form-check-input", id:"wifi" %>
+          <label class="form-check-label" for="wifi">WiFi</label>
         </div>
       </div>
     </div>

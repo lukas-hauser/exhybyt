@@ -69,14 +69,15 @@ class SpacesController < ApplicationController
       :is_nat_light,
       :is_sec_sys,
       :is_toilet,
-      :is_plug,
+      :is_plugs,
       :is_paintings,
       :is_photography,
       :is_drawings,
       :is_sculptures,
       :is_live_perf,
       :is_adverts,
-      :images
+      :images,
+      :active
     )
   end
 
