@@ -1,41 +1,60 @@
 <%= provide(:title, @space.listing_name ) %>
 
-<% if @space.images.count > 0 %>
-  <%= image_tag @space.images[0], class:"img-fluid max-width: 100%" %>
+<% if @space.images.attached? %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= image_tag @space.images[0], class:"img-fluid max-width: 100%" %>
+    </div>
+  </div>
 <% end %>
 
 <div class="col p-4 d-flex flex-column position-static">
-  <strong class="d-inline-block mb-2 text-primary"><%= @space.venue_type %></strong>
-  <h3 class="mb-0"><%= link_to @space.listing_name, @space %></h3>
-  <div class="mb-1 text-muted"></div>
-  <p class="card-text mb-auto"><%= @space.category %>: <%= @space.wall_width %> x <%= @space.wall_height %> cm (w x h)</p>
-  <p class="card-text mb-auto">Price: £ <%= @space.price %> per day</p>
-  <p class="card-text mb-auto"><%= @space.address %></p>
-  <p class="card-text mb-auto"><%= @space.description %></p>
+  <h2 class="d-inline-block mb-2 text"><%= @space.venue_type %></h2>
+  <h1 class="center"><%= @space.listing_name %></h1>
+  <h2 class="d-inline-block mb-2 text"><%= @space.category %></h2>
+  <p class="d-inline-block mb-2 text center">Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
+  <p class="d-inline-block mb-2 text center">Price: £ <%= @space.price %> per day</p>
+  <p class="d-inline-block mb-2 text center"><%= @space.description %></p>
+  <p class="d-inline-block mb-2 text center"><%= @space.address %></p>
 
-  Amenities
-  <ul>
-    <li class="<%= 'text-muted' if !@space.is_toilet %>">Toilet</li>
-    <li class="<%= 'text-muted' if !@space.is_parking %>">Parking</li>
-    <li class="<%= 'text-muted' if !@space.is_wifi %>">WiFi</li>
-    <li class="<%= 'text-muted' if !@space.is_dis_acc %>">Disabled Access</li>
-    <li class="<%= 'text-muted' if !@space.is_sec_sys %>">Security System</li>
-    <li class="<%= 'text-muted' if !@space.is_hang_sys %>">Picture Hanging System</li>
-    <li class="<%= 'text-muted' if !@space.is_adj_light %>">Adjustable Lighting</li>
-    <li class="<%= 'text-muted' if !@space.is_nat_light %>">Natural Light</li>
-    <li class="<%= 'text-muted' if !@space.is_plugs %>">Power Plugs</li>
-    <li class="<%= 'text-muted' if !@space.is_storage %>">Storage</li>
-  </ul>
 
-  Interested in
-  <ul>
-    <li class="<%= 'text-muted' if !@space.is_paintings %>">Paintings</li>
-    <li class="<%= 'text-muted' if !@space.is_photography %>">Photography</li>
-    <li class="<%= 'text-muted' if !@space.is_drawings %>">Drawings</li>
-    <li class="<%= 'text-muted' if !@space.is_sculptures %>">Sculptures</li>
-    <li class="<%= 'text-muted' if !@space.is_live_perf %>">Live Performances</li>
-    <li class="<%= 'text-muted' if !@space.is_adverts %>">Advertisements</li>
-  </ul>
+  <div class="center">
+    <h3><%= 'Amenities' if @space.is_toilet ||
+                       @space.is_parking ||
+                       @space.is_wifi ||
+                       @space.is_dis_acc ||
+                       @space.is_sec_sys ||
+                       @space.is_hang_sys ||
+                       @space.is_adj_light ||
+                       @space.is_nat_light ||
+                       @space.is_plugs ||
+                       @space.is_storage %></h3>
+
+    <ul class="mx-auto" style="list-style-position: inside">
+      <li class="<%= 'text-hide' if !@space.is_toilet %>">Toilet</li>
+      <li class="<%= 'text-hide' if !@space.is_parking %>">Parking</li>
+      <li class="<%= 'text-hide' if !@space.is_wifi %>">WiFi</li>
+      <li class="<%= 'text-hide' if !@space.is_dis_acc %>">Disabled Access</li>
+      <li class="<%= 'text-hide' if !@space.is_sec_sys %>">Security System</li>
+      <li class="<%= 'text-hide' if !@space.is_hang_sys %>">Picture Hanging System</li>
+      <li class="<%= 'text-hide' if !@space.is_adj_light %>">Adjustable Lighting</li>
+      <li class="<%= 'text-hide' if !@space.is_nat_light %>">Natural Light</li>
+      <li class="<%= 'text-hide' if !@space.is_plugs %>">Power Plugs</li>
+      <li class="<%= 'text-hide' if !@space.is_storage %>">Storage</li>
+    </ul>
+  </div>
+
+  <div class="center">
+      <h3><%= 'We are interested to show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
+      <ul class="mx-auto" style="list-style-position: inside">
+        <li class="<%= 'text-hide' if !@space.is_paintings %>">Paintings</li>
+        <li class="<%= 'text-hide' if !@space.is_photography %>">Photography</li>
+        <li class="<%= 'text-hide' if !@space.is_drawings %>">Drawings</li>
+        <li class="<%= 'text-hide' if !@space.is_sculptures %>">Sculptures</li>
+        <li class="<%= 'text-hide' if !@space.is_live_perf %>">Live Performances</li>
+        <li class="<%= 'text-hide' if !@space.is_adverts %>">Advertisements</li>
+      </ul>
+  </div>
 
   <% if @space.images.count > 1 %>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
