@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   before_action :admin_user,      only: [:destroy]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    @spaces = @user.spaces
+    @spaces = @user.spaces.paginate(page: params[:page])
   end
 
   def new
@@ -49,14 +49,14 @@ end
 def following
   @title = "Following"
   @user = User.find(params[:id])
-  @users = @user.following
+  @users = @user.following.paginate(page: params[:page])
   render 'show_follow'
 end
 
 def followers
   @title = "Followers"
   @user = User.find(params[:id])
-  @users = @user.followers
+  @users = @user.followers.paginate(page: params[:page])
   render 'show_follow'
 end
 

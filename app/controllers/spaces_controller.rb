@@ -5,7 +5,7 @@ class SpacesController < ApplicationController
 
   def index
 #    @spaces = Space.all
-    @spaces = current_user.spaces
+    @spaces = current_user.spaces.paginate(page: params[:page])
   end
 
   def show
