@@ -1,7 +1,7 @@
 class SpacesController < ApplicationController
   before_action :set_space,       only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
-  before_action :correct_user, only: :destroy
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
 #    @spaces = Space.all
@@ -32,7 +32,7 @@ class SpacesController < ApplicationController
   def update
     if @space.update(space_params)
       redirect_to @space
-      flash[:success] = "updated."
+      flash[:primary] = "Space updated."
     else
       render :edit
     end
@@ -40,7 +40,7 @@ class SpacesController < ApplicationController
 
   def destroy
     @space.destroy
-    flash[:success] = "Space has been deleted"
+    flash[:primary] = "Space has been deleted"
     redirect_to request.referrer || root_path
   end
 

@@ -1,1 +1,19 @@
-<%= render 'form' %>
+<% provide(:title, 'Edit Space') %>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+      <%= render 'form' %>
+      <% if @space.images.attached? %>
+        <div class="card-columns">
+          <% @space.images.each do |image| %>
+            <div class="card">
+              <%= image_tag image, class:"card-img" %>
+              <div class="card-body">
+                <%= link_to "Remove", "#" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+</div>

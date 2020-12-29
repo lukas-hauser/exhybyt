@@ -13,10 +13,10 @@
   </aside>
   <div class="col-md-8">
     <% if @user.spaces.any? %>
-      <h3>Spaces <%= @user.spaces.count %></h3>
-      <ol class="spaces">
+      <h3><%= @user.spaces.count %> Spaces</h3>
+      <div class="card-columns">
         <%= render @spaces %>
-      </ol>
+      </div>
       <%= will_paginate @spaces %>
     <% end %>
   </div>
