@@ -2,14 +2,6 @@
 
 $light-gray: #777;
 
-/* Debug styling */
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
-
 /* Users index */
 
 .users {
@@ -22,10 +14,6 @@ $light-gray: #777;
 }
 
 /* Site wide layout & pages */
-
-body {
-  padding-top: 0px;
-}
 
 section {
   overflow: auto;
@@ -64,11 +52,6 @@ h2 {
   color: $light-gray;
 }
 
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
 /* Misc */
 
 .debug_dump {
@@ -76,7 +59,6 @@ p {
   float: left;
   width: 100%;
   margin-top: 45px;
-  @include box_sizing;
 }
 
 /* sidebar */
@@ -125,11 +107,6 @@ input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
-  @include box_sizing;
-}
-
-input {
-  height: auto !important;
 }
 
 #error_explanation {
