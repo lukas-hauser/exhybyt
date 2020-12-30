@@ -63,7 +63,7 @@ end
 private
 
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:firstname, :lastname, :display_name, :email, :password, :password_confirmation)
   end
 
   def correct_user

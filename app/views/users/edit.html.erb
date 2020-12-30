@@ -5,11 +5,27 @@
     <%= form_with(model: @user, local: true) do |f| %>
       <h1>Update Profile</h1>
       <%= render 'shared/error_messages', object: f.object %>
-      <%= f.text_field :firstname, class: "form-control" %>
-      <%= f.text_field :lastname, class: "form-control" %>
-      <%= f.email_field :email, class: "form-control" %>
-      <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
-      <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+      <div class="form-group">
+        <%= f.text_field :firstname, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :lastname, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :display_name, class: "form-control", placeholder:"Display Name" %>
+        <small class="text-muted">
+          If you represent an organization, you can use its name as your display name. Display name is shown to other users instead of your first and last name.
+        </small>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+      </div>
       <%= f.submit "Save Changes", class: "btn btn-primary" %>
     <% end %>
     <div class="gravatar_edit">

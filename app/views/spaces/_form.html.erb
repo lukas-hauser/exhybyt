@@ -1,13 +1,23 @@
 <%= form_with(model: @space, local: true) do |f| %>
   <h1>Your Beautiful Space</h1>
   <%= render 'shared/error_messages', object: f.object %>
-  <%= f.select :category,space_categories,
-  id: "category", prompt: "Category", class: "form-control" %>
-  <%= f.select :venue_type, venue_types,
-  prompt: "Venue Type", class: "form-control" %>
-  <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
-  <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
-  <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+  <div class="form-group">
+    <%= f.select :category,space_categories,
+    id: "category", prompt: "Category", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.select :venue_type, venue_types,
+    prompt: "Venue Type", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :address, placeholder: "Address", class: "form-control" %>
+  </div>
 
   <hr class="my-4">
 
@@ -143,9 +153,10 @@
 
   <hr class="my-4">
 
-
   <span class="image">
-    <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
+    <div class="form-group">
+      <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
+    </div>
   </span>
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>

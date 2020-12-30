@@ -9,9 +9,11 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  before_create { self.display_name = self.firstname + " " + self.lastname }
   before_save { self.email = email.downcase}
   validates :firstname, presence: true, length: { maximum: 60 }
   validates :lastname, presence: true, length: { maximum: 60 }
+  validates :display_name, presence: true, length: { maximum: 60 }, allow_nil: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },

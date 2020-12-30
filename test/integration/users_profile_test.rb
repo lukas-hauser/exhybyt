@@ -10,8 +10,8 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 #  test "profile page" do
 #    get user_path(@user)
 #    assert_template 'users/show'
-#    assert_select 'title', full_title(@user.firstname + " " + @user.lastname)
-#    assert_select 'h1', text: @user.firstname + " " + @user.lastname
+#    assert_select 'title', full_title(@user.display_name)
+#    assert_select 'h1', text: @user.display_name
 #    assert_select 'h1>img.gravatar'
 #    assert_match @user.spaces.count.to_s, response.body
 #  end

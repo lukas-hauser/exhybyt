@@ -20,12 +20,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     firstname = "James"
     lastname = "Smith"
     email = "james@example.com"
-    patch user_path(@user), params: { user: { firstname: firstname, lastname: lastname, email: email, password: "", password_confirmation: "" } }
+    patch user_path(@user), params: { user: { firstname: firstname, lastname: lastname, display_name: firstname, email: email, password: "", password_confirmation: "" } }
     assert_not flash.empty?
     assert_redirected_to @user
     @user.reload
-    assert_equal firstname, @user.firstname
-    assert_equal lastname, @user.lastname
+    assert_equal firstname, @user.display_name
     assert_equal email, @user.email
   end
 end

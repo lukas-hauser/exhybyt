@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_222645) do
+ActiveRecord::Schema.define(version: 2020_12_30_124244) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,23 +52,23 @@ ActiveRecord::Schema.define(version: 2020_12_17_222645) do
     t.float "wall_height"
     t.float "wall_width"
     t.float "price"
-    t.boolean "is_adj_light"
-    t.boolean "is_nat_light"
-    t.boolean "is_dis_acc"
-    t.boolean "is_parking"
-    t.boolean "is_hang_sys"
-    t.boolean "is_plugs"
-    t.boolean "is_sec_sys"
-    t.boolean "is_toilet"
-    t.boolean "is_wifi"
-    t.boolean "is_storage"
-    t.boolean "is_paintings"
-    t.boolean "is_photography"
-    t.boolean "is_drawings"
-    t.boolean "is_sculptures"
-    t.boolean "is_live_perf"
-    t.boolean "is_adverts"
-    t.boolean "active"
+    t.boolean "is_adj_light", default: false
+    t.boolean "is_nat_light", default: false
+    t.boolean "is_dis_acc", default: false
+    t.boolean "is_parking", default: false
+    t.boolean "is_hang_sys", default: false
+    t.boolean "is_plugs", default: false
+    t.boolean "is_sec_sys", default: false
+    t.boolean "is_toilet", default: false
+    t.boolean "is_wifi", default: false
+    t.boolean "is_storage", default: false
+    t.boolean "is_paintings", default: false
+    t.boolean "is_photography", default: false
+    t.boolean "is_drawings", default: false
+    t.boolean "is_sculptures", default: false
+    t.boolean "is_live_perf", default: false
+    t.boolean "is_adverts", default: false
+    t.boolean "active", default: true
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_222645) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
     t.boolean "admin", default: false
+    t.string "display_name"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
