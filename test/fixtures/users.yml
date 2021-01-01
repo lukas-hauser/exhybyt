@@ -3,6 +3,7 @@ lukas:
   firstname: Lukas
   lastname: Hauser
   email: lukas@test.com
+  display_name: Lukas
   password_digest: <%= User.digest('password123') %>
   admin: true
 
@@ -10,6 +11,7 @@ lukas:
 jane:
   firstname: Jane
   lastname: Test
+  display_name: Jane
   email: jane@example.com
   password_digest: <%= User.digest('password123') %>
 
@@ -17,6 +19,7 @@ jane:
 user_<%= n %>:
   firstname: <%= "User #{n}" %>
   lastname: <%= "User #{n}" %>
+  display_name: <%= "User #{n}" %>
   email: <%= "user-#{n}@test.com" %>
   password_digest: <%= User.digest('password123') %>
 <% end %>

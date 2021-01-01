@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     end
   end
   resources :spaces,        only: [:new, :show, :index, :create, :edit, :update, :destroy]
+  resources :artworks,      only: [:new, :show, :index, :create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
 end

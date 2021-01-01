@@ -41,6 +41,40 @@ users = User.order(:created_at).take(5)
     }
 end
 
+users = User.order(:created_at).take(5)
+5.times do
+  styles = "Realism"
+  subject = "Portrait"
+  category = "Painting"
+  listing_name = Faker::Hipster.word
+  description = Faker::Lorem.sentence(word_count: 20)
+  medium = "Oil on Canvas"
+  height = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  width = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  depth = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  year = "2020"
+  status = "For Sale"
+  users.each { |user| artwork = user.artworks.build(
+    styles: styles,
+    subject: subject,
+    category: category,
+    listing_name: listing_name,
+    description: description,
+    medium: medium,
+    height: height,
+    width: width,
+    depth: depth,
+    year: year,
+    status: status,
+    price: price)
+    artwork.images.attach(
+      io: File.open('app/assets/images/skull.jpg'),
+      filename: 'skull.jpg')
+      artwork.save!
+    }
+end
+
 users = User.all
 user = users.first
 following = users[2..50]

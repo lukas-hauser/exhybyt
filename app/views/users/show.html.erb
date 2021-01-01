@@ -2,7 +2,10 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-        <%= render 'shared/user_info' %>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.display_name %>
+      </h1>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
@@ -18,6 +21,14 @@
         <%= render @spaces %>
       </div>
       <%= will_paginate @spaces %>
+      <br>
+    <% end %>
+    <% if @user.artworks.any? %>
+      <h3><%= @user.artworks.count %> Artworks</h3>
+      <div class="card-columns">
+        <%= render @artworks %>
+      </div>
+      <%= will_paginate @artworks %>
     <% end %>
   </div>
 </div>

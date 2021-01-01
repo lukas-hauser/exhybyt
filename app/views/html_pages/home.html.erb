@@ -3,7 +3,9 @@
 <% if logged_in? %>
   <div class="col-md-8 offset-md-2">
     <h3>Spaces</h3>
-    <%= render 'shared/feed' %>
+    <%= render 'shared/space_feed' %>
+    <h3>Artwork</h3>
+    <%= render 'shared/art_feed' %>
   </div>
 <% else %>
   <div class="center jumbotron">

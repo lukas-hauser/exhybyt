@@ -70,12 +70,12 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_adverts: false,
         active: true} }
     end
-    #assert_redirected_to @space
-    #follow_redirect!
+#    assert_redirected_to @space
+#    follow_redirect!
 
     # Delete Post
 #    assert_select 'a', text: 'delete'
-#    first_space = @user.spaces.first
+#    first_space = @user.spaces.paginate(page: 1).first
 #    assert_difference 'Space.count', -1 do
 #      delete spaces_path(first_space)
 #    end

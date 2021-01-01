@@ -1,0 +1,109 @@
+<%= form_with(model: @artwork, local: true) do |f| %>
+  <h1>Your Beautiful Artwork</h1>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.select :category, artwork_categories,
+    id: "category", prompt: "Category", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.select :subject, artwork_subjects,
+    prompt: "Subject", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.select :status, artwork_status,
+    prompt: "Status", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :styles, placeholder: "Styles", class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :year, placeholder: "Year", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <div class="mb-3">
+      <label for="price">Price</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">£</span>
+        </div>
+        <%= f.text_field :price, placeholder: "e.g. 95.50", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <label for="width">Width</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">cm</span>
+          </div>
+          <%= f.text_field :width, placeholder: "e.g. 50", class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <label for="height">Height</label>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"">
+            <span class="input-group-text" id="basic-addon2">cm</span>
+          </div>
+          <%= f.text_field :height, placeholder: "e.g. 60", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="depth">Depth</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend"">
+              <span class="input-group-text" id="basic-addon2">cm</span>
+            </div>
+            <%= f.text_field :depth, placeholder: "e.g. 2", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="row">
+    <div class="form-check">
+      <%= f.check_box :is_framed, class:"form-check-input", id:"framed" %>
+      <label class="form-check-label" for="framed">Framed</label>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <span class="image">
+    <div class="form-group">
+      <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
+    </div>
+  </span>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>
+
+<script type="text/javascript">
+  $("#artwork_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+    alert("image cannot exceet 5MB. Please choose a smaller file.");
+    }
+    $("#artwork_image").val("");
+  });
+</script>

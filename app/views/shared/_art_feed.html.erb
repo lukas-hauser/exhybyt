@@ -1,0 +1,6 @@
+<% if @art_feed_items.any? %>
+  <div class="card-columns">
+    <%= render @art_feed_items %>
+  </div>
+  <%= will_paginate @art_feed_items, params: { controller: :html_pages, action: :home } %>
+<% end %>

@@ -1,0 +1,6 @@
+<% if @space_feed_items.any? %>
+  <div class="card-columns">
+    <%= render @space_feed_items %>
+  </div>
+  <%= will_paginate @space_feed_items, params: { controller: :html_pages, action: :home } %>
+<% end %>

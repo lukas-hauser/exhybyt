@@ -27,7 +27,7 @@ one:
   is_live_perf: false
   is_adverts: false
   active: false
-  user: one
+  user: lukas
   created_at: <%= 10.minutes.ago %>
 
 two:
@@ -57,7 +57,7 @@ two:
   is_live_perf: false
   is_adverts: false
   active: false
-  user: two
+  user: lukas
   created_at: <%= 2.months.ago %>
 
 most_recent:
@@ -87,7 +87,7 @@ most_recent:
   is_live_perf: false
   is_adverts: false
   active: false
-  user: two
+  user: lukas
   created_at: <%= Time.zone.now %>
 
 three:
@@ -121,7 +121,7 @@ three:
   created_at: <%= 2.months.ago %>
 
 
-<% 20.times do |n| %>
+<% 40.times do |n| %>
 space_<%= n %>:
   venue_type: "Coffee Shop"
   category: "Wall Space"

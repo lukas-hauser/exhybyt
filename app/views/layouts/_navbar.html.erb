@@ -15,7 +15,7 @@
     <ul class="navbar-nav navbar-right">
       <% if logged_in? %>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Add Art</a>
+          <%= link_to "Add Art", new_artwork_path, class:"nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "Add Space", new_space_path, class:"nav-link" %>

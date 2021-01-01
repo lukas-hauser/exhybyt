@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :spaces, dependent: :destroy
+  has_many :artworks, dependent: :destroy
   has_many :active_relationships, class_name:      "Relationship",
                                   foreign_key:     "follower_id",
                                   dependent:       :destroy
@@ -26,8 +27,12 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def feed
+  def space_feed
     Space.where("user_id IN (?) OR user_id =?", following_ids, id)
+  end
+
+  def art_feed
+    Artwork.where("user_id IN (?) OR user_id =?", following_ids, id)
   end
 
   def follow(other_user)
