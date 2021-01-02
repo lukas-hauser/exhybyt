@@ -6,7 +6,7 @@ class Artwork < ApplicationRecord
   validates :listing_name, presence: true, length: { maximum: 60 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category, presence: true
-  validates :year, presence: true
+  validates :year, presence: true, numericality: {only_integer: true}
   validates :medium, presence: true, length: { maximum: 60 }
   validates :status, presence: true
   validates :subject, presence: true

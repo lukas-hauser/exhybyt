@@ -23,7 +23,7 @@
     <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.text_field :styles, placeholder: "Styles", class: "form-control" %>
+    <%= f.select :styles, artwork_styles, prompt: "Select Style" %>
   </div>
   <div class="form-group">
     <%= f.text_field :year, placeholder: "Year", class: "form-control" %>
@@ -43,37 +43,12 @@
 
   <hr class="my-4">
 
-  <div class="row">
-    <div class="col">
-      <div class="mb-3">
-        <label for="width">Width</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">cm</span>
-          </div>
-          <%= f.text_field :width, placeholder: "e.g. 50", class: "form-control" %>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="mb-3">
-        <label for="height">Height</label>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend"">
-            <span class="input-group-text" id="basic-addon2">cm</span>
-          </div>
-          <%= f.text_field :height, placeholder: "e.g. 60", class: "form-control" %>
-        </div>
-      </div>
-      <div class="col">
-        <div class="mb-3">
-          <label for="depth">Depth</label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend"">
-              <span class="input-group-text" id="basic-addon2">cm</span>
-            </div>
-            <%= f.text_field :depth, placeholder: "e.g. 2", class: "form-control" %>
-          </div>
+  <div class="container">
+    <div class="mb-3">
+      <div class="row">
+        <div class="form-check">
+          <%= f.check_box :is_framed, class:"form-check-input", id:"framed" %>
+          <label class="form-check-label" for="framed">Framed</label>
         </div>
       </div>
     </div>
@@ -82,9 +57,32 @@
   <hr class="my-4">
 
   <div class="row">
-    <div class="form-check">
-      <%= f.check_box :is_framed, class:"form-check-input", id:"framed" %>
-      <label class="form-check-label" for="framed">Framed</label>
+    <div class="col mb-3">
+      <label for="width">Width</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">cm</span>
+        </div>
+        <%= f.text_field :width, placeholder: "e.g. 50", class: "form-control" %>
+      </div>
+    </div>
+    <div class="col mb-3">
+      <label for="height">Height</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"">
+          <span class="input-group-text" id="basic-addon2">cm</span>
+        </div>
+        <%= f.text_field :height, placeholder: "e.g. 60", class: "form-control" %>
+      </div>
+    </div>
+    <div class="col mb-3">
+      <label for="depth">Depth</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend"">
+          <span class="input-group-text" id="basic-addon2">cm</span>
+        </div>
+        <%= f.text_field :depth, placeholder: "e.g. 2", class: "form-control" %>
+      </div>
     </div>
   </div>
 

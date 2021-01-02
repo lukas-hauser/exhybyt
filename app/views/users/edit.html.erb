@@ -6,10 +6,10 @@
       <h1>Update Profile</h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="form-group">
-        <%= f.text_field :firstname, class: "form-control" %>
+        <%= f.text_field :firstname, class: "form-control", placeholder:"First Name" %>
       </div>
       <div class="form-group">
-        <%= f.text_field :lastname, class: "form-control" %>
+        <%= f.text_field :lastname, class: "form-control", placeholder:"Last Name" %>
       </div>
       <div class="form-group">
         <%= f.text_field :display_name, class: "form-control", placeholder:"Display Name" %>
@@ -18,7 +18,7 @@
         </small>
       </div>
       <div class="form-group">
-        <%= f.email_field :email, class: "form-control" %>
+        <%= f.email_field :email, class: "form-control", placeholder:"Email Address" %>
       </div>
       <div class="form-group">
         <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
