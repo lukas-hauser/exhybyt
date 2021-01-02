@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  space: one
+  start_date: 2021-01-02 11:32:12
+  end_date: 2021-01-02 11:32:12
+  price: 1.5
+  total: 1.5
+
+two:
+  user: two
+  space: two
+  start_date: 2021-01-02 11:32:12
+  end_date: 2021-01-02 11:32:12
+  price: 1.5
+  total: 1.5

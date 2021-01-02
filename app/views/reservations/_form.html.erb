@@ -1,0 +1,12 @@
+<%= form_with(model: @space.reservations.build, local: true) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="form-group">
+    <%= f.text_field :start_date,placeholder: "Start Date", class: "flatpickr" %>
+  </div>
+  <div class="form-group">
+    <%= f.text_field :end_date, placeholder: "End Date", class: "flatpickr" %>
+  </div>
+  <%= f.hidden_field :space_id, value: @space.id %>
+  <%= f.hidden_field :price, value: @space.price %>
+  <%= f.submit "Book Now", class:"btn btn-primary" %>
+<% end %>
