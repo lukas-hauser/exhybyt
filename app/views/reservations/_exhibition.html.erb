@@ -1,0 +1,11 @@
+<div class="card">
+  <% if reservation.space.images.attached? %>
+    <%= image_tag reservation.space.images[0], class:"card-img" %>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= reservation.space.listing_name %></h5>
+    <p class="card-text small">
+      <%= reservation.start_date %> to <%= reservation.end_date %><br>
+    </p>
+  </div>
+</div>
