@@ -16,7 +16,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
   test "successful edit with friendly forwarding" do
     get edit_user_path(@user)
     log_in_as(@user)
-    assert_redirected_to edit_user_url(@user)
+    assert_redirected_to edit_user_path(@user)
     firstname = "James"
     lastname = "Smith"
     email = "james@example.com"
