@@ -1,5 +1,11 @@
 # Create main test user
-User.create!(firstname: "Test", lastname: "User", email: "test@testuser.com", password: "password123", password_confirmation: "password123", admin: true)
+User.create!(firstname: "Test",
+  lastname: "User", email: "test@testuser.com",
+  password: "password123",
+  password_confirmation: "password123",
+  admin: true,
+  activated: true,
+  activated_at: Time.zone.now)
 
 # Bulk generate test users
 99.times do |n|
@@ -7,7 +13,13 @@ User.create!(firstname: "Test", lastname: "User", email: "test@testuser.com", pa
   lastname = Faker::Name.last_name
   email = "example-#{n+1}@testuser.com"
   password = "password123"
-  User.create!(firstname: firstname, lastname: lastname, email: email, password: password, password_confirmation: password)
+  User.create!(firstname: firstname,
+    lastname: lastname,
+    email: email,
+    password: password,
+    password_confirmation: password,
+    activated: true,
+    activated_at: Time.zone.now)
 end
 
 users = User.order(:created_at).take(5)
