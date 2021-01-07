@@ -1,0 +1,15 @@
+<% provide(:title, "Forgot Password") %>
+<h1>Forgot Password</h1>
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+    <%= form_with(url: password_resets_path, scope: :password_reset,
+                  local: true) do |f| %>
+    <div class="form-group">
+      <%= f.email_field :email, placeholder: "Email", class: 'form-control' %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary"%>
+
+    <% end %>
+  </div>
+</div>
