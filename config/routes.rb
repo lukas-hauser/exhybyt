@@ -21,11 +21,13 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :relationships,       only: [:create, :destroy]
   resources :spaces do
-    resources :reservations,  only: [:create, :index]
+    resources :reservations,      only: [:create, :index]
   end
-  resources :reservations,    only: [:create, :index]
-  resources :spaces,          only: [:new, :show, :index, :create, :edit, :update, :destroy]
-  resources :artworks,        only: [:new, :show, :index, :create, :edit, :update, :destroy]
-  resources :relationships,   only: [:create, :destroy]
+  resources :reservations,        only: [:create, :index]
+  resources :spaces,              only: [:new, :show, :index, :create,
+                                         :edit, :update, :destroy]
+  resources :artworks,            only: [:new, :show, :index, :create,
+                                         :edit, :update, :destroy]
 end
