@@ -30,4 +30,8 @@ Rails.application.routes.draw do
                                          :edit, :update, :destroy]
   resources :artworks,            only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
+
+  get '/preload' => 'reservations#preload'
+  get '/preview' => 'reservations#preview'
+
 end

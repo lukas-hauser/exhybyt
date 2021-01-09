@@ -1,24 +1,154 @@
 <%= form_with(model: @space.reservations.build, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
 
-  <div class="row">
-
-  </div>
   <div class="col">
-    <div class="form-group">
+    <div class="form-group date">
       <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control" %>
     </div>
   </div>
   <div class="col">
-    <div class="form-group">
-      <%= f.text_field :end_date, placeholder: "End Date", class: "form-control" %>
+    <div class="form-group date">
+      <%= f.text_field :end_date, placeholder: "End Date", class: "form-control",
+                                  disabled: true %>
     </div>
   </div>
-  <div class="col">
-    <div class="form-group">
-      <%= f.submit "Book Now", class:"btn btn-primary" %>
-    </div>
-  </div>
+
   <%= f.hidden_field :space_id, value: @space.id %>
   <%= f.hidden_field :price, value: @space.price %>
+  <%= f.hidden_field :total, id: 'reservation_total' %>
+
+  <div class="col">
+    <h4><span id="message"></span></h4>
+  </div>
+  <div class="col", id="preview", style="display: none">
+    <table class="rservation-table">
+      <tbody>
+        <tr>
+          <td>Day(s)</td>
+          <td><span id="reservation_days"></span></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>£ <span id="reservation_sum"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <%= f.submit "Book Now", id:"btn_book", class:"btn btn-primary", disabled: true %>
+    </div>
+  </div>
+
 <% end %>
+
+<script>
+
+  function unavailable(date) {
+    dmy = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+    return [$.inArray(dmy, unavailableDates) == -1];
+  }
+
+  $(function() {
+
+    unavailableDates = [];
+    $.ajax({
+      url: '/preload',
+      data: {'space_id': <%= @space.id %>},
+      dataType: 'json',
+      success: function(data) {
+
+        $.each(data, function(arrID, arrValue) {
+          for(var d = new Date(arrValue.start_date); d <= new Date(arrValue.end_date); d.setDate(d.getDate()
+            + 1)) {
+              unavailableDates.push($.datepicker.formatDate('d-m-yy', d));
+            }
+        })
+      }
+    });
+
+    $('#reservation_start_date').datepicker({
+      dateFormat: 'dd-mm-yy',
+      minDate: 0,
+      maxDate: '6m',
+      beforeShowDay: unavailable,
+      onSelect: function(selected) {
+        $('#reservation_end_date').datepicker("option", "minDate", selected);
+        $('#reservation_end_date').attr('disabled',false);
+
+        var start_date = $(this).datepicker('getDate');
+        var end_date = $('#reservation_end_date').datepicker('getDate');
+        var days = (end_date - start_date)/1000/60/60/24 + 1
+
+        var input = {
+          'start_date': start_date,
+          'end_date':   end_date,
+          'space_id':   <%= @space.id %>
+        }
+
+        $.ajax({
+          url: "/preview",
+          data: input,
+          success: function(data) {
+
+            if (data.conflict) {
+              $('#message').text("This date range is not available.");
+              $('#preview').hide();
+              $('#btn_book').attr('disabled',true);
+            } else {
+              $('#preview').show();
+              $('#btn_book').attr('disabled',false);
+
+              var total = days * <%= @space.price %>
+              $('#message').text("Ready to book");
+              $('#reservation_days').text(days);
+              $('#reservation_sum').text(total);
+              $('#reservation_total').val(total);
+            }
+          }
+        });
+      }
+    });
+    $('#reservation_end_date').datepicker({
+      dateFormat: 'dd-mm-yy',
+      minDate: 0,
+      maxDate: '6m',
+      beforeShowDay: unavailable,
+      onSelect: function(selected) {
+        $('#reservation_start_date').datepicker("option", "maxDate", selected);
+
+        var start_date = $('#reservation_start_date').datepicker('getDate');
+        var end_date = $(this).datepicker('getDate');
+        var days = (end_date - start_date)/1000/60/60/24 + 1
+
+        var input = {
+          'start_date': start_date,
+          'end_date':   end_date,
+          'space_id':   <%= @space.id %>
+        }
+
+        $.ajax({
+          url: "/preview",
+          data: input,
+          success: function(data) {
+
+            if (data.conflict) {
+              $('#message').text("This date range is not available.");
+              $('#preview').hide();
+              $('#btn_book').attr('disabled',true);
+            } else {
+              $('#preview').show();
+              $('#btn_book').attr('disabled',false);
+
+              var total = days * <%= @space.price %>
+              $('#message').text("Ready to book");
+              $('#reservation_days').text(days);
+              $('#reservation_sum').text(total);
+              $('#reservation_total').val(total);
+            }
+          }
+        });
+      }
+    });
+  });
+</script>

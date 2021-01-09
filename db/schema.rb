@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_192814) do
     t.boolean "is_framed", default: false
     t.string "subject"
     t.string "styles"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_artworks_on_user_id"
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2021_01_08_192814) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "space_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.float "price"
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_192814) do
     t.boolean "is_live_perf", default: false
     t.boolean "is_adverts", default: false
     t.boolean "active", default: true
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
