@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Ignore db test file
 /db/test.*
+
+# Ignore the development/test environment config variables
+/config/app_environment_variables.rb

@@ -15,7 +15,9 @@ gem 'sass-rails',                 '>= 6'
 gem 'webpacker',                  '~> 5'
 gem 'turbolinks',                 '~> 5'
 gem 'jbuilder',                   '~> 2.7'
-gem 'geocoder'
+gem 'geocoder',                   '~> 1.6', '>= 1.6.4'
+gem 'httparty',                   '~> 0.18.1'
+gem 'stripe',                     '~> 5.29'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 

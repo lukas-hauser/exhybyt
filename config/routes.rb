@@ -1,19 +1,23 @@
 Rails.application.routes.draw do
+  root 'html_pages#home'
   get 'password_resets/new'
   get 'password_resets/edit'
-  root 'html_pages#home'
-  get '/home', to: 'html_pages#home'
-  get '/help', to: 'html_pages#help'
-  get '/about', to: 'html_pages#about'
-  get '/howitworks', to: 'html_pages#howitworks'
-  get '/terms', to: 'html_pages#terms'
+  get '/home',          to: 'html_pages#home'
+  get '/help',          to: 'html_pages#help'
+  get '/about',         to: 'html_pages#about'
+  get '/howitworks',    to: 'html_pages#howitworks'
+  get '/terms',         to: 'html_pages#terms'
   get '/privacypolicy', to: 'html_pages#privacypolicy'
-  get '/cookiepolicy', to: 'html_pages#cookiepolicy'
-  get '/contact', to: 'html_pages#contact'
-  get '/signup', to: 'users#new'
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  get '/cookiepolicy',  to: 'html_pages#cookiepolicy'
+  get '/contact',       to: 'html_pages#contact'
+  get '/signup',        to: 'users#new'
+  get '/login',         to: 'sessions#new'
+  get '/preload',       to: 'reservations#preload'
+  get '/preview',       to: 'reservations#preview'
+  get "stripe/connect", to: "stripe#connect", as: :stripe_connect
+  get "stripe/dashboard/:user_id", to: "stripe#dashboard", as: :stripe_dashboard
+  post '/login',        to: 'sessions#create'
+  delete '/logout',     to: 'sessions#destroy'
   resources :users do
     member do
       get :following, :followers
@@ -30,8 +34,5 @@ Rails.application.routes.draw do
                                          :edit, :update, :destroy]
   resources :artworks,            only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
-
-  get '/preload' => 'reservations#preload'
-  get '/preview' => 'reservations#preview'
 
 end
