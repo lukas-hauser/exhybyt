@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-md-12">
         <% if @user.stripe_user_id %>
-          Connected with Stripe
+          <%= link_to "Go to Stripe Dashboard", stripe_dashboard_path(@user.id) %>
         <% else %>
           <div class="btn-block">
             <%= link_to "Connect with Stripe", stripe_button_link, class:"btn btn-block btn-secondary" %>
