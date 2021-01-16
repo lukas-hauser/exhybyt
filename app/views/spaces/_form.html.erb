@@ -2,13 +2,12 @@
   <h1>Your Beautiful Space</h1>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
-    <%= f.select :category,space_categories,
-    id: "category", prompt: "Category", class: "form-control" %>
+    <%= f.select :category, space_categories, {prompt: "Category"}, class: "form-control custom-select" %>
   </div>
   <div class="form-group">
-    <%= f.select :venue_type, venue_types,
-    prompt: "Venue Type", class: "form-control" %>
+    <%= f.select :venue_type, venue_types, { prompt: "Venue Type" }, class: "form-control custom-select" %>
   </div>
+
   <div class="form-group">
     <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
   </div>
@@ -153,12 +152,11 @@
 
   <hr class="my-4">
 
-  <span class="image">
-    <div class="form-group">
-      <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
-    </div>
-  </span>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <div class="form-group">
+    <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
+  </div>
+
+  <%= f.submit "Submit", class: "btn btn-block btn-primary" %>
 <% end %>
 
 <script type="text/javascript">

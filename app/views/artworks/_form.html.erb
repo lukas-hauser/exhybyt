@@ -2,16 +2,15 @@
   <h1>Your Beautiful Artwork</h1>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
-    <%= f.select :category, artwork_categories,
-    id: "category", prompt: "Category", class: "form-control" %>
+    <%= f.select :category, artwork_categories, {prompt: "Category"}, class: "form-control custom-select" %>
   </div>
   <div class="form-group">
     <%= f.select :subject, artwork_subjects,
-    prompt: "Subject", class: "form-control" %>
+    {prompt: "Subject"}, class: "form-control custom-select" %>
   </div>
   <div class="form-group">
     <%= f.select :status, artwork_status,
-    prompt: "Status", class: "form-control" %>
+    {prompt: "Status"}, class: "form-control custom-select" %>
   </div>
   <div class="form-group">
     <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
@@ -23,7 +22,7 @@
     <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.select :styles, artwork_styles, prompt: "Select Style" %>
+    <%= f.select :styles, artwork_styles, {prompt: "Select Style"}, class: "form-control custom-select" %>
   </div>
   <div class="form-group">
     <%= f.text_field :year, placeholder: "Year", class: "form-control" %>
@@ -43,15 +42,9 @@
 
   <hr class="my-4">
 
-  <div class="container">
-    <div class="mb-3">
-      <div class="row">
-        <div class="form-check">
-          <%= f.check_box :is_framed, class:"form-check-input", id:"framed" %>
-          <label class="form-check-label" for="framed">Framed</label>
-        </div>
-      </div>
-    </div>
+  <div class="form-check">
+    <%= f.check_box :is_framed, class:"form-check-input", id:"framed" %>
+    <label class="form-check-label" for="framed">Framed</label>
   </div>
 
   <hr class="my-4">
@@ -93,7 +86,7 @@
       <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
     </div>
   </span>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <%= f.submit "Submit", class: "btn btn-block btn-primary" %>
 <% end %>
 
 <script type="text/javascript">
