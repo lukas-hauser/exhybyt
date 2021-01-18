@@ -1,16 +1,35 @@
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link" href="<%= contact_path %>">Contact</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= terms_path %>">Terms of use</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= privacypolicy_path %>">Privacy Policy</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="<%= cookiepolicy_path %>">Cookie Policy</a>
-  </li>
-</ul>
-
-<p class="nav justify-content-center">© EXHYBYT <%= Date.today.year %></p>
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+  <div class="row">
+    <div class="col-12 col-md">
+      <%= image_tag asset_path("favicon.png"), class:"mb-2", alt:"", width:"28", height:"28" %>
+      <small class="d-block mb-3 text-muted">&copy; <%= Date.today.year %> EXHYBYT</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Browse</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Paintings</a></li>
+        <li><a class="text-muted" href="#">Photography</a></li>
+        <li><a class="text-muted" href="#">Spaces</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Why EXHYBYT?</a></li>
+        <li><a class="text-muted" href="#">How it works</a></li>
+        <li><a class="text-muted" href="#">Artists</a></li>
+        <li><a class="text-muted" href="#">Businesses</a></li>
+        <li><a class="text-muted" href="#">Collectors</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>About</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="<%= contact_path %>">Contact</a></li>
+        <li><a class="text-muted" href="<%= cookiepolicy_path %>">Cookies</a></li>
+        <li><a class="text-muted" href="<%= privacypolicy_path %>">Privacy</a></li>
+        <li><a class="text-muted" href="<%= terms_path %>">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
