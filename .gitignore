@@ -45,3 +45,6 @@ yarn-debug.log*
 
 # Ignore the development/test environment config variables
 /config/app_environment_variables.rb
+
+# Ignore .DS_Store
+/config/.DS_Store
