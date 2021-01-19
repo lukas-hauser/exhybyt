@@ -6,8 +6,8 @@
     <h5 class="card-title"><%= reservation.space.listing_name %></h5>
     <p class="card-text small">
       Price: £ <%= reservation.price %> per day<br>
-      Total Price: £<br>
-      <%= reservation.start_date %> to <%= reservation.end_date %><br>
+      Total Price: £ <%= reservation.total %><br>
+      <%= reservation.start_date.strftime("%d %b %Y") %> to <%= reservation.end_date.strftime("%d %b %Y") %><br>
     </p>
   </div>
 </div>
