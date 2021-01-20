@@ -5,5 +5,7 @@
   <% else %>
     <%= render 'follow' %>
   <% end %>
+  <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id),
+  method: 'post' %>
   </div>
 <% end %>

@@ -1,0 +1,12 @@
+<div class="panel">
+	<div class="panel-body">
+		<%= gravatar_for(message.user, size: 40) %>
+		<strong><%= message.user.display_name %></strong>
+
+		<span class="pull-right"><%= message.message_time %></span>
+		<br>
+		<div class="row-space-2">
+			<%= message.content %>
+		</div>
+	</div>
+</div>

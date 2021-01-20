@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get '/preview',       to: 'reservations#preview'
   get '/your_bookings',     to: 'reservations#your_bookings'
   get '/your_reservations', to: 'reservations#your_reservations'
-
   get "stripe/connect", to: "stripe#connect", as: :stripe_connect
   get "stripe/dashboard/:user_id", to: "stripe#dashboard", as: :stripe_dashboard
   post '/login',        to: 'sessions#create'
@@ -32,10 +31,11 @@ Rails.application.routes.draw do
   resources :spaces do
     resources :reservations,      only: [:create, :index]
   end
-  resources :reservations,        only: [:create, :index]
   resources :spaces,              only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
   resources :artworks,            only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
-
+  resources :conversations,       only: [:index, :create] do
+    resources :messages,          only: [:index, :create]
+  end
 end

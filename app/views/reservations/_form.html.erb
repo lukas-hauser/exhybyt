@@ -1,4 +1,4 @@
-<%= form_with(model: @space.reservations.build, local: true) do |f| %>
+<%= form_with model: [@space, @space.reservations.new], local: true do | f | %>
 
   <div class="col">
     <div class="form-group date">
