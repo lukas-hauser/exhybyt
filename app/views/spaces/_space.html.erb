@@ -1,6 +1,6 @@
 <div class="card">
   <% if space.images.attached? %>
-    <%= image_tag space.images[0], class:"card-img" %>
+    <%= link_to image_tag(space.images[0], class:"card-img"), space %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= space.listing_name %></h5>
@@ -11,12 +11,11 @@
       <%= space.wall_width %> x <%= space.wall_height %> cm<br>
       <small class="text-muted">Hosted by <%= link_to space.user.display_name, space.user, class:"text-muted" %></small>
     </p>
-    <div class="btn-group">
-      <%= link_to "View", space, class:"btn btn-sm btn-outline-secondary" %>
-      <% if current_user?(space.user) %>
-          <%= link_to "Edit", edit_space_path(space), class:"btn btn-sm btn-outline-secondary" %>
-          <%= link_to "Delete", space, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
-      <% end %>
-    </div>
+    <% if current_user?(space.user) %>
+      <div class="btn-group">
+        <%= link_to "Edit", edit_space_path(space), class:"btn btn-sm btn-outline-secondary" %>
+        <%= link_to "Delete", space, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+      </div>
+    <% end %>
   </div>
 </div>

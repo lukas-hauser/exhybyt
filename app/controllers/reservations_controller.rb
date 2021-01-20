@@ -22,6 +22,14 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations.paginate(page: params[:page])
   end
 
+  def your_bookings
+    @bookings = current_user.reservations.paginate(page: params[:page])
+  end
+
+  def your_reservations
+    @spaces = current_user.spaces
+  end
+
   def create
     @reservation = current_user.reservations.create(reservation_params)
     if @reservation.save

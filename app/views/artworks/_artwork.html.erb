@@ -1,6 +1,6 @@
 <div class="card">
   <% if artwork.images.attached? %>
-    <%= image_tag artwork.images[0], class:"card-img" %>
+    <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= artwork.listing_name %></h5>
@@ -11,12 +11,11 @@
       <%= artwork.width %> x <%= artwork.height %> cm<br>
       <small class="text-muted"><%= link_to artwork.user.display_name, artwork.user, class:"text-muted" %></small>
     </p>
-    <div class="btn-group">
-      <%= link_to "View", artwork, class:"btn btn-sm btn-outline-secondary" %>
-      <% if current_user?(artwork.user) %>
-          <%= link_to "Edit", edit_artwork_path(artwork), class:"btn btn-sm btn-outline-secondary" %>
-          <%= link_to "Delete", artwork, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
-      <% end %>
-    </div>
+    <% if current_user?(artwork.user) %>
+      <div class="btn-group">
+        <%= link_to "Edit", edit_artwork_path(artwork), class:"btn btn-sm btn-outline-secondary" %>
+        <%= link_to "Delete", artwork, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+      </div>
+    <% end %>
   </div>
 </div>
