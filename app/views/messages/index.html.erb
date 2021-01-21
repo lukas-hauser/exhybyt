@@ -16,28 +16,12 @@
 				Conversation with <%= @other.display_name %>
 			</h5>
 			<div class="card-body">
-				<div class="container">
-
-					<%= form_with model: [@conversation, @conversation.messages.new], local: true do | f | %>
-
-						<div class="form-group">
-							<%= f.text_area :content, placeholder: "Add a personal message", class: "form-control" %>
-						</div>
-						<%= f.hidden_field :user_id, value: current_user.id %>
-
-						<div class="actions">
-							<%= f.submit "Send Message", class: "btn btn-primary" %>
-						</div>
-					<% end %>
-
-				</div>
+				<%= render 'message_form' %>
 			</div>
 		</div>
 
-		<div class="card">
+		<div class="card", id="chat" >
 			<%= render @messages, locals: {conversation: @conversation} %>
 		</div>
-
 	</div>
-
 </div>

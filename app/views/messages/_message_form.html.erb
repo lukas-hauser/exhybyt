@@ -1,0 +1,11 @@
+  <%= form_with model: [@conversation, @conversation.messages.new], id:"message_form" do |f| %>
+
+    <div class="form-group">
+      <%= f.text_area :content, placeholder: "Add a personal message", class: "form-control" %>
+    </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="actions">
+      <%= f.submit "Send Message", class: "btn btn-primary" %>
+    </div>
+  <% end %>
