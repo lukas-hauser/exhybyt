@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 2021_01_20_123056) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "space_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "space_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.float "price"
