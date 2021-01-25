@@ -130,7 +130,7 @@
   <div class="row">
     <h3>Nearby Spaces</h3>
     <div class="card-group">
-      <% for space in @space.nearbys(10) %>
+      <% for space in @space.nearbys(10).take(3) %>
         <div class="card">
           <% if space.images.attached? %>
             <%= image_tag space.images[0], class:"card-img" %>
