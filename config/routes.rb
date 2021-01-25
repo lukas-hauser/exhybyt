@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/privacypolicy', to: 'html_pages#privacypolicy'
   get '/cookiepolicy',  to: 'html_pages#cookiepolicy'
   get '/contact',       to: 'html_pages#contact'
+  get '/search',        to: 'html_pages#search'
   get '/signup',        to: 'users#new'
   get '/login',         to: 'sessions#new'
   get '/preload',       to: 'reservations#preload'
