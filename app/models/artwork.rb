@@ -1,6 +1,7 @@
 class Artwork < ApplicationRecord
   belongs_to :user
   has_many_attached :images
+  has_many :reservations
 
   validates :user_id, presence: true
   validates :listing_name, presence: true, length: { maximum: 60 }

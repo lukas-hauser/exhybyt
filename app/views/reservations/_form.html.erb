@@ -17,6 +17,19 @@
   <%= f.hidden_field :total, id: 'reservation_total' %>
 
   <div class="col">
+    <% if current_user.artworks.any? %>
+        <div class="form-group">
+          <%= f.select :artwork_id, current_user.artworks.collect {
+            |x| [x.listing_name + " " + x.category, x.id]}, {}, multiple: false, class: "form-control custom-select" %>
+        </div>
+    <% else %>
+      <div class="alert alert-warning" role="alert">
+        Please upload your artwork to book this space.
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col">
     <h4><span id="message"></span></h4>
   </div>
   <div class="col", id="preview", style="display: none">

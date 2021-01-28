@@ -39,8 +39,12 @@ class SpacesController < ApplicationController
   end
 
   def destroy
-    @space.destroy
-    flash[:primary] = "Space has been deleted"
+    if @space.reservations.any?
+      flash[:warning] = "Space currently can't be deleted as there are reservations. However, you can inactivate it, so it's not searchable and bookable anymore."
+    else
+      @space.destroy
+      flash[:primary] = "Space has been deleted"
+    end
     redirect_to request.referrer || root_path
   end
 

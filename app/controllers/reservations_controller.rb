@@ -37,6 +37,7 @@ class ReservationsController < ApplicationController
       flash[:success] = "You have submited the reservation."
     else
       redirect_to request.referrer || root_path
+      flash[:danger] = "Something went wrong. Did you upload and add the artwork that you want to exhibit?"
     end
   end
 
@@ -49,6 +50,6 @@ class ReservationsController < ApplicationController
     end
 
     def reservation_params
-      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id)
+      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id, :artwork_id)
     end
 end

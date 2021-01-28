@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_123056) do
+ActiveRecord::Schema.define(version: 2021_01_28_192609) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -88,14 +88,16 @@ ActiveRecord::Schema.define(version: 2021_01_20_123056) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "space_id", null: false
+    t.integer "user_id", null: false
+    t.integer "space_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.float "price"
     t.float "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "artwork_id", null: false
+    t.index ["artwork_id"], name: "index_reservations_on_artwork_id"
     t.index ["space_id"], name: "index_reservations_on_space_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -159,6 +161,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_123056) do
   add_foreign_key "artworks", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "reservations", "artworks"
   add_foreign_key "reservations", "spaces"
   add_foreign_key "reservations", "users"
   add_foreign_key "spaces", "users"

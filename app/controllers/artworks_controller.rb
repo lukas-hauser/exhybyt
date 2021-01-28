@@ -39,8 +39,12 @@ class ArtworksController < ApplicationController
   end
 
   def destroy
-    @artwork.destroy
-    flash[:primary] = "artwork has been deleted"
+    if @artwork.reservations.any?
+      flash[:warning] = "Artwork currently can't be deleted as it was used in a reservation."
+    else
+      @artwork.destroy
+      flash[:primary] = "artwork has been deleted"
+    end
     redirect_to request.referrer || root_path
   end
 
