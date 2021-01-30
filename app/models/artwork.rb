@@ -16,9 +16,14 @@ class Artwork < ApplicationRecord
   validates :height, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :width, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :depth, numericality: {only_float: true, :greater_than => 0, allow_blank: true}
-  validates :price, presence: true, numericality: {only_float: true, :greater_than => 0}
+  validates :price, presence: true, if: :for_sale?,
+                    numericality: {only_float: true, :greater_than => 0}
 
   validates :images, #presence: true,
                     content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)." },
                     size: { less_than: 5.megabytes, message: "exceeds 5MB." }
+
+  def for_sale?
+  	status == "For Sale"
+  end
 end
