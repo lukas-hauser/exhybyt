@@ -1,14 +1,16 @@
 <%= form_with model: [@space, @space.reservations.new], local: true do | f | %>
 
-  <div class="col">
-    <div class="form-group date">
-      <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control" %>
+  <div class="row">
+    <div class="col">
+      <div class="form-group date">
+        <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control" %>
+      </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="form-group date">
-      <%= f.text_field :end_date, placeholder: "End Date", class: "form-control",
-                                  disabled: true %>
+    <div class="col">
+      <div class="form-group date">
+        <%= f.text_field :end_date, placeholder: "End Date", class: "form-control",
+                                    disabled: true %>
+      </div>
     </div>
   </div>
 
@@ -16,18 +18,16 @@
   <%= f.hidden_field :price, value: @space.price %>
   <%= f.hidden_field :total, id: 'reservation_total' %>
 
-  <div class="col">
-    <% if current_user.artworks.any? %>
-        <div class="form-group">
-          <%= f.select :artwork_id, current_user.artworks.collect {
-            |x| [x.listing_name + " " + x.category, x.id]}, {}, multiple: false, class: "form-control custom-select" %>
-        </div>
-    <% else %>
-      <div class="alert alert-warning" role="alert">
-        Please upload your artwork to book this space.
+  <% if current_user.artworks.any? %>
+      <div class="form-group">
+        <%= f.select :artwork_id, current_user.artworks.collect {
+          |x| [x.listing_name + " " + x.category, x.id]}, {}, multiple: false, class: "form-control custom-select" %>
       </div>
-    <% end %>
-  </div>
+  <% else %>
+    <div class="alert alert-warning" role="alert">
+      Please upload your artwork to book this space.
+    </div>
+  <% end %>
 
   <div class="col">
     <h4><span id="message"></span></h4>
@@ -47,9 +47,11 @@
     </table>
   </div>
 
-  <div class="col">
-    <div class="form-group">
-      <%= f.submit "Book Now", id:"btn_book", class:"btn btn-primary", disabled: true %>
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <%= f.submit "Book Now", id:"btn_book", class:"btn btn-primary", disabled: true %>
+      </div>
     </div>
   </div>
 

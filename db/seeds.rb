@@ -34,6 +34,22 @@ users = User.order(:created_at).take(5)
   wall_height = Faker::Number.decimal(l_digits: 2, r_digits: 2)
   wall_width = Faker::Number.decimal(l_digits: 2, r_digits: 2)
   price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  is_adj_light = rand(0..1)
+  is_nat_light = rand(0..1)
+  is_dis_acc = rand(0..1)
+  is_parking = rand(0..1)
+  is_hang_sys = rand(0..1)
+  is_plugs = rand(0..1)
+  is_sec_sys = rand(0..1)
+  is_toilet = rand(0..1)
+  is_wifi = rand(0..1)
+  is_storage = rand(0..1)
+  is_paintings = rand(0..1)
+  is_photography = rand(0..1)
+  is_drawings = rand(0..1)
+  is_sculptures = rand(0..1)
+  is_live_perf = rand(0..1)
+  is_adverts = rand(0..1)
   images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
   users.each { |user| space = user.spaces.build(
     venue_type: venue_type,
@@ -45,7 +61,23 @@ users = User.order(:created_at).take(5)
     longitude: longitude,
     wall_height: wall_height,
     wall_width: wall_width,
-    price: price)
+    price: price,
+    is_adj_light: is_adj_light,
+    is_nat_light: is_nat_light,
+    is_dis_acc: is_dis_acc,
+    is_parking: is_parking,
+    is_hang_sys: is_hang_sys,
+    is_plugs: is_plugs,
+    is_sec_sys: is_sec_sys,
+    is_toilet: is_toilet,
+    is_wifi: is_wifi,
+    is_storage: is_storage,
+    is_paintings: is_paintings,
+    is_photography: is_photography,
+    is_drawings: is_drawings,
+    is_sculptures: is_sculptures,
+    is_live_perf: is_live_perf,
+    is_adverts: is_adverts)
     space.images.attach(
       io: File.open('app/assets/images/exhibition.jpg'),
       filename: 'exhibition.jpg')
