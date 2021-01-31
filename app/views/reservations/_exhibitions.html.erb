@@ -1,0 +1,19 @@
+<% @exhibitions.each do |exhibition| %>
+  <div class="card">
+    <% if exhibition.artwork.images.attached? %>
+      <%= link_to image_tag(exhibition.artwork.images[0], class:"card-img"), exhibition.artwork %>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to gravatar_for(exhibition.artwork.user, size: 25), exhibition.artwork.user %>
+        <%= exhibition.space.user.display_name %></h5>
+      <p class="card-text small">
+        <%= exhibition.start_date.strftime("%d %b %Y") %> to <%= exhibition.end_date.strftime("%d %b %Y") %><br>
+      </p>
+      <p class="card-text small">
+        <%= link_to image_tag(exhibition.space.images[0], size: 25, class:"rounded-circle"), exhibition.space %>
+        <%= exhibition.space.listing_name %>
+      </p>
+    </div>
+  </div>
+<% end %>

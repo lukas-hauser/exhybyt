@@ -30,6 +30,21 @@ class ReservationsController < ApplicationController
     @spaces = current_user.spaces
   end
 
+  def current_exhibitions
+    today = Date.today
+    @exhibitions = Reservation.where("start_date <= ? AND end_date >= ?", today, today)
+  end
+
+  def past_exhibitions
+    today = Date.today
+    @exhibitions = Reservation.where("start_date <= ? AND end_date <= ?", today, today)
+  end
+
+  def upcoming_exhibitions
+    today = Date.today
+    @exhibitions = Reservation.where("start_date >= ? AND end_date >= ?", today, today)
+  end
+
   def create
     @reservation = current_user.reservations.create(reservation_params)
     if @reservation.save

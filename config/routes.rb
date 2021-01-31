@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   get '/login',         to: 'sessions#new'
   get '/preload',       to: 'reservations#preload'
   get '/preview',       to: 'reservations#preview'
-  get '/your_bookings',     to: 'reservations#your_bookings'
-  get '/your_reservations', to: 'reservations#your_reservations'
+  get '/your_bookings',       to: 'reservations#your_bookings'
+  get '/your_reservations',   to: 'reservations#your_reservations'
+  get 'current_exhibitions',  to: 'reservations#current_exhibitions'
+  get 'upcoming_exhibitions', to: 'reservations#upcoming_exhibitions'
+  get 'past_exhibitions',     to: 'reservations#past_exhibitions'
   get "stripe/connect", to: "stripe#connect", as: :stripe_connect
   get "stripe/dashboard/:user_id", to: "stripe#dashboard", as: :stripe_dashboard
   post '/login',        to: 'sessions#create'
