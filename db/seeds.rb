@@ -22,17 +22,17 @@ User.create!(firstname: "Test",
     activated_at: Time.zone.now)
 end
 
-users = User.order(:created_at).take(5)
-5.times do
-  venue_type = "Coffee Shop"
-  category = "Wall Space"
+25.times do
+  user = User.order(:created_at).take(5)[rand(0..4)]
+  venue_type = ["Bar","Coffee Shop","Restaurant"].sample
+  category = ["Wall Space","Window Display","Entire Gallery"].sample
   listing_name = Faker::Restaurant.name
   description = Faker::Lorem.sentence(word_count: 20)
   address = Faker::Address.full_address
   latitude = rand(51.5..51.52)
   longitude = rand(0.125..0.14)
-  wall_height = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  wall_width = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  wall_height = rand(50..300)
+  wall_width = rand(80..200)
   price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
   is_adj_light = rand(0..1)
   is_nat_light = rand(0..1)
@@ -50,8 +50,8 @@ users = User.order(:created_at).take(5)
   is_sculptures = rand(0..1)
   is_live_perf = rand(0..1)
   is_adverts = rand(0..1)
-  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
-  users.each { |user| space = user.spaces.build(
+#  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
+  space = user.spaces.build(
     venue_type: venue_type,
     category: category,
     listing_name: listing_name,
@@ -82,24 +82,31 @@ users = User.order(:created_at).take(5)
       io: File.open('app/assets/images/exhibition.jpg'),
       filename: 'exhibition.jpg')
       space.save!
-    }
 end
 
-users = User.order(:created_at).take(5)
-5.times do
-  styles = "Realism"
-  subject = "Portrait"
-  category = "Painting"
+users = User.all
+user = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+
+25.times do
+  user = User.order(:created_at).take(5)[rand(0..4)]
+  styles = ["Abstract","Realism"].sample
+  subject = ["Portrait","Landscape"].sample
+  category = ["Advertisement","Drawing","Painting","Photography","Sculpture"].sample
   listing_name = Faker::Hipster.word
   description = Faker::Lorem.sentence(word_count: 20)
-  medium = "Oil on Canvas"
-  height = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  width = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  depth = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  year = "2020"
-  status = "For Sale"
-  users.each { |user| artwork = user.artworks.build(
+  medium = ["Oil on Canvas","Mixed Media"].sample
+  height = rand(50..120)
+  width = rand(50..120)
+  depth = rand(1..3)
+  price = rand(10..200)
+  year = ["2018","2019","2020"].sample
+  status = ["For Sale","Not For Sale","Sold"].sample
+  framed = rand(0..1)
+  artwork = user.artworks.build(
     styles: styles,
     subject: subject,
     category: category,
@@ -111,17 +118,10 @@ users = User.order(:created_at).take(5)
     depth: depth,
     year: year,
     status: status,
+    is_framed: framed,
     price: price)
     artwork.images.attach(
       io: File.open('app/assets/images/skull.jpg'),
       filename: 'skull.jpg')
       artwork.save!
-    }
 end
-
-users = User.all
-user = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }
