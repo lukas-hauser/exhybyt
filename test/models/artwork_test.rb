@@ -74,6 +74,18 @@ class ArtworkTest < ActiveSupport::TestCase
     assert_not @artwork.valid?
   end
 
+  test "Price doesn't need to be present if status Sold" do
+    @artwork.status = "Sold"
+    @artwork.price = "   "
+    assert @artwork.valid?
+  end
+
+  test "Price doesn't need to be present if status Not For Sale" do
+    @artwork.status = "Not For Sale"
+    @artwork.price = "   "
+    assert @artwork.valid?
+  end
+
   test "Status should be present" do
     @artwork.status = "   "
     assert_not @artwork.valid?

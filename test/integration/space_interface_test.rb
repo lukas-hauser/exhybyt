@@ -70,18 +70,23 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_adverts: false,
         active: true} }
     end
-#    assert_redirected_to @space
-#    follow_redirect!
+    follow_redirect!
+    assert_template 'spaces/show'
 
-    # Delete Post
-#    assert_select 'a', text: 'delete'
-#    first_space = @user.spaces.paginate(page: 1).first
-#    assert_difference 'Space.count', -1 do
-#      delete spaces_path(first_space)
-#    end
+    # Delete Space
+    get user_path(@user)
+    assert_template 'users/show'
+    assert_select 'a', text: 'Delete'
+    assert_select 'a', text: 'Edit'
+    first_space = @user.spaces.paginate(page: 1).first
+    assert_difference 'Space.count', -1 do
+      delete space_path(first_space)
+    end
 
     # Visit different user (no delete links)
     get user_path(users(:lukas))
-    assert_select 'a', text: 'delete', count: 0
+    assert_template 'users/show'
+    assert_select 'a', text: 'Delete', count: 0
+    assert_select 'a', text: 'Edit', count: 0
   end
 end
