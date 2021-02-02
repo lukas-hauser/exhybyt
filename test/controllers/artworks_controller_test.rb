@@ -40,4 +40,37 @@ class ArtworksControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
+
+  test "should redirect edit when not logged in" do
+    get edit_artwork_path(@artwork)
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test "should redirect edit for wrong artwork" do
+    log_in_as (users(:lukas))
+    artwork = artworks(:three)
+    get edit_artwork_path(artwork)
+    assert flash.empty?
+    assert_redirected_to root_url
+  end
+
+  test "should redirect update when logged in as wrong user" do
+    log_in_as (users(:jane))
+    patch artwork_path(@artwork), params: { artwork: { listing_name: "Moana Lisa",
+      description: "This is the Hawaiian version of Mona Lisa",
+      height: "60",
+      width: "50",
+      depth: "2.5",
+      year: "2020",
+      category: "Painting",
+      medium: "Oil on Canvas",
+      price: "5000",
+      status: "For Sale",
+      is_framed: true,
+      subject: "Portrait",
+      styles: "Realism" } }
+    assert flash.empty?
+    assert_redirected_to root_url
+  end
 end

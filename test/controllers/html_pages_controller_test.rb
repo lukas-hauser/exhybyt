@@ -55,4 +55,10 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "Sign Up | EXHYBYT"
   end
 
+  test "should get login" do
+    get login_path
+    assert_response :success
+    assert_select "title", "Log In | EXHYBYT"
+  end
+
 end
