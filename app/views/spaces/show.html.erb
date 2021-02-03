@@ -19,7 +19,13 @@
   <p class="d-inline-block mb-2 text center"><%= @space.description %></p>
   <p class="d-inline-block mb-2 text center"><%= @space.address %></p>
 
-  <%= render 'reservations/form' %>
+  <% if !logged_in? %>
+    <div class="alert alert-warning" role="alert">
+      Please log in to check dates and book.
+    </div>
+  <% else %>
+    <%= render 'reservations/form' %>
+  <% end %>
 
   <div class="center">
     <h3><%= 'Amenities' if @space.is_toilet ||
