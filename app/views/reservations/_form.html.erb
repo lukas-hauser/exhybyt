@@ -18,7 +18,11 @@
   <%= f.hidden_field :price, value: @space.price %>
   <%= f.hidden_field :total, id: 'reservation_total' %>
 
-  <% if current_user.artworks.any? %>
+  <% if !logged_in? %>
+    <div class="alert alert-warning" role="alert">
+      Please log in to book.
+    </div>
+  <% elsif current_user.artworks.any? %>
       <div class="form-group">
         <%= f.select :artwork_id, current_user.artworks.collect {
           |x| [x.listing_name + " " + x.category, x.id]}, {}, multiple: false, class: "form-control custom-select" %>

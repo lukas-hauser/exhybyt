@@ -61,4 +61,9 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "Log In | EXHYBYT"
   end
 
+  test "should get search" do
+    get search_path
+    assert_response :success
+    assert_select "title", "Find Space | EXHYBYT"
+  end
 end
