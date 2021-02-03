@@ -71,44 +71,44 @@
       <div class="row">
         <div class="col">
           <div class="form-check">
-            <%= check_box_tag 'q[is_adj_light_eq]', true %> Adjustable Lighting
+            <%= f.check_box :is_adj_light_eq, {}, true, nil %> Adjustable Lighting
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_dis_acc_eq]', true %> Disabled Access
+            <%= f.check_box :is_dis_acc_eq, {}, true, nil %> Disabled Access
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_hang_sys_eq]', true %> Hanging System
+            <%= f.check_box :is_hang_sys_eq, {}, true, nil  %> Hanging System
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_nat_light_eq]', true %> Natural Light
+            <%= f.check_box :is_nat_light_eq, {}, true, nil  %> Natural Light
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_parking_eq]', true %> Parking
+            <%= f.check_box :is_parking_eq, {}, true, nil  %> Parking
           </div>
         </div>
         <div class="col">
           <div class="form-check">
-            <%= check_box_tag 'q[is_plugs_eq]', true %> Power Plugs
+            <%= f.check_box :is_plugs_eq, {}, true, nil  %> Power Plugs
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_sec_sys_eq]', true %> Security System
+            <%= f.check_box :is_sec_sys_eq, {}, true, nil  %> Security System
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_storage_eq]', true %> Storage
+            <%= f.check_box :is_storage_eq, {}, true, nil  %> Storage
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_toilet_eq]', true %> Toilet
+            <%= f.check_box :is_toilet_eq, {}, true, nil  %> Toilet
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_wifi_eq]', true %> WiFi
+            <%= f.check_box :is_wifi_eq, {}, true, nil  %> WiFi
           </div>
         </div>
       </div>
@@ -120,35 +120,35 @@
       <div class="row">
         <div class="col">
           <div class="form-check">
-            <%= check_box_tag 'q[is_adverts_eq]', true %> Advertisement
+            <%= f.check_box :is_adverts_eq, {}, true, nil %> Advertisement
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_drawings_eq]', true %> Drawings
+            <%= f.check_box :is_drawings_eq, {}, true, nil %> Drawings
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_live_perf_eq]', true %> Live Performance
+            <%= f.check_box :is_live_perf_eq, {}, true, nil %> Live Performance
           </div>
         </div>
         <div class="col">
           <div class="form-check">
-            <%= check_box_tag 'q[is_paintings_eq]', true %> Paintings
+            <%= f.check_box :is_paintings_eq, {}, true, nil %> Paintings
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_photography_eq]', true %> Photography
+            <%= f.check_box :is_photography_eq, {}, true, nil %> Photography
           </div>
 
           <div class="form-check">
-            <%= check_box_tag 'q[is_sculptures_eq]', true %> Scultpures
+            <%= f.check_box :is_sculptures_eq, {}, true, nil %> Scultpures
           </div>
         </div>
       </div>
 
       <hr class="my-4">
 
-      <%= f.submit "Search", class:"btn btn-primary" %>
+      <%= f.submit "Search", class:"btn btn-primary", name:'' %>
 
     <% end %>
   </div>
