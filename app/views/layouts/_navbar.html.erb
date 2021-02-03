@@ -16,7 +16,9 @@
     <ul class="navbar-nav navbar-right">
       <% if logged_in? %>
         <li class="nav-item">
-          <%= link_to "Messages", conversations_path, class:"nav-link" %>
+          <%= link_to conversations_path do %>
+            <i class="nav-link far fa-envelope"></i>
+          <% end %>
         </li>
         <li class="nav-item">
           <%= link_to "Add Art", new_artwork_path, class:"nav-link" %>

@@ -12,6 +12,7 @@ import 'bootstrap'
 
 require("jquery-ui")
 
+import "@fortawesome/fontawesome-free/css/all"
 
 // $(function(){
     // Plain jquery
