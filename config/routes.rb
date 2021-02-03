@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get '/preview',       to: 'reservations#preview'
   get '/your_bookings',       to: 'reservations#your_bookings'
   get '/your_reservations',   to: 'reservations#your_reservations'
-  get 'current_exhibitions',  to: 'reservations#current_exhibitions'
+  get 'exhibitions',  to: 'reservations#current_exhibitions'
   get 'upcoming_exhibitions', to: 'reservations#upcoming_exhibitions'
   get 'past_exhibitions',     to: 'reservations#past_exhibitions'
   get "stripe/connect", to: "stripe#connect", as: :stripe_connect

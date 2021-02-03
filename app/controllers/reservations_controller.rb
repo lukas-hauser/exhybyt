@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
 
   def preload
     space = Space.find(params[:space_id])
