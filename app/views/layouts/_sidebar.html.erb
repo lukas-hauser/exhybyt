@@ -1,14 +1,30 @@
-<ul class="nav flex-column">
-  <li class="nav-item">
-    <%= link_to "Your Artwork", artworks_path, class:"nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Your Spaces", spaces_path, class:"nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Your Bookings", your_bookings_path, class:"nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Your Reservations", your_reservations_path, class:"nav-link" %>
-  </li>
-</ul>
+<div class="col">
+  <div class="flex-column">
+    <div class="list-group">
+      <%= link_to artworks_path, class:"list-group-item list-group-item-action" do %>
+        <i class="fa fa-image"></i>
+        <span>Your Artwork</span>
+      <% end %>
+
+      <%= link_to spaces_path, class:"list-group-item list-group-item-action" do %>
+        <i class="fa fa-store"></i>
+        <span>Your Spaces</span>
+      <% end %>
+
+      <%= link_to your_bookings_path, class:"list-group-item list-group-item-action" do %>
+        <i class="fa fa-book"></i>
+        <span>Your Bookings</span>
+      <% end %>
+
+      <%= link_to your_reservations_path, class:"list-group-item list-group-item-action" do %>
+        <i class="fa fa-file"></i>
+        <span>Your Reservations</span>
+      <% end %>
+
+      <%= link_to conversations_path, class:"list-group-item list-group-item-action" do %>
+        <i class="fa fa-envelope"></i>
+        <span>Messages</span>
+      <% end %>
+    </div>
+  </div>
+</div>

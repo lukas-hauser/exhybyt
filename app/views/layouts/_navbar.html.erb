@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top mb-3">
   <a class="navbar-brand" href="<%= root_path %>">
+    <%= image_tag asset_path("favicon.svg"), width:"30", height:"30", class:"d-inline-block align-top" %>
     EXHYBYT</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,17 +8,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <%= link_to "About", about_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item">
         <%= link_to "How it works", howitworks_path, class: "nav-link" %>
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
       <% if logged_in? %>
         <li class="nav-item">
-          <%= link_to conversations_path do %>
-            <i class="nav-link far fa-envelope fa-2x"></i>
+          <%= link_to conversations_path, class:"nav-link" do %>
+            <i class="far fa-envelope"></i>
+            <span>Messages</span>
           <% end %>
         </li>
         <li class="nav-item">
