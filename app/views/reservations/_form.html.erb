@@ -54,9 +54,17 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <%= f.submit "Book Now", id:"btn_book", class:"btn btn-primary", disabled: true %>
+        <%= f.submit "Book Now", id:"btn_book", class:"btn btn-block btn-primary", disabled: true %>
       </div>
     </div>
+    <% unless current_user?(@space.user) %>
+      <div class="col">
+        <div class="form-group">
+          <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @space.user_id),
+          method: 'post', class:"btn btn-block btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 
 <% end %>
