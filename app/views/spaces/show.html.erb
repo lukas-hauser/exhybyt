@@ -1,13 +1,32 @@
 <%= provide(:title, @space.listing_name ) %>
 
 <% if @space.images.attached? %>
-  <div class="container-fluid-xl">
-    <div class="row">
-      <div>
-        <%= image_tag @space.images[0], class:"img-fluid max-width: 100%" %>
+  <% if @space.images.count > 1 %>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% @space.images.each do |image| %>
+          <li data-target="#carouselExampleIndicators" data-slide-to="<%= image.id %>"<%= ' class="active"' if image.id == @space.images[0].id %></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+        <% @space.images.each do |image| %>
+          <div class="carousel-item<%= ' active' if image.id == @space.images[0].id %>">
+            <%= image_tag image, class:"d-block w-100 carousel-full-height-image" %>
+          </div>
+        <% end %>
       </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
-  </div>
+  <% else %>
+    <%= image_tag @space.images[0], class:"d-block w-100 carousel-full-height-image" %>
+  <% end %>
 <% end %>
 
 <div class="col p-4 d-flex flex-column position-static">
@@ -64,35 +83,6 @@
         <li class="<%= 'text-hide' if !@space.is_adverts %>">Advertisements</li>
       </p>
   </div>
-
-  <% if @space.images.count > 1 %>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <% if @space.images %>
-        <ol class="carousel-indicators">
-          <% @space.images.each do |image| %>
-            <li data-target="#carouselExampleIndicators" data-slide-to="<%= image.id %>"<%= ' class="active"' if image.id == @space.images[0].id %></li>
-          <% end %>
-        </ol>
-      <% end %>
-      <div class="carousel-inner">
-        <% if @space.images %>
-          <% @space.images.each do |image| %>
-            <div class="carousel-item<%= ' active' if image.id == @space.images[0].id %>">
-              <%= image_tag image, class:"img-fluid" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  <% end %>
 
   <div class="row">
     <%= render 'map' %>

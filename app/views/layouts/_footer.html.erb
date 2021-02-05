@@ -1,38 +1,60 @@
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
+<footer class="container py-5">
   <div class="container center">
       <a href="https://www.instagram.com/exhybyt/"> <i class="fab fa-instagram fa-2x text-muted"></i></a>
       <a href="https://facebook.com/exhybyt"> <i class="fab fa-facebook-f fa-2x text-muted"></i></a>
       <a href="https://twitter.com/exhybyt"> <i class="fab fa-twitter fa-2x text-muted"></i></a>
   </div>
-  <div class="row pt-4">
-    <div class="col col-md center">
+</footer>
+
+<footer class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md">
+      <%= image_tag asset_path("favicon.png"), class:"mb-2", alt:"", width:"100", height:"100" %>
+      <small class="d-block mb-3 text-muted">&copy; <%= Date.today.year %> EXHYBYT</small>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Features</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Cool stuff</a></li>
+        <li><a class="text-muted" href="#">Random feature</a></li>
+        <li><a class="text-muted" href="#">Team feature</a></li>
+        <li><a class="text-muted" href="#">Stuff for developers</a></li>
+        <li><a class="text-muted" href="#">Another one</a></li>
+        <li><a class="text-muted" href="#">Last time</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
+      <ul class="list-unstyled text-small">
+        <li><a class="text-muted" href="#">Resource</a></li>
+        <li><a class="text-muted" href="#">Resource name</a></li>
+        <li><a class="text-muted" href="#">Another resource</a></li>
+        <li><a class="text-muted" href="#">Final resource</a></li>
+      </ul>
+    </div>
+    <div class="col-6 col-md">
+      <h5>Resources</h5>
       <ul class="list-unstyled text-small">
         <li><a class="text-muted" href="<%= about_path %>">About</a></li>
         <li><a class="text-muted" href="<%= contact_path %>">Contact</a></li>
         <li><a class="text-muted" href="<%= cookiepolicy_path %>">Cookies</a></li>
         <li><a class="text-muted" href="<%= privacypolicy_path %>">Privacy</a></li>
         <li><a class="text-muted" href="<%= terms_path %>">Terms</a></li>
+        <li><a class="text-muted" href="#">Business</a></li>
+        <li><a class="text-muted" href="#">Education</a></li>
+        <li><a class="text-muted" href="#">Government</a></li>
+        <li><a class="text-muted" href="#">Gaming</a></li>
       </ul>
     </div>
-    <div class="col col-md center">
+    <div class="col-6 col-md">
+      <h5>About</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Why EXHYBYT?</a></li>
         <li><a class="text-muted" href="<%= howitworks_path %>">How it works</a></li>
-        <li><a class="text-muted" href="#">Artists</a></li>
-        <li><a class="text-muted" href="#">Businesses</a></li>
-        <li><a class="text-muted" href="#">Collectors</a></li>
+        <li><a class="text-muted" href="#">Team</a></li>
+        <li><a class="text-muted" href="#">Locations</a></li>
+        <li><a class="text-muted" href="#">Privacy</a></li>
+        <li><a class="text-muted" href="#">Terms</a></li>
       </ul>
     </div>
-    <div class="col col-md center">
-      <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="#">Paintings</a></li>
-        <li><a class="text-muted" href="#">Photography</a></li>
-        <li><a class="text-muted" href="#">Spaces</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="col-12 col-md center">
-    <%= image_tag asset_path("favicon.png"), class:"mb-2", alt:"", width:"100", height:"100" %>
-    <small class="d-block mb-3 text-muted">&copy; <%= Date.today.year %> EXHYBYT</small>
   </div>
 </footer>

@@ -1,4 +1,7 @@
 <% provide(:title, 'Home') %>
+<% provide(:pageheader, render('search_form')) %>
+
+<%= render 'layouts/howitworks' %>
 
 <% if logged_in? %>
   <div class="col-md-8 offset-md-2">
