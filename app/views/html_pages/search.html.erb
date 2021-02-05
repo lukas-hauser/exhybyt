@@ -148,7 +148,15 @@
 
       <hr class="my-4">
 
-      <%= f.submit "Search", class:"btn btn-primary", name:'' %>
+      <div class="row">
+        <div class="col">
+          <%= f.submit "Search", class:"btn btn-block btn-primary", name:'' %>
+        </div>
+        <div class="col">
+          <%= link_to "Clear", search_path, class:"btn btn-block btn-secondary" %>
+        </div>
+      </div>
+
 
     <% end %>
   </div>

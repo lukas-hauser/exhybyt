@@ -51,6 +51,15 @@ class HtmlPagesController < ApplicationController
 
   end
 
+  def browse_art
+    arrResult = Array.new
+
+    @search = Artwork.all.ransack(params[:q])
+    @artworks = @search.result
+
+    @arrArtworks = @artworks.to_a
+  end
+
   def help
   end
 

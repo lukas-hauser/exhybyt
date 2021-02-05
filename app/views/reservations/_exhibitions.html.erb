@@ -6,7 +6,7 @@
     <div class="card-body">
       <h5 class="card-title">
         <%= link_to gravatar_for(exhibition.artwork.user, size: 25), exhibition.artwork.user %>
-        <%= exhibition.space.user.display_name %></h5>
+        <%= exhibition.artwork.user.display_name %></h5>
       <p class="card-text small">
         <%= exhibition.start_date.strftime("%d %b %Y") %> to <%= exhibition.end_date.strftime("%d %b %Y") %><br>
       </p>
