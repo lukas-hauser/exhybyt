@@ -31,6 +31,7 @@ class SpacesController < ApplicationController
 
   def update
     if @space.update(space_params)
+      @space.images.attach(params[:space][:images])
       redirect_to @space
       flash[:primary] = "Space updated."
     else
