@@ -9,6 +9,18 @@ $light-gray: #777;
   max-height: 600px;
 }
 
+.carousel-full-height-image {
+  max-height: 100vh;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
 /* Users index */
 
 .users {

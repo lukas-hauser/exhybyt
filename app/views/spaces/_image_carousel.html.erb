@@ -9,7 +9,7 @@
       <div class="carousel-inner">
         <% @space.images.each do |image| %>
           <div class="carousel-item<%= ' active' if image.id == @space.images[0].id %>">
-            <%= image_tag image, class:"background d-block w-100" %>
+            <%= image_tag image, class:"d-block w-100 carousel-full-height-image" %>
           </div>
         <% end %>
       </div>
