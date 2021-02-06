@@ -11,6 +11,7 @@ $light-gray: #777;
 
 .carousel-full-height-image {
   max-height: 100vh;
+  max-height: -webkit-fill-available;
   object-fit: cover;
   object-position: center center;
 }
