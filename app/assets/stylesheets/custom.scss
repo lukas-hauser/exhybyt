@@ -17,9 +17,9 @@ $light-gray: #777;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
 }
 
 /* Users index */
@@ -134,7 +134,7 @@ aside {
 .field_with_errors {
   @extend .has-error !optional;
   .form-control {
-    color: $red;
+    color: red;
   }
 }
 

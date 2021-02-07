@@ -2,14 +2,18 @@
   <% if @space.images.count > 1 %>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
-        <% @space.images.each do |image| %>
-          <li data-target="#carouselExampleIndicators" data-slide-to="<%= image.id %>"<%= ' class="active"' if image.id == @space.images[0].id %></li>
+        <% i=0 %>
+        <% @space.images.each do %>
+          <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>"<%= ' class="active"' if i == 0 %>></li>
+          <% i+=1 %>
         <% end %>
       </ol>
       <div class="carousel-inner">
+        <% i=0 %>
         <% @space.images.each do |image| %>
-          <div class="carousel-item<%= ' active' if image.id == @space.images[0].id %>">
+          <div class="carousel-item<%= ' active' if i == 0 %>">
             <%= image_tag image, class:"d-block w-100 carousel-full-height-image" %>
+            <% i+=1 %>
           </div>
         <% end %>
       </div>

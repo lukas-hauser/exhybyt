@@ -30,8 +30,10 @@ class SpacesController < ApplicationController
   end
 
   def update
-    if @space.update(space_params)
+    unless params[:space][:images].nil?
       @space.images.attach(params[:space][:images])
+    end
+    if @space.update(space_params)
       redirect_to @space
       flash[:primary] = "Space updated."
     else

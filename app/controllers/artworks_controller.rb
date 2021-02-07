@@ -30,6 +30,9 @@ class ArtworksController < ApplicationController
   end
 
   def update
+    unless params[:artwork][:images].nil?
+      @artwork.images.attach(params[:artwork][:images])
+    end
     if @artwork.update(artwork_params)
       redirect_to @artwork
       flash[:primary] = "artwork updated."
