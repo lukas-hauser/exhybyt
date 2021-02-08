@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :relationships,       only: [:create, :destroy]
   resources :spaces do
-    resources :reservations,      only: [:create, :index]
+    resources :reservations,      only: [:create, :index], shallow: true
   end
   resources :spaces,              only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
