@@ -1,92 +1,167 @@
 <%= provide(:title, @space.listing_name ) %>
-
 <% provide :pageheader, render('image_carousel')%>
 
-<div class="col p-4 d-flex flex-column position-static">
-  <h2 class="d-inline-block mb-2 text"><%= @space.venue_type %></h2>
-  <h1 class="center"><%= @space.listing_name %></h1>
-  <h2 class="d-inline-block mb-2 text"><%= @space.category %></h2>
-  <p class="d-inline-block mb-2 text center">Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
-  <p class="d-inline-block mb-2 text center">Price: £ <%= @space.price %> per day</p>
-  <p class="d-inline-block mb-2 text center"><%= @space.description %></p>
-  <p class="d-inline-block mb-2 text center"><%= @space.address %></p>
-
-  <% if !logged_in? %>
-    <div class="alert alert-warning" role="alert">
-      Please log in to check dates and book.
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2 class="d-inline-block mb-2 text"><%= @space.venue_type %></h2>
+      <h1 class="center"><%= @space.listing_name %></h1>
+      <h2 class="d-inline-block mb-2 text"><%= @space.category %></h2>
+      <p class="d-inline-block mb-2 text center">Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
+      <p class="d-inline-block mb-2 text center">Price: £ <%= @space.price %> per day</p>
+      <p class="d-inline-block mb-2 text center"><%= @space.description %></p>
+      <p class="d-inline-block mb-2 text center"><%= @space.address %></p>
     </div>
-  <% else %>
-    <%= render 'reservations/form' %>
-  <% end %>
 
-  <div class="center">
-    <h3><%= 'Amenities' if @space.is_toilet ||
-                       @space.is_parking ||
-                       @space.is_wifi ||
-                       @space.is_dis_acc ||
-                       @space.is_sec_sys ||
-                       @space.is_hang_sys ||
-                       @space.is_adj_light ||
-                       @space.is_nat_light ||
-                       @space.is_plugs ||
-                       @space.is_storage %></h3>
-
-    <p class="mx-auto" style="list-style-position: inside">
-      <li class="<%= 'text-hide' if !@space.is_toilet %>">Toilet</li>
-      <li class="<%= 'text-hide' if !@space.is_parking %>">Parking</li>
-      <li class="<%= 'text-hide' if !@space.is_wifi %>">WiFi</li>
-      <li class="<%= 'text-hide' if !@space.is_dis_acc %>">Disabled Access</li>
-      <li class="<%= 'text-hide' if !@space.is_sec_sys %>">Security System</li>
-      <li class="<%= 'text-hide' if !@space.is_hang_sys %>">Picture Hanging System</li>
-      <li class="<%= 'text-hide' if !@space.is_adj_light %>">Adjustable Lighting</li>
-      <li class="<%= 'text-hide' if !@space.is_nat_light %>">Natural Light</li>
-      <li class="<%= 'text-hide' if !@space.is_plugs %>">Power Plugs</li>
-      <li class="<%= 'text-hide' if !@space.is_storage %>">Storage</li>
-    </p>
+    <div class="col-sm-4">
+      <% if !logged_in? %>
+        <div class="alert alert-warning" role="alert">
+          Please log in to check dates and book.
+        </div>
+      <% else %>
+        <%= render 'reservations/form' %>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="center">
-      <h3><%= 'We are interested to show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
-      <p class="mx-auto" style="list-style-position: inside">
-        <li class="<%= 'text-hide' if !@space.is_paintings %>">Paintings</li>
-        <li class="<%= 'text-hide' if !@space.is_photography %>">Photography</li>
-        <li class="<%= 'text-hide' if !@space.is_drawings %>">Drawings</li>
-        <li class="<%= 'text-hide' if !@space.is_sculptures %>">Sculptures</li>
-        <li class="<%= 'text-hide' if !@space.is_live_perf %>">Live Performances</li>
-        <li class="<%= 'text-hide' if !@space.is_adverts %>">Advertisements</li>
-      </p>
-  </div>
+<div class="container center">
+  <h3><%= 'Amenities' if @space.is_toilet ||
+                     @space.is_parking ||
+                     @space.is_wifi ||
+                     @space.is_dis_acc ||
+                     @space.is_sec_sys ||
+                     @space.is_hang_sys ||
+                     @space.is_adj_light ||
+                     @space.is_nat_light ||
+                     @space.is_plugs ||
+                     @space.is_storage %></h3>
 
   <div class="row">
-    <%= render 'map' %>
-  </div>
-
-  <br>
-
-  <!--Nearby Spaces -->
-  <% if @space.nearbys(10) %>
-    <div class="row">
-      <h3>Nearby Spaces</h3>
-      <div class="card-group">
-        <% for space in @space.nearbys(10).take(3) %>
-          <div class="card">
-            <% if space.images.attached? %>
-              <%= image_tag space.images[0], class:"card-img" %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= space.listing_name %></h5>
-              <p class="card-text"><%= space.venue_type %> | <%= space.distance.round(2) %> km away</p>
-              <p class="card-text small">
-                Price: £ <%= space.price %> per day<br>
-                <%= space.category %><br>
-                <%= space.wall_width %> x <%= space.wall_height %> cm<br>
-                <small class="text-muted">Hosted by <%= link_to space.user.display_name, space.user, class:"text-muted" %></small>
-              </p>
-              <%= link_to "View", space, class:"card-link" %>
-            </div>
-          </div>
-        <% end %>
+    <% if @space.is_toilet %>
+      <div class="col">
+        <i class="fas fa-toilet fa-2x"></i>
+        <p>Toilet</p>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+
+    <% if @space.is_parking %>
+      <div class="col">
+        <i class="fas fa-parking fa-2x"></i>
+        <p>Parking</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_wifi %>
+      <div class="col">
+        <i class="fas fa-wifi fa-2x"></i>
+        <p>WiFi</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_dis_acc %>
+      <div class="col">
+        <i class="fas fa-wheelchair fa-2x"></i>
+        <p>Disabled Access</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_sec_sys %>
+      <div class="col">
+        <i class="fas fa-lock fa-2x"></i>
+        <p>Security System</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_hang_sys %>
+      <div class="col">
+        <i class="fas fa-wrench fa-2x"></i>
+        <p>Picture Hanging System</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_adj_light %>
+      <div class="col">
+        <i class="fas fa-lightbulb fa-2x"></i>
+        <p>Adjustable Lighting</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_nat_light %>
+      <div class="col">
+        <i class="fas fa-sun fa-2x"></i>
+        <p>Natural Light</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_plugs %>
+      <div class="col">
+        <i class="fas fa-plug fa-2x"></i>
+        <p>Power Plugs</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_storage %>
+      <div class="col">
+        <i class="fas fa-box-open fa-2x"></i>
+        <p>Storage</p>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<div class="container center">
+  <h3><%= 'We are interested to show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
+  <div class="row mx-auto" style="list-style-position: inside">
+    <% if @space.is_paintings %>
+      <div class="col">
+        <i class="fas fa-paint-brush fa-2x"></i>
+        <p>Paintings</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_photography %>
+      <div class="col">
+        <i class="fas fa-camera fa-2x"></i>
+        <p>Photography</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_drawings %>
+      <div class="col">
+        <i class="fas fa-pencil-alt fa-2x"></i>
+        <p>Drawings</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_sculptures %>
+      <div class="col">
+        <i class="fas fa-screwdriver fa-2x"></i>
+        <p>Sculptures</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_live_perf %>
+      <div class="col">
+        <i class="fas fa-theater-masks fa-2x"></i>
+        <p>Live Performances</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_adverts %>
+      <div class="col">
+        <i class="fas fa-bullhorn fa-2x"></i>
+        <p>Advertisements</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'map' %>
+</div>
+
+<br>
+
+<!--Nearby Spaces -->
+<%= render 'nearby_spaces' %>

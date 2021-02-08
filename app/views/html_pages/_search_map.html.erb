@@ -1,9 +1,8 @@
 <head>
 <title>Add Map</title>
 <script
-  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
-  defer
-></script>
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAPS_API_KEY'] %>&callback=initMap&libraries=&v=weekly"
+  defer></script>
 <style type="text/css">
   /* Set the size of the div element that contains the map */
   #map {

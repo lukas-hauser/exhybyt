@@ -16,6 +16,10 @@ $light-gray: #777;
   object-position: center center;
 }
 
+.carousel-full-width-image {
+  object-fit: cover;
+}
+
 .carousel-control-prev-icon, .carousel-control-next-icon {
   display: inline-block;
   width: 25px;
