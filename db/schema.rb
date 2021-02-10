@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_192609) do
+ActiveRecord::Schema.define(version: 2021_02_10_170718) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2021_01_28_192609) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "artwork_styles", force: :cascade do |t|
+    t.integer "artwork_id"
+    t.integer "style_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -87,6 +94,13 @@ ActiveRecord::Schema.define(version: 2021_01_28_192609) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
+  create_table "reservation_artworks", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "artwork_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reservations", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "space_id", null: false
@@ -96,8 +110,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_192609) do
     t.float "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "artwork_id", null: false
-    t.index ["artwork_id"], name: "index_reservations_on_artwork_id"
     t.index ["space_id"], name: "index_reservations_on_space_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -137,6 +149,12 @@ ActiveRecord::Schema.define(version: 2021_01_28_192609) do
     t.index ["user_id"], name: "index_spaces_on_user_id"
   end
 
+  create_table "styles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -161,7 +179,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_192609) do
   add_foreign_key "artworks", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
-  add_foreign_key "reservations", "artworks"
   add_foreign_key "reservations", "spaces"
   add_foreign_key "reservations", "users"
   add_foreign_key "spaces", "users"

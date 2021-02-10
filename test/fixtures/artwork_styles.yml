@@ -1,0 +1,9 @@
+one:
+  artwork: one
+  style:   one
+  created_at: <%= 10.minutes.ago %>
+
+two:
+  artwork: two
+  style:   two
+  created_at: <%= 15.minutes.ago %>

@@ -30,7 +30,7 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
           price: 1.5,
           total: 3.0,
           space_id: @space.id,
-          artwork_id: @artwork.id,
+          artwork_ids: [@artwork.id],
           user_id: @user.id} }
     end
     follow_redirect!

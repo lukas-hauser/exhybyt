@@ -4,7 +4,7 @@
 <div class="col p-4 d-flex flex-column position-static">
   <h2 class="d-inline-block mb-2 text"><%= @artwork.category %></h2>
   <h1 class="center"><%= @artwork.listing_name %></h1>
-  <h2 class="d-inline-block mb-2 text"><%= @artwork.styles %></h2>
+  <h2 class="d-inline-block mb-2 text"><%= render @artwork.styles %></h2>
   <p class="d-inline-block mb-2 text center">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
   <p class="d-inline-block mb-2 text center">Price: £ <%= @artwork.price %></p>
 </div>

@@ -1,3 +1,25 @@
+styles = ["Abstract",
+  "Abstract Expressionism",
+  "Art Deco",
+  "Conceptual",
+  "Cubism",
+  "Dada",
+  "Documentary",
+  "Expressionism",
+  "Figurative",
+  "Fine Art",
+  "Folk",
+  "Illustration",
+  "Impressionism",
+  "Minimaism",
+  "Modern",
+  "Photorealism",
+  "Pop Art",
+  "Portraiture",
+  "Realism",
+  "Street Art",
+  "Surrealism"]
+
 space_images = [
 "https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
 "https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
@@ -34,6 +56,9 @@ artwork_images =[
   "https://i1.wp.com/lukashauser.art/wp-content/uploads/2019/02/Escaping-the-Gilded-Cage-e1549753597357.jpg?fit=957%2C1090",
   "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/01/Hamster-Wheel-Painting-scaled.jpg?fit=957%2C1090",
 
+styles.each do |style|
+  Style.create!(name: style)
+end
 
 # Create main test user
 User.create!(firstname: "Test",
@@ -135,7 +160,7 @@ followers.each { |follower| follower.follow(user) }
 
 25.times do
   user = User.order(:created_at).take(5)[rand(0..4)]
-  styles = ["Abstract","Realism"].sample
+  style_ids = [Style.first.id, Style.second.id]
   subject = ["Portrait","Landscape"].sample
   category = ["Advertisement","Drawing","Painting","Photography","Sculpture"].sample
   listing_name = Faker::Artist.name
@@ -149,7 +174,7 @@ followers.each { |follower| follower.follow(user) }
   status = ["For Sale","Not For Sale","Sold"].sample
   framed = rand(0..1)
   artwork = user.artworks.build(
-    styles: styles,
+    style_ids: style_ids,
     subject: subject,
     category: category,
     listing_name: listing_name,

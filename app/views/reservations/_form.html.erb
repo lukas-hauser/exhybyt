@@ -23,10 +23,10 @@
       Please log in to book.
     </div>
   <% elsif current_user.artworks.any? %>
-      <div class="form-group">
-        <%= f.select :artwork_id, current_user.artworks.collect {
-          |x| [x.listing_name + " " + x.category, x.id]}, {}, multiple: false, class: "form-control custom-select" %>
-      </div>
+    <div class="form-group">
+      <%= f.collection_select(:artwork_ids, current_user.artworks, :id, :listing_name,
+      { prompt: "Select Artwork" }, { multiple: true, class: "form-control custom-select" } ) %>
+    </div>
   <% else %>
     <div class="alert alert-warning" role="alert">
       Please upload your artwork to book this space.

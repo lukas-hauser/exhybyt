@@ -1,9 +1,15 @@
 class Artwork < ApplicationRecord
   belongs_to :user
   has_many_attached :images
-  has_many :reservations
+
+  has_many :artwork_styles
+  has_many :styles, through: :artwork_styles
+
+  has_many :reservation_artworks
+  has_many :reservations, through: :reservation_artworks
 
   validates :user_id, presence: true
+  validates :style_ids, presence: true
   validates :listing_name, presence: true, length: { maximum: 60 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category, presence: true
@@ -11,7 +17,6 @@ class Artwork < ApplicationRecord
   validates :medium, presence: true, length: { maximum: 60 }
   validates :status, presence: true
   validates :subject, presence: true
-  validates :styles, presence: true
 
   validates :height, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :width, presence: true, numericality: {only_float: true, :greater_than => 0}

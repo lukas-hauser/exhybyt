@@ -3,6 +3,7 @@ require 'test_helper'
 class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:jane)
+    @style = styles(:one)
   end
 
   test "artwork interface" do
@@ -24,7 +25,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         status: "For Sale",
         is_framed: true,
         subject: "Portrait",
-        styles: "Realism"} }
+        style_ids: [@style.id]} }
     end
     assert_select 'div#error_explanation'
     assert 'a[href=?]'
@@ -44,7 +45,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         status: "For Sale",
         is_framed: true,
         subject: "Portrait",
-        styles: "Realism"} }
+        style_ids: [@style.id]} }
     end
     follow_redirect!
     assert_template 'artworks/show'

@@ -1,0 +1,7 @@
+one:
+  name: "Abstract"
+  created_at: <%= 60.minutes.ago %>
+
+two:
+  name: "Abstract expressionism"
+  created_at: <%= 60.minutes.ago %>

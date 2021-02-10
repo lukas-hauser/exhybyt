@@ -11,7 +11,7 @@ class ReservationTest < ActiveSupport::TestCase
       price: "20",
       total: "100",
       space_id: @space.id,
-      artwork_id: @artwork.id,
+      artwork_ids: @artwork.id,
       user_id: @user.id)
   end
 
@@ -30,7 +30,7 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "artwork id should be present" do
-    @reservation.artwork_id = nil
+    @reservation.artwork_ids = nil
     assert_not @reservation.valid?
   end
 

@@ -147,28 +147,4 @@ module ApplicationHelper
     ["World Culture","World Culture"],
     ["Yacht","Yacht"]]
   end
-
-  def artwork_styles
-    [["Abstract","Abstract"],
-    ["Abstract Expressionism","Abstract Expressionism"],
-    ["Art Deco","Art Deco"],
-    ["Conceptual","Conceptual"],
-    ["Cubism","Cubism"],
-    ["Dada","Dada"],
-    ["Documentary","Documentary"],
-    ["Expressionism","Expressionism"],
-    ["Figurative","Figurative"],
-    ["Fine Art","Fine Art"],
-    ["Folk","Folk"],
-    ["Illustration","Illustration"],
-    ["Impressionism","Impressionism"],
-    ["Minimaism","Minimaism"],
-    ["Modern","Modern"],
-    ["Photorealism","Photorealism"],
-    ["Pop Art","Pop Art"],
-    ["Portraiture","Portraiture"],
-    ["Realism","Realism"],
-    ["Street Art","Street Art"],
-    ["Surrealism","Surrealism"]]
-  end
 end

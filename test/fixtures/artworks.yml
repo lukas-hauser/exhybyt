@@ -13,7 +13,6 @@ one:
   status: MyString
   is_framed: false
   subject: MyString
-  styles: MyString
   user: lukas
   created_at: <%= 10.minutes.ago %>
 
@@ -30,7 +29,6 @@ two:
   status: MyString
   is_framed: false
   subject: MyString
-  styles: MyString
   user: lukas
   created_at: <%= 2.months.ago %>
 
@@ -47,7 +45,6 @@ most_recent:
   status: MyString
   is_framed: false
   subject: MyString
-  styles: MyString
   user: lukas
   created_at: <%= Time.zone.now %>
 
@@ -64,7 +61,6 @@ three:
   status: MyString
   is_framed: false
   subject: MyString
-  styles: MyString
   user: jane
   created_at: <%= 2.months.ago %>
 
@@ -82,7 +78,6 @@ artwork_<%= n %>:
   status: MyString
   is_framed: false
   subject: MyString
-  styles: MyString
   user: lukas
   created_at: <%= 20.days.ago %>
 <% end %>

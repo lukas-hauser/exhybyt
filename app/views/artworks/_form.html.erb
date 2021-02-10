@@ -22,8 +22,10 @@
     <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.select :styles, artwork_styles, {prompt: "Select Style"}, class: "form-control custom-select" %>
+    <%= f.collection_select(:style_ids, Style.all, :id, :name,
+    { prompt: "Select styles" }, { multiple: true, class: "form-control custom-select" } ) %>
   </div>
+
   <div class="form-group">
     <%= f.text_field :year, placeholder: "Year", class: "form-control" %>
   </div>

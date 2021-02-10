@@ -1,0 +1,9 @@
+one:
+  reservation: one
+  artwork:     one
+  created_at: <%= 10.minutes.ago %>
+
+two:
+  reservation: two
+  artwork:     two
+  created_at: <%= 15.minutes.ago %>

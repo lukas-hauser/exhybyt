@@ -71,8 +71,8 @@ class ArtworksController < ApplicationController
       :status,
       :is_framed,
       :subject,
-      :styles,
-      :images
+      :images,
+      style_ids: []
     )
   end
 

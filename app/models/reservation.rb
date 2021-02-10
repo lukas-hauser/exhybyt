@@ -1,7 +1,9 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :space
-  belongs_to :artwork
+
+  has_many :reservation_artworks
+  has_many :artworks, through: :reservation_artworks
 
   validates :price, presence: true
   validates :total, presence: true
@@ -9,6 +11,7 @@ class Reservation < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate  :end_date_after_start_date
+  validates :artwork_ids, presence: true
 
   private
 

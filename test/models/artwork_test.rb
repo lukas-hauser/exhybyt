@@ -3,6 +3,7 @@ require 'test_helper'
 class ArtworkTest < ActiveSupport::TestCase
   def setup
     @user = users(:lukas)
+    @style = styles(:one)
     @artwork = @user.artworks.build(
       listing_name: "Moana Lisa",
       description: "This is the Hawaiian version of Mona Lisa",
@@ -16,7 +17,7 @@ class ArtworkTest < ActiveSupport::TestCase
       status: "For Sale",
       is_framed: true,
       subject: "Portrait",
-      styles: "Realism",
+      style_ids: @style.id,
       user_id: @user.id)
   end
 
@@ -102,7 +103,7 @@ class ArtworkTest < ActiveSupport::TestCase
   end
 
   test "Styles should be present" do
-    @artwork.styles = "   "
+    @artwork.style_ids = "   "
     assert_not @artwork.valid?
   end
 

@@ -3,7 +3,6 @@
 one:
   user: one
   space: one
-  artwork: one
   start_date: 2021-01-02 11:32:12
   end_date: 2021-01-02 11:32:12
   price: 1.5
@@ -12,7 +11,6 @@ one:
 two:
   user: two
   space: two
-  artwork: one
   start_date: 2021-01-02 11:32:12
   end_date: 2021-01-02 11:32:12
   price: 1.5
