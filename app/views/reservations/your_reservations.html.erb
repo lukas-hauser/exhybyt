@@ -14,8 +14,8 @@
         <% @spaces.each do |space| %>
           <% space.reservations.each do |reservation| %>
             <div class="card">
-              <% if reservation.artwork.images.attached? %>
-                <%= link_to image_tag(reservation.artwork.images[0], class:"card-img"), reservation.space %>
+              <% if reservation.space.images.attached? %>
+                <%= link_to image_tag(reservation.space.images[0], class:"card-img"), reservation.space %>
               <% end %>
               <div class="card-body">
                 <h5 class="card-title"><%= reservation.space.listing_name %></h5>
