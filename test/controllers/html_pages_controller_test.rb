@@ -66,4 +66,10 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", "Find Space | EXHYBYT"
   end
+
+  test "should get browse art" do
+    get art_path
+    assert_response :success
+    assert_select "title", "Art | EXHYBYT"
+  end
 end

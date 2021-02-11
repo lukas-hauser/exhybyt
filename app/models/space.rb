@@ -1,7 +1,7 @@
 class Space < ApplicationRecord
   belongs_to :user
   has_many_attached :images
-  has_many :reservations
+  has_many :reservations, dependent: :destroy
 
   def unavailable_dates
     bookings.pluck(:start_date, :end_date).map do |range|

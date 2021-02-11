@@ -6,7 +6,7 @@ class StyleTest < ActiveSupport::TestCase
     @style = styles(:one)
   end
 
-  test "Artwork style sould be valid" do
+  test "Artwork style should be valid" do
     assert @style.valid?
   end
 

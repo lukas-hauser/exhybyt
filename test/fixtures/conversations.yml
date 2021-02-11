@@ -1,9 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sender_id: 1
+  sender_id: 2
   recipient_id: 1
+  created_at: <%= 22.minutes.ago %>
 
 two:
-  sender_id: 1
+  sender_id: 3
+  recipient_id: 4
+  created_at: <%= 12.minutes.ago %>
+
+most_recent:
+  sender_id: 5
   recipient_id: 1
+  created_at: <%= 2.minutes.ago %>

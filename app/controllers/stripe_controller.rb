@@ -1,5 +1,6 @@
 class StripeController < ApplicationController
   before_action :logged_in_user,  only: [:connect, :dashboard]
+  before_action :correct_user,    only: [:connect, :dashboard]
 
   def connect
     response = HTTParty.post("https://connect.stripe.com/oauth/token",
@@ -27,5 +28,12 @@ class StripeController < ApplicationController
     login_links = account.login_links.create
 
     redirect_to login_links.url
+  end
+
+  private
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end

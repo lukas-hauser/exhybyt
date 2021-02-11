@@ -24,6 +24,8 @@ class Artwork < ApplicationRecord
   validates :price, presence: true, if: :for_sale?,
                     numericality: {only_float: true, :greater_than => 0}
 
+  default_scope -> { order(created_at: :desc) }
+
   validates :images, #presence: true,
                     content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)." },
                     size: { less_than: 5.megabytes, message: "exceeds 5MB." }

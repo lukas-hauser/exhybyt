@@ -13,6 +13,8 @@ class Reservation < ApplicationRecord
   validate  :end_date_after_start_date
   validates :artwork_ids, presence: true
 
+  default_scope -> { order(created_at: :desc) }
+
   private
 
   def end_date_after_start_date
@@ -22,5 +24,4 @@ class Reservation < ApplicationRecord
       errors.add(:end_date, "must be after the start date")
     end
   end
-
 end

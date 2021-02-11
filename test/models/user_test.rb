@@ -98,6 +98,44 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "associated artworks should be destroyed" do
+    @user.save
+    @style = styles(:one)
+    @user.artworks.create!(
+      listing_name: "Moana Lisa",
+      description: "This is the Hawaiian version of Mona Lisa",
+      height: "60",
+      width: "50",
+      depth: "2.5",
+      year: "2020",
+      category: "Painting",
+      medium: "Oil on Canvas",
+      price: "5000",
+      status: "For Sale",
+      is_framed: true,
+      subject: "Portrait",
+      style_ids: @style.id)
+    assert_difference 'Artwork.count', -1 do
+      @user.destroy
+    end
+  end
+
+  test "associated reservations should be destroyed" do
+    @user.save
+    @space   = spaces(:three)
+    @artwork = artworks(:one)
+    @user.reservations.create!(
+      start_date: 3.months.ago,
+      end_date: 2.months.ago,
+      price: "20",
+      total: "100",
+      space_id: @space.id,
+      artwork_ids: @artwork.id)
+    assert_difference 'Reservation.count', -1 do
+      @user.destroy
+    end
+  end
+
   test "should follow and unfollow a user" do
     tony = users(:lukas)
     jane = users(:jane)
