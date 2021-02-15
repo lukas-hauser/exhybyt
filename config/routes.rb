@@ -41,6 +41,6 @@ Rails.application.routes.draw do
   resources :artworks,            only: [:new, :show, :index, :create,
                                          :edit, :update, :destroy]
   resources :conversations,       only: [:index, :create] do
-    resources :messages,          only: [:index, :create]
+    resources :messages,          only: [:index, :create], shallow: true
   end
 end

@@ -28,6 +28,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         style_ids: [@style.id]} }
     end
     assert_select 'div#error_explanation'
+    assert_select "title", "Add Art | EXHYBYT"
     assert 'a[href=?]'
 
     # Valid Submission
@@ -57,6 +58,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Edit'
     first_art = @user.artworks.paginate(page: 1).first
     get edit_artwork_path(first_art)
+    assert_select "title", "Edit Artwork | EXHYBYT"
     listing_name = "Moana Lisa"
     description = "Aloha! This is the Hawaiian version of Mona Lisa."
     height = 60

@@ -40,6 +40,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         active: true} }
     end
     assert_select 'div#error_explanation'
+    assert_select "title", "Add Space | EXHYBYT"
     assert 'a[href=?]'
 
     # Valid Submission
@@ -81,6 +82,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Edit'
     first_space = @user.spaces.paginate(page: 1).first
     get edit_space_path(first_space)
+    assert_select "title", "Edit Space | EXHYBYT"
     venue_type = "Coffee Shop"
     category = "Wall Space"
     listing_name = "Jane's Cafe"
