@@ -1,8 +1,6 @@
 <% provide(:title, 'Home') %>
 <% provide(:pageheader, render('search_form')) %>
 
-<%= render 'layouts/howitworks' %>
-
 <% if logged_in? %>
   <div class="col">
     <h3>Spaces</h3>
@@ -22,6 +20,8 @@
     <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
 <% end %>
+
+<%= render 'layouts/howitworks' %>
 
 <script>
 	$(function() {

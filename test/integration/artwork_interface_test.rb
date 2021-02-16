@@ -1,9 +1,12 @@
 require 'test_helper'
 
 class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
+
   def setup
     @user = users(:jane)
     @style = styles(:one)
+    @artwork = artworks(:one)
   end
 
   test "artwork interface" do
@@ -93,7 +96,14 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal category,     first_art.category
     assert_equal height,       first_art.height
     assert_equal width,        first_art.width
+    assert_equal year,         first_art.year
+    assert_equal depth,        first_art.depth
     assert_equal price,        first_art.price
+    assert_equal medium,       first_art.medium
+    assert_equal subject,      first_art.subject
+    assert_equal status,       first_art.status
+    assert_equal style_ids,    first_art.style_ids
+    assert_equal is_framed,    first_art.is_framed
 
     # Delete Artwork
     get user_path(@user)
@@ -110,5 +120,24 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_select 'a', text: 'Delete', count: 0
     assert_select 'a', text: 'Edit', count: 0
+  end
+
+  test "artwork show page" do
+    get artwork_path(@artwork)
+    assert_template 'artworks/show'
+    assert_select 'title', full_title(@artwork.listing_name)
+    assert_select 'h1', text: @artwork.listing_name
+#   assert image
+    assert_select 'h2', text: @artwork.category
+#    assert_select 'h2', text: @artwork.styles
+    assert_select 'p', text: 'Width: ' + @artwork.width.to_s + " cm | Height: " + @artwork.height.to_s + " cm"
+#    assert_select 'p', text: @artwork.depth
+    assert_select 'p', text: 'Price: £ ' + @artwork.price.to_s
+    assert_select 'p', text: @artwork.description
+    assert_select 'p', text: @artwork.medium
+    assert_select 'p', text: @artwork.subject
+    assert_select 'p', text: @artwork.status
+    assert_select 'p', text: @artwork.is_framed
+#    assert_select 'p', text: @artwork.year
   end
 end

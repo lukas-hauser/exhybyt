@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class SpaceInterfaceTest < ActionDispatch::IntegrationTest
+  include ApplicationHelper
+
   def setup
     @user =  users(:jane)
     @space = spaces(:one)
@@ -124,5 +126,23 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_template 'users/show'
     assert_select 'a', text: 'Delete', count: 0
     assert_select 'a', text: 'Edit', count: 0
+  end
+
+  test "space show page" do
+    get space_path(@space)
+    assert_template 'spaces/show'
+    assert_select 'title', full_title(@space.listing_name)
+    assert_select 'h1', text: @space.listing_name
+#   assert image
+    assert_select 'h2', text: @space.category
+    assert_select 'h2', text: @space.venue_type
+    assert_select 'p', text: 'Width: ' + @space.wall_width.to_s + " cm | Height: " + @space.wall_height.to_s + " cm"
+    assert_select 'p', text: 'Price: £ ' + @space.price.to_s + ' per day'
+    assert_select 'p', text: @space.description
+    assert_select 'p', text: @space.address
+
+    # Don't show reservation form if logged in
+
+    # Show reservation form if logged in
   end
 end

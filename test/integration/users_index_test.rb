@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersIndexTest < ActionDispatch::IntegrationTest
   def setup
     @admin = users(:lukas)
-#    @non_admin = users(:jane)
+#    @non_admin = users(:jane) can't be deleted as there are reservations?
     @non_admin = User.third
   end
 
@@ -12,7 +12,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     get users_path
     assert_template 'users/index'
     assert_select "title", "Users | EXHYBYT"
-#    assert_select 'div.pagination'
+#   assert_select 'div.pagination'
 
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
