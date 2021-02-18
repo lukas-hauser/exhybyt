@@ -6,17 +6,18 @@
 
 <div class="row">
   <div class="col-md">
-      <div class="card-header center">
-        <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
-        <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
-        <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>
-        <div>Price: £ <%= @artwork.price %></div>
-        <% if @artwork.status=="Sold" %>
-          <div class="text-right", style="font-size: 1.5em; color: Tomato;">
-            <i class="fas fa-circle"></i>
-          </div>
-        <% end %>
-      </div>
+    <div class="card-header center">
+      <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
+      <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
+      <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>
+      <div>Price: £ <%= @artwork.price %></div>
+      <% if @artwork.status=="Sold" %>
+        <div class="text-right", style="font-size: 1.5em; color: Tomato;">
+          <i class="fas fa-circle"></i>
+        </div>
+      <% end %>
+    </div>
+    <br>
   </div>
 
   <div class="col-md">
@@ -25,4 +26,4 @@
   </div>
 </div>
 <br>
-<h2 class="d-inline-block mb-2 text"><%= render @artwork.styles %></h2>
+<h2 class="mb-2 text-center"><%= render @artwork.styles %></h2>
