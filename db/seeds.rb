@@ -69,6 +69,14 @@ User.create!(firstname: "Test",
   activated: true,
   activated_at: Time.zone.now)
 
+  # Create non-admin demo user
+  User.create!(firstname: "Demo",
+    lastname: "User", email: "demo@testuser.com",
+    password: "exhybyt",
+    password_confirmation: "exhybyt",
+    activated: true,
+    activated_at: Time.zone.now)
+
 # Bulk generate test users
 99.times do |n|
   firstname = Faker::Name.first_name

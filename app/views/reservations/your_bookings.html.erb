@@ -27,6 +27,11 @@
                 <%= link_to gravatar_for(booking.space.user, size: 25), booking.space.user %>
                 <%= booking.space.user.display_name %>
               </p>
+              <p>
+                <% booking.artworks.each do |artwork| %>
+                 <%= link_to image_tag(artwork.images[0], width: 50), artwork %>
+                <% end %>
+              </p>
             </div>
           </div>
         <% end %>

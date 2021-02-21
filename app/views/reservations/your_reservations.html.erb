@@ -23,6 +23,11 @@
                   Total Price: £ <%= reservation.total %><br>
                   <%= reservation.start_date.strftime("%d %b %Y") %> to <%= reservation.end_date.strftime("%d %b %Y") %><br>
                 </p>
+                <p>
+                  <% reservation.artworks.each do |artwork| %>
+                   <%= link_to image_tag(artwork.images[0], width: 50), artwork %>
+                  <% end %>
+                </p>
                 <p class="card-text small">
                   <%= link_to gravatar_for(reservation.user, size: 25), reservation.user %>
                   <%= reservation.user.display_name %>

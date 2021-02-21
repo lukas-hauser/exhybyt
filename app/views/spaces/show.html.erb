@@ -111,7 +111,7 @@
 </div>
 
 <div class="container center">
-  <h3><%= 'We are interested to show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
+  <h3><%= 'We show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
   <div class="row mx-auto" style="list-style-position: inside">
     <% if @space.is_paintings %>
       <div class="col">
