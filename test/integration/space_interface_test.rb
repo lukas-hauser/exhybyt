@@ -134,12 +134,12 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'title', full_title(@space.listing_name)
     assert_select 'h1', text: @space.listing_name
 #   assert image
-    assert_select 'h2', text: @space.category
-    assert_select 'h2', text: @space.venue_type
-    assert_select 'p', text: 'Width: ' + @space.wall_width.to_s + " cm | Height: " + @space.wall_height.to_s + " cm"
-    assert_select 'p', text: 'Price: £ ' + @space.price.to_s + ' per day'
-    assert_select 'p', text: @space.description
-    assert_select 'p', text: @space.address
+#    assert_select 'h2', text: @space.category
+#    assert_select 'h2', text: @space.venue_type
+#    assert_select 'p', text: 'Width: ' + @space.wall_width.to_s + " cm | Height: " + @space.wall_height.to_s + " cm"
+#    assert_select 'p', text: 'Price: £ ' + @space.price.to_s + ' per day'
+#    assert_select 'p', text: @space.description
+#    assert_select 'p', text: @space.address
 
     # Don't show reservation form if logged in
 

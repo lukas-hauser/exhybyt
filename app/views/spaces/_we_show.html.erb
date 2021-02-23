@@ -1,0 +1,46 @@
+<div class="container center">
+  <h3><%= 'We show:' if @space.is_paintings || @space.is_photography || @space.is_drawings || @space.is_sculptures || @space.is_live_perf || @space.is_adverts %></h3>
+  <div class="row mx-auto" style="list-style-position: inside">
+    <% if @space.is_paintings %>
+      <div class="col">
+        <i class="fas fa-paint-brush fa-2x"></i>
+        <p>Paintings</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_photography %>
+      <div class="col">
+        <i class="fas fa-camera fa-2x"></i>
+        <p>Photography</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_drawings %>
+      <div class="col">
+        <i class="fas fa-pencil-alt fa-2x"></i>
+        <p>Drawings</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_sculptures %>
+      <div class="col">
+        <i class="fas fa-screwdriver fa-2x"></i>
+        <p>Sculptures</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_live_perf %>
+      <div class="col">
+        <i class="fas fa-theater-masks fa-2x"></i>
+        <p>Live Performances</p>
+      </div>
+    <% end %>
+
+    <% if @space.is_adverts %>
+      <div class="col">
+        <i class="fas fa-bullhorn fa-2x"></i>
+        <p>Advertisements</p>
+      </div>
+    <% end %>
+  </div>
+</div>

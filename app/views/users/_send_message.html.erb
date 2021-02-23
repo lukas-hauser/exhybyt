@@ -1,0 +1,2 @@
+<%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id),
+method: 'post', class:"btn btn-sm btn-outline-secondary" %>

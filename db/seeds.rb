@@ -71,7 +71,7 @@ User.create!(firstname: "Test",
 
   # Create non-admin demo user
   User.create!(firstname: "Demo",
-    lastname: "User", email: "demo@testuser.com",
+    lastname: "User", email: "demo@demouser.com",
     password: "exhybyt",
     password_confirmation: "exhybyt",
     activated: true,

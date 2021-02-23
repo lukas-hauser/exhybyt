@@ -1,12 +1,10 @@
 <% unless current_user?(@user) %>
-  <div id="follow_form" class="btn-group">
+  <div id="follow_form" class="btn-group btn-group-sm">
     <% if current_user.following?(@user) %>
       <%= render 'unfollow' %>
     <% else %>
       <%= render 'follow' %>
     <% end %>
 
-    <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id),
-    method: 'post', class:"btn btn-sm btn-outline-secondary" %>
   </div>
 <% end %>
