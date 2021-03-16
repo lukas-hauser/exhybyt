@@ -15,6 +15,8 @@ require("jquery-ui")
 import "@fortawesome/fontawesome-free/js/all";
 import "@fortawesome/fontawesome-free/css/all"
 
+import "../src/add-eu-banner"
+
 // $(function(){
     // Plain jquery
 //     $('#fadeMe').fadeOut(5000);
