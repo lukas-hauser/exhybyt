@@ -1,6 +1,7 @@
 <% if @art_feed_items.any? %>
+  <h1>Artwork</h1>
+  <h2><%= link_to "Browse all art", art_path, class: "text-muted" %></h2>
   <div class="card-columns">
-    <%= render @art_feed_items %>
+    <%= render @art_feed_items.take(10) %>
   </div>
-  <%= will_paginate @art_feed_items, params: { controller: :html_pages, action: :home } %>
 <% end %>

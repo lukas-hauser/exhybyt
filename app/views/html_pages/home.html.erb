@@ -2,12 +2,8 @@
 <% provide(:pageheader, render('search_form')) %>
 
 <% if logged_in? %>
-  <div class="col">
-    <h3>Spaces</h3>
-    <%= render 'shared/space_feed' %>
-    <h3>Artwork</h3>
-    <%= render 'shared/art_feed' %>
-  </div>
+  <%= render 'shared/space_feed' %>
+  <%= render 'shared/art_feed' %>
 <% else %>
   <div class="center jumbotron">
     <h1>We are making exhibition space more accessible.</h1>
