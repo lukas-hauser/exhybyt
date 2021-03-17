@@ -32,17 +32,17 @@ class ReservationsController < ApplicationController
 
   def current_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("start_date <= ? AND end_date >= ?", today, today)
+    @exhibitions = Reservation.where("DATE(start_date) <= ? AND DATE(end_date) >= ?", today, today)
   end
 
   def past_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("start_date <= ? AND end_date <= ?", today, today)
+    @exhibitions = Reservation.where("DATE(start_date) <= ? AND DATE(end_date) <= ?", today, today)
   end
 
   def upcoming_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("start_date >= ? AND end_date >= ?", today, today)
+    @exhibitions = Reservation.where("DATE(start_date) > ? AND DATE(end_date) > ?", today, today)
   end
 
   def create

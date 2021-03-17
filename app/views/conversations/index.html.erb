@@ -1,32 +1,36 @@
 <% provide(:title, 'Messages') %>
-<div class="row">
-	<div class="col-md-12">
-		<div class="card">
-			<h5 class="card-header">Your conversations</h5>
-			<ul class="list-group list-group-flush">
-				<% @conversations.each do |conversation| %>
-					<li class="list-group-item">
-						<% other = conversation.sender == current_user ? conversation.recipient : conversation.sender %>
-						<%= link_to conversation_messages_path(conversation) do %>
 
-							<div class="row conversation">
-								<div class="col-md-1">
-									<%= gravatar_for(other, size: 40) %>
+<div class="container-fluid">
+  <div class="row">
+    <%= render 'layouts/sidebar' %>
+    <main class="col-md-9 ms-sm-auto">
+			<div class="card">
+				<h5 class="card-header">Messages</h5>
+				<ul class="list-group list-group-flush">
+					<% @conversations.each do |conversation| %>
+						<li class="list-group-item">
+							<% other = conversation.sender == current_user ? conversation.recipient : conversation.sender %>
+							<%= link_to conversation_messages_path(conversation), class:"text-dark" do %>
+
+								<div class="row conversation">
+									<div class="col-md-1">
+										<%= gravatar_for(other, size: 40) %>
+									</div>
+									<div class="col-md-2">
+										<%= other.display_name %><br>
+									</div>
+									<div class="col-md-7">
+										<%= conversation.messages.last.content %>
+									</div>
+									<div class="col-md-2">
+										<%= conversation.messages.last.message_time %>
+									</div>
 								</div>
-								<div class="col-md-2">
-									<%= other.display_name %><br>
-								</div>
-								<div class="col-md-7">
-									<%= conversation.messages.last.content %>
-								</div>
-								<div class="col-md-2">
-									<%= conversation.messages.last.message_time %>
-								</div>
-							</div>
-						</li>
+							</li>
+						<% end %>
 					<% end %>
-				<% end %>
-			</ul>
-		</div>
-	</div>
+				</ul>
+			</div>
+    </main>
+  </div>
 </div>
