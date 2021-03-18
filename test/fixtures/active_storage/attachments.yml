@@ -1,0 +1,56 @@
+art_one:
+  name: 'images'
+  record_type: 'Artwork'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+art_two:
+  name: 'images'
+  record_type: 'Artwork'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+art_three:
+  name: 'images'
+  record_type: 'Artwork'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+art_most_recent:
+  name: 'images'
+  record_type: 'Artwork'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:most_recent) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+#<% 40.times do |n| %>
+#  <% artwork_n = ("artwork_" + n.to_s).to_sym %>
+#  <%= artwork_n %>:
+#    name: 'images'
+#    record_type: 'Artwork'
+#    record_id: <%= ActiveRecord::FixtureSet.identify(:artwork_n) %>
+#    blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+#<% end %>
+
+space_one:
+  name: 'images'
+  record_type: 'Space'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:one) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+space_two:
+  name: 'images'
+  record_type: 'Space'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:two) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+space_three:
+  name: 'images'
+  record_type: 'Space'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:three) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>
+
+space_most_recent:
+  name: 'images'
+  record_type: 'Space'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:most_recent) %>
+  blob_id: <%= ActiveRecord::FixtureSet.identify(:png) %>

@@ -49,7 +49,8 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         status: "For Sale",
         is_framed: true,
         subject: "Portrait",
-        style_ids: [@style.id]} }
+        style_ids: [@style.id],
+        images: fixture_file_upload("example.png", "image/png")} }
     end
     follow_redirect!
     assert_template 'artworks/show'

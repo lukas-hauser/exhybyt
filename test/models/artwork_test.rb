@@ -2,7 +2,8 @@ require 'test_helper'
 
 class ArtworkTest < ActiveSupport::TestCase
   def setup
-    @user = users(:lukas)
+    @other_artwork = artworks(:one)
+    @user =  users(:lukas)
     @style = styles(:one)
     @artwork = @user.artworks.build(
       listing_name: "Moana Lisa",
@@ -19,10 +20,19 @@ class ArtworkTest < ActiveSupport::TestCase
       subject: "Portrait",
       style_ids: @style.id,
       user_id: @user.id)
+      @artwork.images.attach(
+        io: File.open('app/assets/images/skull.jpg'),
+        filename: 'skull.jpg')
   end
 
   test "should be valid" do
     assert @artwork.valid?
+    assert @other_artwork.valid?
+  end
+
+  test "image should be present" do
+    @artwork.images = nil
+    assert_not @artwork.valid?
   end
 
   test "user id should be present" do

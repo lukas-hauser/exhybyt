@@ -39,7 +39,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_sculptures: false,
         is_live_perf: false,
         is_adverts: false,
-        active: true} }
+        active: true,
+        images: fixture_file_upload("example.png", "image/png")} }
     end
     assert_select 'div#error_explanation'
     assert_select "title", "Add Space | EXHYBYT"
@@ -72,7 +73,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_sculptures: false,
         is_live_perf: false,
         is_adverts: false,
-        active: true} }
+        active: true,
+        images: fixture_file_upload("example.png", "image/png")} }
     end
     follow_redirect!
     assert_template 'spaces/show'

@@ -1,0 +1,8 @@
+png:
+  key: '12345678'
+  filename: 'example.png'
+  content_type: 'image/png'
+  metadata: '{"identified":true,"analyzed":true}'
+  byte_size: 373
+  checksum: "123456789012345678901234"
+  service_name: local
