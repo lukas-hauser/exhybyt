@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-md">
-    <div class="card-header center">
+    <div class="card-body center shadow">
       <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
       <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
       <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>

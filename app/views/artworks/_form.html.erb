@@ -1,33 +1,33 @@
-<%= form_with(model: @artwork, local: true) do |f| %>
+<%= form_with(model: @artwork, local: true, class:"needs-validation") do |f| %>
   <h1>Your Beautiful Artwork</h1>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
-    <%= f.select :category, artwork_categories, {prompt: "Category"}, class: "form-control custom-select" %>
+    <%= f.select :category, artwork_categories, {prompt: "Category"}, class: "form-control custom-select", required: true %>
   </div>
   <div class="form-group">
     <%= f.select :subject, artwork_subjects,
-    {prompt: "Subject"}, class: "form-control custom-select" %>
+    {prompt: "Subject"}, class: "form-control custom-select", required: true %>
   </div>
   <div class="form-group">
     <%= f.select :status, artwork_status,
-    {prompt: "Status"}, class: "form-control custom-select" %>
+    {prompt: "Status"}, class: "form-control custom-select", required: true %>
   </div>
   <div class="form-group">
-    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control" %>
+    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control", required: true %>
   </div>
   <div class="form-group">
-    <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control" %>
+    <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control", required: true %>
   </div>
   <div class="form-group">
-    <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control" %>
+    <%= f.text_field :medium, placeholder: "Medium, e.g. Oil on Canvas", class: "form-control", required: true %>
   </div>
   <div class="form-group">
     <%= f.collection_select(:style_ids, Style.all, :id, :name,
-    { prompt: "Select styles" }, { multiple: true, class: "form-control custom-select" } ) %>
+    { prompt: "Select styles" }, { multiple: true, class: "form-control custom-select", size:"5", required: true } ) %>
   </div>
 
   <div class="form-group">
-    <%= f.text_field :year, placeholder: "Year", class: "form-control" %>
+    <%= f.text_field :year, placeholder: "Year", class: "form-control", required: true %>
   </div>
 
   <div class="form-group">
@@ -37,7 +37,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">£</span>
         </div>
-        <%= f.text_field :price, placeholder: "e.g. 95.50", class: "form-control" %>
+        <%= f.text_field :price, placeholder: "e.g. 95.50", class: "form-control", required: true %>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">cm</span>
         </div>
-        <%= f.text_field :width, placeholder: "e.g. 50", class: "form-control" %>
+        <%= f.text_field :width, placeholder: "e.g. 50", class: "form-control", required: true %>
       </div>
     </div>
     <div class="col mb-3">
@@ -67,7 +67,7 @@
         <div class="input-group-prepend"">
           <span class="input-group-text" id="basic-addon2">cm</span>
         </div>
-        <%= f.text_field :height, placeholder: "e.g. 60", class: "form-control" %>
+        <%= f.text_field :height, placeholder: "e.g. 60", class: "form-control", required: true %>
       </div>
     </div>
   </div>
@@ -75,7 +75,7 @@
     <div class="col mb-3">
       <label for="depth">Depth</label>
       <div class="input-group mb-3">
-        <div class="input-group-prepend"">
+        <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon2">cm</span>
         </div>
         <%= f.text_field :depth, placeholder: "e.g. 2", class: "form-control" %>
