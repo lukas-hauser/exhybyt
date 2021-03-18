@@ -18,8 +18,10 @@
     <div class="col-6 col-md">
       <h5>Features</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="<%= new_artwork_path %>">Add Art</a></li>
-        <li><a class="text-muted" href="<%= new_space_path %>">Add Space</a></li>
+        <% if logged_in? %>
+          <li><a class="text-muted" href="<%= new_artwork_path %>">Add Art</a></li>
+          <li><a class="text-muted" href="<%= new_space_path %>">Add Space</a></li>
+        <% end %>
         <li><a class="text-muted" href="<%= art_path %>">Browse Art</a></li>
         <li><a class="text-muted" href="<%= search_path %>">Find Space</a></li>
         <li><a class="text-muted" href="<%= exhibitions_path %>">Current Exhibitions</a></li>
