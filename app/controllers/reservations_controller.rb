@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
       flash[:success] = "You have submited the reservation."
     else
       redirect_to request.referrer || root_path
-      flash[:danger] = "Something went wrong. Have you already uploaded the artwork that you want to exhibit?"
+      flash[:danger] = "Something went wrong. We couldn't submit your booking."
     end
   end
 

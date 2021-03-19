@@ -2,6 +2,7 @@ class SpacesController < ApplicationController
   before_action :set_space,         only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
   before_action :correct_user,      only: [:edit, :update, :destroy]
+  before_action :stripe_ready,      only: [:create, :update]
 
   def index
 #    @spaces = Space.all
@@ -91,5 +92,11 @@ class SpacesController < ApplicationController
   def correct_user
     @space = current_user.spaces.find_by(id: params[:id])
     redirect_to root_url if @space.nil?
+  end
+
+  def stripe_ready
+    if current_user.stripe_user_id.nil?
+      flash[:warning] = "Please connect with Stripe to accept bookings."
+    end
   end
 end

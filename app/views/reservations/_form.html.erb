@@ -22,6 +22,10 @@
     <div class="alert alert-warning" role="alert">
       Please log in to book.
     </div>
+  <% elsif @space.user.stripe_user_id.nil? %>
+    <div class="alert alert-warning" role="alert">
+      This space is not ready yet to accept payments. Stay tuned.
+    </div>
   <% elsif current_user.artworks.any? %>
     <div class="form-group">
       <%= f.collection_select(:artwork_ids, current_user.artworks, :id, :listing_name,

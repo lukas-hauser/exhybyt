@@ -1,7 +1,31 @@
 <% provide(:title, 'How it works') %>
 
+<h1>How it works</h1>
+
+
+  <div class="center">
+    <p>
+      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#forartists" aria-expanded="false" aria-controls="forartists">
+        For Artists
+      </button>
+      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#forbusinesses" aria-expanded="true" aria-controls="forbusinesses">
+        For Businesses
+      </button>
+    </p>
+    <div class="collapse" id="forartists">
+      <div class="card card-body">
+        <%= render 'layouts/howitworks_artists' %>
+      </div>
+    </div>
+    <div class="collapse show" id="forbusinesses">
+      <div class="card card-body">
+        <%= render 'layouts/howitworks_businesses' %>
+      </div>
+    </div>
+  </div>
+
 <div class="row">
   <div>
-      <%= render 'layouts/howitworks' %>
+      <%= render 'layouts/faq' %>
   </div>
 </div>

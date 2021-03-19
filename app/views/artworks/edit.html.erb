@@ -10,7 +10,9 @@
             <div class="card">
               <%= image_tag image, class:"card-img" %>
               <div class="card-body">
-                <%= link_to "Remove", "#" %>
+                <%= link_to "#", class:"text-muted", data: { confirm: "The feature to delete images doesn't work yet." }, remote: true do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
               </div>
             </div>
           <% end %>

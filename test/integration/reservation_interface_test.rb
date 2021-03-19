@@ -11,7 +11,7 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
     @upcoming_exhibition  = reservations(:upcoming_exhibition)
   end
 
-  test "space interface" do
+  test "reservation interface" do
     log_in_as(@user)
     get root_path
 
