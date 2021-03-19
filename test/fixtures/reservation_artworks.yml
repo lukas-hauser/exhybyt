@@ -7,3 +7,23 @@ two:
   reservation: two
   artwork:     two
   created_at: <%= 15.minutes.ago %>
+
+three:
+  reservation: current_exhibition
+  artwork:     one
+  created_at: <%= 15.minutes.ago %>
+
+four:
+  reservation: one_day_exhibition
+  artwork:     two
+  created_at: <%= 15.minutes.ago %>
+
+five:
+  reservation: upcoming_exhibition
+  artwork:     two
+  created_at: <%= 15.minutes.ago %>
+
+six:
+  reservation: past_exhibition
+  artwork:     two
+  created_at: <%= 15.minutes.ago %>

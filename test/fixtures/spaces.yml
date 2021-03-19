@@ -5,7 +5,7 @@ one:
   category: MyString
   listing_name: MyString
   description: MyText
-  address: MyString
+  address: "London Canary Wharf E14"
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
@@ -35,7 +35,7 @@ two:
   category: MyString
   listing_name: MyString
   description: MyText
-  address: MyString
+  address: "London Canary Wharf E14"
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
