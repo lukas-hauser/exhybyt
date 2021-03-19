@@ -17,7 +17,7 @@
   </aside>
   <div class="col-md-8">
     <% if @user.spaces.any? %>
-      <h3><%= @user.spaces.count %> Spaces</h3>
+      <h3><%= pluralize(@user.spaces.count, "Space") %></h3>
       <div class="card-columns">
         <%= render @spaces %>
       </div>
@@ -25,7 +25,7 @@
       <br>
     <% end %>
     <% if @user.artworks.any? %>
-      <h3><%= @user.artworks.count %> Artworks</h3>
+      <h3><%= pluralize(@user.artworks.count, "Artwork") %></h3>
       <div class="card-columns">
         <%= render @artworks %>
       </div>
