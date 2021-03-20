@@ -9,6 +9,6 @@ class Message < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
 
   def message_time
-  	created_at.strftime("%v")
+    created_at.strftime("%d %b %Y")
   end
 end

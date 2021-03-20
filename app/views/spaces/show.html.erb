@@ -36,6 +36,14 @@
 
 <br>
 
+<!--Reviews -->
+
+<h3>Reviews <%= @space.average_rating %> (<%= @reviews.count %>)</h3>
+<%= render 'reviews/form' if @booked && !@hasReview %>
+<%= render 'reviews/list' %>
+
+<!-- Google Map -->
+
 <div class="row">
   <%= render 'map' %>
 </div>

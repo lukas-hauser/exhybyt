@@ -19,7 +19,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
-  test "should redirect message when logged in as wrong user" do
+  test "Should redirect message when logged in as wrong user" do
     log_in_as(User.third)
     get conversation_messages_path(@message)
     assert_not flash.empty?

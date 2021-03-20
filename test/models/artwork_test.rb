@@ -75,13 +75,41 @@ class ArtworkTest < ActiveSupport::TestCase
     assert_not @artwork.valid?
   end
 
+  test "Height should be a positive number" do
+    @artwork.height = -5
+    assert_not @artwork.valid?
+    @artwork.height = 0
+    assert_not @artwork.valid?
+  end
+
   test "Width should be present" do
-    @artwork.height = "   "
+    @artwork.width = "   "
+    assert_not @artwork.valid?
+  end
+
+  test "Width should be a positive number" do
+    @artwork.width = -5
+    assert_not @artwork.valid?
+    @artwork.width = 0
+    assert_not @artwork.valid?
+  end
+
+  test "Depth should be a positive number" do
+    @artwork.depth = -5
+    assert_not @artwork.valid?
+    @artwork.depth = 0
     assert_not @artwork.valid?
   end
 
   test "Price should be present" do
     @artwork.price = "   "
+    assert_not @artwork.valid?
+  end
+
+  test "Price should be a positive number" do
+    @artwork.price = -5
+    assert_not @artwork.valid?
+    @artwork.price = 0
     assert_not @artwork.valid?
   end
 

@@ -10,6 +10,9 @@ class SpacesController < ApplicationController
   end
 
   def show
+    @booked = Reservation.where("space_id = ? AND user_id = ?", @space.id, current_user.id).present? if current_user
+    @reviews = @space.reviews
+    @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
   end
 
   def new

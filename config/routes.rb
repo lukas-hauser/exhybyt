@@ -43,4 +43,8 @@ Rails.application.routes.draw do
   resources :conversations,       only: [:index, :create] do
     resources :messages,          only: [:index, :create], shallow: true
   end
+
+  resources :spaces do
+    resources :reviews,           only: [:create, :destroy], shallow: true
+  end
 end

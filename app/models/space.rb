@@ -2,6 +2,7 @@ class Space < ApplicationRecord
   belongs_to :user
   has_many_attached :images
   has_many :reservations, dependent: :destroy
+  has_many :reviews
 
   def unavailable_dates
     bookings.pluck(:start_date, :end_date).map do |range|
@@ -30,4 +31,8 @@ class Space < ApplicationRecord
 #  def display_image
 #    image.variant(resize_to_limit: [500,500])
 #  end
+
+  def average_rating
+    reviews.count == 0 ? 0 : reviews.average(:star).round(2)
+  end
 end

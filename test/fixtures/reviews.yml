@@ -1,0 +1,20 @@
+one:
+  comment: MyText
+  star: 5
+  space: one
+  user: lukas
+  created_at: <%= 20.minutes.ago %>
+
+two:
+  comment: MyText
+  star: 4
+  space: two
+  user: jane
+  created_at: <%= 10.minutes.ago %>
+
+most_recent:
+  comment: MyText
+  star: 5
+  space: one
+  user: jane
+  created_at: <%= Time.zone.now %>

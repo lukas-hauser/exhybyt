@@ -1,0 +1,30 @@
+<% if @space.reviews.count > 0 %>
+  <ul class="list-group list-group-flush">
+    <% @space.reviews.each do |r| %>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col lg-2">
+          <%= gravatar_for(r.user, size: 40) %>
+          <strong><%= r.user.display_name %></strong>
+        </div>
+        <div class="col lg-1">
+          <%= r.star %>
+        </div>
+        <div class="col lg-6">
+          <%= r.comment %>
+        </div>
+        <div class="col lg-3">
+          <%= r.review_time %>
+        </div>
+        <div class="row-space-2">
+          <%= link_to "Remove my review", r, method: :delete, data: { confirm: "Are you sure?"} if current_user && current_user == r.user %>
+        </div>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="text-center">
+    There is no review yet.
+  </div>
+<% end %>
