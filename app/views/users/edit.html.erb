@@ -2,23 +2,23 @@
 
 <div class="row">
   <div class="col-md-6 offset-md-3">
-    <%= form_with(model: @user, local: true) do |f| %>
+    <%= form_with(model: @user, local: true, class: "needs-validation" ) do |f| %>
       <h1>Update Profile</h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="form-group">
-        <%= f.text_field :firstname, class: "form-control", placeholder:"First Name" %>
+        <%= f.text_field :firstname, class: "form-control", placeholder:"First Name", required: true %>
       </div>
       <div class="form-group">
-        <%= f.text_field :lastname, class: "form-control", placeholder:"Last Name" %>
+        <%= f.text_field :lastname, class: "form-control", placeholder:"Last Name", required: true %>
       </div>
       <div class="form-group">
-        <%= f.text_field :display_name, class: "form-control", placeholder:"Display Name" %>
+        <%= f.text_field :display_name, class: "form-control", placeholder:"Display Name", required: true %>
         <small class="text-muted">
           If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name.
         </small>
       </div>
       <div class="form-group">
-        <%= f.email_field :email, class: "form-control", placeholder:"Email Address" %>
+        <%= f.email_field :email, class: "form-control", placeholder:"Email Address", required: true %>
       </div>
       <div class="form-group">
         <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
@@ -45,7 +45,8 @@
         <% if @user.stripe_user_id %>
           <%= link_to "Go to Stripe Dashboard", stripe_dashboard_path(@user.id) %>
         <% else %>
-          <div class="btn-block">
+          <div class="btn-block center">
+            <i class="fab fa-stripe fa-3x"></i>
             <%= link_to "Connect with Stripe", stripe_button_link, class:"btn btn-block btn-secondary" %>
           </div>
         <% end %>
