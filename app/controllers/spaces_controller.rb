@@ -2,7 +2,7 @@ class SpacesController < ApplicationController
   before_action :set_space,         only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
   before_action :correct_user,      only: [:edit, :update, :destroy]
-  after_action :stripe_ready,       only: [:create, :update]
+  after_action  :stripe_ready,      only: [:create, :update]
 
   def index
 #    @spaces = Space.all

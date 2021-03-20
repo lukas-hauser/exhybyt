@@ -29,7 +29,7 @@
   <% elsif current_user.artworks.any? %>
     <div class="form-group">
       <%= f.collection_select(:artwork_ids, current_user.artworks, :id, :listing_name,
-      { prompt: "Select Artwork" }, { multiple: true, class: "form-control custom-select", size:"3" } ) %>
+      { prompt: "Select Artwork" }, { multiple: true, class: "form-control custom-select", size:"3", required: true } ) %>
     </div>
   <% else %>
     <div class="alert alert-warning" role="alert">
