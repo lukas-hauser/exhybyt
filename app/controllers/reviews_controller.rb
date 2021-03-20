@@ -5,7 +5,12 @@ class ReviewsController < ApplicationController
 
 
   def create
-    @review = current_user.reviews.create(review_params)
+    @review = current_user.reviews.build(review_params)
+    if @review.save
+      flash[:success] = "Thank you for leaving a review!"
+    else
+      flash[:danger] = "Something went wrong."
+    end
     redirect_to @review.space
   end
 
@@ -13,7 +18,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     space = @review.space
     @review.destroy
-
+    flash[:success] = "Your review has been deleted."
     redirect_to space
   end
 
