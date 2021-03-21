@@ -1,8 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user_create,   only: :create
-  before_action :correct_user_destroy,  only: :destroy
-
+  before_action :correct_user_create,   only: [:create]
+  before_action :correct_user_destroy,  only: [:destroy]
 
   def create
     @review = current_user.reviews.build(review_params)

@@ -38,8 +38,8 @@ class ReviewTest < ActiveSupport::TestCase
     assert_not @review.valid?
   end
 
-  test "Content should be no more than 100 characters " do
-    @review.comment = "a" * 101
+  test "Content should be no more than 1000 characters " do
+    @review.comment = "a" * 1001
     assert_not @review.valid?
   end
 

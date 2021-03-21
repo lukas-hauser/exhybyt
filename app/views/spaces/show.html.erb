@@ -37,10 +37,18 @@
 <br>
 
 <!--Reviews -->
+<div class="container">
+  <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+  <%= render 'reviews/form' if @booked && !@hasReview %>
+</div>
 
-<h3>Reviews <%= @space.average_rating %> (<%= @reviews.count %>)</h3>
-<%= render 'reviews/form' if @booked && !@hasReview %>
-<%= render 'reviews/list' %>
+<script>
+  $('#average_rating').raty({
+    path: '/assets',
+    readOnly: true,
+    score: <%= @space.average_rating %>
+  })
+</script>
 
 <!-- Google Map -->
 

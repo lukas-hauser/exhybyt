@@ -16,6 +16,7 @@ import "@fortawesome/fontawesome-free/js/all";
 import "@fortawesome/fontawesome-free/css/all"
 
 import "../src/add-eu-banner"
+import "../src/jquery.raty"
 
 // $(function(){
     // Plain jquery
