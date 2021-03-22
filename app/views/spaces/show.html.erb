@@ -37,8 +37,8 @@
 <br>
 
 <!--Reviews -->
-  <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
-  <%= render 'reviews/form' if @booked && !@hasReview %>
+<h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+<%= render 'reviews/form' if @booked && !@hasReview %>
 
 <!-- Google Map -->
 

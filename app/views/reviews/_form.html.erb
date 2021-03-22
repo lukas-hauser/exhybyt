@@ -1,10 +1,11 @@
 <%= form_with model: [@space, @space.reviews.new], local: true do | f | %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div id="user_stars"></div>
+  <div class="form-group">
+    <div id="user_stars"></div>
+  </div>
   <div class="form-group">
     <%= f.text_area :comment, class: "form-control", required: true, maxlength: 1000 %>
   </div>
-
   <%= f.hidden_field :space_id, value: @space.id %>
   <div class="form-group">
     <%= f.submit "Add Review", class: "btn btn-primary" %>
