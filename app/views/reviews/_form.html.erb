@@ -6,7 +6,9 @@
   </div>
 
   <%= f.hidden_field :space_id, value: @space.id %>
-  <%= f.submit "Submit", class: "btn btn-block btn-primary" %>
+  <div class="form-group">
+    <%= f.submit "Add Review", class: "btn btn-primary" %>
+  </div>
 
 <% end %>
 
