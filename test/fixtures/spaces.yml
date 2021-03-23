@@ -26,7 +26,7 @@ one:
   is_sculptures: false
   is_live_perf: false
   is_adverts: false
-  active: false
+  active: true
   user: lukas
   created_at: <%= 10.minutes.ago %>
 
@@ -120,17 +120,47 @@ three:
   user: jane
   created_at: <%= 2.months.ago %>
 
+inactive_space:
+  venue_type: MyString
+  category: MyString
+  listing_name: MyString
+  description: MyText
+  address: MyString
+  wall_height: 1.5
+  wall_width: 1.5
+  price: 1.5
+  is_adj_light: false
+  is_nat_light: false
+  is_dis_acc: false
+  is_parking: false
+  is_hang_sys: false
+  is_plugs: false
+  is_sec_sys: false
+  is_storage: false
+  is_toilet: true
+  is_wifi: false
+  is_storage: false
+  is_paintings: false
+  is_photography: false
+  is_drawings: false
+  is_sculptures: false
+  is_live_perf: false
+  is_adverts: false
+  active: false
+  user: jane
+  created_at: <%= 2.months.ago %>
+
 
 <% 40.times do |n| %>
 space_<%= n %>:
   venue_type: "Coffee Shop"
   category: "Wall Space"
-  listing_name: <%= Faker::Restaurant.name %>
-  description: <%= Faker::Lorem.sentence(word_count: 20) %>
-  address: <%= Faker::Address.full_address %>
-  wall_height: <%= Faker::Number.decimal(l_digits: 2, r_digits: 2) %>
-  wall_width: <%= Faker::Number.decimal(l_digits: 2, r_digits: 2) %>
-  price: <%= Faker::Number.decimal(l_digits: 2, r_digits: 2) %>
+  listing_name: MyString
+  description: MyString
+  address: MyString
+  wall_height: 1.5
+  wall_width: 1.5
+  price: 1.5
   created_at: <%= 20.days.ago %>
   user: lukas
 <% end %>

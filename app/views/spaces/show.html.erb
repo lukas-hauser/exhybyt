@@ -17,6 +17,10 @@
         <div class="alert alert-warning" role="alert">
           Please log in to check dates and book.
         </div>
+      <% elsif !@space.active? %>
+        <div class="alert alert-secondary" role="alert">
+          Space is inactivated and doesn't accept any bookings.
+        </div>
       <% else %>
         <%= render 'reservations/form' %>
       <% end %>

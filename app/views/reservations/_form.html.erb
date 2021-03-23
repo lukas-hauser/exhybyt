@@ -29,7 +29,7 @@
   <% elsif current_user.artworks.any? %>
     <div class="form-group">
       <%= f.collection_select(:artwork_ids, current_user.artworks, :id, :listing_name,
-      { prompt: "Select Artwork" }, { multiple: true, class: "form-control custom-select", size:"3", required: true } ) %>
+      { prompt: "Select Artwork" }, { multiple: true, required: true, class: "form-control custom-select", size:"3" } ) %>
     </div>
   <% else %>
     <div class="alert alert-warning" role="alert">
@@ -64,7 +64,7 @@
     <% unless current_user?(@space.user) %>
       <div class="col">
         <div class="form-group">
-          <%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @space.user_id),
+          <%= link_to "Message", conversations_path(sender_id: current_user.id, recipient_id: @space.user_id),
           method: 'post', class:"btn btn-block btn-outline-secondary" %>
         </div>
       </div>

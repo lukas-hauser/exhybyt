@@ -16,16 +16,16 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.spaces.any? %>
-      <h3><%= pluralize(@user.spaces.count, "Space") %></h3>
+    <% if @spaces.any? %>
+      <h3><%= pluralize(@spaces.count, "Space") %></h3>
       <div class="card-columns">
         <%= render @spaces %>
       </div>
       <%= will_paginate @spaces %>
       <br>
     <% end %>
-    <% if @user.artworks.any? %>
-      <h3><%= pluralize(@user.artworks.count, "Artwork") %></h3>
+    <% if @artworks.any? %>
+      <h3><%= pluralize(@artworks.count, "Artwork") %></h3>
       <div class="card-columns">
         <%= render @artworks %>
       </div>

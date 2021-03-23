@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :logged_in_user, except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
+  before_action :active_space,     only: [:create]
 
   def preload
     space = Space.find(params[:space_id])
@@ -66,5 +67,12 @@ class ReservationsController < ApplicationController
 
     def reservation_params
       params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id, artwork_ids: [])
+    end
+
+    # Confirms an active space
+    def active_space
+      @space = Space.find(params[:space_id])
+      redirect_to root_url unless @space.active?
+      flash[:warning] = "Space is inactive. We can't submit your booking."
     end
 end

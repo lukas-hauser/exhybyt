@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @spaces = @user.spaces.paginate(page: params[:page])
+    @spaces = @user.spaces.where(active:true).paginate(page: params[:page])
     @artworks = @user.artworks.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
   end
