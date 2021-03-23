@@ -90,7 +90,9 @@
       <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
     </div>
   </span>
-  <%= f.submit "Submit", class: "btn btn-block btn-primary" %>
+  <div class="form-group">
+    <%= f.submit "Submit", class: "btn btn-block btn-primary" %>
+  </div>
 <% end %>
 
 <script type="text/javascript">

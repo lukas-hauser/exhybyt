@@ -6,10 +6,11 @@
     <%= form_with(url: password_resets_path, scope: :password_reset,
                   local: true) do |f| %>
     <div class="form-group">
-      <%= f.email_field :email, placeholder: "Email", class: 'form-control' %>
+      <%= f.email_field :email, placeholder: "Email", class: 'form-control', required: true %>
     </div>
-    <%= f.submit "Submit", class: "btn btn-primary"%>
-
+    <div class="form-group">
+      <%= f.submit "Submit", class: "btn btn-primary"%>
+    </div>
     <% end %>
   </div>
 </div>
