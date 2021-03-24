@@ -72,7 +72,9 @@ class ReservationsController < ApplicationController
     # Confirms an active space
     def active_space
       @space = Space.find(params[:space_id])
-      redirect_to root_url unless @space.active?
-      flash[:warning] = "Space is inactive. We can't submit your booking."
+      if !@space.active?
+        redirect_to root_url
+        flash[:warning] = "Space is inactive. We can't submit your booking."
+      end
     end
 end
