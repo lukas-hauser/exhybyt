@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_112634) do
+ActiveRecord::Schema.define(version: 2021_03_20_171056) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,17 +110,13 @@ ActiveRecord::Schema.define(version: 2021_03_24_112634) do
     t.float "total"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "stripe_id"
-    t.string "status"
-    t.datetime "paid_at"
     t.index ["space_id"], name: "index_reservations_on_space_id"
-    t.index ["stripe_id"], name: "index_reservations_on_stripe_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
     t.text "comment"
-    t.integer "star"
+    t.integer "star", default: 1
     t.integer "space_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
