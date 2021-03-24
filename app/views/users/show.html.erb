@@ -18,8 +18,8 @@
             <a href="https://twitter.com/<%= @user.twitter %>"> <i class="fab fa-twitter text-muted"></i></a>
           <% end %>
           <% if @user.website? %>
+            <a href="https://<%= @user.website %>"> <i class="fas fa-globe-europe text-muted"></i></a>
           <% end %>
-          <a href="https://<%= @user.website %>"> <i class="fas fa-globe-europe text-muted"></i></a>
         </div>
       </ul>
     </section>

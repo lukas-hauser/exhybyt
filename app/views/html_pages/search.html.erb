@@ -4,6 +4,10 @@
   <div class="col-md-6">
     <%= search_form_for @search, url: search_path do |f| %>
 
+      <div class="form-group">
+        <%= f.text_field :listing_name_or_description_or_address_cont, placeholder: "Search...", class: "form-control" %>
+      </div>
+
       <div class="row">
         <div class="col">
           <div class="form-group">

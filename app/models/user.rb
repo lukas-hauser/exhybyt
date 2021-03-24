@@ -3,6 +3,8 @@ class User < ApplicationRecord
   before_save   :downcase_email
   before_create :create_activation_digest
   before_create { self.display_name = self.firstname + " " + self.lastname }
+  before_create { self.user_name = "user_" + (User.last.id + 1).to_s }
+  before_create { self.currency = "GBP" }
 
   has_many :spaces, dependent: :destroy
   has_many :reservations, dependent: :destroy

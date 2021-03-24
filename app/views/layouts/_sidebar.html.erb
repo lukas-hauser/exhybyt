@@ -1,27 +1,27 @@
-<div class="col">
+<div class="col mb-3">
   <div class="flex-column">
     <div class="list-group">
-      <%= link_to artworks_path, class:"list-group-item list-group-item-action" do %>
+      <%= link_to artworks_path, class:"list-group-item list-group-item-action#{" active" if  current_page?(artworks_path) }" do %>
         <i class="fa fa-image"></i>
         <span>Your Artwork</span>
       <% end %>
 
-      <%= link_to spaces_path, class:"list-group-item list-group-item-action" do %>
+      <%= link_to spaces_path, class:"list-group-item list-group-item-action#{" active" if  current_page?(spaces_path) }" do %>
         <i class="fa fa-store"></i>
         <span>Your Spaces</span>
       <% end %>
 
-      <%= link_to your_bookings_path, class:"list-group-item list-group-item-action" do %>
+      <%= link_to your_bookings_path, class:"list-group-item list-group-item-action#{" active" if  current_page?(your_bookings_path) }" do %>
         <i class="fa fa-book"></i>
         <span>Your Bookings</span>
       <% end %>
 
-      <%= link_to your_reservations_path, class:"list-group-item list-group-item-action" do %>
+      <%= link_to your_reservations_path, class:"list-group-item list-group-item-action#{" active" if  current_page?(your_reservations_path) }" do %>
         <i class="fa fa-file"></i>
         <span>Your Reservations</span>
       <% end %>
 
-      <%= link_to conversations_path, class:"list-group-item list-group-item-action" do %>
+      <%= link_to conversations_path, class:"list-group-item list-group-item-action#{" active" if  current_page?(conversations_path) }" do %>
         <i class="fa fa-envelope"></i>
         <span>Messages</span>
       <% end %>

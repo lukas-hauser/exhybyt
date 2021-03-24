@@ -4,12 +4,7 @@
   <div class="row">
     <%= render 'layouts/sidebar' %>
     <main class="col-md-9 ms-sm-auto">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-        <h1 class="h2">Your Reservations</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-        </div>
-      </div>
-
+      <h1 class="text-left">Your Reservations</h1>
       <div class="card-columns">
         <% @spaces.each do |space| %>
           <% space.reservations.each do |reservation| %>
