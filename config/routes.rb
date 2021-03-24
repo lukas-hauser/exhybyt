@@ -30,21 +30,24 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :relationships,       only: [:create, :destroy]
+  resources :account_activations,     only: [:edit]
+  resources :password_resets,         only: [:new, :create, :edit, :update]
+  resources :relationships,           only: [:create, :destroy]
   resources :spaces do
-    resources :reservations,      only: [:create, :index], shallow: true
+    resources :reservations,          only: [:create, :index], shallow: true
   end
-  resources :spaces,              only: [:new, :show, :index, :create,
-                                         :edit, :update, :destroy]
-  resources :artworks,            only: [:new, :show, :index, :create,
-                                         :edit, :update, :destroy]
-  resources :conversations,       only: [:index, :create] do
-    resources :messages,          only: [:index, :create], shallow: true
+  resources :spaces,                  only: [:new, :show, :index, :create,
+                                            :edit, :update, :destroy]
+  resources :artworks,                only: [:new, :show, :index, :create,
+                                            :edit, :update, :destroy]
+  resources :conversations,           only: [:index, :create] do
+    resources :messages,              only: [:index, :create], shallow: true
   end
 
   resources :spaces do
-    resources :reviews,           only: [:create, :destroy], shallow: true
+    resources :reviews,               only: [:create, :destroy], shallow: true
   end
+
+  resources :reservation_approvals,   only: [:edit]
+  resources :reservation_rejections,  only: [:edit]
 end

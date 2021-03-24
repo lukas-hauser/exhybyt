@@ -27,9 +27,10 @@ class ReviewsController < ApplicationController
     end
 
     def correct_user_create
-      @space       = Space.find_by(id: params[:space_id])
-      @reservation = Reservation.where("space_id = ? AND user_id = ?", @space.id, current_user.id)
-      @review      = Review.find_by(user_id: current_user.id)
+      @space        = Space.find_by(id: params[:space_id])
+      @reservations = Reservation.where(approved:true)
+      @reservation  = @reservations.where("space_id = ? AND user_id = ?", @space.id, current_user.id)
+      @review       = Review.find_by(user_id: current_user.id)
       redirect_to root_url if @reservation.nil?  || !@review.nil?
     end
 

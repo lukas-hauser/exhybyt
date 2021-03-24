@@ -1,11 +1,13 @@
 class ReservationsController < ApplicationController
-  before_action :logged_in_user, except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
-  before_action :active_space,     only: [:create]
+  before_action :logged_in_user,      except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
+  before_action :active_space,          only: [:create]
+  before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
 
   def preload
     space = Space.find(params[:space_id])
     today = Date.today
-    reservations = space.reservations.where("start_date >= ? OR end_date >= ?", today, today)
+    reservations = space.reservations.where(rejected:false)
+    reservations = reservations.where("DATE(start_date) >= ? OR DATE(end_date) >= ?", today, today)
     render json: reservations
   end
 
@@ -33,17 +35,17 @@ class ReservationsController < ApplicationController
 
   def current_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("DATE(start_date) <= ? AND DATE(end_date) >= ?", today, today)
+    @exhibitions = @reservations.where("DATE(start_date) <= ? AND DATE(end_date) >= ?", today, today)
   end
 
   def past_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("DATE(start_date) < ? AND DATE(end_date) < ?", today, today)
+    @exhibitions = @reservations.where("DATE(start_date) < ? AND DATE(end_date) < ?", today, today)
   end
 
   def upcoming_exhibitions
     today = Date.today
-    @exhibitions = Reservation.where("DATE(start_date) > ? AND DATE(end_date) > ?", today, today)
+    @exhibitions = @reservations.where("DATE(start_date) > ? AND DATE(end_date) > ?", today, today)
   end
 
   def create
@@ -61,7 +63,8 @@ class ReservationsController < ApplicationController
     def is_conflict(start_date, end_date)
       space = Space.find(params[:space_id])
 
-      check = space.reservations.where("? < start_date AND end_date < ?", start_date, end_date)
+      reservations = space.reservations.where(rejected:false)
+      check = reservations.where("? < DATE(start_date) AND DATE(end_date) < ?", start_date, end_date)
       check.size > 0? true : false
     end
 
@@ -76,5 +79,10 @@ class ReservationsController < ApplicationController
         redirect_to root_url
         flash[:warning] = "Space is inactive. We can't submit your booking."
       end
+    end
+
+    # Confirms a reservatin was approved
+    def approved_reservations
+      @reservations = Reservation.where(approved:true)
     end
 end

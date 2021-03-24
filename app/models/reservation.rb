@@ -15,6 +15,18 @@ class Reservation < ApplicationRecord
 
   default_scope -> { order(created_at: :desc) }
 
+  # Approves a reservation
+  def approve
+    update_columns(approved: true, approved_at: Time.zone.now,
+                   rejected: false)
+  end
+
+  # Rejects a reservation
+  def reject
+    update_columns(rejected: true, rejected_at: Time.zone.now,
+                   approved: false)
+  end
+
   private
 
   def end_date_after_start_date

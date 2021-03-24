@@ -32,6 +32,13 @@
                  <%= link_to image_tag(artwork.images[0], width: 50), artwork %>
                 <% end %>
               </p>
+              <% if booking.approved? %>
+                <p class="card-text text-success small">Approved</p>
+              <% elsif booking.rejected? %>
+                <p class="card-text text-danger small">Rejected</p>
+              <% else %>
+                <p class="card-text small">Awaiting response from space</p>
+              <% end %>
             </div>
           </div>
         <% end %>
