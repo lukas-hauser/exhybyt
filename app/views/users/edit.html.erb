@@ -1,49 +1,98 @@
 <% provide(:title, 'Update Profile') %>
 
-<div class="row">
-  <div class="col-md-6 offset-md-3">
-    <%= form_with(model: @user, local: true, class: "needs-validation" ) do |f| %>
-      <h1>Update Profile</h1>
-      <%= render 'shared/error_messages', object: f.object %>
+<%= form_with(model: @user, local: true, class: "needs-validation" ) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <h1>Update Profile</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Profile Settings</h2>
       <div class="form-group">
+        <%= f.label :firstname %>
         <%= f.text_field :firstname, class: "form-control", placeholder:"First Name", required: true %>
       </div>
       <div class="form-group">
+        <%= f.label :lastname %>
         <%= f.text_field :lastname, class: "form-control", placeholder:"Last Name", required: true %>
       </div>
+
       <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", placeholder:"Email Address", required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <div class="form-check">
+          <%= f.check_box :marketing_consent, class:"form-check-input", id:"marketing" %>
+          <label class="form-check-label text-muted" for="marketing">
+            Opt in to receive occasional updates on spaces, artwork and exhibitions, and other announcements.
+            We also don't like spam. That's why we make it easy for you to updated your email preferences or unsubscribe at anytime.
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <h2>Public Profile</h2>
+      <div class="form-group">
+        <%= f.label :instagram %>
+        <%= f.text_field :instagram, class: "form-control", placeholder:"instagram handle, e.g. exhybyt" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :facebook %>
+        <%= f.text_field :facebook, class: "form-control", placeholder:"facebook handle, e.g. exhybyt" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :twitter %>
+        <%= f.text_field :twitter, class: "form-control", placeholder:"twitter handle, e.g. exhybyt" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :website %>
+        <%= f.text_field :website, class: "form-control", placeholder:"website, e.g. www.exhybyt.com" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :display_name %>
         <%= f.text_field :display_name, class: "form-control", placeholder:"Display Name", required: true %>
         <small class="form-text text-muted">
           If you represent an organisation, you can use its name as your display name. Display name is shown to other users instead of your first and last name.
         </small>
       </div>
       <div class="form-group">
-        <%= f.email_field :email, class: "form-control", placeholder:"Email Address", required: true %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Save Changes", class: "btn btn-block btn-primary" %>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <div class="col">
-        <%= gravatar_for @user, size:50 %>
-        <a href="https://gravatar.com/emails" target="_blank">Change Avatar</a>
-      </div>
-      <div class="col center">
-        <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
-        <% if @user.stripe_user_id %>
-          <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle" %>
-        <% else %>
-          <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
-        <% end %>
+        <%= f.label :bio %>
+        <%= f.text_area :bio, class: "form-control", placeholder:"Your bio", maxlength:1000 %>
       </div>
     </div>
+  </div>
+
+  <div class="row center">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.submit "Save Changes", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= gravatar_for @user, size:50 %>
+    <a href="https://gravatar.com/emails" target="_blank">Change Avatar</a>
+  </div>
+  <div class="col-md-6">
+    <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
+    <% if @user.stripe_user_id %>
+      <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle" %>
+    <% else %>
+      <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
+    <% end %>
   </div>
 </div>

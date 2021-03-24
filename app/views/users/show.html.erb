@@ -6,6 +6,22 @@
         <%= gravatar_for @user %>
         <%= @user.display_name %>
       </h1>
+      <ul class="list-unstyled text-small">
+        <div class="container-center">
+          <% if @user.instagram? %>
+            <a href="https://www.instagram.com/<%= @user.instagram %>/"> <i class="fab fa-instagram text-muted"></i></a>
+          <% end %>
+          <% if @user.facebook? %>
+            <a href="https://facebook.com/<%= @user.facebook %>"> <i class="fab fa-facebook-f text-muted"></i></a>
+          <% end %>
+          <% if @user.twitter? %>
+            <a href="https://twitter.com/<%= @user.twitter %>"> <i class="fab fa-twitter text-muted"></i></a>
+          <% end %>
+          <% if @user.website? %>
+          <% end %>
+          <a href="https://<%= @user.website %>"> <i class="fas fa-globe-europe text-muted"></i></a>
+        </div>
+      </ul>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
@@ -14,6 +30,7 @@
       <%= render 'follow_form' if logged_in? %>
       <%= render 'send_message' if logged_in? %>
     </section>
+    <%= @user.bio %>
   </aside>
   <div class="col-md-8">
     <% if @spaces.any? %>

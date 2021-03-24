@@ -31,3 +31,11 @@
 
 en:
   hello: "Hello world"
+
+  helpers:
+    label:
+      user:
+        firstname: "First Name"
+        lastname: "Last Name"
+        email: "Email"
+        display_name: "Display Name"

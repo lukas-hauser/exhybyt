@@ -46,6 +46,41 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "instagram cannot be too long" do
+    @user.instagram = "a" * 61
+    assert_not @user.valid?
+  end
+
+  test "facebook cannot be too long" do
+    @user.facebook = "a" * 61
+    assert_not @user.valid?
+  end
+
+  test "twitter cannot be too long" do
+    @user.twitter = "a" * 61
+    assert_not @user.valid?
+  end
+
+  test "website cannot be too long" do
+    @user.website = "a" * 61
+    assert_not @user.valid?
+  end
+
+  test "bio cannot be too long" do
+    @user.bio = "a" * 1001
+    assert_not @user.valid?
+  end
+
+  test "currency cannot be too long" do
+    @user.currency = "a" * 61
+    assert_not @user.valid?
+  end
+
+  test "user name cannot be too long" do
+    @user.user_name = "a" * 61
+    assert_not @user.valid?
+  end
+
   test "email validation should accept valid addresses" do
     valid_addresses = %w[tony@example.com JOHN@test.com MARY_Smith@new.co.uk]
     valid_addresses.each do |valid_address|

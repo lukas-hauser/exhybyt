@@ -28,6 +28,14 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  validates :instagram,   length: { maximum: 60 }
+  validates :facebook,    length: { maximum: 60 }
+  validates :twitter,     length: { maximum: 60 }
+  validates :website,     length: { maximum: 60 }
+  validates :bio,         length: { maximum: 1000 }
+  validates :currency,    length: { maximum: 60 }
+  validates :user_name,   length: { maximum: 60 }
+
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

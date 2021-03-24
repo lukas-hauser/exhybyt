@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_143744) do
+ActiveRecord::Schema.define(version: 2021_03_24_164949) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -186,6 +186,14 @@ ActiveRecord::Schema.define(version: 2021_03_24_143744) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.string "stripe_user_id"
+    t.string "instagram"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "website"
+    t.text "bio"
+    t.string "currency"
+    t.string "user_name"
+    t.boolean "marketing_consent", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
