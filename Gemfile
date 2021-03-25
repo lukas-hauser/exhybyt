@@ -18,6 +18,7 @@ gem 'jbuilder',                   '~> 2.7'
 gem 'geocoder',                   '~> 1.6', '>= 1.6.4'
 gem 'httparty',                   '~> 0.18.1'
 gem 'stripe',                     '~> 5.29'
+gem 'stripe_event',               '~> 2.3', '>= 2.3.1'
 gem 'ransack',                    '~> 2.4', '>= 2.4.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

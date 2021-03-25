@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_164949) do
+ActiveRecord::Schema.define(version: 2021_03_25_191852) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -114,6 +114,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_164949) do
     t.datetime "approved_at"
     t.boolean "rejected", default: false
     t.datetime "rejected_at"
+    t.string "checkout_session_id"
+    t.boolean "payment_completed", default: false
     t.index ["space_id"], name: "index_reservations_on_space_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

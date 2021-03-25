@@ -250,6 +250,9 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
     stripe (5.29.0)
+    stripe_event (2.3.1)
+      activesupport (>= 3.1)
+      stripe (>= 2.8, < 6)
     thor (1.0.1)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -313,6 +316,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
   stripe (~> 5.29)
+  stripe_event (~> 2.3, >= 2.3.1)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

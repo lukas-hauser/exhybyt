@@ -51,12 +51,46 @@ class ReservationsController < ApplicationController
   def create
     @reservation = current_user.reservations.create(reservation_params)
     if @reservation.save
-      redirect_to @reservation.space
-      flash[:success] = "You have submited the reservation."
+      session = Stripe::Checkout::Session.create({
+      payment_method_types: ['card'],
+      line_items: [{
+       price_data: {
+         unit_amount: (@reservation.total * 100).to_i,
+         currency: 'gbp',
+         product_data: {
+           name: @reservation.space.listing_name,
+           images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],
+         },
+       },
+       quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: "#{success_url}?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "#{cancel_url}?session_id={CHECKOUT_SESSION_ID}",
+      })
+
+      @reservation.update(checkout_session_id: session.id)
+      redirect_to reservation_payment_url(@reservation.id)
     else
       redirect_to request.referrer || root_path
       flash[:danger] = "Something went wrong. We couldn't submit your booking."
     end
+  end
+
+  def payment
+   @reservation = Reservation.find(params[:reservation_id])
+  end
+
+  def success
+    @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+    redirect_to @reservation.space
+    flash[:notice] = "You have submited the reservation and confirmation details will be sent to #{@reservation.user.email}"
+  end
+
+  def cancel
+    @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+    redirect_to root_path
+    flash[:alert] = "Something went wrong. We couldn't submit your booking. You can try again or contact us."
   end
 
   private

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'html_pages#home'
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
   get 'password_resets/new'
   get 'password_resets/edit'
   get '/home',          to: 'html_pages#home'
@@ -50,4 +51,11 @@ Rails.application.routes.draw do
 
   resources :reservation_approvals,   only: [:edit]
   resources :reservation_rejections,  only: [:edit]
+
+  resources :reservations do
+    get 'payment', to: 'reservations#payment'
+  end
+
+  get 'success', to: 'reservations#your_bookings#success'
+  get 'cancel',  to: 'reservations#your_bookings#cancel'
 end
