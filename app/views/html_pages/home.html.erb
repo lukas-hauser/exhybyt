@@ -18,9 +18,13 @@
     <%= link_to "Sign Up", signup_path, class: "btn btn-lg btn-primary" %>
   </div>
 
-<% end %>
+  <%= render 'spaces/featured'%>
+  <%= render 'layouts/howitworks' %>
+  <br>
+  <br>
+  <%= render 'artworks/featured'%>
 
-<%= render 'layouts/howitworks' %>
+<% end %>
 
 <script>
 	$(function() {

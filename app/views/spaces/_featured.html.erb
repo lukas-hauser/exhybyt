@@ -1,0 +1,16 @@
+<h1>Featured Spaces</h1>
+<h2><%= link_to "See more spaces", search_path, class: "text-muted" %></h2>
+<div class="card-columns">
+  <% Space.take(3).each do |space| %>
+    <div class="card">
+      <% if space.images.attached? %>
+        <%= link_to image_tag(space.images[0], class:"card-img"), space %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= space.listing_name %></h5>
+        <p class="card-text small"><%= space.venue_type %><br>
+          <%= space.category %> | <%= space.wall_width %> x <%= space.wall_height %> cm</p>
+      </div>
+    </div>
+  <% end %>
+</div>

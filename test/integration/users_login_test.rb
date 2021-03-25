@@ -67,6 +67,5 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_artwork_path, count: 0
     assert_select "a[href=?]", new_space_path, count: 0
     assert_select "a[href=?]", edit_user_path(@user), count: 0
-    assert_select "a[href=?]", user_path(@user), count: 0
   end
 end
