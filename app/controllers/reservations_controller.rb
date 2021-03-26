@@ -2,6 +2,7 @@ class ReservationsController < ApplicationController
   before_action :logged_in_user,      except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :active_space,          only: [:create]
   before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
+  before_action :set_reservation,       only: [:success, :cancel]
 
   def preload
     space = Space.find(params[:space_id])
@@ -65,6 +66,12 @@ class ReservationsController < ApplicationController
        quantity: 1,
       }],
       mode: 'payment',
+      payment_intent_data: {
+        application_fee_amount: (@reservation.total * 100 * 0.15).to_i,
+        transfer_data:{
+          destination: @reservation.space.user.stripe_user_id,
+        }
+      },
       success_url: "#{success_url}?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "#{cancel_url}?session_id={CHECKOUT_SESSION_ID}",
       })
@@ -78,19 +85,15 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-   @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.find(params[:reservation_id])
   end
 
   def success
-    @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-    redirect_to @reservation.space
-    flash[:notice] = "You have submited the reservation and confirmation details will be sent to #{@reservation.user.email}"
+    flash[:primary] = "You have submited the reservation."
   end
 
   def cancel
-    @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-    redirect_to root_path
-    flash[:alert] = "Something went wrong. We couldn't submit your booking. You can try again or contact us."
+    flash[:danger] = "Something went wrong. We couldn't submit your booking. You can try again or contact us."
   end
 
   private
@@ -118,5 +121,9 @@ class ReservationsController < ApplicationController
     # Confirms a reservatin was approved
     def approved_reservations
       @reservations = Reservation.where(approved:true)
+    end
+
+    def set_reservation
+      @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
     end
 end
