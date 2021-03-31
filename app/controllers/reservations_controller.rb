@@ -24,11 +24,11 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = current_user.reservations.paginate(page: params[:page])
+    @reservations = current_user.reservations.where(payment_completed:true).paginate(page: params[:page])
   end
 
   def your_bookings
-    @bookings = current_user.reservations.paginate(page: params[:page])
+    @bookings = current_user.reservations.where(payment_completed:true).paginate(page: params[:page])
   end
 
   def your_reservations

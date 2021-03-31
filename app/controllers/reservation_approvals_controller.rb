@@ -2,6 +2,7 @@ class ReservationApprovalsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user
   before_action :check_expiration
+  before_action :payment_completed
 
   def edit
     reservation = Reservation.find(params[:id])
@@ -30,6 +31,13 @@ class ReservationApprovalsController < ApplicationController
   def check_expiration
     if @reservation.booking_request_expired?
       flash[:danger] = "Booking request has expired."
+      redirect_to your_reservations_path
+    end
+  end
+
+  def payment_completed
+    unless @reservation.payment_completed?
+      flash[:danger] = "Can't approve this incomplete booking request."
       redirect_to your_reservations_path
     end
   end
