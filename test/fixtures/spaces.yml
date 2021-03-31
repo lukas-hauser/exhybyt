@@ -7,6 +7,7 @@ one:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   is_adj_light: false
   is_nat_light: false
   is_dis_acc: false
@@ -37,6 +38,7 @@ two:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   is_adj_light: false
   is_nat_light: false
   is_dis_acc: false
@@ -67,6 +69,7 @@ most_recent:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   is_adj_light: false
   is_nat_light: false
   is_dis_acc: false
@@ -97,6 +100,7 @@ three:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   is_adj_light: false
   is_nat_light: false
   is_dis_acc: false
@@ -127,6 +131,7 @@ inactive_space:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   is_adj_light: false
   is_nat_light: false
   is_dis_acc: false
@@ -158,6 +163,7 @@ space_<%= n %>:
   wall_height: 1.5
   wall_width: 1.5
   price: 1.5
+  days_min: 1
   created_at: <%= 20.days.ago %>
   user: lukas
 <% end %>

@@ -88,7 +88,8 @@ class SpacesController < ApplicationController
       :is_live_perf,
       :is_adverts,
       :images,
-      :active
+      :active,
+      :days_min
     )
   end
 

@@ -143,6 +143,16 @@
     </div>
   </div>
 
+  <div class="mb-3">
+    <label for="price">Minimum Booking Duration</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon3">Days</span>
+      </div>
+      <%= f.text_field :days_min, placeholder: "e.g. 3", class: "form-control", required: true, type:"number", min:"1" %>
+    </div>
+  </div>
+
   <hr class="my-4">
 
   <div class="form-check">

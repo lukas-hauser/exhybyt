@@ -16,6 +16,7 @@ class SpacesControllerTest < ActionDispatch::IntegrationTest
         wall_height: "50.0",
         wall_width: "60.5",
         price: "25",
+        days_min: "5",
         is_adj_light: true,
         is_nat_light: false,
         is_dis_acc: false,
@@ -76,7 +77,8 @@ class SpacesControllerTest < ActionDispatch::IntegrationTest
       address: "Main Street 1, City 10000, UK",
       wall_height: "50.0",
       wall_width: "60.5",
-      price: "25", } }
+      price: "25",
+      days_min: "30" } }
     assert flash.empty?
     assert_redirected_to root_url
   end

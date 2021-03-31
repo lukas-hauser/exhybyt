@@ -65,4 +65,8 @@ class ReservationTest < ActiveSupport::TestCase
     @reservation.end_date = Date.today
     assert @reservation.valid?
   end
+
+  test "order should be most recent reservation first" do
+    assert_equal reservations(:most_recent), Reservation.first
+  end
 end

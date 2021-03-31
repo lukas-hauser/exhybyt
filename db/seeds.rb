@@ -224,6 +224,7 @@ end
   wall_height = rand(50..300)
   wall_width = rand(80..200)
   price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+  days_min = rand(1..7)
   is_adj_light = rand(0..1)
   is_nat_light = rand(0..1)
   is_dis_acc = rand(0..1)
@@ -252,6 +253,7 @@ end
     wall_height: wall_height,
     wall_width: wall_width,
     price: price,
+    days_min: days_min
     is_adj_light: is_adj_light,
     is_nat_light: is_nat_light,
     is_dis_acc: is_dis_acc,

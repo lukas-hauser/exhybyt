@@ -12,6 +12,7 @@ class SpaceTest < ActiveSupport::TestCase
       wall_height: "50.0",
       wall_width: "60.5",
       price: "25",
+      days_min: "5",
       is_adj_light: true,
       is_nat_light: false,
       is_dis_acc: false,
@@ -37,6 +38,11 @@ class SpaceTest < ActiveSupport::TestCase
 
   test "should be valid" do
     assert @space.valid?
+  end
+
+  test "image should be present" do
+    @space.images = nil
+    assert_not @space.valid?
   end
 
   test "user id should be present" do
@@ -84,13 +90,46 @@ class SpaceTest < ActiveSupport::TestCase
     assert_not @space.valid?
   end
 
+  test "Wall Height should be greater than 0" do
+    @space.wall_height = 0
+    assert_not @space.valid?
+    @space.wall_height = -1
+    assert_not @space.valid?
+  end
+
   test "Wall Width should be present" do
     @space.wall_width = "   "
     assert_not @space.valid?
   end
 
+  test "Wall Width should be greater than 0" do
+    @space.wall_width = 0
+    assert_not @space.valid?
+    @space.wall_width = -1
+    assert_not @space.valid?
+  end
+
   test "Price should be present" do
     @space.price = "   "
+    assert_not @space.valid?
+  end
+
+  test "Price should be greater than 0" do
+    @space.price = 0
+    assert_not @space.valid?
+    @space.price = -1
+    assert_not @space.valid?
+  end
+
+  test "Days Min should be present" do
+    @space.days_min = "   "
+    assert_not @space.valid?
+  end
+
+  test "Days Min should be greater than 0" do
+    @space.days_min = 0
+    assert_not @space.valid?
+    @space.days_min = -1
     assert_not @space.valid?
   end
 
