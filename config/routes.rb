@@ -57,6 +57,6 @@ Rails.application.routes.draw do
     get 'payment', to: 'reservations#payment'
   end
 
-  get 'success', to: 'reservations#show#success'
+  get 'success', to: 'reservations#your_bookings#success'
   get 'cancel',  to: 'reservations#your_bookings#cancel'
 end

@@ -5,10 +5,6 @@ class ReservationsController < ApplicationController
   before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :set_reservation,       only: [:success, :cancel]
 
-  def show
-    @reservation = Reservation.find(params[:id])
-  end
-
   def preload
     space = Space.find(params[:space_id])
     today = Date.today
