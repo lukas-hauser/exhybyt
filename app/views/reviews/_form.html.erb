@@ -1,9 +1,11 @@
 <%= form_with model: [@space, @space.reviews.new], local: true do | f | %>
   <%= render 'shared/error_messages', object: f.object %>
+  <h3>Leave your review</h3>
   <div class="form-group">
     <div id="user_stars"></div>
   </div>
   <div class="form-group">
+    <%= f.label :comment %>
     <%= f.text_area :comment, class: "form-control", required: true, maxlength: 1000 %>
   </div>
   <%= f.hidden_field :space_id, value: @space.id %>

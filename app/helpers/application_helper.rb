@@ -14,6 +14,13 @@ module ApplicationHelper
     ["Entire Gallery","Entire Gallery"]]
   end
 
+  def user_currencies
+    [["CHF","chf"],
+    ["EUR","eur"],
+    ["GBP","gbp"],
+    ["USD","usd"]]
+  end
+
   def venue_types
     [["Airport","Airport"],
     ["Architecture Firm","Architecture Firm"],

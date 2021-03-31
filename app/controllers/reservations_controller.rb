@@ -1,14 +1,19 @@
 class ReservationsController < ApplicationController
   before_action :logged_in_user,      except: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :active_space,          only: [:create]
+  before_action :stripe_ready,          only: [:create]
   before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :set_reservation,       only: [:success, :cancel]
+
+  def show
+    @reservation = Reservation.find(params[:id])
+  end
 
   def preload
     space = Space.find(params[:space_id])
     today = Date.today
-    reservations = space.reservations.where(rejected:false)
-    reservations = reservations.where("DATE(start_date) >= ? OR DATE(end_date) >= ?", today, today)
+    confirmed_bookings = space.reservations.where(approved:true)
+    reservations = confirmed_bookings.where("DATE(start_date) >= ? OR DATE(end_date) >= ?", today, today)
     render json: reservations
   end
 
@@ -57,7 +62,7 @@ class ReservationsController < ApplicationController
       line_items: [{
        price_data: {
          unit_amount: (@reservation.total * 100).to_i,
-         currency: 'gbp',
+         currency: @reservation.space.user.currency,
          product_data: {
            name: @reservation.space.listing_name,
            images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],
@@ -100,7 +105,7 @@ class ReservationsController < ApplicationController
     def is_conflict(start_date, end_date)
       space = Space.find(params[:space_id])
 
-      reservations = space.reservations.where(rejected:false)
+      reservations = space.reservations.where(approved:true)
       check = reservations.where("? < DATE(start_date) AND DATE(end_date) < ?", start_date, end_date)
       check.size > 0? true : false
     end
@@ -115,6 +120,14 @@ class ReservationsController < ApplicationController
       if !@space.active?
         redirect_to root_url
         flash[:warning] = "Space is inactive. We can't submit your booking."
+      end
+    end
+
+    def stripe_ready
+      @space = Space.find(params[:space_id])
+      if @space.user.stripe_user_id.nil?
+        redirect_to root_url
+        flash[:danger] = "This space is not ready yet to accept payments. Stay tuned.."
       end
     end
 

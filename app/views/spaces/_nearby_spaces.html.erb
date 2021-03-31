@@ -11,7 +11,7 @@
             <h5 class="card-title"><%= space.listing_name %></h5>
             <p class="card-text"><%= space.venue_type %> | <%= space.distance.round(2) %> km away</p>
             <p class="card-text small">
-              Price: £ <%= space.price %> per day<br>
+              Price: <%= space.user.currency.upcase %> <%= space.price %> per day<br>
               <%= space.category %><br>
               <%= space.wall_width %> x <%= space.wall_height %> cm<br>
               <small class="text-muted">Hosted by <%= link_to space.user.display_name, space.user, class:"text-muted" %></small>

@@ -72,4 +72,10 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "title", "Art | EXHYBYT"
   end
+
+  test "should get faq" do
+    get faq_path
+    assert_response :success
+    assert_select "title", "FAQ | EXHYBYT"
+  end
 end

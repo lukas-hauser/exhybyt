@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/contact',       to: 'html_pages#contact'
   get '/search',        to: 'html_pages#search'
   get 'art',            to: 'html_pages#browse_art'
+  get 'faq',            to: 'html_pages#faq'
   get '/signup',        to: 'users#new'
   get '/login',         to: 'sessions#new'
   get '/preload',       to: 'reservations#preload'
@@ -56,6 +57,6 @@ Rails.application.routes.draw do
     get 'payment', to: 'reservations#payment'
   end
 
-  get 'success', to: 'reservations#your_bookings#success'
+  get 'success', to: 'reservations#show#success'
   get 'cancel',  to: 'reservations#your_bookings#cancel'
 end

@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(firstname: "TestFirstName", lastname: "TestLastName",
     email: "test@example.com",
-    password: "password123", password_confirmation: "password123")
+    password: "password123", password_confirmation: "password123", currency: "gbp")
   end
 
   test "should be valid" do
@@ -72,7 +72,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "currency cannot be too long" do
-    @user.currency = "a" * 61
+    @user.currency = "usdd"
+    assert_not @user.valid?
+  end
+
+  test "currency cannot be empty" do
+    @user.currency = " "
     assert_not @user.valid?
   end
 

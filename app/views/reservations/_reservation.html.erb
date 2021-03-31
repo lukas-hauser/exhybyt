@@ -5,7 +5,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= reservation.space.listing_name %></h5>
     <p class="card-text small">
-      Total Price: £ <%= reservation.total %><br>
+      Total Price: <%= reservation.space.user.currency.upcase %> <%= reservation.total %><br>
       <%= reservation.start_date.strftime("%d %b %Y") %> to <%= reservation.end_date.strftime("%d %b %Y") %><br>
     </p>
     <p class="card-text small">

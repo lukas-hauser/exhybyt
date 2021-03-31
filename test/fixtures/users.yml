@@ -1,4 +1,3 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 lukas:
   firstname: Lukas
   lastname: Hauser
@@ -7,10 +6,10 @@ lukas:
   password_digest: <%= User.digest('password123') %>
   admin: true
   activated: true
+  currency: "gbp"
   stripe_user_id: <%= ENV['STRIPE_TEST_UID'] %>
   activated_at: <%= Time.zone.now %>
 
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 jane:
   firstname: Jane
   lastname: Test
@@ -18,6 +17,7 @@ jane:
   email: jane@example.com
   password_digest: <%= User.digest('password123') %>
   activated: true
+  currency: "gbp"
   stripe_user_id: <%= ENV['STRIPE_TEST_UID'] %>
   activated_at: <%= Time.zone.now %>
 
@@ -29,5 +29,6 @@ user_<%= n %>:
   email: <%= "user-#{n}@test.com" %>
   password_digest: <%= User.digest('password123') %>
   activated: true
+  currency: "gbp"
   activated_at: <%= Time.zone.now %>
 <% end %>

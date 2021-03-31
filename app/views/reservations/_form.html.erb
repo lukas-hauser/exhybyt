@@ -3,11 +3,13 @@
   <div class="row">
     <div class="col">
       <div class="form-group date">
+        <%= f.label :start_date, "From" %>
         <%= f.text_field :start_date, placeholder: "Start Date", class: "form-control" %>
       </div>
     </div>
     <div class="col">
       <div class="form-group date">
+        <%= f.label :end_date, "To" %>
         <%= f.text_field :end_date, placeholder: "End Date", class: "form-control",
                                     disabled: true %>
       </div>
@@ -28,6 +30,7 @@
     </div>
   <% elsif current_user.artworks.any? %>
     <div class="form-group">
+      <%= f.label :artwork_ids, "Art to exhibit" %>
       <%= f.collection_select(:artwork_ids, current_user.artworks, :id, :listing_name,
       { prompt: "Select Artwork" }, { multiple: true, required: true, class: "form-control custom-select", size:"3" } ) %>
     </div>
@@ -49,7 +52,7 @@
         </tr>
         <tr>
           <td>Total</td>
-          <td>£ <span id="reservation_sum"></span></td>
+          <td><%= @space.user.currency.upcase %> <span id="reservation_sum"></span></td>
         </tr>
       </tbody>
     </table>
@@ -58,7 +61,7 @@
   <div class="row">
     <div class="col">
       <div class="form-group">
-        <%= f.submit "Book Now", id:"btn_book", class:"btn btn-block btn-primary", disabled: true %>
+        <%= f.submit "Request to book", id:"btn_book", class:"btn btn-block btn-primary", disabled: true %>
       </div>
     </div>
     <% unless current_user?(@space.user) %>

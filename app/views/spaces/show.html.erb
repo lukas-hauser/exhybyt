@@ -3,16 +3,16 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-md-8">
       <h1 class="text-left"><%= @space.listing_name %></h1>
       <h2 class="text-left"><%= @space.venue_type %> | <%= @space.category %></h2>
       <p><%= @space.address %></p>
       <p>Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
-      <p>Price: £ <%= @space.price %> per day</p>
+      <p>Price: <%= @space.user.currency.upcase %> <%= @space.price %> per day</p>
       <p><%= @space.description %></p>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-md-4">
       <% if !logged_in? %>
         <div class="alert alert-warning" role="alert">
           Please log in to check dates and book.
@@ -41,8 +41,11 @@
 <br>
 
 <!--Reviews -->
-<h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
-<%= render 'reviews/form' if @booked && !@hasReview %>
+<div class="container">
+  <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+  <%= render 'reviews/list' %>
+  <%= render 'reviews/form' if @booked && !@hasReview %>
+</div>
 
 <!-- Google Map -->
 

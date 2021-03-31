@@ -27,6 +27,11 @@ class Reservation < ApplicationRecord
                    approved: false)
   end
 
+  # Returns true if a password reset has expired
+  def booking_request_expired?
+    created_at < 48.hours.ago
+  end
+
   private
 
   def end_date_after_start_date

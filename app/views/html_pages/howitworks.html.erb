@@ -2,30 +2,34 @@
 
 <h1>How it works</h1>
 
-
-  <div class="center">
-    <p>
-      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#forartists" aria-expanded="false" aria-controls="forartists">
-        For Artists
-      </button>
-      <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#forbusinesses" aria-expanded="true" aria-controls="forbusinesses">
-        For Businesses
-      </button>
-    </p>
-    <div class="collapse" id="forartists">
-      <div class="card card-body">
-        <%= render 'layouts/howitworks_artists' %>
-      </div>
+<div class="accordion" id="howitWorks">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          For Artists
+        </button>
+      </h2>
     </div>
-    <div class="collapse show" id="forbusinesses">
-      <div class="card card-body">
-        <%= render 'layouts/howitworks_businesses' %>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#howitWorks">
+      <div class="card-body">
+        <%= render 'layouts/howitworks_artists' %>
       </div>
     </div>
   </div>
 
-<div class="row">
-  <div>
-      <%= render 'layouts/faq' %>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          For Businesses
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#howitWorks">
+      <div class="card-body">
+        <%= render 'layouts/howitworks_businesses' %>
+      </div>
+    </div>
   </div>
 </div>

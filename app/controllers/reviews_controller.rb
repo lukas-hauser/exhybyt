@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :logged_in_user
-#  before_action :correct_user_create,   only: [:create]
+  before_action :correct_user_create,   only: [:create]
   before_action :correct_user_destroy,  only: [:destroy]
 
   def create

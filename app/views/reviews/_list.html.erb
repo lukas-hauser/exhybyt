@@ -1,24 +1,27 @@
 <% if @reviews.any? %>
-  <ul class="list-group list-group-flush">
+  <ul class="list-group list-group-flush center">
     <% @reviews.each do |r| %>
       <li class="list-group-item">
         <div class="row">
-          <div class="col lg-3">
-            <%= gravatar_for(r.user, size: 30) %>
-            <strong><%= r.user.display_name %></strong>
+          <div class="col-md-4">
+            <%= r.user.display_name %>
           </div>
-          <div class="col lg-3">
+          <div class="col-md-4">
             <div id="stars_<%= r.id %>"></div>
           </div>
-          <div class="col lg-3">
+          <div class="col-md-4">
             <%= r.review_time %>
           </div>
-          <div class="col lg-3">
-            <%= link_to "Remove my review", r, method: :delete, data: { confirm: "Are you sure?"} if current_user && current_user == r.user %>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <%= r.comment %>
           </div>
         </div>
-        <div class="row-space-2">
-          <%= r.comment %>
+        <div class="row">
+          <div class="col-md-12">
+            <%= link_to "Remove my review", r, method: :delete, data: { confirm: "Are you sure?"} if current_user && current_user == r.user %>
+          </div>
         </div>
       </li>
 

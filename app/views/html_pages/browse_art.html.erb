@@ -99,7 +99,7 @@
             <h5 class="card-title"><%= artwork.listing_name %></h5>
             <p class="card-text"><%= artwork.category %></p>
             <p class="card-text small">
-              Price: £ <%= artwork.price %><br>
+              Price: <%= artwork.user.currency.upcase %> <%= artwork.price %><br>
               <%= artwork.width %> x <%= artwork.height %> cm<br>
               <small class="text-muted">By <%= link_to artwork.user.display_name, artwork.user, class:"text-muted" %></small>
             </p>

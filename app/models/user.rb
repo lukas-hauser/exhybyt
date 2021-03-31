@@ -4,7 +4,7 @@ class User < ApplicationRecord
   before_create :create_activation_digest
   before_create { self.display_name = self.firstname + " " + self.lastname }
   before_create { self.user_name = "user_" + (User.last.id + 1).to_s }
-  before_create { self.currency = "GBP" }
+  before_create { self.currency = "gbp" }
 
   has_many :spaces, dependent: :destroy
   has_many :reservations, dependent: :destroy
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   validates :twitter,     length: { maximum: 60 }
   validates :website,     length: { maximum: 60 }
   validates :bio,         length: { maximum: 1000 }
-  validates :currency,    length: { maximum: 60 }
+  validates :currency,    length: { maximum: 3 },  presence: true
   validates :user_name,   length: { maximum: 60 }
 
   # Returns the hash digest of the given string.
