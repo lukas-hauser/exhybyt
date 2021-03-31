@@ -10,6 +10,9 @@ class ReservationApprovalsController < ApplicationController
     elsif reservation.rejected?
       flash[:danger] = "You already rejected this reservation."
     else
+      Stripe::PaymentIntent.capture(
+        reservation.payment_intent_id,
+      )
       reservation.approve
       flash[:success] = "Reservation approved."
     end

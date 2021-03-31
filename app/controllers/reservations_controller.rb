@@ -68,6 +68,7 @@ class ReservationsController < ApplicationController
       }],
       mode: 'payment',
       payment_intent_data: {
+        capture_method: "manual",
         application_fee_amount: (@reservation.total * 100 * 0.15).to_i,
         transfer_data:{
           destination: @reservation.space.user.stripe_user_id,

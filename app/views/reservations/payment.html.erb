@@ -1,4 +1,3 @@
-<script src="https://js.stripe.com/v3/"></script>
  <script>
    const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
    stripe.redirectToCheckout({
