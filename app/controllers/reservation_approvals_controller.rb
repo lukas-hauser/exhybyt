@@ -17,33 +17,37 @@ class ReservationApprovalsController < ApplicationController
       reservation.approve
       flash[:success] = "Reservation approved."
     end
-    redirect_to your_reservations_path
+    redirect_to reservation
   end
 
   private
 
-  def correct_user
-    @reservation = current_user.reservations.find_by(id: params[:id])
-    redirect_to root_url if @reservation.nil?
-  end
-
-  # Checks expiration of the booking request
-  def check_expiration
-    if @reservation.booking_request_expired?
-      flash[:danger] = "Booking request has expired."
-      redirect_to your_reservations_path
+    # Confirms that user is reservation space listing owner
+    def correct_user
+      @reservation = Reservation.find(params[:id])
+      if !current_user?(@reservation.space.user)
+        redirect_to root_url
+        flash[:danger] = "You are not authorised."
+      end
     end
-  end
 
-  # Confirms a checkout session is completed
-  def payment_completed
-    unless @reservation.payment_completed?
-      flash[:danger] = "Can't approve this incomplete booking request."
-      redirect_to your_reservations_path
+    # Checks expiration of the booking request
+    def check_expiration
+      if @reservation.booking_request_expired?
+        flash[:danger] = "Booking request has expired."
+        redirect_to your_reservations_path
+      end
     end
-  end
 
-  # Confirm that dates to approve are available
-  def available_dates
-  end
+    # Confirms a checkout session is completed
+    def payment_completed
+      unless @reservation.payment_completed?
+        flash[:danger] = "Can't approve this incomplete booking request."
+        redirect_to your_reservations_path
+      end
+    end
+
+    # Confirm that dates to approve are available
+    def available_dates
+    end
 end

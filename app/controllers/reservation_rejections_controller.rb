@@ -17,14 +17,18 @@ class ReservationRejectionsController < ApplicationController
       reservation.reject
       flash[:success] = "Reservation rejected."
     end
-    redirect_to your_reservations_path
+    redirect_to reservation
   end
 
   private
 
+    # Confirms that user is reservation space listing owner
     def correct_user
-      @reservation = current_user.reservations.find_by(id: params[:id])
-      redirect_to root_url if @reservation.nil?
+      @reservation = Reservation.find(params[:id])
+      if !current_user?(@reservation.space.user)
+        redirect_to root_url
+        flash[:danger] = "You are not authorised."
+      end
     end
 
     # Checks expiration of the booking request

@@ -1,42 +1,49 @@
 <h1>Booking Request</h1>
-
-<% if @reservation.approved? %>
-  <h2 class="text-success">Approved</h2>
-<% elsif @reservation.rejected? %>
-  <h2 class="text-danger">Rejected</h2>
-<% elsif @reservation.booking_request_expired? %>
-  <h2>Booking request expired.</h2>
-<% else %>
-
-  <h2>Awaiting response.</h2>
-<% end %>
-<div class="container center">
-  <% if @reservation.space.images.attached? %>
-    <%= link_to image_tag(@reservation.space.images[0], size:100, class:"rounded-circle"), @reservation.space %>
-  <% end %>
-
-  <h5><%= @reservation.space.listing_name %></h5>
-  <p>
-    Total Price: <%= @reservation.space.user.currency.upcase %> <%= @reservation.total %><br>
-    <%= @reservation.start_date.strftime("%d %b %Y") %> to <%= @reservation.end_date.strftime("%d %b %Y") %><br>
-  </p>
-  <div class="card-columns">
-    <% @reservation.artworks.each do |artwork| %>
-      <div class="card">
-        <div class="card-image">
-          <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
-        </div>
+<div class="row mb-5">
+  <div class="container center">
+    <% if @reservation.approved? %>
+      <h2 class="text-success">Approved</h2>
+    <% elsif @reservation.rejected? %>
+      <h2 class="text-danger">Rejected</h2>
+    <% elsif @reservation.booking_request_expired? %>
+      <h2>Booking request expired.</h2>
+    <% elsif current_user?(@reservation.space.user) %>
+      <div class="btn-group">
+        <%= link_to "Approve", edit_reservation_approval_url(@reservation), data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+        <%= link_to "Reject", edit_reservation_rejection_url(@reservation), data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
       </div>
+    <% else %>
+      <h2>Awaiting response.</h2>
     <% end %>
   </div>
-  <p>
-    Artist:
-    <%= link_to gravatar_for(@reservation.user, size: 25), @reservation.user %>
-    <%= @reservation.user.display_name %>
-  </p>
-  <p>
-    Host:
-    <%= link_to gravatar_for(@reservation.space.user, size: 25), @reservation.user %>
-    <%= @reservation.space.user.display_name %>
-  </p>
+</div>
+<div class="row">
+  <div class="container center">
+    <% if @reservation.space.images.attached? %>
+      <%= link_to image_tag(@reservation.space.images[0], size:100, class:"rounded-circle"), @reservation.space %>
+    <% end %>
+
+    <h5><%= @reservation.space.listing_name %></h5>
+    <p>
+      Total Price: <%= @reservation.space.user.currency.upcase %> <%= @reservation.total %><br>
+      <%= @reservation.start_date.strftime("%d %b %Y") %> to <%= @reservation.end_date.strftime("%d %b %Y") %><br>
+    </p>
+    <div class="card-columns">
+      <% @reservation.artworks.each do |artwork| %>
+        <div class="card">
+          <div class="card-image">
+            <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <p>
+      Artist:
+      <%= @reservation.user.display_name %>
+    </p>
+    <p>
+      Host:
+      <%= @reservation.space.user.display_name %>
+    </p>
+  </div>
 </div>

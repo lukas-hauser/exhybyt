@@ -25,7 +25,6 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @reservation = Reservation.find(params[:id])
   end
 
   def index
@@ -149,8 +148,11 @@ class ReservationsController < ApplicationController
 
     #Confirms that user is either space listing owner or reservation user
     def correct_user
-      @space = current_user.spaces.find_by(id: params[:space_id])
-      @reservation = current_user.reservations.find_by(id: params[:id])
-      redirect_to root_url if @space.nil? && @reservation.nil?
+      @reservation = Reservation.find_by(id: params[:id])
+      @yourreservation = current_user.reservations.find_by(id: params[:id])
+      if !current_user?(@reservation.space.user) && @yourreservation.nil?
+        redirect_to root_url
+        flash[:danger] = "You're not authorised"
+      end
     end
 end
