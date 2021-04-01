@@ -11,6 +11,9 @@ class ReservationRejectionsController < ApplicationController
     elsif reservation.rejected?
       flash[:warning] = "You already rejected this reservation."
     else
+      Stripe::PaymentIntent.cancel(
+        reservation.payment_intent_id,
+      )
       reservation.reject
       flash[:success] = "Reservation rejected."
     end

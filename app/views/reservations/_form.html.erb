@@ -41,7 +41,7 @@
   <% end %>
 
   <div class="col">
-    <h4><span id="message"></span></h4>
+    <p><span id="message"></span></p>
   </div>
   <div class="col", id="preview", style="display: none">
     <table class="rservation-table">
@@ -134,7 +134,7 @@
               $('#btn_book').attr('disabled',false);
 
               var total = days * <%= @space.price %>
-              $('#message').text("Ready to book");
+              $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
               $('#reservation_days').text(days);
               $('#reservation_sum').text(total);
               $('#reservation_total').val(total);
@@ -175,7 +175,7 @@
               $('#btn_book').attr('disabled',false);
 
               var total = days * <%= @space.price %>
-              $('#message').text("Ready to book");
+              $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
               $('#reservation_days').text(days);
               $('#reservation_sum').text(total);
               $('#reservation_total').val(total);

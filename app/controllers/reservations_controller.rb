@@ -4,6 +4,7 @@ class ReservationsController < ApplicationController
   before_action :stripe_ready,          only: [:create]
   before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :set_reservation,       only: [:success, :cancel]
+  before_action :correct_user,          only: [:show]
 
   def preload
     space = Space.find(params[:space_id])
@@ -21,6 +22,10 @@ class ReservationsController < ApplicationController
       conflict: is_conflict(start_date, end_date)
     }
     render json: output
+  end
+
+  def show
+    @reservation = Reservation.find(params[:id])
   end
 
   def index
@@ -55,6 +60,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
+      customer_email: @reservation.user.email,
       line_items: [{
        price_data: {
          unit_amount: (@reservation.total * 100).to_i,
@@ -91,24 +97,27 @@ class ReservationsController < ApplicationController
   end
 
   def success
-    flash[:primary] = "You have submited the reservation."
+    redirect_to @reservation
+    flash[:primary] = "You have submited the booking request."
   end
 
   def cancel
+    redirect_to root_path
     flash[:danger] = "Something went wrong. We couldn't submit your booking. You can try again or contact us."
   end
 
   private
+    def reservation_params
+      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id, artwork_ids: [])
+    end
+
+    # Confirms that there is no approved booking for the requested dates.
     def is_conflict(start_date, end_date)
       space = Space.find(params[:space_id])
 
       reservations = space.reservations.where(approved:true)
       check = reservations.where("? < DATE(start_date) AND DATE(end_date) < ?", start_date, end_date)
       check.size > 0? true : false
-    end
-
-    def reservation_params
-      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id, artwork_ids: [])
     end
 
     # Confirms an active space
@@ -120,6 +129,7 @@ class ReservationsController < ApplicationController
       end
     end
 
+    # Confirms Space Listing Owner is ready to accept payments
     def stripe_ready
       @space = Space.find(params[:space_id])
       if @space.user.stripe_user_id.nil?
@@ -128,12 +138,19 @@ class ReservationsController < ApplicationController
       end
     end
 
-    # Confirms a reservatin was approved
+    # Confirms a reservation was approved
     def approved_reservations
       @reservations = Reservation.where(approved:true)
     end
 
     def set_reservation
       @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+    end
+
+    #Confirms that user is either space listing owner or reservation user
+    def correct_user
+      @space = current_user.spaces.find_by(id: params[:space_id])
+      @reservation = current_user.reservations.find_by(id: params[:id])
+      redirect_to root_url if @space.nil? && @reservation.nil?
     end
 end

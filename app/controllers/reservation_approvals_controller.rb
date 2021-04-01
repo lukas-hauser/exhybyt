@@ -35,10 +35,15 @@ class ReservationApprovalsController < ApplicationController
     end
   end
 
+  # Confirms a checkout session is completed
   def payment_completed
     unless @reservation.payment_completed?
       flash[:danger] = "Can't approve this incomplete booking request."
       redirect_to your_reservations_path
     end
+  end
+
+  # Confirm that dates to approve are available
+  def available_dates
   end
 end

@@ -1,4 +1,15 @@
-<h1>Reservation</h1>
+<h1>Booking Request</h1>
+
+<% if @reservation.approved? %>
+  <h2 class="text-success">Approved</h2>
+<% elsif @reservation.rejected? %>
+  <h2 class="text-danger">Rejected</h2>
+<% elsif @reservation.booking_request_expired? %>
+  <h2>Booking request expired.</h2>
+<% else %>
+
+  <h2>Awaiting response.</h2>
+<% end %>
 <div class="container center">
   <% if @reservation.space.images.attached? %>
     <%= link_to image_tag(@reservation.space.images[0], size:100, class:"rounded-circle"), @reservation.space %>
@@ -28,15 +39,4 @@
     <%= link_to gravatar_for(@reservation.space.user, size: 25), @reservation.user %>
     <%= @reservation.space.user.display_name %>
   </p>
-
-  <% if @reservation.approved? %>
-    <h2 class="text-success">Approved</h2>
-  <% elsif @reservation.rejected? %>
-    <h2 class="text-danger">Rejected</h2>
-  <% elsif @reservation.booking_request_expired? %>
-    <h2>Booking request expired.</h2>
-  <% else %>
-    <h2>Awaiting response.</h2>
-  <% end %>
-
 </div>
