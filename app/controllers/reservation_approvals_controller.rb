@@ -15,6 +15,7 @@ class ReservationApprovalsController < ApplicationController
         reservation.payment_intent_id,
       )
       reservation.approve
+      @reservation.send_request_approval_email
       flash[:success] = "Reservation approved."
     end
     redirect_to reservation

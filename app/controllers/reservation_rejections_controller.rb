@@ -15,6 +15,7 @@ class ReservationRejectionsController < ApplicationController
         reservation.payment_intent_id,
       )
       reservation.reject
+      @reservation.send_request_rejection_email
       flash[:success] = "Reservation rejected."
     end
     redirect_to reservation

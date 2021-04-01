@@ -32,6 +32,24 @@ class Reservation < ApplicationRecord
     created_at < 48.hours.ago
   end
 
+  # Sends booking request confirmation email
+  def send_request_confirmation_email
+    ReservationMailer.request_confirmation(self).deliver_now
+  end
+
+  # Sends booking request notification email
+  def send_request_notification_email
+    ReservationMailer.request_notification(self).deliver_now
+  end
+
+  def send_request_approval_email
+    ReservationMailer.request_approval(self).deliver_now
+  end
+
+  def send_request_rejection_email
+    ReservationMailer.request_rejection(self).deliver_now
+  end
+
   private
 
   def end_date_after_start_date

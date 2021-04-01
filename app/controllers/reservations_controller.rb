@@ -96,8 +96,10 @@ class ReservationsController < ApplicationController
   end
 
   def success
+    @reservation.send_request_confirmation_email
+    @reservation.send_request_notification_email
     redirect_to @reservation
-    flash[:primary] = "You have submited the booking request."
+    flash[:primary] = "Thank you - we received your booking request and emailed you the details to #{ @reservation.user.email }. #{ @reservation.space.listing_name} has 48 hours to approve your request."
   end
 
   def cancel
