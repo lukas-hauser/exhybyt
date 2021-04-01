@@ -16,10 +16,6 @@
     </div>
   </div>
 
-  <%= f.hidden_field :space_id, value: @space.id %>
-  <%= f.hidden_field :price, value: @space.price %>
-  <%= f.hidden_field :total, id: 'reservation_total' %>
-
   <% if !logged_in? %>
     <div class="alert alert-warning" role="alert">
       Please log in to book.

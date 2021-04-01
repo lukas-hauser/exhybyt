@@ -20,8 +20,8 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
       post space_reservations_path(@space), params: { reservation:
         { start_date: "2021-01-02 11:32:12",
           end_date: "2021-01-02 11:32:12",
-          price: 1.5,
-          total: ""} }
+          artwork_ids: [],
+          user_id: @user.id} }
     end
     assert_not flash.empty?
     assert 'a[href=?]'
@@ -31,8 +31,6 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
       post space_reservations_path(@space), params: { reservation:
         { start_date: Date.today,
           end_date: Date.today,
-          price: 1.5,
-          total: 3.0,
           space_id: @space.id,
           artwork_ids: [@artwork.id],
           user_id: @user.id} }

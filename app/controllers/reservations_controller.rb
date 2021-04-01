@@ -55,7 +55,17 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = current_user.reservations.create(reservation_params)
+    @reservation = current_user.reservations.build(reservation_params)
+    @space = Space.find(params[:space_id])
+
+    start_date = Date.parse(reservation_params[:start_date])
+    end_date = Date.parse(reservation_params[:end_date])
+    days = (end_date - start_date).to_i + 1
+
+    @reservation.space = @space
+    @reservation.price = @space.price
+    @reservation.total = @space.price * days
+
     if @reservation.save
       session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
@@ -109,7 +119,7 @@ class ReservationsController < ApplicationController
 
   private
     def reservation_params
-      params.require(:reservation).permit(:start_date, :end_date, :price, :total, :space_id, artwork_ids: [])
+      params.require(:reservation).permit(:start_date, :end_date, artwork_ids: [])
     end
 
     # Confirms that there is no approved booking for the requested dates.

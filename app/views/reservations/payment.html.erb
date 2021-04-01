@@ -1,6 +1,12 @@
- <script>
-   const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-   stripe.redirectToCheckout({
-     sessionId: '<%= @reservation.checkout_session_id %>'
-   });
- </script>
+<div class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<script>
+  const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+  stripe.redirectToCheckout({
+   sessionId: '<%= @reservation.checkout_session_id %>'
+  });
+</script>

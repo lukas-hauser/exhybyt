@@ -1,7 +1,9 @@
 <h1>Booking Request</h1>
 <div class="row mb-5">
   <div class="container center">
-    <% if @reservation.approved? %>
+    <% if !@reservation.payment_completed? %>
+      <h2>Incomplete booking request. Please try again.</h2>
+    <% elsif @reservation.approved? %>
       <h2 class="text-success">Approved</h2>
     <% elsif @reservation.rejected? %>
       <h2 class="text-danger">Rejected</h2>
