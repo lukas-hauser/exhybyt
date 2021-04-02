@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :spaces, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :artworks, dependent: :destroy
+  has_many :orders
   has_many :active_relationships, class_name:      "Relationship",
                                   foreign_key:     "follower_id",
                                   dependent:       :destroy

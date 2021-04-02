@@ -1,0 +1,35 @@
+one:
+  artwork: one
+  user: one
+  delivery_method: MyString
+  delivery_fee: 1
+  price: 1
+  total: 1
+  checkout_session_id: MyString
+  payment_completed: false
+  status: MyString
+  created_at: <%= 2.months.ago %>
+
+two:
+  artwork: two
+  user: two
+  delivery_method: MyString
+  delivery_fee: 1
+  price: 1
+  total: 1
+  checkout_session_id: MyString
+  payment_completed: false
+  status: MyString
+  created_at: <%= 2.months.ago %>
+
+most_recent:
+  artwork: two
+  user: two
+  delivery_method: MyString
+  delivery_fee: 1
+  price: 1
+  total: 1
+  checkout_session_id: MyString
+  payment_completed: false
+  status: MyString
+  created_at: <%= Time.zone.now %>

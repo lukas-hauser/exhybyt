@@ -23,8 +23,8 @@
   <div class="col-md">
     <p><%= @artwork.description %></p>
     <p>Subject: <%= @artwork.subject %></p>
-    <% if @artwork.status=="For Sale" %>
-      <%= link_to "Buy", "#", class: "btn btn-primary disabled" %>
+    <% if @artwork.status=="For Sale" && logged_in? %>
+      <%= render 'orders/form' %>
     <% end %>
   </div>
 </div>

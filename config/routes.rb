@@ -38,6 +38,9 @@ Rails.application.routes.draw do
   resources :spaces do
     resources :reservations,          only: [:create, :index], shallow: true
   end
+  resources :artworks do
+    resources :orders,          only: [:create, :index], shallow: true
+  end
   resources :spaces,                  only: [:new, :show, :index, :create,
                                             :edit, :update, :destroy]
   resources :artworks,                only: [:new, :show, :index, :create,
@@ -57,6 +60,13 @@ Rails.application.routes.draw do
     get 'payment', to: 'reservations#payment'
   end
 
-  get 'success', to: 'reservations#success'
-  get 'cancel',  to: 'reservations#cancel'
+  resources :orders do
+    get 'payment', to: 'orders#payment'
+  end
+
+  get 'reservation_success', to: 'reservations#success'
+  get 'reservation_cancel',  to: 'reservations#cancel'
+
+  get 'order_success',       to: 'orders#success'
+  get 'order_cancel',        to: 'orders#cancel'
 end

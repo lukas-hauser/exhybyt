@@ -89,8 +89,8 @@ class ReservationsController < ApplicationController
           destination: @reservation.space.user.stripe_user_id,
         }
       },
-      success_url: "#{success_url}?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "#{cancel_url}?session_id={CHECKOUT_SESSION_ID}",
+      success_url: "#{reservation_success_url}?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "#{reservation_cancel_url}?session_id={CHECKOUT_SESSION_ID}",
       })
 
       @reservation.update(checkout_session_id: session.id)

@@ -1,0 +1,29 @@
+<%= form_with model: [@artwork, @artwork.orders.new], local: true do | f | %>
+
+  <% if !logged_in? %>
+    <div class="alert alert-warning" role="alert">
+      Please log in to purchase art.
+    </div>
+  <% elsif @artwork.user.stripe_user_id.nil? %>
+    <div class="alert alert-warning" role="alert">
+      This artist is not ready yet to accept payments. Stay tuned.
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <%= f.submit "Buy now", id:"btn_book", class:"btn btn-block btn-primary" %>
+      </div>
+    </div>
+    <% unless current_user?(@artwork.user) %>
+      <div class="col">
+        <div class="form-group">
+          <%= link_to "Message", conversations_path(sender_id: current_user.id, recipient_id: @space.user_id),
+          method: 'post', class:"btn btn-block btn-outline-secondary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>

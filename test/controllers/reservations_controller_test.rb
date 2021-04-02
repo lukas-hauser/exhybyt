@@ -5,7 +5,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     @user           = users(:jane)
     @spaceuser      = users(:lukas)
     @space          = spaces(:one)
-    @artwork        = artworks(:three)
+    @artwork        = artworks(:one)
     @inactive_space = spaces(:inactive_space)
     @reservation    = reservations(:one)
   end
@@ -35,13 +35,13 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should redirect success when not logged in" do
-    get success_url
+    get reservation_success_url
     assert_not flash.empty?
     assert_redirected_to login_url
   end
 
   test "should redirect cancel when not logged in" do
-    get cancel_url
+    get reservation_cancel_url
     assert_not flash.empty?
     assert_redirected_to login_url
   end
@@ -79,5 +79,15 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
     assert_not flash.empty?
+  end
+
+  test "valid submission" do
+    log_in_as(@user)
+    assert_difference 'Reservation.count', 1 do
+      post space_reservations_path(@space), params: { reservation:
+        { start_date: Date.today,
+          end_date: Date.today,
+          artwork_ids: [@artwork.id] } }
+    end
   end
 end

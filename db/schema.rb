@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_192618) do
+ActiveRecord::Schema.define(version: 2021_04_02_101115) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 2021_03_31_192618) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "artwork_id", null: false
+    t.integer "user_id", null: false
+    t.string "delivery_method"
+    t.integer "delivery_fee", default: 0
+    t.integer "price"
+    t.integer "total"
+    t.string "checkout_session_id"
+    t.boolean "payment_completed", default: false
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artwork_id"], name: "index_orders_on_artwork_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -207,6 +223,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_192618) do
   add_foreign_key "artworks", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "orders", "artworks"
+  add_foreign_key "orders", "users"
   add_foreign_key "reservations", "spaces"
   add_foreign_key "reservations", "users"
   add_foreign_key "reviews", "spaces"

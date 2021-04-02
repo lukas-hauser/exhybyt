@@ -1,6 +1,7 @@
 class Artwork < ApplicationRecord
   belongs_to :user
   has_many_attached :images
+  has_many :orders
 
   has_many :artwork_styles
   has_many :styles, through: :artwork_styles
