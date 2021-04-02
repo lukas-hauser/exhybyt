@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_101115) do
+ActiveRecord::Schema.define(version: 2021_04_02_135631) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,12 +56,12 @@ ActiveRecord::Schema.define(version: 2021_04_02_101115) do
     t.integer "year"
     t.string "category"
     t.string "medium"
-    t.float "price"
+    t.decimal "price", precision: 8, scale: 2
     t.string "status"
     t.boolean "is_framed", default: false
     t.string "subject"
     t.string "styles"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_artworks_on_user_id"
@@ -88,9 +88,9 @@ ActiveRecord::Schema.define(version: 2021_04_02_101115) do
     t.integer "artwork_id", null: false
     t.integer "user_id", null: false
     t.string "delivery_method"
-    t.integer "delivery_fee", default: 0
-    t.integer "price"
-    t.integer "total"
+    t.decimal "delivery_fee", precision: 8, scale: 2, default: "0.0"
+    t.decimal "price", precision: 8, scale: 2
+    t.decimal "total", precision: 8, scale: 2
     t.string "checkout_session_id"
     t.boolean "payment_completed", default: false
     t.string "status"
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 2021_04_02_101115) do
     t.integer "space_id", null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.float "price"
-    t.float "total"
+    t.decimal "price", precision: 8, scale: 2
+    t.decimal "total", precision: 8, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "approved", default: false
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_101115) do
     t.string "address"
     t.float "wall_height"
     t.float "wall_width"
-    t.float "price"
+    t.decimal "price", precision: 8, scale: 2
     t.boolean "is_adj_light", default: false
     t.boolean "is_nat_light", default: false
     t.boolean "is_dis_acc", default: false

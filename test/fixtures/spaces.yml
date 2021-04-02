@@ -6,7 +6,7 @@ one:
   address: "London Canary Wharf E14"
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   is_adj_light: false
   is_nat_light: false
@@ -37,7 +37,7 @@ two:
   address: "London Canary Wharf E14"
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   is_adj_light: false
   is_nat_light: false
@@ -68,7 +68,7 @@ most_recent:
   address: MyString
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   is_adj_light: false
   is_nat_light: false
@@ -99,7 +99,7 @@ three:
   address: MyString
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   is_adj_light: false
   is_nat_light: false
@@ -130,7 +130,7 @@ inactive_space:
   address: MyString
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   is_adj_light: false
   is_nat_light: false
@@ -162,7 +162,7 @@ space_<%= n %>:
   address: MyString
   wall_height: 1.5
   wall_width: 1.5
-  price: 1.5
+  price: 15
   days_min: 1
   created_at: <%= 20.days.ago %>
   user: lukas

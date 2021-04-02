@@ -1,10 +1,10 @@
 one:
   artwork: one
-  user: one
+  user: jane
   delivery_method: MyString
-  delivery_fee: 1
-  price: 1
-  total: 1
+  delivery_fee: 0
+  price: 10
+  total: 10
   checkout_session_id: MyString
   payment_completed: false
   status: MyString
@@ -12,11 +12,11 @@ one:
 
 two:
   artwork: two
-  user: two
+  user: lukas
   delivery_method: MyString
-  delivery_fee: 1
-  price: 1
-  total: 1
+  delivery_fee: 0
+  price: 10
+  total: 10
   checkout_session_id: MyString
   payment_completed: false
   status: MyString
@@ -24,11 +24,11 @@ two:
 
 most_recent:
   artwork: two
-  user: two
+  user: lukas
   delivery_method: MyString
-  delivery_fee: 1
-  price: 1
-  total: 1
+  delivery_fee: 0
+  price: 10
+  total: 10
   checkout_session_id: MyString
   payment_completed: false
   status: MyString

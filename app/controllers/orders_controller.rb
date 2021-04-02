@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   before_action :logged_in_user
-#  before_action :active_artwork,        only: [:create]
   before_action :artwork_for_sale,      only: [:create]
   before_action :stripe_ready,          only: [:create]
   before_action :set_order,             only: [:success, :cancel]
@@ -64,6 +63,8 @@ class OrdersController < ApplicationController
   end
 
   def success
+    @order.send_order_confirmation_email
+    @order.send_order_notification_email
     flash[:primary] = "You have submited the order."
     redirect_to artwork_path(@order.artwork)
   end
@@ -73,15 +74,6 @@ class OrdersController < ApplicationController
   end
 
   private
-
-    # Confirms an active artwork
-#    def active_artwork
-#      @artwork = Artwork.find(params[:artwork_id])
-#      if !@artwork.active?
-#        redirect_to root_url
-#        flash[:warning] = "Artwork is inactive. We can't submit your order."
-#      end
-#    end
 
     def artwork_for_sale
       @artwork = Artwork.find(params[:artwork_id])
