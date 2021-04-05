@@ -2,6 +2,7 @@ class ArtworksController < ApplicationController
   before_action :set_artwork,       only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
   before_action :correct_user,      only: [:edit, :update, :destroy]
+  after_action  :stripe_ready,      only: [:create, :update, :index]
 
   def index
 #    @artworks = artwork.all
@@ -79,5 +80,11 @@ class ArtworksController < ApplicationController
   def correct_user
     @artwork = current_user.artworks.find_by(id: params[:id])
     redirect_to root_url if @artwork.nil?
+  end
+
+  def stripe_ready
+    if current_user.stripe_user_id.nil?
+      flash[:danger] = "Please connect with Stripe to accept payments."
+    end
   end
 end

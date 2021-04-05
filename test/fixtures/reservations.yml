@@ -5,7 +5,7 @@ one:
   end_date: 2021-01-02 11:32:12
   price: 15
   total: 15
-  created_at: <%= 2.months.ago %>
+  created_at: <%= 1.day.ago %>
 
 two:
   user: jane
