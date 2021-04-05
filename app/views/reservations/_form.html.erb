@@ -132,7 +132,7 @@
               var total = days * <%= @space.price %>
               $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
               $('#reservation_days').text(days);
-              $('#reservation_sum').text(total);
+              $('#reservation_sum').text(Math.round(total*100)/100);
               $('#reservation_total').val(total);
             }
           }
@@ -173,7 +173,7 @@
               var total = days * <%= @space.price %>
               $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
               $('#reservation_days').text(days);
-              $('#reservation_sum').text(total);
+              $('#reservation_sum').text(Math.round(total*100)/100);
               $('#reservation_total').val(total);
             }
           }

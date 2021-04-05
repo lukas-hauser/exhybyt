@@ -29,4 +29,7 @@ class ReservationApprovalsControllerTest < ActionDispatch::IntegrationTest
 
   test "when reservation has already been rejected" do
   end
+
+  test "overlapping dates" do
+  end
 end
