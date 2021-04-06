@@ -252,37 +252,24 @@ followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
-25.times do
+CSV.foreach(Rails.root.join('lib/seed_csv/lukas_hauser_art.csv'), headers: true) do |row|
   user = User.order(:created_at).take(5)[rand(0..4)]
-  style_ids = [Style.first.id, Style.second.id]
-  subject = artwork_subjects.sample
-  category = ["Advertisement","Drawing","Painting","Photography","Sculpture"].sample
-  listing_name = Faker::Artist.name
-  description = Faker::Lorem.sentence(word_count: 20)
-  medium = ["Oil on Canvas","Mixed Media"].sample
-  height = rand(50..120)
-  width = rand(50..120)
-  depth = rand(1..3)
-  price = rand(10..200)
-  year = ["2018","2019","2020"].sample
-  status = ["For Sale","Not For Sale","Sold"].sample
-  framed = rand(0..1)
   artwork = user.artworks.build(
-    style_ids: style_ids,
-    subject: subject,
-    category: category,
-    listing_name: listing_name,
-    description: description,
-    medium: medium,
-    height: height,
-    width: width,
-    depth: depth,
-    year: year,
-    status: status,
-    is_framed: framed,
-    price: price)
+    style_ids:  row["style_ids"],
+    subject:    row["subject"],
+    category:   row["category"],
+    listing_name: row["listing_name"],
+    description:  row["description"],
+    medium:     row["medium"],
+    height:     row["height"],
+    width:      row["width"],
+    depth:      row["depth"],
+    year:       row["year"],
+    status:     row["status"],
+    is_framed:  row["framed"],
+    price:      row["price"])
     artwork.images.attach(
-      io: URI.open(artwork_images.sample),
+      io: URI.open(row["image_url"]),
       filename: 'photo.jpg',
       content_type: 'image/jpg')
     artwork.save!
