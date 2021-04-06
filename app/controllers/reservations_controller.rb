@@ -77,7 +77,7 @@ class ReservationsController < ApplicationController
          currency: @reservation.space.user.currency,
          product_data: {
            name: @reservation.space.listing_name,
-           images: [@reservation.space.images[0].key],
+           images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],
          },
        },
        quantity: 1,
