@@ -146,6 +146,14 @@ artwork_subjects = ["Abstract",
   "World Culture",
   "Yacht"]
 
+artwork_materials = [ "Paper",
+  "Canvas"
+]
+
+artwork_mediums = [ "Oil",
+  "Acrylyc"
+]
+
 space_images = [
   "https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
   "https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80",
@@ -185,6 +193,22 @@ artwork_images =[
 styles.each do |style|
   Style.create!(name: style)
 end
+
+#venue_types.each do |venue_type|
+#  Type.create!(name: venue_type)
+#end
+
+#artwork_subjects.each do |artwork_subject|
+#  Subject.create!(name: artwork_subject)
+#end
+
+#artwork_materials.each do |artwork_material|
+#  Material.create!(name: artwork_material)
+#end
+
+#artwork_mediums.each do |artwork_medium|
+#  Medium.create!(name: artwork_medium)
+#end
 
 # Create main test user
 User.create!(firstname: "Test",
@@ -231,7 +255,7 @@ followers.each { |follower| follower.follow(user) }
 25.times do
   user = User.order(:created_at).take(5)[rand(0..4)]
   style_ids = [Style.first.id, Style.second.id]
-  subject = ["Portrait","Landscape"].sample
+  subject = artwork_subjects.sample
   category = ["Advertisement","Drawing","Painting","Photography","Sculpture"].sample
   listing_name = Faker::Artist.name
   description = Faker::Lorem.sentence(word_count: 20)
@@ -261,77 +285,70 @@ followers.each { |follower| follower.follow(user) }
       io: URI.open(artwork_images.sample),
       filename: 'photo.jpg',
       content_type: 'image/jpg')
-    artwork.images.attach(
-      io: File.open('app/assets/images/skull.jpg'),
-      filename: 'skull.jpg')
-      artwork.save!
+end
 
-  25.times do
-    user = User.order(:created_at).take(5)[rand(0..4)]
-    venue_type = ["Bar","Coffee Shop","Restaurant"].sample
-    category = ["Wall Space","Window Display","Entire Gallery"].sample
-    listing_name = Faker::Restaurant.name
-    description = Faker::Lorem.sentence(word_count: 20)
-    address = "London #{["W1","SW1","WC1","WC2","EC1","EC2","EC3"].sample} #{rand(1..9)}#{('A'..'Z').to_a[rand(26)]}"
-    latitude = Geocoder.search(address).first.latitude
-    longitude = Geocoder.search(address).first.longitude
-    wall_height = rand(50..300)
-    wall_width = rand(80..200)
-    price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-    days_min = rand(1..7)
-    is_adj_light = rand(0..1)
-    is_nat_light = rand(0..1)
-    is_dis_acc = rand(0..1)
-    is_parking = rand(0..1)
-    is_hang_sys = rand(0..1)
-    is_plugs = rand(0..1)
-    is_sec_sys = rand(0..1)
-    is_toilet = rand(0..1)
-    is_wifi = rand(0..1)
-    is_storage = rand(0..1)
-    is_paintings = rand(0..1)
-    is_photography = rand(0..1)
-    is_drawings = rand(0..1)
-    is_sculptures = rand(0..1)
-    is_live_perf = rand(0..1)
-    is_adverts = rand(0..1)
-  #  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
-    space = user.spaces.build(
-      venue_type: venue_type,
-      category: category,
-      listing_name: listing_name,
-      description: description,
-      address: address,
-      latitude: latitude,
-      longitude: longitude,
-      wall_height: wall_height,
-      wall_width: wall_width,
-      price: price,
-      days_min: days_min,
-      is_adj_light: is_adj_light,
-      is_nat_light: is_nat_light,
-      is_dis_acc: is_dis_acc,
-      is_parking: is_parking,
-      is_hang_sys: is_hang_sys,
-      is_plugs: is_plugs,
-      is_sec_sys: is_sec_sys,
-      is_toilet: is_toilet,
-      is_wifi: is_wifi,
-      is_storage: is_storage,
-      is_paintings: is_paintings,
-      is_photography: is_photography,
-      is_drawings: is_drawings,
-      is_sculptures: is_sculptures,
-      is_live_perf: is_live_perf,
-      is_adverts: is_adverts)
-      space.images.attach(
-        io: URI.open(space_images.sample),
-        filename: 'photo.jpg',
-        content_type: 'image/jpg')
-      space.images.attach(
-        io: URI.open(space_images.sample),
-        filename: 'photo.jpg',
-        content_type: 'image/jpg')
-      space.save!
-  end
+space_n = 1
+25.times do
+  user = User.order(:created_at).take(5)[rand(0..4)]
+  venue_type      = venue_types.sample
+  category        = ["Wall Space","Window Display","Entire Gallery"].sample
+  listing_name    = "Sample Space #{space_n}" # Faker::Restaurant.name
+  description     = "This is the description of a sample space. This space can't be booked."# Faker::Lorem.sentence(word_count: 20)
+  address         = "London #{["W1","SW1","WC1","WC2","EC1","EC2","EC3"].sample} #{rand(1..9)}#{('A'..'Z').to_a[rand(26)]}"
+  latitude        = rand(51.5..51.51) # Geocoder.search(address).first.latitude
+  longitude       = rand(-0.12..-0.115) # Geocoder.search(address).first.longitude
+  wall_height     = rand(50..300)
+  wall_width      = rand(80..200)
+  price           = rand(5.00..100.00)
+  days_min        = rand(1..7)
+  is_adj_light    = rand(0..1)
+  is_nat_light    = rand(0..1)
+  is_dis_acc      = rand(0..1)
+  is_parking      = rand(0..1)
+  is_hang_sys     = rand(0..1)
+  is_plugs        = rand(0..1)
+  is_sec_sys      = rand(0..1)
+  is_toilet       = rand(0..1)
+  is_wifi         = rand(0..1)
+  is_storage      = rand(0..1)
+  is_paintings    = rand(0..1)
+  is_photography  = rand(0..1)
+  is_drawings     = rand(0..1)
+  is_sculptures   = rand(0..1)
+  is_live_perf    = rand(0..1)
+  is_adverts      = rand(0..1)
+  space = user.spaces.build(
+    venue_type: venue_type,
+    category: category,
+    listing_name: listing_name,
+    description: description,
+    address: address,
+    latitude: latitude,
+    longitude: longitude,
+    wall_height: wall_height,
+    wall_width: wall_width,
+    price: price,
+    days_min: days_min,
+    is_adj_light: is_adj_light,
+    is_nat_light: is_nat_light,
+    is_dis_acc: is_dis_acc,
+    is_parking: is_parking,
+    is_hang_sys: is_hang_sys,
+    is_plugs: is_plugs,
+    is_sec_sys: is_sec_sys,
+    is_toilet: is_toilet,
+    is_wifi: is_wifi,
+    is_storage: is_storage,
+    is_paintings: is_paintings,
+    is_photography: is_photography,
+    is_drawings: is_drawings,
+    is_sculptures: is_sculptures,
+    is_live_perf: is_live_perf,
+    is_adverts: is_adverts)
+    space.images.attach(
+      io: URI.open(space_images.sample),
+      filename: 'photo.jpg',
+      content_type: 'image/jpg')
+    space.save!
+    space_n += 1
 end
