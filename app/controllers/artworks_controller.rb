@@ -2,7 +2,7 @@ class ArtworksController < ApplicationController
   before_action :set_artwork,       only: [:show, :edit, :update, :destroy]
   before_action :logged_in_user,  except: [:show]
   before_action :correct_user,      only: [:edit, :update, :destroy]
-  after_action  :stripe_ready,      only: [:create, :update, :index]
+  after_action  :stripe_ready,      only: [:create, :update]
 
   def index
 #    @artworks = artwork.all

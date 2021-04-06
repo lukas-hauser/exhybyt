@@ -5,6 +5,7 @@ class ReservationsController < ApplicationController
   before_action :approved_reservations, only: [:current_exhibitions, :past_exhibitions, :upcoming_exhibitions]
   before_action :set_reservation,       only: [:success, :cancel]
   before_action :correct_user,          only: [:show]
+  before_action :own_space,             only: [:create]
 
   def preload
     space = Space.find(params[:space_id])
@@ -137,6 +138,15 @@ class ReservationsController < ApplicationController
       if !@space.active?
         redirect_to root_url
         flash[:warning] = "Space is inactive. We can't submit your booking."
+      end
+    end
+
+    # Confirms it's not their own space
+    def own_space
+      @space = Space.find(params[:space_id])
+      if current_user?(@space.user)
+        redirect_to root_url
+        flash[:danger] = "You can't book your own space."
       end
     end
 

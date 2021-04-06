@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :logged_in_user
   before_action :artwork_for_sale,      only: [:create]
+  before_action :own_art,               only: [:create]
   before_action :stripe_ready,          only: [:create]
   before_action :set_order,             only: [:success, :cancel]
 
@@ -75,6 +76,7 @@ class OrdersController < ApplicationController
 
   private
 
+    # Confirms that artwork is for sale
     def artwork_for_sale
       @artwork = Artwork.find(params[:artwork_id])
       if @artwork.status != "For Sale"
@@ -83,6 +85,16 @@ class OrdersController < ApplicationController
       end
     end
 
+    # Confirms that artists can't buy their own art
+    def own_art
+      @artwork = Artwork.find(params[:artwork_id])
+      if current_user?(@artwork.user)
+        redirect_to root_url
+        flash[:danger] = "You can't buy your own art."
+      end
+    end
+
+    # Confirms that artists are ready to accept payments to sell their art
     def stripe_ready
       @artwork = Artwork.find(params[:artwork_id])
       if @artwork.user.stripe_user_id.nil?
