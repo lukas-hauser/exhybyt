@@ -285,6 +285,7 @@ followers.each { |follower| follower.follow(user) }
       io: URI.open(artwork_images.sample),
       filename: 'photo.jpg',
       content_type: 'image/jpg')
+    artwork.save!
 end
 
 space_n = 1
