@@ -83,7 +83,7 @@ class ArtworksController < ApplicationController
   end
 
   def stripe_ready
-    if current_user.stripe_user_id.nil?
+    if current_user.artworks.where(status:"For Sale").any? && current_user.stripe_user_id.nil?
       flash[:danger] = "Please connect with Stripe to accept payments."
     end
   end

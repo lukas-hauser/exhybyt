@@ -1,110 +1,29 @@
 <% provide(:title, 'FAQ') %>
+<% i=0 %>
+<% ["General", "Businesses","Artists"].each do |category| %>
+  <h2 class="mt-5"><%= category %></h2>
 
-<div class="accordion" id="faqGeneral">
-<h2>General Questions</h2>
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          What is EXHYBYT?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
+  <div class="accordion" id="faq<%= category %>">
+  <% @faqs.where(category:category).each do |faq| %>
+
+    <div class="card">
+      <div class="card-header" id="heading<%= i %>">
+        <h2 class="mb-0">
+          <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapse<%= i %>" aria-expanded="true" aria-controls="collapse<%= i %>">
+            <%= faq.question %>
+          </button>
+        </h2>
+      </div>
+      <div id="collapse<%= i %>" class="collapse<%= ' show' if i == 0 %>" aria-labelledby="heading<%= i %>" data-parent="#faq<%= category %>">
+        <div class="card-body">
+          <%= faq.answer %>
+        </div>
       </div>
     </div>
+
+    <% i+=1 %>
+  <% end %>
+
   </div>
 
-  <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          How does EXHYBYT work?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-          What does EXHYBYT do?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingFour">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-          Do I need to create an account?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingFive">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-          Is it free to create a listing?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingSix">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-          What countries do you support?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="headingSeven">
-      <h2 class="mb-0">
-        <button class="btn btn-link btn-block text-left text-dark" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
-          Who started EXHYBYT?
-        </button>
-      </h2>
-    </div>
-    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqGeneral">
-      <div class="card-body">
-        COMING SOON
-      </div>
-    </div>
-  </div>
-
-</div>
+<% end %>

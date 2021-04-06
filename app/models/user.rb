@@ -3,7 +3,7 @@ class User < ApplicationRecord
   before_save   :downcase_email
   before_create :create_activation_digest
   before_create { self.display_name = self.firstname + " " + self.lastname }
-  before_create { self.user_name = "user_" + (User.last.id + 1).to_s }
+  before_create :create_username
   before_create { self.currency = "gbp" }
 
   has_many :spaces, dependent: :destroy
@@ -125,5 +125,13 @@ class User < ApplicationRecord
     def create_activation_digest
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
+    end
+
+    def create_username
+      if User.any?
+        self.user_name = "user_" + (User.last.id + 1).to_s
+      else
+        self.user_name = "user_1"
+      end
     end
 end

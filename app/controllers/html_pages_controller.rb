@@ -77,4 +77,8 @@ class HtmlPagesController < ApplicationController
 
   def cookiepolicy
   end
+
+  def faq
+    @faqs = Faq.all
+  end
 end

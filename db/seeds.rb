@@ -1,3 +1,13 @@
+require 'csv'
+
+CSV.foreach(Rails.root.join('lib/seed_csv/faqs.csv'), headers: true) do |row|
+  Faq.create( {
+    question: row["Question"],
+    answer: row["Answer"],
+    category: row["Category"],
+  } )
+end
+
 styles = ["Abstract",
   "Abstract Expressionism",
   "Art Deco",
@@ -158,7 +168,7 @@ space_images = [
 
 artwork_images =[
   "https://i0.wp.com/lukashauser.art/wp-content/uploads/2017/08/Give-Me-a-Reason-e1504438812511.jpg",
-  "https://i0.wp.com/lukashauser.art/wp-content/uploads/2017/01/33611235923_912ff1bcc7_o-e1504360657215.jpg?fit=957%2C1090"],
+  "https://i0.wp.com/lukashauser.art/wp-content/uploads/2017/01/33611235923_912ff1bcc7_o-e1504360657215.jpg?fit=957%2C1090",
   "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/06/25063600611_8f1861b44c_b.jpg?fit=957%2C1090",
   "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/01/Umbrellas.jpg?fit=957%2C1090",
   "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/01/Beach-Vibes-in-the-City-1-e1504464826324.jpg?fit=957%2C1090",
@@ -170,8 +180,7 @@ artwork_images =[
   "https://i1.wp.com/lukashauser.art/wp-content/uploads/2019/03/Metamorphosis-of-Narcissus-e1551646196169.jpg?fit=957%2C1090",
   "https://i2.wp.com/lukashauser.art/wp-content/uploads/2019/02/Exploding-Sunflower-Vase-e1549673856443.jpg?fit=957%2C1090",
   "https://i1.wp.com/lukashauser.art/wp-content/uploads/2019/02/Escaping-the-Gilded-Cage-e1549753597357.jpg?fit=957%2C1090",
-  "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/01/Hamster-Wheel-Painting-scaled.jpg?fit=957%2C1090"
-]
+  "https://i2.wp.com/lukashauser.art/wp-content/uploads/2017/01/Hamster-Wheel-Painting-scaled.jpg?fit=957%2C1090"]
 
 styles.each do |style|
   Style.create!(name: style)
@@ -187,14 +196,14 @@ User.create!(firstname: "Test",
   activated: true,
   activated_at: Time.zone.now)
 
-  # Create non-admin demo user
-  User.create!(firstname: "Demo",
-    lastname: "User", email: "demo@demouser.com",
-    password: "exhybyt",
-    password_confirmation: "exhybyt",
-    currency: "gbp",
-    activated: true,
-    activated_at: Time.zone.now)
+# Create non-admin demo user
+User.create!(firstname: "Demo",
+  lastname: "User", email: "demo@demouser.com",
+  password: "exhybyt",
+  password_confirmation: "exhybyt",
+  currency: "gbp",
+  activated: true,
+  activated_at: Time.zone.now)
 
 # Bulk generate test users
 99.times do |n|
@@ -210,75 +219,6 @@ User.create!(firstname: "Test",
     currency: "gbp",
     activated: true,
     activated_at: Time.zone.now)
-end
-
-25.times do
-  user = User.order(:created_at).take(5)[rand(0..4)]
-  venue_type = ["Bar","Coffee Shop","Restaurant"].sample
-  category = ["Wall Space","Window Display","Entire Gallery"].sample
-  listing_name = Faker::Restaurant.name
-  description = Faker::Lorem.sentence(word_count: 20)
-  address = "London #{["W1","SW1","WC1","WC2","EC1","EC2","EC3"].sample} #{rand(1..9)}#{('A'..'Z').to_a[rand(26)]}"
-  latitude = Geocoder.search(address).first.latitude
-  longitude = Geocoder.search(address).first.longitude
-  wall_height = rand(50..300)
-  wall_width = rand(80..200)
-  price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
-  days_min = rand(1..7)
-  is_adj_light = rand(0..1)
-  is_nat_light = rand(0..1)
-  is_dis_acc = rand(0..1)
-  is_parking = rand(0..1)
-  is_hang_sys = rand(0..1)
-  is_plugs = rand(0..1)
-  is_sec_sys = rand(0..1)
-  is_toilet = rand(0..1)
-  is_wifi = rand(0..1)
-  is_storage = rand(0..1)
-  is_paintings = rand(0..1)
-  is_photography = rand(0..1)
-  is_drawings = rand(0..1)
-  is_sculptures = rand(0..1)
-  is_live_perf = rand(0..1)
-  is_adverts = rand(0..1)
-#  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
-  space = user.spaces.build(
-    venue_type: venue_type,
-    category: category,
-    listing_name: listing_name,
-    description: description,
-    address: address,
-    latitude: latitude,
-    longitude: longitude,
-    wall_height: wall_height,
-    wall_width: wall_width,
-    price: price,
-    days_min: days_min
-    is_adj_light: is_adj_light,
-    is_nat_light: is_nat_light,
-    is_dis_acc: is_dis_acc,
-    is_parking: is_parking,
-    is_hang_sys: is_hang_sys,
-    is_plugs: is_plugs,
-    is_sec_sys: is_sec_sys,
-    is_toilet: is_toilet,
-    is_wifi: is_wifi,
-    is_storage: is_storage,
-    is_paintings: is_paintings,
-    is_photography: is_photography,
-    is_drawings: is_drawings,
-    is_sculptures: is_sculptures,
-    is_live_perf: is_live_perf,
-    is_adverts: is_adverts)
-    space.images.attach(
-      io: URI.open(space_images.sample),
-      filename: 'photo.jpg',
-      content_type: 'image/jpg')
-    space.images.attach(
-      io: URI.open(space_images.sample),
-      filename: 'photo.jpg',
-      content_type: 'image/jpg')
-    space.save!
 end
 
 users = User.all
@@ -325,4 +265,73 @@ followers.each { |follower| follower.follow(user) }
       io: File.open('app/assets/images/skull.jpg'),
       filename: 'skull.jpg')
       artwork.save!
+
+  25.times do
+    user = User.order(:created_at).take(5)[rand(0..4)]
+    venue_type = ["Bar","Coffee Shop","Restaurant"].sample
+    category = ["Wall Space","Window Display","Entire Gallery"].sample
+    listing_name = Faker::Restaurant.name
+    description = Faker::Lorem.sentence(word_count: 20)
+    address = "London #{["W1","SW1","WC1","WC2","EC1","EC2","EC3"].sample} #{rand(1..9)}#{('A'..'Z').to_a[rand(26)]}"
+    latitude = Geocoder.search(address).first.latitude
+    longitude = Geocoder.search(address).first.longitude
+    wall_height = rand(50..300)
+    wall_width = rand(80..200)
+    price = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+    days_min = rand(1..7)
+    is_adj_light = rand(0..1)
+    is_nat_light = rand(0..1)
+    is_dis_acc = rand(0..1)
+    is_parking = rand(0..1)
+    is_hang_sys = rand(0..1)
+    is_plugs = rand(0..1)
+    is_sec_sys = rand(0..1)
+    is_toilet = rand(0..1)
+    is_wifi = rand(0..1)
+    is_storage = rand(0..1)
+    is_paintings = rand(0..1)
+    is_photography = rand(0..1)
+    is_drawings = rand(0..1)
+    is_sculptures = rand(0..1)
+    is_live_perf = rand(0..1)
+    is_adverts = rand(0..1)
+  #  images = Faker::LoremFlickr.image(size: "300x300", search_terms: ['coffee'])
+    space = user.spaces.build(
+      venue_type: venue_type,
+      category: category,
+      listing_name: listing_name,
+      description: description,
+      address: address,
+      latitude: latitude,
+      longitude: longitude,
+      wall_height: wall_height,
+      wall_width: wall_width,
+      price: price,
+      days_min: days_min,
+      is_adj_light: is_adj_light,
+      is_nat_light: is_nat_light,
+      is_dis_acc: is_dis_acc,
+      is_parking: is_parking,
+      is_hang_sys: is_hang_sys,
+      is_plugs: is_plugs,
+      is_sec_sys: is_sec_sys,
+      is_toilet: is_toilet,
+      is_wifi: is_wifi,
+      is_storage: is_storage,
+      is_paintings: is_paintings,
+      is_photography: is_photography,
+      is_drawings: is_drawings,
+      is_sculptures: is_sculptures,
+      is_live_perf: is_live_perf,
+      is_adverts: is_adverts)
+      space.images.attach(
+        io: URI.open(space_images.sample),
+        filename: 'photo.jpg',
+        content_type: 'image/jpg')
+      space.images.attach(
+        io: URI.open(space_images.sample),
+        filename: 'photo.jpg',
+        content_type: 'image/jpg')
+      space.save!
+  end
 end
