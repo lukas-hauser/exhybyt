@@ -1,41 +1,47 @@
 <%= provide(:title, @artwork.listing_name ) %>
 <% provide :pageheader, render('image_carousel')%>
 
-<h1 class="center"><%= @artwork.listing_name %></h1>
-<h2 class="center"><%= @artwork.category %> by <%= link_to @artwork.user.display_name, @artwork.user %></h2>
 
-<div class="row">
-  <div class="col-md">
-    <div class="card-body center shadow">
-      <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
-      <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
-      <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>
-      <% if !@artwork.price.nil? %>
-        <div>Price: <%= @artwork.user.currency.upcase %> <%= @artwork.price %></div>
-      <% end %>
-      <% if @artwork.status=="Sold" %>
-        <div class="text-right", style="font-size: 1.5em; color: Tomato;">
-          <i class="fas fa-circle"></i>
-        </div>
-      <% end %>
+<div class="row mb-5 mt-5">
+  <div class="col-md-6 offset-md-3 text-center">
+    <div class="card center" style="border: none">
+      <div class="card-body center shadow">
+        <h5 class="card-title"><%= @artwork.listing_name %></h5>
+        <p class="mb-2 text"><%= @artwork.category %> by <%= link_to @artwork.user.display_name, @artwork.user %></p>
+        <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
+        <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
+        <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>
+        <% if !@artwork.price.nil? %>
+          <div>Price: <%= @artwork.user.currency.upcase %> <%= @artwork.price %></div>
+        <% end %>
+        <% if @artwork.status=="Sold" %>
+          <div class="text-right", style="font-size: 1.5em; color: Tomato;">
+            <i class="fas fa-circle"></i>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <br>
   </div>
+</div>
 
-  <div class="col-md">
-    <p><%= @artwork.description %></p>
-    <% if @artwork.status=="For Sale" && logged_in? %>
+<div>
+  <div class="col-md-6 offset-md-3 text-center">
+
+    <% unless @artwork.description.nil? %>
+      <h5>Artist's comment:</h5>
+      <p><%= @artwork.description %></p>
+    <% end %>
+    <% if @artwork.status=="For Sale" && logged_in? && !current_user?(@artwork.user) %>
       <%= render 'orders/form' %>
     <% end %>
   </div>
 </div>
-<br>
 
 <% if current_user?(@artwork.user) %>
   <div class="container mb-5 center">
     <div class="btn-group">
       <%= link_to "Edit", edit_artwork_path(@artwork), class:"btn btn-sm btn-outline-secondary" %>
-      <%= link_to "Delete", @artwork, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete", @artwork, method: :delete, data: { confirm: "Are you sure to delete this artwork?" }, class:"btn btn-sm btn-outline-secondary" %>
     </div>
   </div>
 <% end %>

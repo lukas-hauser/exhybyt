@@ -127,7 +127,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     get artwork_path(@artwork)
     assert_template 'artworks/show'
     assert_select 'title', full_title(@artwork.listing_name)
-    assert_select 'h1', text: @artwork.listing_name
+    assert_select 'h5', text: @artwork.listing_name
 #    assert image
 #    assert_select 'h2', text: @artwork.category + " by " + @artwork.user.display_name
 #    assert_select 'p', text: 'Width: ' + @artwork.width.to_s + " cm | Height: " + @artwork.height.to_s + " cm"
