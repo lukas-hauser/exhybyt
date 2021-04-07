@@ -10,7 +10,9 @@
       <p class="mb-2 text">Width: <%= @artwork.width %> cm | Height: <%= @artwork.height %> cm</p>
       <p class="mb-2 text"><%= @artwork.medium %> | <%= @artwork.year %></p>
       <p class="mb-2 text"><%= "Framed | " if @artwork.is_framed? %><%= @artwork.status %></p>
-      <div>Price: <%= @artwork.user.currency.upcase %> <%= @artwork.price %></div>
+      <% if !@artwork.price.nil? %>
+        <div>Price: <%= @artwork.user.currency.upcase %> <%= @artwork.price %></div>
+      <% end %>
       <% if @artwork.status=="Sold" %>
         <div class="text-right", style="font-size: 1.5em; color: Tomato;">
           <i class="fas fa-circle"></i>
