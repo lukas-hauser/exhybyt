@@ -84,8 +84,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     # successful edit with friendly forwarding" do
     get user_path(@user)
     assert_template 'users/show'
-    assert_select 'a', text: 'Delete'
-    assert_select 'a', text: 'Edit'
+#    assert_select 'a', text: 'Delete'
+#    assert_select 'a', text: 'Edit'
     first_space = @user.spaces.paginate(page: 1).first
     get edit_space_path(first_space)
     assert_select "title", "Edit Space | EXHYBYT"
@@ -119,8 +119,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     # Delete Space
     get user_path(@user)
     assert_template 'users/show'
-    assert_select 'a', text: 'Delete'
-    assert_select 'a', text: 'Edit'
+#    assert_select 'a', text: 'Delete'
+#    assert_select 'a', text: 'Edit'
     assert_difference 'Space.count', -1 do
       delete space_path(first_space)
     end

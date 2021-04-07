@@ -24,11 +24,18 @@
 
   <div class="col-md">
     <p><%= @artwork.description %></p>
-    <p>Subject: <%= @artwork.subject %></p>
     <% if @artwork.status=="For Sale" && logged_in? %>
       <%= render 'orders/form' %>
     <% end %>
   </div>
 </div>
 <br>
-<h2 class="mb-2 text-center"><%= render @artwork.styles %></h2>
+
+<% if current_user?(@artwork.user) %>
+  <div class="container mb-5 center">
+    <div class="btn-group">
+      <%= link_to "Edit", edit_artwork_path(@artwork), class:"btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete", @artwork, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+    </div>
+  </div>
+<% end %>

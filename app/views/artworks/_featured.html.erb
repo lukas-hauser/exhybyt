@@ -1,17 +1,15 @@
 <h1>Featured Art</h1>
 <h2><%= link_to "Browse all art", art_path, class: "text-muted" %></h2>
 <div class="card-columns">
-  <% Artwork.take(6).each do |artwork| %>
+  <% Artwork.take(3).each do |artwork| %>
 
-    <div class="card">
+    <div class="card" style="border: none">
       <% if artwork.images.attached? %>
         <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
       <% end %>
       <div class="card-body">
-        <h5 class="card-title"><%= artwork.listing_name %></h5>
-        <p class="card-text small">
-          <small class="text-muted">By <%= link_to artwork.user.display_name, artwork.user, class:"text-muted" %></small>
-        </p>
+        <h5 class="card-title mb-1"><%= artwork.listing_name %></h5>
+        <p class="text-muted"><%= artwork.category %> by <%= link_to artwork.user.display_name, artwork.user, class:"text-muted" %></p>
       </div>
     </div>
 

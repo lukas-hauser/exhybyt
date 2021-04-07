@@ -2,13 +2,13 @@
 <h2><%= link_to "See more spaces", search_path, class: "text-muted" %></h2>
 <div class="card-columns">
   <% Space.take(3).each do |space| %>
-    <div class="card">
+    <div class="card" style="border: none">
       <% if space.images.attached? %>
         <%= link_to image_tag(space.images[0], class:"card-img"), space %>
       <% end %>
       <div class="card-body">
         <h5 class="card-title"><%= space.listing_name %></h5>
-        <p class="card-text small"><%= space.venue_type %><br>
+        <p class="card-text small"><%= space.venue_type %> |
           <%= space.category %> | <%= space.wall_width %> x <%= space.wall_height %> cm</p>
       </div>
     </div>

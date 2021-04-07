@@ -1,21 +1,12 @@
-<div class="card">
+<div class="card" style="border: none">
   <% if space.images.attached? %>
     <%= link_to image_tag(space.images[0], class:"card-img"), space %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= space.listing_name %></h5>
-    <p class="card-text"><%= space.venue_type %></p>
+    <p class="card-text"><%= space.venue_type %> | <%= space.category %></p>
     <p class="card-text small">
-      Price: <%= space.user.currency.upcase %> <%= space.price %> per day<br>
-      <%= space.category %><br>
-      <%= space.wall_width %> x <%= space.wall_height %> cm<br>
-      <small class="text-muted">Hosted by <%= link_to space.user.display_name, space.user, class:"text-muted" %></small>
+      <%= space.wall_width %> x <%= space.wall_height %> cm | <%= space.user.currency.upcase %> <%= space.price %> per day<br>
     </p>
-    <% if current_user?(space.user) %>
-      <div class="btn-group">
-        <%= link_to "Edit", edit_space_path(space), class:"btn btn-sm btn-outline-secondary" %>
-        <%= link_to "Delete", space, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
-      </div>
-    <% end %>
   </div>
 </div>

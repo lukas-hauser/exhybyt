@@ -10,6 +10,7 @@
       <p>Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
       <p>Price: <%= @space.user.currency.upcase %> <%= @space.price %> per day</p>
       <p>Minumum Booking Period: <%= pluralize(@space.days_min, "Day") %></p>
+      <p>Hosted by <%= link_to @space.user.display_name, @space.user, class:"text-muted" %></p>
 
       <p><%= @space.description %></p>
     </div>
@@ -43,7 +44,7 @@
 <br>
 
 <!--Reviews -->
-<div class="container">
+<div class="container mb-5 center">
   <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
   <%= render 'reviews/list' %>
   <%= render 'reviews/form' if @booked && !@hasReview %>
@@ -56,6 +57,15 @@
 </div>
 
 <br>
+
+<% if current_user?(@space.user) %>
+  <div class="container mb-5 center">
+    <div class="btn-group">
+      <%= link_to "Edit", edit_space_path(@space), class:"btn btn-sm btn-outline-secondary" %>
+      <%= link_to "Delete", @space, method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
+    </div>
+  </div>
+<% end %>
 
 <!--Nearby Spaces -->
 
