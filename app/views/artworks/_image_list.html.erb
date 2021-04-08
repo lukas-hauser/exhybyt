@@ -1,8 +1,8 @@
-<div class="card-columns">
-  <% if @artwork.images.attached? %>
+<% if @artwork.images.attached? %>
+  <div class="card-columns">
     <% @artwork.images.each do |image| %>
-      <div class="card">
-        <%= image_tag image, class:"card-img" %>
+      <div class="card text-right">
+        <%= image_tag image, class:"card-img card-img-sm" %>
         <div class="card-body">
           <%= link_to delete_image_attachment_artwork_url(image.signed_id),
            method: :delete,
@@ -14,5 +14,5 @@
         </div>
       </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

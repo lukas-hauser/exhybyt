@@ -26,6 +26,24 @@ $light-gray: #777;
   height: 25px;
 }
 
+.card-img-sm {
+  object-fit: cover;
+  object-position: center center;
+  height: 10rem;
+}
+
+.card-img-md {
+  object-fit: cover;
+  object-position: center center;
+  height: 15rem;
+}
+
+.card-img-lg {
+  object-fit: cover;
+  object-position: center center;
+  height: 25rem;
+}
+
 /* Users index */
 
 .users {

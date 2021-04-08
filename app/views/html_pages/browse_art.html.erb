@@ -93,7 +93,7 @@
 
         <div class="card" style="border: none">
           <% if artwork.images.attached? %>
-            <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
+            <%= link_to image_tag(artwork.images[0], class:"card-img card-img-md"), artwork %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= artwork.listing_name %></h5>

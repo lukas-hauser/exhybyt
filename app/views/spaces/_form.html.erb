@@ -9,7 +9,7 @@
   </div>
 
   <div class="form-group">
-    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control", required: true %>
+    <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control", required: true, maxlength:60 %>
   </div>
   <div class="form-group">
     <%= f.text_area :description, rows: 5, placeholder: "Detailed description", class: "form-control", required: true %>
@@ -18,9 +18,7 @@
     <%= f.text_field :address, placeholder: "Address", class: "form-control", required: true %>
   </div>
 
-  <hr class="my-4">
-
-  <div class="container">
+  <div class="form-group">
     <h3>Amenities</h3>
     <div class="row">
       <div class="col">
@@ -70,9 +68,7 @@
     </div>
   </div>
 
-  <hr class="my-4">
-
-  <div class="container">
+  <div class="form-group">
     <h3>We show:</h3>
     <div class="row">
       <div class="col">
@@ -105,8 +101,6 @@
       </div>
     </div>
   </div>
-
-  <hr class="my-4">
 
   <div class="row">
     <div class="col">
@@ -153,14 +147,12 @@
     </div>
   </div>
 
-  <hr class="my-4">
-
-  <div class="form-check">
-    <%= f.check_box :active, class:"form-check-input", id:"active", checked:true %>
-    <label class="form-check-label" for="active">Active</label>
+  <div class="form-group">
+    <div class="form-check">
+      <%= f.check_box :active, class:"form-check-input", id:"active", checked:true %>
+      <label class="form-check-label" for="active">Active</label>
+    </div>
   </div>
-
-  <hr class="my-4">
 
   <div class="form-group">
     <%= f.file_field :images, accept: "image/jpeg, image/gif, image/png", multiple:true %>
