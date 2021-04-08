@@ -7,22 +7,22 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "Home | EXHYBYT"
   end
 
-  test "should get help" do
-    get help_path
-    assert_response :success
-    assert_select "title", "Help | EXHYBYT"
-  end
-
   test "should get about" do
     get about_path
     assert_response :success
     assert_select "title", "About | EXHYBYT"
   end
 
-  test "should get howitworks" do
-    get howitworks_path
+  test "should get for businesses" do
+    get for_businesses_path
     assert_response :success
-    assert_select "title", "How it works | EXHYBYT"
+    assert_select "title", "For Businesses | EXHYBYT"
+  end
+
+  test "should get for artists" do
+    get for_artists_path
+    assert_response :success
+    assert_select "title", "For Artists | EXHYBYT"
   end
 
   test "should get terms" do

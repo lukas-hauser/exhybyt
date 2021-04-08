@@ -2,32 +2,26 @@
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
   <h1>How it works</h1>
-  <h2><%= link_to "Find out more", howitworks_path, class: "text-muted" %></h2>
+  <h2><%= link_to "FAQs", faq_path, class: "text-muted" %></h2>
   <div class="container center">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <i class="fa fa-store fa-2x text-muted mt-5"></i>
-        <h2>BUSINESSES LIST SPACES</h2>
-        <p class="center">Businesses like coffee shops can list their wall space, window display or even entire galleries.</p>
-        <%= link_to "Find out more", howitworks_path, class: "btn btn-secondary" %>
+        <h2>For Businesses</h2>
+        <p class="center">Easily rent out the spare wall space in your business and gernerate an additional revenue stream while showing beautiful artwork.</p>
+        <%= link_to "Find out more", for_businesses_path, class: "btn btn-secondary" %>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <i class="fa fa-images fa-2x text-muted mt-5"></i>
-        <h2>ARTISTS LIST THEIR WORK</h2>
-        <p class="center">After uploading their paintings, photography or scultpures, artists can submit booking requests.</p>
-        <%= link_to "Find out more", howitworks_path, class: "btn btn-secondary" %>
+        <h2>For Artists</h2>
+        <p class="center">No matter if you are an emerging artist or a passionate photographer, it has never been easier to find a place to show your work.</p>
+        <%= link_to "Find out more", for_artists_path, class: "btn btn-secondary" %>
       </div>
-      <div class="col-lg-3">
-        <i class="fa fa-image fa-2x text-muted mt-5"></i>
-        <h2>EXHIBITION WILL BE SET UP</h2>
-        <p class="center">After businesses accept reservations, artists provide their artwork to the venue to exhibit. </p>
-        <%= link_to "See Exhibitions", exhibitions_path, class: "btn btn-secondary" %>
-      </div>
-      <div class="col-lg-3">
+      <div class="col-lg-4">
         <i class="fa fa-shopping-bag fa-2x text-muted mt-5"></i>
-        <h2>ART LOVERS CAN BUY ART</h2>
-        <p class="center">We provide labels with QR code to display with the art to sell it. (COMING SOON)</p>
-        <%= link_to "Brows Art", art_path, class: "btn btn-secondary" %>
+        <h2>For Art Lovers</h2>
+        <p class="center">You can easily find the art you saw exhibited via QR Code (COMING SOON). You can also discover new artists and their exhibitions.</p>
+        <%= link_to "Find out more", art_path, class: "btn btn-secondary" %>
       </div>
     </div>
   </div>
