@@ -4,19 +4,6 @@
   <div class="col-md-6 offset-md-3">
       <%= render 'form' %>
       <hr class="my-4">
-      <% if @artwork.images.attached? %>
-        <div class="card-columns">
-          <% @artwork.images.each do |image| %>
-            <div class="card">
-              <%= image_tag image, class:"card-img" %>
-              <div class="card-body">
-                <%= link_to "#", class:"text-muted", data: { confirm: "The feature to delete images doesn't work yet." }, remote: true do %>
-                  <i class="fas fa-times"></i>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <div id="edit"><%= render 'image_list' %></div>
   </div>
 </div>

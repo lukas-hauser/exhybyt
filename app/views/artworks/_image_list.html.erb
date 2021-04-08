@@ -1,0 +1,18 @@
+<div class="card-columns">
+  <% if @artwork.images.attached? %>
+    <% @artwork.images.each do |image| %>
+      <div class="card">
+        <%= image_tag image, class:"card-img" %>
+        <div class="card-body">
+          <%= link_to delete_image_attachment_artwork_url(image.signed_id),
+           method: :delete,
+           class:"text-muted",
+           data: { confirm: 'Are you sure?' },
+           remote: true do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

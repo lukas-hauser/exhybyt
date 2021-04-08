@@ -41,6 +41,16 @@ Rails.application.routes.draw do
   resources :artworks do
     resources :orders,          only: [:create, :index], shallow: true
   end
+  resources :artworks do
+    member do
+      delete :delete_image_attachment
+    end
+  end
+  resources :spaces do
+    member do
+      delete :delete_image_attachment
+    end
+  end
   resources :spaces,                  only: [:new, :show, :index, :create,
                                             :edit, :update, :destroy]
   resources :artworks,                only: [:new, :show, :index, :create,

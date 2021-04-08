@@ -55,6 +55,16 @@ class SpacesController < ApplicationController
     redirect_to request.referrer || root_path
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Blob.find_signed(params[:id])
+    @space = Space.find_by(id: @image.attachments.first.record_id)
+    @image.attachments.first.purge
+    respond_to do |format|
+      format.js
+      format.html { redirect_to edit_space_path(@space) }
+    end
+  end
+
   private
 
   def set_space

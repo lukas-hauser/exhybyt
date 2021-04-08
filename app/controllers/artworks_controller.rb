@@ -52,6 +52,16 @@ class ArtworksController < ApplicationController
     redirect_to request.referrer || root_path
   end
 
+  def delete_image_attachment
+    @image = ActiveStorage::Blob.find_signed(params[:id])
+    @artwork = Artwork.find_by(id: @image.attachments.first.record_id)
+    @image.attachments.first.purge
+    respond_to do |format|
+      format.js
+      format.html { redirect_to edit_artwork_path(@artwork) }
+    end
+  end
+
   private
 
   def set_artwork
