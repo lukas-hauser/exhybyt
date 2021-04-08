@@ -1,6 +1,6 @@
 <% @exhibitions.each do |exhibition| %>
   <div class="card">
-    <%= link_to image_tag(exhibition.artworks[0].images[0], class:"card-img"), exhibition.artworks[0] %>
+    <%= link_to image_tag(exhibition.artworks[0].images[0], class:"card-img card-img-lg"), exhibition.artworks[0] %>
     <div class="card-body">
       <h5 class="card-title">
         <%= link_to gravatar_for(exhibition.user, size: 25), exhibition.user %>

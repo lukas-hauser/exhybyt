@@ -9,7 +9,7 @@
         <% @bookings.each do |booking| %>
           <div class="card">
             <% if booking.space.images.attached? %>
-              <%= link_to image_tag(booking.space.images[0], class:"card-img"), booking %>
+              <%= link_to image_tag(booking.space.images[0], class:"card-img card-img-md"), booking %>
             <% end %>
             <div class="card-body">
               <h5 class="card-title"><%= booking.space.listing_name %></h5>

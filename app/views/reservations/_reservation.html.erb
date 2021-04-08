@@ -1,6 +1,6 @@
 <div class="card">
   <% if reservation.space.images.attached? %>
-    <%= image_tag reservation.space.images[0], class:"card-img" %>
+    <%= image_tag reservation.space.images[0], class:"card-img card-img-md" %>
   <% end %>
   <div class="card-body">
     <h5 class="card-title"><%= reservation.space.listing_name %></h5>

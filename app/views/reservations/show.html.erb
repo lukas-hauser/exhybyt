@@ -34,7 +34,7 @@
       <% @reservation.artworks.each do |artwork| %>
         <div class="card">
           <div class="card-image">
-            <%= link_to image_tag(artwork.images[0], class:"card-img"), artwork %>
+            <%= link_to image_tag(artwork.images[0], class:"card-img card-img-lg"), artwork %>
           </div>
         </div>
       <% end %>

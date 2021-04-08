@@ -5,7 +5,7 @@
       <% for space in @space.nearbys(10).take(3) %>
         <div class="card">
           <% if space.images.attached? %>
-            <%= image_tag space.images[0], class:"card-img" %>
+            <%= image_tag space.images[0], class:"card-img card-img-md" %>
           <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= space.listing_name %></h5>
