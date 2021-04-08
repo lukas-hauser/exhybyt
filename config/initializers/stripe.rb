@@ -9,4 +9,5 @@ StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]
 
 StripeEvent.configure do |events|
   events.subscribe 'checkout.session.completed', StripeCheckoutSessionService.new
+  events.subscribe 'payment_intent.succeeded', StripePaymentIntentService.new
 end
