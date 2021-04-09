@@ -66,6 +66,7 @@ class ReservationsController < ApplicationController
     @reservation.space = @space
     @reservation.price = @space.price
     @reservation.total = @space.price * days
+    @reservation.status = "Request incomplete"
 
     if @reservation.save
       session = Stripe::Checkout::Session.create({

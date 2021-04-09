@@ -24,7 +24,7 @@ class Reservation < ApplicationRecord
   # Rejects a reservation
   def reject
     update_columns(rejected: true, rejected_at: Time.zone.now,
-                   approved: false)
+                   approved: false, status:"Rejected")
   end
 
   # Returns true if a password reset has expired
