@@ -5,49 +5,47 @@
       <small class="d-block mb-3 text-muted">&copy; <%= Date.today.year %> EXHYBYT</small>
     </div>
     <div class="col-6 col-md">
-      <h5>About</h5>
+      <h5>How it works</h5>
       <ul class="list-unstyled text-small">
-        <li><a class="text-muted" href="<%= for_businesses_path %>">For Businesses</a></li>
-        <li><a class="text-muted" href="<%= for_artists_path %>">For Artists</a></li>
-        <li><a class="text-muted" href="<%= faq_path %>">FAQs</a></li>
-        <li><a class="text-muted" href="<%= about_path %>">About</a></li>
-        <li><a class="text-muted" href="<%= contact_path %>">Contact</a></li>
-        <li><a class="text-muted" href="<%= cookiepolicy_path %>">Cookie Policy</a></li>
-        <li><a class="text-muted" href="<%= privacypolicy_path %>">Privacy Policy</a></li>
-        <li><a class="text-muted" href="<%= terms_path %>">Terms</a></li>
+        <li><%= link_to "For Businesses", for_businesses_path, class:"text-muted" %></li>
+        <li><%= link_to "For Artists", for_artists_path, class:"text-muted" %></li>
+        <li><%= link_to "For Art Lovers", "#", class:"text-muted" %></li>
+        <li><%= link_to "FAQs", faq_path, class:"text-muted" %></li>
+        <li><%= link_to "About", about_path, class:"text-muted" %></li>
+        <li><%= link_to "Contact", contact_path, class:"text-muted" %></li>
       </ul>
     </div>
     <div class="col-6 col-md">
       <h5>Features</h5>
       <ul class="list-unstyled text-small">
         <% if logged_in? %>
-          <li><a class="text-muted" href="<%= new_artwork_path %>">Add Art</a></li>
-          <li><a class="text-muted" href="<%= new_space_path %>">Add Space</a></li>
+          <li><%= link_to "Add Art", new_artwork_path, class:"text-muted" %></li>
+          <li><%= link_to "Add Space", new_space_path, class:"text-muted" %></li>
         <% end %>
-        <li><a class="text-muted" href="<%= art_path %>">Browse Art</a></li>
-        <li><a class="text-muted" href="<%= search_path %>">Find Space</a></li>
-        <li><a class="text-muted" href="<%= exhibitions_path %>">Current Exhibitions</a></li>
-        <li><a class="text-muted" href="<%= upcoming_exhibitions_path %>">Future Exhibitions</a></li>
+        <li><%= link_to "Browse Art", art_path, class:"text-muted" %></li>
+        <li><%= link_to "Find Space", search_path, class:"text-muted" %></li>
+        <li><%= link_to "Current Exhibitions", exhibitions_path, class:"text-muted" %></li>
+        <li><%= link_to "Future Exhibitions", upcoming_exhibitions_path, class:"text-muted" %></li>
       </ul>
     </div>
     <% if logged_in? %>
       <div class="col-6 col-md">
         <h5>Your...</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="<%= artworks_path %>">Artwork</a></li>
-          <li><a class="text-muted" href="<%= spaces_path %>">Spaces</a></li>
-          <li><a class="text-muted" href="<%= your_bookings_path %>">Bookings</a></li>
-          <li><a class="text-muted" href="<%= your_reservations_path %>">Reservations</a></li>
-          <li><a class="text-muted" href="<%= current_user %>">Profile</a></li>
-          <li><a class="text-muted" href="<%= edit_user_path(current_user) %>">Settings</a></li>
+          <li><%= link_to "Artwork", artworks_path, class:"text-muted" %></li>
+          <li><%= link_to "Spaces", spaces_path, class:"text-muted" %></li>
+          <li><%= link_to "Bookings", your_bookings_path, class:"text-muted" %></li>
+          <li><%= link_to "Reservations", your_reservations_path, class:"text-muted" %></li>
+          <li><%= link_to "Profile", current_user, class:"text-muted" %></li>
+          <li><%= link_to "Settings", edit_user_path(current_user), class:"text-muted" %></li>
         </ul>
       </div>
     <% else %>
       <div class="col-6 col-md">
         <h5>Join us</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-muted" href="<%= login_path %>">Log In</a></li>
-          <li><a class="text-muted" href="<%= signup_path %>">Sign Up</a></li>
+          <li><%= link_to "Log In", login_path, class:"text-muted" %></li>
+          <li><%= link_to "Sign Up", signup_path, class:"text-muted" %></li>
         </ul>
       </div>
     <% end %>
@@ -61,5 +59,15 @@
         </div>
       </ul>
     </div>
+  </div>
+</footer>
+
+<footer class="footer mt-auto py-3">
+  <div class="container center">
+    <span class="text-muted">
+      <%= link_to "Terms", terms_path, class:"text-muted" %> |
+      <%= link_to "Cookie Policy", cookiepolicy_path, class:"text-muted" %> |
+      <%= link_to "Privacy Policy", privacypolicy_path, class:"text-muted" %>
+    </span>
   </div>
 </footer>
