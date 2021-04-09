@@ -12,7 +12,8 @@ class ReservationTest < ActiveSupport::TestCase
       total: "100",
       space_id: @space.id,
       artwork_ids: @artwork.id,
-      user_id: @user.id)
+      user_id: @user.id,
+      currency: @space.user.currency)
   end
 
   test "should be valid" do

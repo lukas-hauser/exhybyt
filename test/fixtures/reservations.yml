@@ -3,6 +3,7 @@ one:
   space: three
   start_date: 2021-01-02 11:32:12
   end_date: 2021-01-02 11:32:12
+  currency: "gbp"
   price: 15
   total: 15
   created_at: <%= 1.day.ago %>
@@ -12,6 +13,7 @@ two:
   space: two
   start_date: 2021-01-02 11:32:12
   end_date: 2021-01-02 11:32:12
+  currency: "gbp"
   price: 15
   total: 15
   created_at: <%= 2.months.ago %>
@@ -21,6 +23,7 @@ most_recent:
   space: two
   start_date: <%= 2.month.from_now %>
   end_date: <%= 2.month.from_now %>
+  currency: "gbp"
   price: 15
   total: 15
   created_at: <%= Time.zone.now %>
@@ -30,6 +33,7 @@ current_exhibition:
   space: one
   start_date: <%= 2.months.ago %>
   end_date: <%= 1.month.from_now %>
+  currency: "gbp"
   price: 15
   total: 15
   approved: true
@@ -40,6 +44,7 @@ one_day_exhibition:
   space: two
   start_date: <%= Time.zone.now %>
   end_date: <%= Time.zone.now %>
+  currency: "gbp"
   price: 15
   total: 15
   approved: true
@@ -50,6 +55,7 @@ upcoming_exhibition:
   space: two
   start_date: <%= 2.month.from_now %>
   end_date: <%= 3.months.from_now %>
+  currency: "gbp"
   price: 15
   total: 15
   approved: true
@@ -60,6 +66,7 @@ past_exhibition:
   space: two
   start_date: <%= 3.months.ago %>
   end_date: <%= 2.months.ago %>
+  currency: "gbp"
   price: 15
   total: 15
   approved: true

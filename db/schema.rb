@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_112056) do
+ActiveRecord::Schema.define(version: 2021_04_09_154308) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_112056) do
     t.string "payment_intent_id"
     t.boolean "payment_captured", default: false
     t.string "status"
+    t.string "currency"
     t.index ["space_id"], name: "index_reservations_on_space_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

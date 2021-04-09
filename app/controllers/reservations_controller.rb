@@ -64,6 +64,7 @@ class ReservationsController < ApplicationController
     days = (end_date - start_date).to_i + 1
 
     @reservation.space = @space
+    @reservation.currency = @space.user.currency
     @reservation.price = @space.price
     @reservation.total = @space.price * days
     @reservation.status = "Request incomplete"
@@ -75,7 +76,7 @@ class ReservationsController < ApplicationController
       line_items: [{
        price_data: {
          unit_amount: (@reservation.total * 100).to_i,
-         currency: @reservation.space.user.currency,
+         currency: @reservation.currency,
          product_data: {
            name: @reservation.space.listing_name,
            images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],

@@ -177,7 +177,8 @@ class UserTest < ActiveSupport::TestCase
       price: "20",
       total: "100",
       space_id: @space.id,
-      artwork_ids: @artwork.id)
+      artwork_ids: @artwork.id,
+      currency: @space.user.currency)
     assert_difference 'Reservation.count', -1 do
       @user.destroy
     end

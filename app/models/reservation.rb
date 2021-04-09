@@ -12,6 +12,7 @@ class Reservation < ApplicationRecord
   validates :end_date, presence: true
   validate  :end_date_after_start_date
   validates :artwork_ids, presence: true
+  validates :currency, presence: true
 
   default_scope -> { order(created_at: :desc) }
 
