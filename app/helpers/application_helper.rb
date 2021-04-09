@@ -15,7 +15,9 @@ module ApplicationHelper
   end
 
   def user_currencies
-    [["CHF","chf"],
+    [["AUD","aud"],
+    ["CAD","cad"],
+    ["CHF","chf"],
     ["EUR","eur"],
     ["GBP","gbp"],
     ["USD","usd"]]

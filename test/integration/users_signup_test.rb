@@ -21,8 +21,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                           lastname: "Hauser",
                                           email: "lukas@example.com",
                                           password: "password123",
-                                          password_confirmation: "password123",
-                                          currency: "gbp" }}
+                                          password_confirmation: "password123" }}
     end
     assert_equal 1, ActionMailer::Base.deliveries.size
     user = assigns(:user)

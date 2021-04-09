@@ -30,11 +30,11 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     twitter           = "james_smith"
     website           = "www.jamessmith.exhybyt.com"
     bio               = "Hi, this is James Smith"
-    user_name         = "jamessmith123"
+#    user_name         = "jamessmith123"
     patch user_path(@user), params: { user: { firstname: firstname, lastname: lastname, display_name: displayname,
                                               email: email, currency: currency, password: "", password_confirmation: "",
                                               marketing_consent: marketing_consent, instagram: instagram, facebook: facebook,
-                                              twitter: twitter, website: website, bio: bio, user_name: user_name } }
+                                              twitter: twitter, website: website, bio: bio } }
     assert_not flash.empty?
     assert_redirected_to @user
     @user.reload

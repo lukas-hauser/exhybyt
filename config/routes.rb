@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/contact',       to: 'html_pages#contact'
   get '/search',        to: 'html_pages#search'
   get 'art',            to: 'html_pages#browse_art'
+  get 'howitworks',     to: 'html_pages#howitworks'
   get 'faq',            to: 'html_pages#faq'
   get '/signup',        to: 'users#new'
   get '/login',         to: 'sessions#new'

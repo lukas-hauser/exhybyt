@@ -36,8 +36,8 @@ class User < ApplicationRecord
   validates :twitter,     length: { maximum: 60 }
   validates :website,     length: { maximum: 60 }
   validates :bio,         length: { maximum: 1000 }
-  validates :currency,    length: { maximum: 3 },  presence: true
-  validates :user_name,   length: { maximum: 60 }
+  validates :currency,    length: { maximum: 3 }, presence: true, allow_nil: true
+  validates :user_name,   length: { maximum: 60 }, presence: true, allow_nil: true
 
   # Returns the hash digest of the given string.
   def User.digest(string)
