@@ -9,7 +9,8 @@ class OrderTest < ActiveSupport::TestCase
       total: "100",
       delivery_fee: "20",
       artwork_id: @artwork.id,
-      user_id: @user.id)
+      user_id: @user.id,
+      currency: @artwork.user.currency)
   end
 
   test "should be valid" do
@@ -38,6 +39,11 @@ class OrderTest < ActiveSupport::TestCase
 
   test "Total price should be present" do
     @order.total = nil
+    assert_not @order.valid?
+  end
+
+  test "currency should be present" do
+    @order.currency = nil
     assert_not @order.valid?
   end
 

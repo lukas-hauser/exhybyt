@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
     @artwork = Artwork.find(params[:artwork_id])
 
     @order.artwork = @artwork
+    @order.currency = @artwork.user.currency
     @order.price = @artwork.price
     @order.total = @artwork.price + @order.delivery_fee
 
@@ -32,7 +33,7 @@ class OrdersController < ApplicationController
       line_items: [{
        price_data: {
          unit_amount: (@order.total * 100).to_i,
-         currency: @order.artwork.user.currency,
+         currency: @order.currency,
          product_data: {
            name: @order.artwork.listing_name,
            images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],

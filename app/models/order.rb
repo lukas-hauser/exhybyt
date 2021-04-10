@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   validates :delivery_fee, presence: true
   validates :total, presence: true
   validates :user_id, presence: true
+  validates :currency, presence: true
 
   default_scope -> { order(created_at: :desc) }
 

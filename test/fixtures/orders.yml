@@ -8,6 +8,7 @@ one:
   checkout_session_id: MyString
   payment_completed: false
   status: MyString
+  currency: "gbp"
   created_at: <%= 2.months.ago %>
 
 two:
@@ -20,6 +21,7 @@ two:
   checkout_session_id: MyString
   payment_completed: false
   status: MyString
+  currency: "gbp"
   created_at: <%= 2.months.ago %>
 
 most_recent:
@@ -32,4 +34,5 @@ most_recent:
   checkout_session_id: MyString
   payment_completed: false
   status: MyString
+  currency: "gbp"
   created_at: <%= Time.zone.now %>
