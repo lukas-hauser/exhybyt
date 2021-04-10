@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-md-8">
       <h1 class="text-left"><%= @space.listing_name %></h1>
-      <h2 class="text-left"><%= @space.venue_type %> | <%= @space.category %></h2>
+      <h2 class="text-left"><%= @space.type.name %> | <%= @space.category %></h2>
       <p><%= @space.address %></p>
       <p>Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
       <p>Price: <%= @space.user.currency.upcase %> <%= @space.price %> per day</p>

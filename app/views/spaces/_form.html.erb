@@ -5,9 +5,9 @@
     <%= f.select :category, space_categories, {prompt: "Category"}, class: "form-control custom-select", required: true %>
   </div>
   <div class="form-group">
-    <%= f.select :venue_type, venue_types, { prompt: "Venue Type" }, class: "form-control custom-select", required: true %>
+    <%= f.collection_select(:type_id, Type.all, :id, :name,
+    { prompt: "Venue Type" }, { multiple: false, class: "form-control custom-select", required: true } ) %>
   </div>
-
   <div class="form-group">
     <%= f.text_field :listing_name, placeholder: "Listing Name", class: "form-control", required: true, maxlength:60 %>
   </div>

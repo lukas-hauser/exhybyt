@@ -53,6 +53,7 @@ venue_types = ["Airport",
   "PopUp Space",
   "Private Members Club",
   "Restaurant",
+  "Retail",
   "University",
   "Other"]
 
@@ -194,9 +195,9 @@ styles.each do |style|
   Style.create!(name: style)
 end
 
-#venue_types.each do |venue_type|
-#  Type.create!(name: venue_type)
-#end
+venue_types.each do |venue_type|
+  Type.create!(name: venue_type)
+end
 
 #artwork_subjects.each do |artwork_subject|
 #  Subject.create!(name: artwork_subject)
@@ -277,8 +278,8 @@ end
 
 space_n = 1
 25.times do
-  user = User.order(:created_at).take(5)[rand(0..4)]
-  venue_type      = venue_types.sample
+  user            = User.order(:created_at).take(5)[rand(0..4)]
+  type            = Type.all.sample
   category        = ["Wall Space","Window Display","Entire Gallery"].sample
   listing_name    = "Sample Space #{space_n}" # Faker::Restaurant.name
   description     = "This is the description of a sample space. This space can't be booked."# Faker::Lorem.sentence(word_count: 20)
@@ -306,7 +307,7 @@ space_n = 1
   is_live_perf    = rand(0..1)
   is_adverts      = rand(0..1)
   space = user.spaces.build(
-    venue_type: venue_type,
+    type: type,
     category: category,
     listing_name: listing_name,
     description: description,

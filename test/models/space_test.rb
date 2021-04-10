@@ -3,8 +3,8 @@ require 'test_helper'
 class SpaceTest < ActiveSupport::TestCase
   def setup
     @user = users(:lukas)
+    @type = types(:one)
     @space = @user.spaces.build(
-      venue_type: "Coffee Shop",
       category: "Wall Space",
       listing_name: "Lukas' Cafe",
       description: "Cozy coffee shop in the town center",
@@ -30,7 +30,8 @@ class SpaceTest < ActiveSupport::TestCase
       is_live_perf: false,
       is_adverts: false,
       active: true,
-      user_id: @user.id)
+      user_id: @user.id,
+      type_id: @type.id)
       @space.images.attach(
         io: File.open('app/assets/images/exhibition.jpg'),
         filename: 'exhibition.jpg')
@@ -47,6 +48,11 @@ class SpaceTest < ActiveSupport::TestCase
 
   test "user id should be present" do
     @space.user_id = nil
+    assert_not @space.valid?
+  end
+
+  test "type id should be present" do
+    @space.type_id = nil
     assert_not @space.valid?
   end
 
@@ -67,11 +73,6 @@ class SpaceTest < ActiveSupport::TestCase
 
   test "Description should be no more than 1000 characters " do
     @space.description = "a" * 1001
-    assert_not @space.valid?
-  end
-
-  test "Venue Type should be present" do
-    @space.venue_type = "   "
     assert_not @space.valid?
   end
 

@@ -1,5 +1,6 @@
 class Space < ApplicationRecord
   belongs_to :user
+  belongs_to :type
   has_many_attached :images
   has_many :reservations, dependent: :destroy
   has_many :reviews
@@ -15,11 +16,11 @@ class Space < ApplicationRecord
 
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
+  validates :type_id, presence: true
   validates :listing_name, presence: true, length: { maximum: 60 }
   validates :address, presence: true
   validates :description, presence: true, length: { maximum: 1000 }
   validates :category, presence: true
-  validates :venue_type, presence: true
   validates :wall_height, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :wall_width, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :price, presence: true, numericality: {only_float: true, :greater_than => 0}

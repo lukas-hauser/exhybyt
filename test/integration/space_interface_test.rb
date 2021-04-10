@@ -4,8 +4,9 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user =  users(:jane)
+    @user  = users(:jane)
     @space = spaces(:one)
+    @type  = types(:one)
   end
 
   test "space interface" do
@@ -15,8 +16,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     # Invalid Submission
     assert_no_difference 'Space.count' do
       post spaces_path, params: { space:
-        {venue_type: "Coffee Shop",
-        category: "Wall Space",
+        { category: "Wall Space",
         listing_name: "Lukas' Cafe",
         description: "",
         address: "Main Street 1, City 10000, UK",
@@ -41,6 +41,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_live_perf: false,
         is_adverts: false,
         active: true,
+        type_id: @type.id,
         images: fixture_file_upload("example.png", "image/png")} }
     end
     assert_select 'div#error_explanation'
@@ -50,8 +51,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     # Valid Submission
     assert_difference 'Space.count', 1 do
       post spaces_path, params: { space:
-        {venue_type: "Coffee Shop",
-        category: "Wall Space",
+        { category: "Wall Space",
         listing_name: "Lukas' Cafe",
         description: "Cozy coffee shop in the town center",
         address: "Main Street 1, City 10000, UK",
@@ -76,6 +76,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
         is_live_perf: false,
         is_adverts: false,
         active: true,
+        type_id: @type.id,
         images: fixture_file_upload("example.png", "image/png")} }
     end
     follow_redirect!
@@ -89,7 +90,6 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     first_space = @user.spaces.paginate(page: 1).first
     get edit_space_path(first_space)
     assert_select "title", "Edit Space | EXHYBYT"
-    venue_type = "Coffee Shop"
     category = "Wall Space"
     listing_name = "Jane's Cafe"
     description = "Cozy coffee shop in the town center"
@@ -97,7 +97,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     wall_height = 50.0
     wall_width = 60.5
     price = 25
-    patch space_path(first_space), params: { space: { venue_type: venue_type,
+    patch space_path(first_space), params: { space: {
       category: category,
       listing_name: listing_name,
       description: description,
@@ -139,7 +139,6 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'h1', text: @space.listing_name
 #   assert image
 #    assert_select 'h2', text: @space.category
-#    assert_select 'h2', text: @space.venue_type
 #    assert_select 'p', text: 'Width: ' + @space.wall_width.to_s + " cm | Height: " + @space.wall_height.to_s + " cm"
 #    assert_select 'p', text: 'Price: £ ' + @space.price.to_s + ' per day'
 #    assert_select 'p', text: @space.description

@@ -77,7 +77,6 @@ class SpacesController < ApplicationController
       :address,
       :description,
       :category,
-      :venue_type,
       :wall_height,
       :wall_width,
       :price,
@@ -99,7 +98,8 @@ class SpacesController < ApplicationController
       :is_adverts,
       :images,
       :active,
-      :days_min
+      :days_min,
+      :type_id
     )
   end
 
