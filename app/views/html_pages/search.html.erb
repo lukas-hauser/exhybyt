@@ -169,7 +169,7 @@
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= space.listing_name %></h5>
-          <p class="card-text"><%= space.venue_type %> | <%= space.category %></p>
+          <p class="card-text"><%= space.type.name %> | <%= space.category %></p>
           <p class="card-text small">
             Price: <%= space.user.currency.upcase %> <%= space.price %> per day<br>
             <%= space.wall_width %> x <%= space.wall_height %> cm<br>
