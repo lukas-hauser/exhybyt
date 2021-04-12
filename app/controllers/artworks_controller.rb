@@ -49,7 +49,7 @@ class ArtworksController < ApplicationController
       @artwork.destroy
       flash[:primary] = "artwork has been deleted"
     end
-    redirect_to request.referrer || root_path
+    redirect_to artworks_path
   end
 
   def delete_image_attachment

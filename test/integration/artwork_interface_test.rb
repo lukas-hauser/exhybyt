@@ -4,10 +4,11 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user    = users(:jane)
-    @style   = styles(:one)
-    @subject = subjects(:one)
-    @artwork = artworks(:one)
+    @user      = users(:jane)
+    @otheruser = users(:lukas)
+    @style     = styles(:one)
+    @subject   = subjects(:one)
+    @artwork   = artworks(:three)
   end
 
   test "artwork interface" do
@@ -59,8 +60,11 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     # successful edit with friendly forwarding" do
     get user_path(@user)
     assert_template 'users/show'
-#    assert_select 'a', text: 'Delete'
-#    assert_select 'a', text: 'Edit'
+    first_art = @user.artworks.paginate(page: 1).first
+    get artwork_path(first_art)
+    assert_template 'artworks/show'
+    assert_select 'a', text: 'Edit'
+    assert_select 'a', text: 'Delete'
     first_art = @user.artworks.paginate(page: 1).first
     get edit_artwork_path(first_art)
     assert_select "title", "Edit Artwork | EXHYBYT"
@@ -108,20 +112,40 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal is_framed,    first_art.is_framed
 
     # Delete Artwork
-    get user_path(@user)
-    assert_template 'users/show'
-#    assert_select 'a', text: 'Delete'  /// Update to go to artwork show page instead
-#    assert_select 'a', text: 'Edit'
-    first_art = @user.artworks.paginate(page: 1).first
     assert_difference 'Artwork.count', -1 do
       delete artwork_path(first_art)
     end
+    assert_redirected_to artworks_path
 
-    # Visit different user (no delete links)
-    get user_path(users(:lukas))
-    assert_template 'users/show'
-    assert_select 'a', text: 'Delete', count: 0
+    # Visit artwork of different user (no delete and edit links)
+    second_art = @otheruser.artworks.paginate(page: 1).first
+    get artwork_path(second_art)
+    assert_template 'artworks/show'
     assert_select 'a', text: 'Edit', count: 0
+    assert_select 'a', text: 'Delete', count: 0
+    assert_no_difference 'Artwork.count' do
+      delete artwork_path(second_art)
+    end
+    assert_redirected_to root_url
+
+    get edit_artwork_path(second_art)
+    assert_redirected_to root_url
+
+    patch artwork_path(second_art), params: { artwork: { listing_name: listing_name,
+      description: description,
+      height: height,
+      width: width,
+      depth: depth,
+      year: year,
+      category: category,
+      medium: medium,
+      price: price,
+      status: status,
+      is_framed: is_framed,
+      subject_id: @subject.id,
+      style_ids: style_ids } }
+    assert flash.empty?
+    assert_redirected_to root_url
   end
 
   test "artwork show page" do

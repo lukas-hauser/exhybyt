@@ -5,6 +5,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
 
   def setup
     @user  = users(:jane)
+    @otheruser = users(:lukas)
     @space = spaces(:one)
     @type  = types(:one)
   end
@@ -85,9 +86,11 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     # successful edit with friendly forwarding" do
     get user_path(@user)
     assert_template 'users/show'
-#    assert_select 'a', text: 'Delete'
-#    assert_select 'a', text: 'Edit'
     first_space = @user.spaces.paginate(page: 1).first
+    get space_path(first_space)
+    assert_template 'spaces/show'
+    assert_select 'a', text: 'Delete'
+    assert_select 'a', text: 'Edit'
     get edit_space_path(first_space)
     assert_select "title", "Edit Space | EXHYBYT"
     category = "Wall Space"
@@ -96,6 +99,7 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     address = "Main Street 1, City 10000, UK"
     wall_height = 50.0
     wall_width = 60.5
+    type_id    = @type.id
     price = 25
     patch space_path(first_space), params: { space: {
       category: category,
@@ -104,7 +108,8 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
       address: address,
       wall_height: wall_height,
       wall_width: wall_width,
-      price: price } }
+      price: price,
+      type_id: @type.id } }
     assert_not flash.empty?
     assert_redirected_to first_space
     first_space.reload
@@ -115,21 +120,38 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal wall_height,  first_space.wall_height
     assert_equal wall_width,   first_space.wall_width
     assert_equal price,        first_space.price
+    assert_equal type_id,      first_space.type_id
 
     # Delete Space
-    get user_path(@user)
-    assert_template 'users/show'
-#    assert_select 'a', text: 'Delete'
-#    assert_select 'a', text: 'Edit'
     assert_difference 'Space.count', -1 do
       delete space_path(first_space)
     end
 
-    # Visit different user (no delete links)
-    get user_path(users(:lukas))
-    assert_template 'users/show'
+    # Visit different user's space (no delete and edit links)
+    second_space = @otheruser.spaces.paginate(page: 1).first
+    get space_path(second_space)
+    assert_template 'spaces/show'
     assert_select 'a', text: 'Delete', count: 0
     assert_select 'a', text: 'Edit', count: 0
+    assert_no_difference 'Space.count' do
+      delete space_path(second_space)
+    end
+    assert_redirected_to root_url
+
+    get edit_space_path(second_space)
+    assert_redirected_to root_url
+
+    patch space_path(second_space), params: { space: {
+      category: category,
+      listing_name: listing_name,
+      description: description,
+      address: address,
+      wall_height: wall_height,
+      wall_width: wall_width,
+      price: price,
+      type_id: @type.id } }
+    assert flash.empty?
+    assert_redirected_to root_url
   end
 
   test "space show page" do

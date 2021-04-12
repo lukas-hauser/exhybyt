@@ -52,7 +52,7 @@ class SpacesController < ApplicationController
       @space.destroy
       flash[:primary] = "Space has been deleted"
     end
-    redirect_to request.referrer || root_path
+    redirect_to spaces_path
   end
 
   def delete_image_attachment

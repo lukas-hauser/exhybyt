@@ -79,6 +79,12 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "FAQ | EXHYBYT"
   end
 
+  test "should get dpa" do
+    get dpa_path
+    assert_response :success
+    assert_select "title", "DPA | EXHYBYT"
+  end
+
   test "should get how it works" do
     get howitworks_path
     assert_response :success

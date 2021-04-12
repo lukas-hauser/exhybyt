@@ -95,11 +95,21 @@ class User < ApplicationRecord
   end
 
   def space_feed
-    Space.where("user_id IN (?) OR user_id =?", following_ids, id)
+    followed_space = Space.where("user_id IN (?) OR user_id =?", following_ids, id)
+    if followed_space.count >= 3
+      followed_space
+    else
+      followed_space && Space.all
+    end
   end
 
   def art_feed
-    Artwork.where("user_id IN (?) OR user_id =?", following_ids, id)
+    followed_art = Artwork.where("user_id IN (?) OR user_id =?", following_ids, id)
+    if followed_art.count >= 3
+      followed_art
+    else
+      followed_art && Artwork.all
+    end
   end
 
   def follow(other_user)
