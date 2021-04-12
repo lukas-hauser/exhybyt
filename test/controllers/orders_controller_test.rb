@@ -49,15 +49,15 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
   end
 
-#  test "should redirect create when artist user not stripe ready" do
-#    log_in_as(@user)
-#    @artworkuser.stripe_user_id = " "
-#    assert_no_difference 'Order.count' do
-#      post artwork_orders_path(@artwork)
-#    end
-#    assert_redirected_to root_url
-#    assert_not flash.empty?
-#  end
+  test "should redirect create when artist user not stripe ready" do
+    log_in_as(@user)
+    @artworkuser.update(stripe_user_id: "")
+    assert_no_difference 'Order.count' do
+      post artwork_orders_path(@artwork)
+    end
+    assert_redirected_to root_url
+    assert_not flash.empty?
+  end
 
   test "valid submission" do
     log_in_as(@user)

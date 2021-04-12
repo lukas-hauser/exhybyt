@@ -9,6 +9,8 @@
       <h2 class="text-danger">Rejected</h2>
     <% elsif @reservation.booking_request_expired? %>
       <h2>Booking request expired.</h2>
+    <% elsif @reservation.payment_intent_cancelled? %>
+      <h2>Payment cancelled.</h2
     <% elsif current_user?(@reservation.space.user) %>
       <div class="btn-group">
         <%= link_to "Approve", edit_reservation_approval_url(@reservation), data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>

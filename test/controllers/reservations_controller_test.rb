@@ -84,11 +84,11 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect create when space user not stripe ready" do
     log_in_as(@user)
-    @spaceuser.stripe_user_id = " "
+    @space.user.update(stripe_user_id:"")
     assert_no_difference 'Reservation.count' do
       post space_reservations_path(@space), params: { reservation:
-        { start_date: "2021-01-02 11:32:12",
-          end_date: "2021-01-03 11:32:12",
+        { start_date: Date.today,
+          end_date: Date.today,
           artwork_ids: @artwork.id } }
     end
     assert_redirected_to root_url
@@ -103,8 +103,20 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     #tbd
   end
 
+  test "Don't allow users to submit other user's artworks" do
+
+  end
+
   test "Don't allow users to book their own space" do
-    #tbd
+    log_in_as(@spaceuser)
+    assert_no_difference 'Reservation.count' do
+      post space_reservations_path(@space), params: { reservation:
+        { start_date: Date.today,
+          end_date: Date.today,
+          artwork_ids: [@artwork.id] } }
+    end
+    assert_redirected_to root_url
+    assert_not flash[:danger].empty?
   end
 
   test "valid submission" do

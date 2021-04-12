@@ -10,6 +10,8 @@ class ReservationRejectionsController < ApplicationController
       flash[:danger] = "You already approved this reservation."
     elsif reservation.rejected?
       flash[:warning] = "You already rejected this reservation."
+    elsif reservation.payment_intent_cancelled?
+      flash[:danger] = "Payment was cancelled. You can't approve this request anymore."
     else
       Stripe::PaymentIntent.cancel(
         reservation.payment_intent_id,
@@ -36,7 +38,7 @@ class ReservationRejectionsController < ApplicationController
     def check_expiration
       if @reservation.booking_request_expired?
         flash[:danger] = "Booking request has expired."
-        redirect_to root_url
+        redirect_to your_reservations_path
       end
     end
 

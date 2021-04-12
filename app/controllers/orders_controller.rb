@@ -98,7 +98,7 @@ class OrdersController < ApplicationController
     # Confirms that artists are ready to accept payments to sell their art
     def stripe_ready
       @artwork = Artwork.find(params[:artwork_id])
-      if @artwork.user.stripe_user_id.nil?
+      if @artwork.user.stripe_user_id.empty?
         redirect_to root_url
         flash[:danger] = "This artist is not ready yet to accept payments. Stay tuned.."
       end

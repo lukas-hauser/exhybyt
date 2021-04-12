@@ -33,6 +33,11 @@ class Reservation < ApplicationRecord
     created_at < 48.hours.ago
   end
 
+  # Returns true if a payment_intent was cancelled
+  def payment_intent_cancelled?
+    status == "Payment Intent Cancelled"
+  end
+
   # Sends booking request confirmation email
   def send_request_confirmation_email
     ReservationMailer.request_confirmation(self).deliver_now
