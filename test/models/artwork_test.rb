@@ -3,8 +3,9 @@ require 'test_helper'
 class ArtworkTest < ActiveSupport::TestCase
   def setup
     @other_artwork = artworks(:one)
-    @user =  users(:lukas)
-    @style = styles(:one)
+    @user    =  users(:lukas)
+    @style   = styles(:one)
+    @subject = subjects(:one)
     @artwork = @user.artworks.build(
       listing_name: "Moana Lisa",
       description: "This is the Hawaiian version of Mona Lisa",
@@ -17,7 +18,7 @@ class ArtworkTest < ActiveSupport::TestCase
       price: "5000",
       status: "For Sale",
       is_framed: true,
-      subject: "Portrait",
+      subject_id: @subject.id,
       style_ids: @style.id,
       user_id: @user.id)
       @artwork.images.attach(
@@ -135,8 +136,8 @@ class ArtworkTest < ActiveSupport::TestCase
     assert_not @artwork.valid?
   end
 
-  test "Subject should be present" do
-    @artwork.subject = "   "
+  test "Subject id should be present" do
+    @artwork.subject_id = nil
     assert_not @artwork.valid?
   end
 

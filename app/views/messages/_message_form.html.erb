@@ -2,6 +2,9 @@
 
     <div class="form-group">
       <%= f.text_area :content, placeholder: "Add a personal message", class: "form-control", required: true %>
+      <small class="form-text text-muted">
+        Never send any personal information or credit card details.
+      </small>
     </div>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <div class="actions">

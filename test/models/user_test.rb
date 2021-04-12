@@ -124,8 +124,9 @@ class UserTest < ActiveSupport::TestCase
 
   test "associated spaces should be destroyed" do
     @user.save
+    @type = types(:one)
     @space = @user.spaces.build(
-      venue_type: "Coffee Shop",
+      type_id: @type.id,
       category: "Wall Space",
       listing_name: "Lukas' Cafe",
       description: "Cozy coffee shop in the town center",
@@ -143,7 +144,8 @@ class UserTest < ActiveSupport::TestCase
 
   test "associated artworks should be destroyed" do
     @user.save
-    @style = styles(:one)
+    @style   = styles(:one)
+    @subject = subjects(:one)
     @artwork = @user.artworks.build(
       listing_name: "Moana Lisa",
       description: "This is the Hawaiian version of Mona Lisa",
@@ -156,7 +158,7 @@ class UserTest < ActiveSupport::TestCase
       price: "5000",
       status: "For Sale",
       is_framed: true,
-      subject: "Portrait",
+      subject_id: @subject.id,
       style_ids: @style.id)
       @artwork.images.attach(
         io: File.open('app/assets/images/skull.jpg'),

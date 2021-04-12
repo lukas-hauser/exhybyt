@@ -3,7 +3,7 @@ require 'csv'
 CSV.foreach(Rails.root.join('lib/seed_csv/faqs.csv'), headers: true) do |row|
   Faq.create( {
     question: row["Question"],
-    answer: row["Answer"],
+    answer:   row["Answer"],
     category: row["Category"],
   } )
 end
@@ -199,9 +199,9 @@ venue_types.each do |venue_type|
   Type.create!(name: venue_type)
 end
 
-#artwork_subjects.each do |artwork_subject|
-#  Subject.create!(name: artwork_subject)
-#end
+artwork_subjects.each do |artwork_subject|
+  Subject.create!(name: artwork_subject)
+end
 
 #artwork_materials.each do |artwork_material|
 #  Material.create!(name: artwork_material)
@@ -256,19 +256,19 @@ followers.each { |follower| follower.follow(user) }
 CSV.foreach(Rails.root.join('lib/seed_csv/lukas_hauser_art.csv'), headers: true) do |row|
   user = User.order(:created_at).take(5)[rand(0..4)]
   artwork = user.artworks.build(
-    style_ids:  row["style_ids"],
-    subject:    row["subject"],
-    category:   row["category"],
+    style_ids:    row["style_ids"],
+    subject:      Subject.all.sample,
+    category:     row["category"],
     listing_name: row["listing_name"],
     description:  row["description"],
-    medium:     row["medium"],
-    height:     row["height"],
-    width:      row["width"],
-    depth:      row["depth"],
-    year:       row["year"],
-    status:     row["status"],
-    is_framed:  row["framed"],
-    price:      row["price"])
+    medium:       row["medium"],
+    height:       row["height"],
+    width:        row["width"],
+    depth:        row["depth"],
+    year:         row["year"],
+    status:       row["status"],
+    is_framed:    row["framed"],
+    price:        row["price"])
     artwork.images.attach(
       io: URI.open(row["image_url"]),
       filename: 'photo.jpg',

@@ -1,5 +1,4 @@
 one:
-  venue_type: MyString
   category: MyString
   listing_name: MyString
   description: MyText
@@ -31,7 +30,6 @@ one:
   created_at: <%= 10.minutes.ago %>
 
 two:
-  venue_type: MyString
   category: MyString
   listing_name: MyString
   description: MyText
@@ -63,7 +61,6 @@ two:
   created_at: <%= 2.months.ago %>
 
 most_recent:
-  venue_type: MyString
   category: MyString
   listing_name: MyString
   description: MyText
@@ -95,7 +92,6 @@ most_recent:
   created_at: <%= Time.zone.now %>
 
 three:
-  venue_type: MyString
   category: MyString
   listing_name: MyString
   description: MyText
@@ -127,7 +123,6 @@ three:
   created_at: <%= 2.months.ago %>
 
 inactive_space:
-  venue_type: MyString
   category: MyString
   listing_name: MyString
   description: MyText
@@ -160,7 +155,6 @@ inactive_space:
 
 <% 40.times do |n| %>
 space_<%= n %>:
-  venue_type: "Coffee Shop"
   category: "Wall Space"
   listing_name: MyString
   description: MyString

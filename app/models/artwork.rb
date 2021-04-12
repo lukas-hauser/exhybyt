@@ -1,5 +1,6 @@
 class Artwork < ApplicationRecord
   belongs_to :user
+  belongs_to :subject
   has_many_attached :images
   has_many :orders
 
@@ -17,7 +18,6 @@ class Artwork < ApplicationRecord
   validates :year, presence: true, numericality: {only_integer: true}
   validates :medium, presence: true, length: { maximum: 60 }
   validates :status, presence: true
-  validates :subject, presence: true
 
   validates :height, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :width, presence: true, numericality: {only_float: true, :greater_than => 0}

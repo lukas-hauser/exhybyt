@@ -4,8 +4,9 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
   include ApplicationHelper
 
   def setup
-    @user = users(:jane)
-    @style = styles(:one)
+    @user    = users(:jane)
+    @style   = styles(:one)
+    @subject = subjects(:one)
     @artwork = artworks(:one)
   end
 
@@ -27,7 +28,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         price: "5000",
         status: "For Sale",
         is_framed: true,
-        subject: "Portrait",
+        subject_id: @subject.id,
         style_ids: [@style.id]} }
     end
     assert_select 'div#error_explanation'
@@ -48,7 +49,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
         price: "5000",
         status: "For Sale",
         is_framed: true,
-        subject: "Portrait",
+        subject_id: @subject.id,
         style_ids: [@style.id],
         images: fixture_file_upload("example.png", "image/png")} }
     end
@@ -74,7 +75,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     price = 5000
     status = "For Sale"
     is_framed = true
-    subject = "Portrait"
+    subject_id = @subject.id
     style_ids = [@style.id]
     patch artwork_path(first_art), params: { artwork: { listing_name: listing_name,
       description: description,
@@ -87,7 +88,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
       price: price,
       status: status,
       is_framed: is_framed,
-      subject: subject,
+      subject_id: @subject.id,
       style_ids: style_ids } }
     assert_not flash.empty?
     assert_redirected_to first_art
@@ -101,7 +102,7 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal depth,        first_art.depth
     assert_equal price,        first_art.price
     assert_equal medium,       first_art.medium
-    assert_equal subject,      first_art.subject
+    assert_equal subject_id,   first_art.subject_id
     assert_equal status,       first_art.status
     assert_equal style_ids,    first_art.style_ids
     assert_equal is_framed,    first_art.is_framed

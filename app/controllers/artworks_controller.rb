@@ -81,7 +81,7 @@ class ArtworksController < ApplicationController
       :price,
       :status,
       :is_framed,
-      :subject,
+      :subject_id,
       :images,
       style_ids: []
     )

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_140605) do
+ActiveRecord::Schema.define(version: 2021_04_12_080712) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,11 +59,11 @@ ActiveRecord::Schema.define(version: 2021_04_10_140605) do
     t.decimal "price", precision: 8, scale: 2
     t.string "status"
     t.boolean "is_framed", default: false
-    t.string "subject"
-    t.string "styles"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "subject_id", null: false
+    t.index ["subject_id"], name: "index_artworks_on_subject_id"
     t.index ["user_id"], name: "index_artworks_on_user_id"
   end
 
@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 2021_04_10_140605) do
   end
 
   create_table "spaces", force: :cascade do |t|
-    t.string "venue_type"
     t.string "category"
     t.string "listing_name"
     t.text "description"
@@ -205,6 +204,12 @@ ActiveRecord::Schema.define(version: 2021_04_10_140605) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -240,6 +245,7 @@ ActiveRecord::Schema.define(version: 2021_04_10_140605) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "artworks", "subjects"
   add_foreign_key "artworks", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
