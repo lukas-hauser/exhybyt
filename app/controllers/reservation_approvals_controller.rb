@@ -18,8 +18,8 @@ class ReservationApprovalsController < ApplicationController
     end
     reservation.approve
     reservation.send_request_approval_email
-    redirect_to @reservation
     flash[:success] = "Reservation approved."
+    redirect_to reservation
   end
 
   private
