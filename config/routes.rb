@@ -79,9 +79,6 @@ Rails.application.routes.draw do
   get 'reservation_success', to: 'reservations#success'
   get 'reservation_cancel',  to: 'reservations#cancel'
 
-  get 'reservation_approval_success', to: 'reservation_approvals#success'
-  get 'reservation_approval_cancel',  to: 'reservation_approvals#cancel'
-
   get 'order_success',       to: 'orders#success'
   get 'order_cancel',        to: 'orders#cancel'
 end

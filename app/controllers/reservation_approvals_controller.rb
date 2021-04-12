@@ -4,8 +4,6 @@ class ReservationApprovalsController < ApplicationController
   before_action :check_expiration
   before_action :payment_completed
   before_action :overlapping_dates
-  before_action :set_reservation,       only: [:success, :cancel]
-
 
   def edit
     reservation = Reservation.find(params[:id])
@@ -16,30 +14,15 @@ class ReservationApprovalsController < ApplicationController
     else
       Stripe::PaymentIntent.capture(
         reservation.payment_intent_id,
-        success_url: "#{reservation_approval_success_url}?payment_intent_id={PAYMENT_INTENT_ID}",
-        cancel_url: "#{reservation_approval_cancel_url}?payment_intent_id={PAYMENT_INTENT_ID}",
       )
     end
-    redirect_to reservation
-  end
-
-  def success
     reservation.approve
     reservation.send_request_approval_email
     redirect_to @reservation
     flash[:success] = "Reservation approved."
   end
 
-  def cancel
-    redirect_to @reservation
-    flash[:danger] = "Something went wrong. The payment couldn't be processed and the booking was cancelled."
-  end
-
   private
-
-    def set_reservation
-      @reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-    end
 
     # Confirms that user is reservation space listing owner
     def correct_user
