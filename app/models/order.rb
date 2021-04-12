@@ -12,12 +12,12 @@ class Order < ApplicationRecord
 
   # Sends order confirmation email
   def send_order_confirmation_email
-    OrderMailer.request_confirmation(self).deliver_now
+    OrderMailer.order_confirmation(self).deliver_now
   end
 
   # Sends order notification email
   def send_order_notification_email
-    OrderMailer.request_notification(self).deliver_now
+    OrderMailer.order_notification(self).deliver_now
   end
 
 end
