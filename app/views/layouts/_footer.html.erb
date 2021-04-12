@@ -67,7 +67,13 @@
     <span class="text-muted">
       <%= link_to "Terms", terms_path, class:"text-muted" %> |
       <%= link_to "Cookie Policy", cookiepolicy_path, class:"text-muted" %> |
-      <%= link_to "Privacy Policy", privacypolicy_path, class:"text-muted" %>
+      <%= link_to "Privacy Policy", privacypolicy_path, class:"text-muted" %> |
+        <a class="text-muted" href="https://app.termly.io/notify/8df66e0c-e37a-4958-bf91-a2f044200ae3">
+        Do not sell my info
+      </a>
     </span>
+  </div>
+  <div class="container mt-2 center">
+    <button class="btn btn-sm btn-outline-secondary termly-cookie-preference-button" type="button" onclick="displayPreferenceModal()">Manage Cookie Preferences</button>
   </div>
 </footer>

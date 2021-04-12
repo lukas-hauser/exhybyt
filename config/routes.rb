@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'art',            to: 'html_pages#browse_art'
   get 'howitworks',     to: 'html_pages#howitworks'
   get 'faq',            to: 'html_pages#faq'
+  get 'dpa',            to: 'html_pages#dpa'
   get '/signup',        to: 'users#new'
   get '/login',         to: 'sessions#new'
   get '/preload',       to: 'reservations#preload'
