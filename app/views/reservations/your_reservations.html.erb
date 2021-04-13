@@ -35,7 +35,7 @@
                   <% elsif reservation.booking_request_expired? %>
                     <p class="card-text small">Expired</p>
                   <% elsif reservation.payment_intent_cancelled? %>
-                    <p>Payment cancelled.</p>
+                    <p class="card-text small">Payment cancelled</p>
                   <% else %>
                     <div class="btn-group">
                       <%= link_to "Approve", edit_reservation_approval_url(reservation), data: { confirm: "Are you sure?" }, class:"btn btn-sm btn-outline-secondary" %>
