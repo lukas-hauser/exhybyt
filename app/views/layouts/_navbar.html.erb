@@ -13,6 +13,17 @@
     </ul>
     <ul class="navbar-nav navbar-right">
       <% if logged_in? %>
+        <% if !current_user.stripe_user_id && (current_user.spaces.where(active: true).any? || current_user.artworks.where(status:"For Sale").any?) %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown" href="current_user" id="Notifications" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: Tomato">
+              <i class="fas fa-bell"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Connect with Stripe to accept payments", stripe_button_link, class:"dropdown-item" %>
+            </div>
+          </li>
+        <% end %>
+
         <li class="nav-item">
           <%= link_to conversations_path, class:"nav-link" do %>
             <i class="far fa-envelope"></i>
