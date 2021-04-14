@@ -7,12 +7,11 @@
 			<div class="card">
 				<h5 class="card-header">Messages</h5>
 				<ul class="list-group list-group-flush">
-          <% if @conversations.any? %>
-  					<% @conversations.each do |conversation| %>
+					<% @conversations.each do |conversation| %>
+            <% if conversation.messages.any? %>
   						<li class="list-group-item">
   							<% other = conversation.sender == current_user ? conversation.recipient : conversation.sender %>
   							<%= link_to conversation_messages_path(conversation), class:"text-dark" do %>
-
   								<div class="row conversation">
   									<div class="col-md-1">
   										<%= gravatar_for(other, size: 40) %>
@@ -29,8 +28,8 @@
   								</div>
     						<% end %>
               </li>
-  					<% end %>
-          <% end %>
+            <% end %>  
+					<% end %>
 				</ul>
 			</div>
     </main>

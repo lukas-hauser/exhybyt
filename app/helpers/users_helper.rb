@@ -12,4 +12,16 @@ module UsersHelper
 
     "#{stripe_url}?redirect_uri=#{redirect_uri}&client_id=#{client_id}"
   end
+
+  def needs_stripe?
+    !current_user.stripe_user_id? && (current_user.spaces.where(active: true).any? ||
+    current_user.artworks.where(status:"For Sale").any?)
+  end
+
+  def pending_reservations?
+    @spaces = current_user.spaces
+    @spaces.each do |space|
+      space.reservations.where("(approved = ? OR rejected = ?) AND payment_completed = ? AND created_at < ? AND status != ?", false, false, true, 48.hours.ago,"Payment Intent Cancelled").any?
+    end
+  end
 end
