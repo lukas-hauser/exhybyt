@@ -221,17 +221,8 @@ User.create!(firstname: "Test",
   activated: true,
   activated_at: Time.zone.now)
 
-# Create non-admin demo user
-User.create!(firstname: "Demo",
-  lastname: "User", email: "demo@demouser.com",
-  password: "exhybyt",
-  password_confirmation: "exhybyt",
-  currency: "gbp",
-  activated: true,
-  activated_at: Time.zone.now)
-
 # Bulk generate test users
-99.times do |n|
+10.times do |n|
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
   email = "example-#{n+1}@testuser.com"
@@ -243,6 +234,7 @@ User.create!(firstname: "Demo",
     password_confirmation: password,
     currency: "gbp",
     activated: true,
+    bio: "This is a sample user",
     activated_at: Time.zone.now)
 end
 
@@ -254,7 +246,7 @@ following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
 CSV.foreach(Rails.root.join('lib/seed_csv/lukas_hauser_art.csv'), headers: true) do |row|
-  user = User.order(:created_at).take(5)[rand(0..4)]
+  user = User.first
   artwork = user.artworks.build(
     style_ids:    row["style_ids"],
     subject:      Subject.all.sample,
@@ -277,7 +269,7 @@ CSV.foreach(Rails.root.join('lib/seed_csv/lukas_hauser_art.csv'), headers: true)
 end
 
 space_n = 1
-25.times do
+10.times do
   user            = User.order(:created_at).take(5)[rand(0..4)]
   type            = Type.all.sample
   category        = ["Wall Space","Window Display","Entire Gallery"].sample

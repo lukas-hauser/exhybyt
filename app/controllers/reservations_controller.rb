@@ -155,7 +155,7 @@ class ReservationsController < ApplicationController
     # Confirms Space Listing Owner is ready to accept payments
     def stripe_ready
       @space = Space.find(params[:space_id])
-      if @space.user.stripe_user_id.empty?
+      if @space.user.stripe_user_id.nil?
         redirect_to root_url
         flash[:danger] = "This space is not ready yet to accept payments. Stay tuned.."
       end

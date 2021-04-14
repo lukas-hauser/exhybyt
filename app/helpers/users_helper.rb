@@ -19,9 +19,8 @@ module UsersHelper
   end
 
   def pending_reservations?
-    @spaces = current_user.spaces
-    @spaces.each do |space|
-      space.reservations.where("(approved = ? AND rejected = ?) AND payment_completed = ? AND created_at < ? AND status != ?", false, false, true, 48.hours.ago, "Payment Intent Cancelled").any?
-    end
+#    current_user.spaces.each do |space|
+#      space.reservations.where("approved = ? AND rejected = ? AND payment_completed = ? AND created_at > ? AND status != ?", false, false, true, 48.hours.ago, "Payment Intent Cancelled").any?
+#    end
   end
 end
