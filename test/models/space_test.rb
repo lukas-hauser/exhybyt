@@ -115,8 +115,10 @@ class SpaceTest < ActiveSupport::TestCase
     assert_not @space.valid?
   end
 
-  test "Price should be greater than 0" do
+  test "Price should be greater than or equal to 1" do
     @space.price = 0
+    assert_not @space.valid?
+    @space.price = 0.9
     assert_not @space.valid?
     @space.price = -1
     assert_not @space.valid?

@@ -107,10 +107,12 @@ class ArtworkTest < ActiveSupport::TestCase
     assert_not @artwork.valid?
   end
 
-  test "Price should be a positive number" do
+  test "Price should be greater than or equal to 1" do
     @artwork.price = -5
     assert_not @artwork.valid?
     @artwork.price = 0
+    assert_not @artwork.valid?
+    @artwork.price = 0.9
     assert_not @artwork.valid?
   end
 

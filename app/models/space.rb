@@ -23,8 +23,8 @@ class Space < ApplicationRecord
   validates :category, presence: true
   validates :wall_height, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :wall_width, presence: true, numericality: {only_float: true, :greater_than => 0}
-  validates :price, presence: true, numericality: {only_float: true, :greater_than => 0}
-  validates :days_min, presence: true, numericality: {only_integer: true, :greater_than => 0}
+  validates :price, presence: true, numericality: {:greater_than_or_equal_to => 1}
+  validates :days_min, presence: true, numericality: {only_integer: true, :greater_than_or_equal_to => 1}
 
   validates :images, presence: true,
                     content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)." },

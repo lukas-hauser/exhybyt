@@ -6,7 +6,7 @@
       Total Price: <%= @order.currency.upcase %> <%= @order.total %><br>
     </p>
 
-    <%= link_to image_tag(@order.artwork.images[0], size:100), @order.artwork %>
+    <%= link_to image_tag(@order.artwork.images[0], size:100, style:"object-fit:cover"), @order.artwork %>
 
     <p>
       Artist:

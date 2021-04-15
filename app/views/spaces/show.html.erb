@@ -45,7 +45,7 @@
 
 <!--Reviews -->
 <div class="container mb-5 center">
-  <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+  <h5><span id="average_rating"></span> <%= pluralize(@reviews.count, "Review") %> </h5>
   <%= render 'reviews/list' %>
 </div>
 

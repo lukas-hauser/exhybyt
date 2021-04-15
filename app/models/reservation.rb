@@ -6,8 +6,8 @@ class Reservation < ApplicationRecord
   has_many :artworks, through: :reservation_artworks
   has_many :reviews
 
-  validates :price, presence: true
-  validates :total, presence: true
+  validates :price, presence: true, numericality: {:greater_than => 1}
+  validates :total, presence: true, numericality: {:greater_than => 1}
   validates :user_id, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
