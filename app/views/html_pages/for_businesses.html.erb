@@ -28,3 +28,20 @@
     </div>
   </div>
 </div>
+
+<div class="center jumbotron">
+  <h1>We are making exhibition space more accessible.</h1>
+  <h2>
+    No matter what type of business, we allow you to rent out your wall space to generate an additional revenue stream.
+    You curate, approve and display only artwork that you like and don't have to take care of artwork sales.
+  </h2>
+
+  <% if logged_in? %>
+    <%= link_to "Add a Space", new_space_path, class: "btn btn-secondary" %>
+  <% end %>
+
+  <% unless logged_in? %>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-primary" %>
+  <% end %>
+
+</div>

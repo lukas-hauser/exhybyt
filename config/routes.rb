@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/about',         to: 'html_pages#about'
   get '/for_businesses',to: 'html_pages#for_businesses'
   get '/for_artists',   to: 'html_pages#for_artists'
+  get '/for_art_lovers',to: 'html_pages#for_art_lovers'
   get '/terms',         to: 'html_pages#terms'
   get '/privacypolicy', to: 'html_pages#privacypolicy'
   get '/cookiepolicy',  to: 'html_pages#cookiepolicy'

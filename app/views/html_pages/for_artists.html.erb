@@ -35,11 +35,12 @@
     Various types of businesses offer their wall spaces online. You can pick your preferred type and choose from various sizes of wall space.
   </h2>
 
-  <%= link_to "Find Space", search_path, class: "btn btn-primary" %>
-  <%= link_to "Upload Art", new_artwork_path, class: "btn btn-secondary" %>
-
+  <%= link_to "Find Space", search_path, class: "btn btn-secondary" %>
+  <% if logged_in? %>
+    <%= link_to "Upload Art", new_artwork_path, class: "btn btn-primary" %>
+  <% end %>
   <% unless logged_in? %>
-    <%= link_to "Sign Up", signup_path, class: "btn btn-secondary" %>
+    <%= link_to "Sign Up", signup_path, class: "btn btn-primary" %>
   <% end %>
 
 </div>

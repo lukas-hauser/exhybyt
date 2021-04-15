@@ -1,0 +1,6 @@
+<%= @order.artwork.listing_name %>
+
+Total Price: <%= @order.currency.upcase %> <%= @order.total %>
+
+Artist: <%= @order.artwork.user.display_name %>
+Buyer: <%= @order.user.display_name %>

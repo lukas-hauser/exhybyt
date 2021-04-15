@@ -1,0 +1,22 @@
+<%= @reservation.space.listing_name %>
+
+Total Price: <%= @reservation.currency.upcase %> <%= @reservation.total %>
+<%= @reservation.start_date.strftime("%d %b %Y") %> to <%= @reservation.end_date.strftime("%d %b %Y") %>
+
+Artist: <%= @reservation.user.display_name %>
+Host: <%= @reservation.space.user.display_name %>
+
+Status:
+<% if !@reservation.payment_completed? %>
+Incomplete booking request. Please try again.
+<% elsif @reservation.approved? %>
+Approved
+<% elsif @reservation.rejected? %>
+Rejected
+<% elsif @reservation.booking_request_expired? %>
+Booking request expired
+<% else %>
+Awaiting response
+<% end %>
+
+<%= reservation_url(@reservation) %>

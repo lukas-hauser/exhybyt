@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="container center">
+    <h5><%= @order.artwork.listing_name %></h5>
+
+    <p>
+      Total Price: <%= @order.currency.upcase %> <%= @order.total %><br>
+    </p>
+
+    <%= link_to image_tag(@order.artwork.images[0], size:100), @order.artwork %>
+
+    <p>
+      Artist:
+      <%= @order.artwork.user.display_name %>
+    </p>
+    <p>
+      Buyer:
+      <%= @order.user.display_name %>
+    </p>
+  </div>
+</div>

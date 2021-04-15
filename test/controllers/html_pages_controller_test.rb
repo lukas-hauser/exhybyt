@@ -25,6 +25,12 @@ class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "For Artists | EXHYBYT"
   end
 
+  test "should get for art lovers" do
+    get for_art_lovers_path
+    assert_response :success
+    assert_select "title", "For Art Lovers | EXHYBYT"
+  end
+
   test "should get terms" do
     get terms_path
     assert_response :success
