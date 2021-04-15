@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_080712) do
+ActiveRecord::Schema.define(version: 2021_04_15_072314) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(version: 2021_04_12_080712) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "reservation_id", null: false
+    t.index ["reservation_id"], name: "index_reviews_on_reservation_id"
     t.index ["space_id"], name: "index_reviews_on_space_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -253,6 +255,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_080712) do
   add_foreign_key "orders", "users"
   add_foreign_key "reservations", "spaces"
   add_foreign_key "reservations", "users"
+  add_foreign_key "reviews", "reservations"
   add_foreign_key "reviews", "spaces"
   add_foreign_key "reviews", "users"
   add_foreign_key "spaces", "types"

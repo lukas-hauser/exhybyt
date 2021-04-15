@@ -1,4 +1,4 @@
-<%= form_with model: [@space, @space.reviews.new], local: true do | f | %>
+<%= form_with model: [@reservation, @reservation.reviews.new], local: true do | f | %>
   <%= render 'shared/error_messages', object: f.object %>
   <h3>Leave your review</h3>
   <div class="form-group">
@@ -8,7 +8,6 @@
     <%= f.label :comment %>
     <%= f.text_area :comment, class: "form-control", required: true, maxlength: 1000 %>
   </div>
-  <%= f.hidden_field :space_id, value: @space.id %>
   <div class="form-group">
     <%= f.submit "Add Review", class: "btn btn-primary" %>
   </div>

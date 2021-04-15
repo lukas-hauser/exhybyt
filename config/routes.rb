@@ -62,7 +62,11 @@ Rails.application.routes.draw do
   end
 
   resources :spaces do
-    resources :reviews,               only: [:create, :destroy], shallow: true
+    resources :reviews,               only: [:destroy], shallow: true
+  end
+
+  resources :reservations do
+    resources :reviews,               only: [:create], shallow: true
   end
 
   resources :reservation_approvals,   only: [:edit]

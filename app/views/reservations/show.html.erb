@@ -32,7 +32,7 @@
       Total Price: <%= @reservation.currency.upcase %> <%= @reservation.total %><br>
       <%= @reservation.start_date.strftime("%d %b %Y") %> to <%= @reservation.end_date.strftime("%d %b %Y") %><br>
     </p>
-    <div class="card-columns">
+    <div class="card-columns d-flex ">
       <% @reservation.artworks.each do |artwork| %>
         <div class="card">
           <div class="card-image">
@@ -49,5 +49,13 @@
       Host:
       <%= @reservation.space.user.display_name %>
     </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="container center">
+    <div class="col-md-6 offset-md-3">
+      <%= render 'reviews/form' if current_user?(@reservation.user) && @reservation.payment_captured? && !@reservation.reviews.any? %>
+    </div>
   </div>
 </div>

@@ -33,6 +33,11 @@ class ReviewTest < ActiveSupport::TestCase
     assert_not @review.valid?
   end
 
+  test "Reservation id should be present" do
+    @review.reservation_id = nil
+    assert_not @review.valid?
+  end
+
   test "Space id should be present" do
     @review.space_id = nil
     assert_not @review.valid?

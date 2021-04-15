@@ -47,7 +47,6 @@
 <div class="container mb-5 center">
   <h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
   <%= render 'reviews/list' %>
-  <%= render 'reviews/form' if @booked && !@hasReview %>
 </div>
 
 <!-- Google Map -->

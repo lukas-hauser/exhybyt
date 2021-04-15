@@ -32,6 +32,8 @@
                 <p class="card-text text-danger small">Rejected</p>
               <% elsif booking.booking_request_expired? %>
                 <p class="card-text small">Expired</p>
+              <% elsif booking.payment_intent_cancelled? %>
+                <p class="card-text small">Payment cancelled</p>
               <% else %>
                 <p class="card-text small">Awaiting response from space</p>
               <% end %>

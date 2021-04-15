@@ -3,6 +3,7 @@ one:
   star: 5
   space: one
   user: lukas
+  reservation: one
   created_at: <%= 20.minutes.ago %>
 
 two:
@@ -10,6 +11,7 @@ two:
   star: 4
   space: two
   user: jane
+  reservation: two
   created_at: <%= 10.minutes.ago %>
 
 most_recent:
@@ -17,4 +19,5 @@ most_recent:
   star: 5
   space: one
   user: jane
+  reservation: most_recent
   created_at: <%= Time.zone.now %>

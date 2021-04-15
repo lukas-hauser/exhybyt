@@ -4,6 +4,7 @@ class Reservation < ApplicationRecord
 
   has_many :reservation_artworks
   has_many :artworks, through: :reservation_artworks
+  has_many :reviews
 
   validates :price, presence: true
   validates :total, presence: true
