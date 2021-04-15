@@ -234,7 +234,7 @@ User.create!(firstname: "Test",
     password_confirmation: password,
     currency: "gbp",
     activated: true,
-    bio: "This is a sample user",
+    bio: "This is a sample user.",
     activated_at: Time.zone.now)
 end
 

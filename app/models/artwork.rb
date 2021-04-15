@@ -23,7 +23,7 @@ class Artwork < ApplicationRecord
   validates :width, presence: true, numericality: {only_float: true, :greater_than => 0}
   validates :depth, numericality: {only_float: true, :greater_than => 0, allow_blank: true}
   validates :price, presence: true, if: :for_sale?,
-                    numericality: {:greater_than_or_equal_to => 1}
+                    numericality: {:greater_than_or_equal_to => 5}
 
   default_scope -> { order(created_at: :desc) }
 

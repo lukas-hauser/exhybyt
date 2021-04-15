@@ -2,9 +2,9 @@ class Order < ApplicationRecord
   belongs_to :artwork
   belongs_to :user
 
-  validates :price, presence: true, numericality: {:greater_than_or_equal_to => 1}
+  validates :price, presence: true, numericality: {:greater_than_or_equal_to => 5}
   validates :delivery_fee, presence: true
-  validates :total, presence: true, numericality: {:greater_than_or_equal_to => 1}
+  validates :total, presence: true, numericality: {:greater_than_or_equal_to => 5}
   validates :user_id, presence: true
   validates :currency, presence: true
 
