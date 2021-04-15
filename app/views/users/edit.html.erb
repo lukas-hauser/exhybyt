@@ -4,7 +4,7 @@
 <%= render 'shared/error_messages', object: f.object %>
   <h1>Update Profile</h1>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 offset-md-3">
       <h2>Profile Settings</h2>
       <div class="form-group">
         <%= f.label :firstname %>
@@ -17,7 +17,10 @@
 
       <div class="form-group">
         <%= f.label :email %>
-        <%= f.email_field :email, class: "form-control", placeholder:"Email Address", required: true %>
+        <%= f.email_field :email, class: "form-control", placeholder:"Email Address", required: true, disabled: true %>
+        <small class="form-text text-muted">
+          Please contact us if you need to update your email address.
+        </small>
       </div>
       <div class="form-group">
         <%= f.label :password %>
@@ -42,9 +45,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="col-md-6">
       <h2>Public Profile</h2>
       <div class="form-group">
         <%= f.label :instagram %>
@@ -84,19 +84,21 @@
     </div>
   </div>
 
-<% end %>
+  <div class="row mt-2">
+    <div class="col-md-6 offset-md-5">
+      <div class="container mb-2">
+        <%= gravatar_for @user, size:25 %>
+        <a href="https://gravatar.com/emails" target="_blank" >Change Avatar</a>
+      </div>
+      <div class="container">
+        <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
+        <% if @user.stripe_user_id %>
+          <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle" %>
+        <% else %>
+          <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <%= gravatar_for @user, size:50 %>
-    <a href="https://gravatar.com/emails" target="_blank">Change Avatar</a>
-  </div>
-  <div class="col-md-6">
-    <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
-    <% if @user.stripe_user_id %>
-      <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle" %>
-    <% else %>
-      <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
-    <% end %>
-  </div>
-</div>
+<% end %>
