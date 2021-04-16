@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount StripeEvent::Engine, at: '/stripe-webhooks'
   get 'password_resets/new'
   get 'password_resets/edit'
+  get '/qr',            to: 'html_pages#home'
   get '/home',          to: 'html_pages#home'
   get '/about',         to: 'html_pages#about'
   get '/for_businesses',to: 'html_pages#for_businesses'
