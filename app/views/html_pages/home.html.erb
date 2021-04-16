@@ -2,9 +2,9 @@
 <% provide(:pageheader, render('search_form')) %>
 
 <% if logged_in? %>
-  <%= render 'shared/space_feed' %>
+  <%= render 'spaces/featured' %>
   <br>
-  <%= render 'shared/art_feed' %>
+  <%= render 'artworks/featured'%>
   <br>
 <% else %>
   <div class="center jumbotron">

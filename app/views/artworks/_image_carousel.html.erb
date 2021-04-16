@@ -7,7 +7,7 @@
         <ol class="carousel-indicators">
           <% i=0 %>
           <% @artwork.images.each do %>
-            <li data-target="#myCarousel" data-slide-to="<%= i %>"<%= ' class="active"' if i == 0 %>></li>
+            <li data-target="#myCarousel" data-slide-to="<%= i %>" class="<%= 'active' if i == 0 %>"></li>
             <% i+=1 %>
           <% end %>
         </ol>

@@ -32,7 +32,7 @@
         <ol class="carousel-indicators">
           <% i=0 %>
           <% @reservation.artworks.each do %>
-            <li data-target="#myCarousel" data-slide-to="<%= i %>"<%= ' class="active"' if i == 0 %>></li>
+            <li data-target="#myCarousel" data-slide-to="<%= i %>" class="<%= 'active' if i == 0 %>"></li>
             <% i+=1 %>
           <% end %>
         </ol>
@@ -54,7 +54,7 @@
           <% i=0 %>
           <% @reservation.artworks.each do |artwork| %>
             <div class="carousel-item<%= ' active' if i == 0 %>" alt:"...">
-              <%= image_tag artwork.images[0], class:"img-fluid carousel-full-width-image" %>
+              <%= link_to image_tag(artwork.images[0], class:"img-fluid carousel-full-width-image"), artwork %>
             </div>
             <% i+=1 %>
           <% end %>

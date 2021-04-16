@@ -1,6 +1,6 @@
 <% if @space_feed_items.any? %>
-  <h1>Spaces</h1>
-  <h2><%= link_to "See more spaces", search_path, class: "text-muted" %></h2>
+  <h1>Featured Spaces</h1>
+  <h2><%= link_to "Discover more spaces", search_path, class: "text-muted" %></h2>
   <div class="card-columns">
     <%= render @space_feed_items.take(3) %>
   </div>
