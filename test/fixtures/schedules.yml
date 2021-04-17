@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  opens_at: 2021-04-17 13:00:11
+  closes_at: 2021-04-17 13:00:11
+  weekday: 1
+  space: one
+
+two:
+  opens_at: 2021-04-17 13:00:11
+  closes_at: 2021-04-17 13:00:11
+  weekday: 1
+  space: two

@@ -148,6 +148,19 @@
   </div>
 
   <div class="form-group">
+    <h3>Days Open:</h3>
+    <% weekdays.each do |day| %>
+      <%= f.fields_for :schedules, f.object.schedules.find_or_initialize_by(weekday: day[:value]) do |sched| %>
+        <%= sched.hidden_field :weekday %>
+        <div class="checkbox">
+          <%= sched.check_box :_destroy, {checked: sched.object.persisted?}, "0", "1" %>
+          <%= sched.label :_destroy, day[:label] %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
     <div class="custom-control custom-switch">
       <%= f.check_box :active, class:"custom-control-input", id:"active" %>
       <label class="custom-control-label" for="active">Active</label>

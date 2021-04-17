@@ -99,7 +99,14 @@ class SpacesController < ApplicationController
       :images,
       :active,
       :days_min,
-      :type_id
+      :type_id,
+      schedules_attributes: [
+        :id,
+        :opens_at,
+        :closes_at,
+        :weekday,
+        :_destroy,
+      ]
     )
   end
 

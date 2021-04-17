@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_072314) do
+ActiveRecord::Schema.define(version: 2021_04_17_120011) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -163,6 +163,16 @@ ActiveRecord::Schema.define(version: 2021_04_15_072314) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.time "opens_at"
+    t.time "closes_at"
+    t.integer "weekday"
+    t.integer "space_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["space_id"], name: "index_schedules_on_space_id"
+  end
+
   create_table "spaces", force: :cascade do |t|
     t.string "category"
     t.string "listing_name"
@@ -258,6 +268,7 @@ ActiveRecord::Schema.define(version: 2021_04_15_072314) do
   add_foreign_key "reviews", "reservations"
   add_foreign_key "reviews", "spaces"
   add_foreign_key "reviews", "users"
+  add_foreign_key "schedules", "spaces"
   add_foreign_key "spaces", "types"
   add_foreign_key "spaces", "users"
 end

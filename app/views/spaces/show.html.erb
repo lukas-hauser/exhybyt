@@ -10,7 +10,14 @@
       <p>Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
       <p>Price: <%= @space.user.currency.upcase %> <%= @space.price %> per day</p>
       <p>Minumum Booking Period: <%= pluralize(@space.days_min, "Day") %></p>
+      <p><%= "Open on Weekends" if @space.open_weekends? %></p>
       <p>Hosted by <%= link_to @space.user.display_name, @space.user, class:"text-muted" %></p>
+      <p>
+        Days open:
+        <% @space.schedules.each do |day| %>
+          <span class="badge badge-pill badge-secondary"><%= t(day.weekday) %></span>
+        <% end %>
+      </p>
 
       <p><%= @space.description %></p>
     </div>

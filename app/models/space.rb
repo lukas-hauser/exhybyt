@@ -11,6 +11,13 @@ class Space < ApplicationRecord
     end
   end
 
+  has_many :schedules
+  accepts_nested_attributes_for :schedules, allow_destroy: true
+
+  def open_weekends?
+    schedules.exists?(weekday: [6,7])
+  end
+
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
