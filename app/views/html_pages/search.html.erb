@@ -147,7 +147,7 @@
           <%= f.submit "Search", class:"btn btn-block btn-primary", name:'' %>
         </div>
         <div class="col">
-          <%= link_to "Clear", search_path, class:"btn btn-block btn-secondary" %>
+          <%= link_to "Clear", request.path, class:"btn btn-block btn-secondary" %>
         </div>
       </div>
 
@@ -169,7 +169,10 @@
         <% end %>
         <div class="card-body">
           <h5 class="card-title"><%= space.listing_name %></h5>
-          <p class="card-text"><%= space.type.name %> | <%= space.category %></p>
+          <p class="card-text"><%= space.type.name %> | <%= space.category %>
+            <span class="badge badge-pill badge-secondary"><%= "Open Weekends" if space.open_weekends? %></span>
+
+          </p>
           <p class="card-text small">
             Price: <%= space.user.currency.upcase %> <%= space.price %> per day<br>
             <%= space.wall_width %> x <%= space.wall_height %> cm<br>
