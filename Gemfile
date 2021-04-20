@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.3'
 gem 'rails',                      '~> 6.1.1', '>= 6.0.3.4'
 gem 'aws-sdk-s3',                 '~> 1.86.0', require: false
 gem 'image_processing',           '~> 1.12.1'
