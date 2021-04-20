@@ -4,7 +4,7 @@ class HtmlPagesController < ApplicationController
       @space_feed_items = (current_user.space_feed).where(active:true).paginate(page: params[:page])
       @art_feed_items = (current_user.art_feed).paginate(page: params[:page])
     end
-    @featured_artworks = Artwork.take(10)
+    @featured_artworks = Artwork.where(featured:true).take(10)
     @featured_spaces   = Space.take(3)
   end
 
