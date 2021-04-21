@@ -24,8 +24,7 @@ module ApplicationHelper
   end
 
   def artwork_categories
-    [["Advertisement","Advertisement"],
-    ["Drawing","Drawing"],
+    [["Drawing","Drawing"],
     ["Painting","Painting"],
     ["Photography","Photography"],
     ["Sculpture","Sculpture"]]

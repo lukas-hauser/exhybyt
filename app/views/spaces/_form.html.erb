@@ -68,28 +68,20 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group mb-4">
     <h3>We show:</h3>
     <div class="row">
       <div class="col">
-        <div class="form-check">
-          <%= f.check_box :is_adverts, class:"form-check-input", id:"adverts" %>
-          <label class="form-check-label" for="adverts">Advertisement</label>
-        </div>
         <div class="form-check">
           <%= f.check_box :is_drawings, class:"form-check-input", id:"drawings" %>
           <label class="form-check-label" for="drawings">Drawings</label>
         </div>
         <div class="form-check">
-          <%= f.check_box :is_live_perf, class:"form-check-input", id:"live_perf" %>
-          <label class="form-check-label" for="live_perf">Live Performance</label>
-        </div>
-      </div>
-      <div class="col">
-        <div class="form-check">
           <%= f.check_box :is_paintings, class:"form-check-input", id:"paintings" %>
           <label class="form-check-label" for="paintings">Paintings</label>
         </div>
+      </div>
+      <div class="col">
         <div class="form-check">
           <%= f.check_box :is_photography, class:"form-check-input", id:"photography" %>
           <label class="form-check-label" for="photography">Photography</label>
