@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-4 offset-md-2">
 					<div class="form-group">
-						<%= text_field_tag :search, params[:search], placeholder: "Where do you want to exhibit?", class: "form-control shadow" %>
+						<%= text_field_tag :search, params[:search], placeholder: "Where do you want to exhibit?", class: "form-control shadow", id:"search_term" %>
 					</div>
 				</div>
 				<div class="col-md-2">
@@ -24,3 +24,14 @@
 		</div>
 	<% end %>
 </div>
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAPS_API_KEY'] %>&libraries=places&callback=activatePlacesSearch">
+</script>
+
+<script>
+	function activatePlacesSearch(){
+		var text_field_tag = document.getElementById('search_term');
+		var autocomplete = new google.maps.places.Autocomplete(text_field_tag);
+	}
+</script>
