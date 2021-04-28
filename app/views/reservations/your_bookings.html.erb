@@ -5,42 +5,49 @@
     <%= render 'layouts/sidebar' %>
     <main class="col-md-9 ms-sm-auto">
       <h1 class="text-left">Your Bookings</h1>
-      <div class="card-columns">
-        <% @bookings.each do |booking| %>
-          <div class="card">
-            <% if booking.space.images.attached? %>
-              <%= link_to image_tag(booking.space.images[0], class:"card-img card-img-md"), booking %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= booking.space.listing_name %></h5>
-              <p class="card-text small">
-                Total Price: <%= booking.currency.upcase %> <%= booking.total %><br>
-                <%= booking.start_date.strftime("%d %b %Y") %> to <%= booking.end_date.strftime("%d %b %Y") %><br>
-              </p>
-              <p class="card-text small">
-                <%= link_to gravatar_for(booking.space.user, size: 25), booking.space.user %>
-                <%= booking.space.user.display_name %>
-              </p>
-              <p>
-                <% booking.artworks.each do |artwork| %>
-                 <%= link_to image_tag(artwork.images[0], width: 50), artwork %>
-                <% end %>
-              </p>
-              <% if booking.approved? %>
-                <p class="card-text text-success small">Approved</p>
-              <% elsif booking.rejected? %>
-                <p class="card-text text-danger small">Rejected</p>
-              <% elsif booking.booking_request_expired? %>
-                <p class="card-text small">Expired</p>
-              <% elsif booking.payment_intent_cancelled? %>
-                <p class="card-text small">Payment cancelled</p>
-              <% else %>
-                <p class="card-text small">Awaiting response from space</p>
+      <% if @bookings.any? %>
+        <div class="card-columns">
+          <% @bookings.each do |booking| %>
+            <div class="card">
+              <% if booking.space.images.attached? %>
+                <%= link_to image_tag(booking.space.images[0], class:"card-img card-img-md"), booking %>
               <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= booking.space.listing_name %></h5>
+                <p class="card-text small">
+                  Total Price: <%= booking.currency.upcase %> <%= booking.total %><br>
+                  <%= booking.start_date.strftime("%d %b %Y") %> to <%= booking.end_date.strftime("%d %b %Y") %><br>
+                </p>
+                <p class="card-text small">
+                  <%= link_to gravatar_for(booking.space.user, size: 25), booking.space.user %>
+                  <%= booking.space.user.display_name %>
+                </p>
+                <p>
+                  <% booking.artworks.each do |artwork| %>
+                   <%= link_to image_tag(artwork.images[0], width: 50), artwork %>
+                  <% end %>
+                </p>
+                <% if booking.approved? %>
+                  <p class="card-text text-success small">Approved</p>
+                <% elsif booking.rejected? %>
+                  <p class="card-text text-danger small">Rejected</p>
+                <% elsif booking.booking_request_expired? %>
+                  <p class="card-text small">Expired</p>
+                <% elsif booking.payment_intent_cancelled? %>
+                  <p class="card-text small">Payment cancelled</p>
+                <% else %>
+                  <p class="card-text small">Awaiting response from space</p>
+                <% end %>
+              </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>
+          There are no bookings yet.
+          <span><%= link_to "Find a Space", search_path, class:"btn btn-sm btn-primary" %></span>
+        </p>
+      <% end %>
     </main>
   </div>
 </div>

@@ -5,9 +5,14 @@
     <%= render 'layouts/sidebar' %>
     <main class="col-md-9 ms-sm-auto">
       <h1 class="text-left">Your Artwork</h1>
-      <div class="card-columns">
-        <%= render @artworks %>
-      </div>
+      <% if @artworks.any? %>
+        <div class="card-columns">
+          <%= render @artworks %>
+        </div>
+      <% else %>
+        You haven't added any art yet.
+        <%= link_to "Add Art", new_artwork_path, class:"btn btn-sm btn-primary" %>
+      <% end %>
     </main>
   </div>
 </div>

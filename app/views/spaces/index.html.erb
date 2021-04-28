@@ -5,9 +5,14 @@
     <%= render 'layouts/sidebar' %>
     <main class="col-md-9 ms-sm-auto">
       <h1 class="text-left">Your Spaces</h1>
-      <div class="card-columns">
-        <%= render @spaces %>
-      </div>
+      <% if @spaces.any? %>
+        <div class="card-columns">
+          <%= render @spaces %>
+        </div>
+      <% else %>
+        You haven't added any space yet.
+        <%= link_to "Add Space", new_space_path, class:"btn btn-sm btn-primary" %>
+      <% end %>
     </main>
   </div>
 </div>

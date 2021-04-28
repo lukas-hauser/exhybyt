@@ -29,6 +29,9 @@
     <section>
       <%= render 'follow_form' if logged_in? %>
       <%= render 'send_message' if logged_in? %>
+      <% if current_user?(@user) %>
+        <%= link_to "Edit Profile", edit_user_path(current_user), class:"btn btn-sm btn-outline-secondary" %>
+      <% end %>
     </section>
     <%= @user.bio %>
   </aside>
