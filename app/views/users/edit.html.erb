@@ -73,6 +73,10 @@
         <%= f.label :bio %>
         <%= f.text_area :bio, class: "form-control", placeholder:"Your bio", maxlength:1000 %>
       </div>
+      <div class="form-group">
+        <%= f.label :image, "Profile Picture" %>
+        <%= f.file_field :image, accept: "image/jpeg, image/gif, image/png" %>
+      </div>
     </div>
   </div>
 
@@ -86,19 +90,37 @@
 
   <div class="row mt-2">
     <div class="col-md-6 offset-md-5">
-      <div class="container mb-2">
-        <%= gravatar_for @user, size:25 %>
-        <a href="https://gravatar.com/emails" target="_blank" >Change Avatar</a>
+      <div class="row">
+        <div class="container mb-2">
+          <%= gravatar_for @user, size:50 %>
+          <% if @user.image.attached? %>
+            Profile Picture
+          <% else %>
+            <a href="https://gravatar.com/emails" target="_blank" >Change Avatar</a>
+          <% end %>
+        </div>
       </div>
-      <div class="container">
-        <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
-        <% if @user.stripe_user_id %>
-          <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle" %>
-        <% else %>
-          <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
-        <% end %>
+      <div class="row">
+        <div class="container">
+          <i class="fab fa-stripe fa-3x align-middle text-primary"></i>
+          <% if @user.stripe_user_id %>
+            <%= link_to "Dashboard", stripe_dashboard_path(@user.id),class:"align-middle", target: :_blank %>
+          <% else %>
+            <%= link_to "Connect with Stripe", stripe_button_link, class:"align-middle" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
 
 <% end %>
+
+<script type="text/javascript">
+  $("#space_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+    alert("image cannot exceet 5MB. Please choose a smaller file.");
+    }
+    $("#space_image").val("");
+  });
+</script>

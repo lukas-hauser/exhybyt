@@ -9,16 +9,16 @@
       <ul class="list-unstyled text-small">
         <div class="container-center">
           <% if @user.instagram? %>
-            <a href="https://www.instagram.com/<%= @user.instagram %>/"> <i class="fab fa-instagram text-muted"></i></a>
+            <a href="https://www.instagram.com/<%= @user.instagram %>/" target="_blank"> <i class="fab fa-instagram text-muted"></i></a>
           <% end %>
           <% if @user.facebook? %>
-            <a href="https://facebook.com/<%= @user.facebook %>"> <i class="fab fa-facebook-f text-muted"></i></a>
+            <a href="https://facebook.com/<%= @user.facebook %>" target="_blank"> <i class="fab fa-facebook-f text-muted"></i></a>
           <% end %>
           <% if @user.twitter? %>
-            <a href="https://twitter.com/<%= @user.twitter %>"> <i class="fab fa-twitter text-muted"></i></a>
+            <a href="https://twitter.com/<%= @user.twitter %>" target="_blank"> <i class="fab fa-twitter text-muted"></i></a>
           <% end %>
           <% if @user.website? %>
-            <a href="https://<%= @user.website %>"> <i class="fas fa-globe-europe text-muted"></i></a>
+            <a href="https://<%= @user.website %>" target="_blank"> <i class="fas fa-globe-europe text-muted"></i></a>
           <% end %>
         </div>
       </ul>

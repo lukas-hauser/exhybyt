@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :reviews
+  has_one_attached :image
 
 
   validates :firstname, presence: true, length: { maximum: 60 }
@@ -38,6 +39,9 @@ class User < ApplicationRecord
   validates :bio,         length: { maximum: 1000 }
   validates :currency,    length: { maximum: 3 }, presence: true, allow_nil: true
   validates :user_name,   length: { maximum: 60 }, presence: true, allow_nil: true
+
+  validates :image, content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)." },
+                    size: { less_than: 5.megabytes, message: "exceeds 5MB." }
 
   # Returns the hash digest of the given string.
   def User.digest(string)
