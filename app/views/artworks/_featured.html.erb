@@ -34,7 +34,7 @@
             <% if artwork.images.attached? %>
               <div class="carousel-item<%= ' active' if i == 0 %>" alt:"...">
                 <%= link_to image_tag(artwork.images[0], class:"img-fluid carousel-full-width-image"), artwork %>
-                <div class="carousel-caption d-md-block">
+                <div class="carousel-caption d-none d-md-block">
                   <h5><%= artwork.listing_name %></h5>
                   <p><%= artwork.category %> by <%= link_to artwork.user.display_name, artwork.user, class:"text-white" %></p>
                 </div>
