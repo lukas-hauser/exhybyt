@@ -16,7 +16,7 @@
         <% if needs_stripe? || pending_reservations? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown" href="current_user" id="Notifications" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: Tomato">
-              <i class="fas fa-bell"></i>
+              <i class="far fa-bell"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% if needs_stripe? %>
@@ -30,10 +30,19 @@
 
         <li class="nav-item">
           <%= link_to conversations_path, class:"nav-link" do %>
-            <i class="far fa-envelope"></i>
-            <span>Messages</span>
+            <span class="fa-layers fa-fw">
+              <i class="far fa-envelope"></i>
+              <% Conversation.involving(current_user).each do |conversation| %>
+                <% if !conversation.unread_message_count(current_user).zero? %>
+                  <span class="fa-layers-counter fa-2x" style="background:Tomato">
+                    <%= conversation.unread_message_count(current_user) %>
+                  </span>
+                <% end %>
+              <% end %>
+            </span>
           <% end %>
         </li>
+
         <li class="nav-item">
           <%= link_to "Add Art", new_artwork_path, class:"nav-link" %>
         </li>
