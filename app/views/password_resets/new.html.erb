@@ -9,6 +9,9 @@
       <%= f.email_field :email, placeholder: "Email", class: 'form-control', required: true %>
     </div>
     <div class="form-group">
+      <%= recaptcha_tags %>
+    </div>
+    <div class="form-group">
       <%= f.submit "Submit", class: "btn btn-primary"%>
     </div>
     <% end %>
