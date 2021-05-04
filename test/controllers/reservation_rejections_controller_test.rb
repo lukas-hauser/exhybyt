@@ -1,13 +1,12 @@
-require 'test_helper'
+require "test_helper"
 
 class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
-
   def setup
-    @user      = users(:lukas)
+    @user = users(:lukas)
     @spaceuser = users(:jane)
     @otheruser = users(:peter)
-    @space     = spaces(:three)
-    @artwork   = artworks(:one)
+    @space = spaces(:three)
+    @artwork = artworks(:one)
     @reservation = @user.reservations.build(
       start_date: 1.month.from_now,
       end_date: 2.months.from_now,
@@ -18,7 +17,8 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
       user_id: @user.id,
       currency: @space.user.currency,
       created_at: 1.day.ago,
-      payment_completed: true)
+      payment_completed: true
+    )
     @reservation.save
   end
 
@@ -27,11 +27,11 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "valid rejection" do
-#    log_in_as(@spaceuser)
-#    get edit_reservation_rejection_url(@reservation)
-# => need valid payment intent id to get a successful rejection.
-#    assert_redirected_to @reservation
-#    assert_not flash[:success].empty?
+    #    log_in_as(@spaceuser)
+    #    get edit_reservation_rejection_url(@reservation)
+    # => need valid payment intent id to get a successful rejection.
+    #    assert_redirected_to @reservation
+    #    assert_not flash[:success].empty?
   end
 
   test "Should redirect edit when user not logged in" do

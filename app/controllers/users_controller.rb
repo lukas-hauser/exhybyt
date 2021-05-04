@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @spaces = @user.spaces.where(active:true).paginate(page: params[:page])
+    @spaces = @user.spaces.where(active: true).paginate(page: params[:page])
     @artworks = @user.artworks.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
   end
@@ -25,12 +25,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
+    if verify_recaptcha(model: @user) && @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -56,22 +56,22 @@ class UsersController < ApplicationController
     @title = "Following"
     @user = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   def followers
     @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   private
 
   def user_params
     params.require(:user).permit(:firstname, :lastname, :display_name, :email, :password,
-                                 :password_confirmation, :instagram, :facebook, :twitter,
-                                 :website, :bio, :marketing_consent, :currency, :image)
+      :password_confirmation, :instagram, :facebook, :twitter,
+      :website, :bio, :marketing_consent, :currency, :image)
   end
 
   def correct_user

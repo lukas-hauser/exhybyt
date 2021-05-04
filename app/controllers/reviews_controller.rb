@@ -27,36 +27,37 @@ class ReviewsController < ApplicationController
   end
 
   private
-    def review_params
-      params.require(:review).permit(:comment, :star)
-    end
 
-    # User can only review create review for paid reservations
-    def completed_reservation
-      @reservation = Reservation.find_by(id: params[:reservation_id])
-      unless @reservation.payment_captured
-        redirect_to @reservation
-        flash[:danger] = "Can't review this reservation yet."
-      end
-    end
+  def review_params
+    params.require(:review).permit(:comment, :star)
+  end
 
-    # Only reservation user can leave a review
-    def correct_user_create
-      @reservation = Reservation.find_by(id: params[:reservation_id])
-      redirect_to @reservation unless current_user?(@reservation.user)
+  # User can only review create review for paid reservations
+  def completed_reservation
+    @reservation = Reservation.find_by(id: params[:reservation_id])
+    unless @reservation.payment_captured
+      redirect_to @reservation
+      flash[:danger] = "Can't review this reservation yet."
     end
+  end
 
-    # User can't leave more than 1 review per reservation
-    def duplicate_review
-      @reservation = Reservation.find_by(id: params[:reservation_id])
-      if @reservation.reviews.any?
-        redirect_to @reservation
-        flash[:danger] = "You already left a review for this booking."
-      end
-    end
+  # Only reservation user can leave a review
+  def correct_user_create
+    @reservation = Reservation.find_by(id: params[:reservation_id])
+    redirect_to @reservation unless current_user?(@reservation.user)
+  end
 
-    def correct_user_destroy
-      @review = current_user.reviews.find_by(id: params[:id])
-      redirect_to root_url if @review.nil?
+  # User can't leave more than 1 review per reservation
+  def duplicate_review
+    @reservation = Reservation.find_by(id: params[:reservation_id])
+    if @reservation.reviews.any?
+      redirect_to @reservation
+      flash[:danger] = "You already left a review for this booking."
     end
+  end
+
+  def correct_user_destroy
+    @review = current_user.reviews.find_by(id: params[:id])
+    redirect_to root_url if @review.nil?
+  end
 end

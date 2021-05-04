@@ -1,14 +1,14 @@
-require 'test_helper'
+require "test_helper"
 
 class ReservationsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user           = users(:jane)
-    @spaceuser      = users(:lukas)
-    @otheruser      = users(:peter)
-    @space          = spaces(:one)
-    @artwork        = artworks(:one)
+    @user = users(:jane)
+    @spaceuser = users(:lukas)
+    @otheruser = users(:peter)
+    @space = spaces(:one)
+    @artwork = artworks(:one)
     @inactive_space = spaces(:inactive_space)
-    @reservation    = reservations(:one)
+    @reservation = reservations(:one)
   end
 
   test "should redirect show when user not logged in" do
@@ -20,8 +20,8 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   test "should redirect show when wrong user" do
     log_in_as(@otheruser)
     get reservations_path(@reservation)
-#    assert_redirected_to root_url
-#    assert_not flash[:danger].empty?
+    #    assert_redirected_to root_url
+    #    assert_not flash[:danger].empty?
   end
 
   test "should redirect index when not logged in" do
@@ -61,22 +61,22 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Should redirect create when user not logged in" do
-    assert_no_difference 'Reservation.count' do
-      post space_reservations_path(@space), params: { reservation:
-        { start_date: "2021-01-02 11:32:12",
-          end_date: "2021-01-02 11:32:12",
-          artwork_ids: @artwork.id} }
+    assert_no_difference "Reservation.count" do
+      post space_reservations_path(@space), params: {reservation:
+        {start_date: "2021-01-02 11:32:12",
+         end_date: "2021-01-02 11:32:12",
+         artwork_ids: @artwork.id}}
     end
     assert_redirected_to login_url
   end
 
   test "should redirect create when space is inactive" do
     log_in_as(@user)
-    assert_no_difference 'Reservation.count' do
-      post space_reservations_path(@inactive_space), params: { reservation:
-        { start_date: "2021-01-02 11:32:12",
-          end_date: "2021-01-02 11:32:12",
-          artwork_ids: @artwork.id} }
+    assert_no_difference "Reservation.count" do
+      post space_reservations_path(@inactive_space), params: {reservation:
+        {start_date: "2021-01-02 11:32:12",
+         end_date: "2021-01-02 11:32:12",
+         artwork_ids: @artwork.id}}
     end
     assert_redirected_to root_url
     assert_not flash[:warning].empty?
@@ -84,36 +84,35 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect create when space user not stripe ready" do
     log_in_as(@user)
-    @space.user.update(stripe_user_id:"")
-    assert_no_difference 'Reservation.count' do
-      post space_reservations_path(@space), params: { reservation:
-        { start_date: Date.today,
-          end_date: Date.today,
-          artwork_ids: @artwork.id } }
+    @space.user.update(stripe_user_id: "")
+    assert_no_difference "Reservation.count" do
+      post space_reservations_path(@space), params: {reservation:
+        {start_date: Date.today,
+         end_date: Date.today,
+         artwork_ids: @artwork.id}}
     end
     assert_redirected_to root_url
     assert_not flash[:danger].empty?
   end
 
   test "don't allow reservation below minimum duration" do
-    #tbd
+    # tbd
   end
 
   test "Don't allow for multiple reservations for same time period from same user before approval/rejection" do
-    #tbd
+    # tbd
   end
 
   test "Don't allow users to submit other user's artworks" do
-
   end
 
   test "Don't allow users to book their own space" do
     log_in_as(@spaceuser)
-    assert_no_difference 'Reservation.count' do
-      post space_reservations_path(@space), params: { reservation:
-        { start_date: Date.today,
-          end_date: Date.today,
-          artwork_ids: [@artwork.id] } }
+    assert_no_difference "Reservation.count" do
+      post space_reservations_path(@space), params: {reservation:
+        {start_date: Date.today,
+         end_date: Date.today,
+         artwork_ids: [@artwork.id]}}
     end
     assert_redirected_to root_url
     assert_not flash[:danger].empty?
@@ -121,11 +120,11 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "valid submission" do
     log_in_as(@user)
-    assert_difference 'Reservation.count', 1 do
-      post space_reservations_path(@space), params: { reservation:
-        { start_date: Date.today,
-          end_date: Date.today,
-          artwork_ids: [@artwork.id] } }
+    assert_difference "Reservation.count", 1 do
+      post space_reservations_path(@space), params: {reservation:
+        {start_date: Date.today,
+         end_date: Date.today,
+         artwork_ids: [@artwork.id]}}
     end
   end
 end

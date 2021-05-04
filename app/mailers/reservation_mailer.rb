@@ -1,5 +1,4 @@
 class ReservationMailer < ApplicationMailer
-
   def request_notification(reservation)
     @reservation = reservation
     mail to: reservation.space.user.email, subject: "New Booking Request"
@@ -19,5 +18,4 @@ class ReservationMailer < ApplicationMailer
     @reservation = reservation
     mail to: reservation.user.email, subject: "Booking Request Declined"
   end
-
 end

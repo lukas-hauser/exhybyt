@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class HtmlPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get home" do

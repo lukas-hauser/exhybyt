@@ -14,7 +14,7 @@ class ReservationRejectionsController < ApplicationController
       flash[:danger] = "Payment was cancelled. You can't approve this request anymore."
     else
       Stripe::PaymentIntent.cancel(
-        reservation.payment_intent_id,
+        reservation.payment_intent_id
       )
       reservation.reject
       reservation.send_request_rejection_email
@@ -25,27 +25,27 @@ class ReservationRejectionsController < ApplicationController
 
   private
 
-    # Confirms that user is reservation space listing owner
-    def correct_user
-      @reservation = Reservation.find(params[:id])
-      if !current_user?(@reservation.space.user)
-        redirect_to root_url
-        flash[:danger] = "You are not authorised."
-      end
+  # Confirms that user is reservation space listing owner
+  def correct_user
+    @reservation = Reservation.find(params[:id])
+    if !current_user?(@reservation.space.user)
+      redirect_to root_url
+      flash[:danger] = "You are not authorised."
     end
+  end
 
-    # Checks expiration of the booking request
-    def check_expiration
-      if @reservation.booking_request_expired?
-        flash[:danger] = "Booking request has expired."
-        redirect_to your_reservations_path
-      end
+  # Checks expiration of the booking request
+  def check_expiration
+    if @reservation.booking_request_expired?
+      flash[:danger] = "Booking request has expired."
+      redirect_to your_reservations_path
     end
+  end
 
-    def payment_completed
-      unless @reservation.payment_completed?
-        flash[:danger] = "Can't decline this incomplete booking request."
-        redirect_to your_reservations_path
-      end
+  def payment_completed
+    unless @reservation.payment_completed?
+      flash[:danger] = "Can't decline this incomplete booking request."
+      redirect_to your_reservations_path
     end
+  end
 end

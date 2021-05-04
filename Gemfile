@@ -20,6 +20,7 @@ gem 'httparty',                   '~> 0.18.1'
 gem 'stripe',                     '~> 5.29'
 gem 'stripe_event',               '~> 2.3', '>= 2.3.1'
 gem 'ransack',                    '~> 2.4', '>= 2.4.1'
+gem "recaptcha",                  "~> 5.7"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 
@@ -43,6 +44,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring',                   '~> 2.1.1'
   gem 'spring-watcher-listen',    '~> 2.0.0'
+  gem 'standardrb',               '~> 1.0'
+  gem 'rubocop',                  '~> 1.13', require: false
 end
 
 group :test do

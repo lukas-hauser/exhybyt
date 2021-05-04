@@ -6,12 +6,12 @@ class Reservation < ApplicationRecord
   has_many :artworks, through: :reservation_artworks
   has_many :reviews
 
-  validates :price, presence: true, numericality: {:greater_than_or_equal_to => 5}
-  validates :total, presence: true, numericality: {:greater_than_or_equal_to => 5}
+  validates :price, presence: true, numericality: {greater_than_or_equal_to: 5}
+  validates :total, presence: true, numericality: {greater_than_or_equal_to: 5}
   validates :user_id, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validate  :end_date_after_start_date
+  validate :end_date_after_start_date
   validates :artwork_ids, presence: true
   validates :currency, presence: true
 
@@ -26,7 +26,7 @@ class Reservation < ApplicationRecord
   # Rejects a reservation
   def reject
     update_columns(rejected: true, rejected_at: Time.zone.now,
-                   approved: false, status:"Rejected")
+                   approved: false, status: "Rejected")
   end
 
   # Returns true if a password reset has expired

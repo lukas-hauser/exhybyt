@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
   before_action :logged_in_user
-  before_action :artwork_for_sale,      only: [:create]
-  before_action :own_art,               only: [:create]
-  before_action :stripe_ready,          only: [:create]
-  before_action :set_order,             only: [:success, :cancel]
+  before_action :artwork_for_sale,  only: [:create]
+  before_action :own_art,           only: [:create]
+  before_action :stripe_ready,      only: [:create]
+  before_action :set_order,         only: [:success, :cancel]
 
   def index
     @orders = current_user.orders.paginate(page: params[:page])
@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order   = current_user.orders.build
+    @order = current_user.orders.build
     @artwork = Artwork.find(params[:artwork_id])
 
     @order.artwork = @artwork
@@ -28,28 +28,28 @@ class OrdersController < ApplicationController
 
     if @order.save
       session = Stripe::Checkout::Session.create({
-      payment_method_types: ['card'],
-      customer_email: @order.user.email,
-      line_items: [{
-       price_data: {
-         unit_amount: (@order.total * 100).to_i,
-         currency: @order.currency,
-         product_data: {
-           name: @order.artwork.listing_name,
-           images: ['https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png'],
-         },
-       },
-       quantity: 1,
-      }],
-      mode: 'payment',
-      payment_intent_data: {
-        application_fee_amount: (@order.total * 100 * 0.15).to_i,
-        transfer_data:{
-          destination: @order.artwork.user.stripe_user_id,
-        }
-      },
-      success_url: "#{order_success_url}?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "#{order_cancel_url}?session_id={CHECKOUT_SESSION_ID}",
+        payment_method_types: ["card"],
+        customer_email: @order.user.email,
+        line_items: [{
+          price_data: {
+            unit_amount: (@order.total * 100).to_i,
+            currency: @order.currency,
+            product_data: {
+              name: @order.artwork.listing_name,
+              images: ["https://safe-depths-41741.herokuapp.com/assets/favicon-ae299e626732d66b77774d9fd96cca12077323c7b4d7502877b83ab225374708.png"]
+            }
+          },
+          quantity: 1
+        }],
+        mode: "payment",
+        payment_intent_data: {
+          application_fee_amount: (@order.total * 100 * 0.15).to_i,
+          transfer_data: {
+            destination: @order.artwork.user.stripe_user_id
+          }
+        },
+        success_url: "#{order_success_url}?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: "#{order_cancel_url}?session_id={CHECKOUT_SESSION_ID}"
       })
 
       @order.update(checkout_session_id: session.id)
@@ -77,34 +77,34 @@ class OrdersController < ApplicationController
 
   private
 
-    # Confirms that artwork is for sale
-    def artwork_for_sale
-      @artwork = Artwork.find(params[:artwork_id])
-      if @artwork.status != "For Sale"
-        redirect_to root_url
-        flash[:warning] = "Artwork is not for sale. We can't submit your order."
-      end
+  # Confirms that artwork is for sale
+  def artwork_for_sale
+    @artwork = Artwork.find(params[:artwork_id])
+    if @artwork.status != "For Sale"
+      redirect_to root_url
+      flash[:warning] = "Artwork is not for sale. We can't submit your order."
     end
+  end
 
-    # Confirms that artists can't buy their own art
-    def own_art
-      @artwork = Artwork.find(params[:artwork_id])
-      if current_user?(@artwork.user)
-        redirect_to root_url
-        flash[:danger] = "You can't buy your own art."
-      end
+  # Confirms that artists can't buy their own art
+  def own_art
+    @artwork = Artwork.find(params[:artwork_id])
+    if current_user?(@artwork.user)
+      redirect_to root_url
+      flash[:danger] = "You can't buy your own art."
     end
+  end
 
-    # Confirms that artists are ready to accept payments to sell their art
-    def stripe_ready
-      @artwork = Artwork.find(params[:artwork_id])
-      if @artwork.user.stripe_user_id.empty?
-        redirect_to root_url
-        flash[:danger] = "This artist is not ready yet to accept payments. Stay tuned.."
-      end
+  # Confirms that artists are ready to accept payments to sell their art
+  def stripe_ready
+    @artwork = Artwork.find(params[:artwork_id])
+    if @artwork.user.stripe_user_id.empty?
+      redirect_to root_url
+      flash[:danger] = "This artist is not ready yet to accept payments. Stay tuned.."
     end
+  end
 
-    def set_order
-      @order = Order.find_by(checkout_session_id: params[:session_id])
-    end
+  def set_order
+    @order = Order.find_by(checkout_session_id: params[:session_id])
+  end
 end

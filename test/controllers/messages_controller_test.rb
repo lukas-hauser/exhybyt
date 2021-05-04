@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class MessagesControllerTest < ActionDispatch::IntegrationTest
   def setup
@@ -12,9 +12,9 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Should redirect create message when user not logged in" do
-    assert_no_difference 'Message.count' do
-      post conversation_messages_path(@message), params: { message:
-        { content: "Hi" } }
+    assert_no_difference "Message.count" do
+      post conversation_messages_path(@message), params: {message:
+        {content: "Hi"}}
     end
     assert_redirected_to login_url
   end
