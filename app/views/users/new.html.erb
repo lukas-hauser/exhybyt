@@ -6,25 +6,25 @@
       <h1>Sign Up</h1>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="form-group">
-        <%= f.text_field :firstname, placeholder: "First Name", class: "form-control", required: true %>
+        <%= f.text_field :firstname, placeholder: "First Name", class: "form-control shadow-sm", required: true %>
       </div>
       <div class="form-group">
-        <%= f.text_field :lastname, placeholder: "Last Name", class: "form-control", required: true %>
+        <%= f.text_field :lastname, placeholder: "Last Name", class: "form-control shadow-sm", required: true %>
       </div>
       <div class="form-group">
-        <%= f.email_field :email, placeholder: "Email", class: "form-control", required: true %>
+        <%= f.email_field :email, placeholder: "Email", class: "form-control shadow-sm", required: true %>
       </div>
       <div class="form-group">
-        <%= f.password_field :password, placeholder: "Password", class: "form-control", required: true %>
+        <%= f.password_field :password, placeholder: "Password", class: "form-control shadow-sm", required: true %>
       </div>
       <div class="form-group">
-        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control", required: true %>
+        <%= f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control shadow-sm", required: true %>
       </div>
       <div class="form-group">
         <%= recaptcha_tags %>
       </div>
       <div class="form-group">
-        <%= f.submit "Sign Up", class: "btn btn-block btn-primary" %>
+        <%= f.submit "Sign Up", class: "btn btn-block btn-primary shadow-sm" %>
       </div>
       <div class="form-group">
         <div class="custom-control custom-checkbox">
@@ -34,9 +34,9 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="form-check">
-          <%= f.check_box :marketing_consent, class:"form-check-input", id:"marketing" %>
-          <label class="form-check-label" for="marketing">
+        <div class="custom-control custom-checkbox">
+          <%= f.check_box :marketing_consent, class:"custom-control-input", id:"marketing" %>
+          <label class="custom-control-label" for="marketing">
             Opt in to receive occasional updates on spaces, artwork and exhibitions, and other announcements.
             We also don't like spam. That's why we make it easy for you to updated your email preferences or unsubscribe at anytime.
           </label>
