@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'html_pages#home'
   mount StripeEvent::Engine, at: '/stripe-webhooks'
@@ -6,9 +8,9 @@ Rails.application.routes.draw do
   get '/qr',            to: 'html_pages#home'
   get '/home',          to: 'html_pages#home'
   get '/about',         to: 'html_pages#about'
-  get '/for_businesses',to: 'html_pages#for_businesses'
-  get '/for_artists',   to: 'html_pages#for_artists'
-  get '/for_art_lovers',to: 'html_pages#for_art_lovers'
+  get '/for_businesses', to: 'html_pages#for_businesses'
+  get '/for_artists', to: 'html_pages#for_artists'
+  get '/for_art_lovers', to: 'html_pages#for_art_lovers'
   get '/terms',         to: 'html_pages#terms'
   get '/privacypolicy', to: 'html_pages#privacypolicy'
   get '/cookiepolicy',  to: 'html_pages#cookiepolicy'
@@ -27,8 +29,8 @@ Rails.application.routes.draw do
   get 'exhibitions',  to: 'reservations#current_exhibitions'
   get 'upcoming_exhibitions', to: 'reservations#upcoming_exhibitions'
   get 'past_exhibitions',     to: 'reservations#past_exhibitions'
-  get "stripe/connect", to: "stripe#connect", as: :stripe_connect
-  get "stripe/dashboard/:user_id", to: "stripe#dashboard", as: :stripe_dashboard
+  get 'stripe/connect', to: 'stripe#connect', as: :stripe_connect
+  get 'stripe/dashboard/:user_id', to: 'stripe#dashboard', as: :stripe_dashboard
   post '/login',        to: 'sessions#create'
   delete '/logout',     to: 'sessions#destroy'
   resources :users do
@@ -37,13 +39,13 @@ Rails.application.routes.draw do
     end
   end
   resources :account_activations,     only: [:edit]
-  resources :password_resets,         only: [:new, :create, :edit, :update]
-  resources :relationships,           only: [:create, :destroy]
+  resources :password_resets,         only: %i[new create edit update]
+  resources :relationships,           only: %i[create destroy]
   resources :spaces do
-    resources :reservations,          only: [:create, :index], shallow: true
+    resources :reservations, only: %i[create index], shallow: true
   end
   resources :artworks do
-    resources :orders,          only: [:create, :index], shallow: true
+    resources :orders, only: %i[create index], shallow: true
   end
   resources :artworks do
     member do
@@ -55,12 +57,12 @@ Rails.application.routes.draw do
       delete :delete_image_attachment
     end
   end
-  resources :spaces,                  only: [:new, :show, :index, :create,
-                                            :edit, :update, :destroy]
-  resources :artworks,                only: [:new, :show, :index, :create,
-                                            :edit, :update, :destroy]
-  resources :conversations,           only: [:index, :create] do
-    resources :messages,              only: [:index, :create], shallow: true
+  resources :spaces,                  only: %i[new show index create
+                                               edit update destroy]
+  resources :artworks,                only: %i[new show index create
+                                               edit update destroy]
+  resources :conversations,           only: %i[index create] do
+    resources :messages,              only: %i[index create], shallow: true
   end
 
   resources :spaces do

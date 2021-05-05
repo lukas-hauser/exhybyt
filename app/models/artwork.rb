@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Artwork < ApplicationRecord
   belongs_to :user
   belongs_to :subject
@@ -12,26 +14,26 @@ class Artwork < ApplicationRecord
 
   validates :user_id, presence: true
   validates :style_ids, presence: true
-  validates :listing_name, presence: true, length: {maximum: 60}
-  validates :description, presence: true, length: {maximum: 1000}
+  validates :listing_name, presence: true, length: { maximum: 60 }
+  validates :description, presence: true, length: { maximum: 1000 }
   validates :category, presence: true
-  validates :year, presence: true, numericality: {only_integer: true}
-  validates :medium, presence: true, length: {maximum: 60}
+  validates :year, presence: true, numericality: { only_integer: true }
+  validates :medium, presence: true, length: { maximum: 60 }
   validates :status, presence: true
 
-  validates :height, presence: true, numericality: {only_float: true, greater_than: 0}
-  validates :width, presence: true, numericality: {only_float: true, greater_than: 0}
-  validates :depth, numericality: {only_float: true, greater_than: 0, allow_blank: true}
+  validates :height, presence: true, numericality: { only_float: true, greater_than: 0 }
+  validates :width, presence: true, numericality: { only_float: true, greater_than: 0 }
+  validates :depth, numericality: { only_float: true, greater_than: 0, allow_blank: true }
   validates :price, presence: true, if: :for_sale?,
-                    numericality: {greater_than_or_equal_to: 5}
+                    numericality: { greater_than_or_equal_to: 5 }
 
   default_scope -> { order(created_at: :desc) }
 
   validates :images, presence: true,
-                     content_type: {in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)."},
-                     size: {less_than: 5.megabytes, message: "exceeds 5MB."}
+                     content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: 'Please upload a valid file type (jpeg, gif, png).' },
+                     size: { less_than: 5.megabytes, message: 'exceeds 5MB.' }
 
   def for_sale?
-    status == "For Sale"
+    status == 'For Sale'
   end
 end

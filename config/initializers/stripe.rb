@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 Rails.configuration.stripe = {
-  publishable_key:  ENV['STRIPE_PUBLISHABLE_KEY'],
-  secret_key:       ENV['STRIPE_SECRET_KEY'],
-  signing_secret:   ENV['STRIPE_WEBHOOK_SECRET_KEY']
+  publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
+  secret_key: ENV['STRIPE_SECRET_KEY'],
+  signing_secret: ENV['STRIPE_WEBHOOK_SECRET_KEY']
 }
 
 Stripe.api_key             = Rails.configuration.stripe[:secret_key]
@@ -12,5 +14,4 @@ StripeEvent.configure do |events|
   events.subscribe 'payment_intent.succeeded', StripePaymentIntentService.new
   events.subscribe 'payment_intent.succeeded', StripePaymentIntentService.new
   events.subscribe 'payment_intent.canceled', StripePaymentIntentCancelService.new
-
 end

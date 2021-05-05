@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ReservationInterfaceTest < ActionDispatch::IntegrationTest
@@ -11,17 +13,17 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
     @upcoming_exhibition  = reservations(:upcoming_exhibition)
   end
 
-  test "reservation interface" do
+  test 'reservation interface' do
     log_in_as(@user)
     get root_path
 
     # Invalid Submission
     assert_no_difference 'Reservation.count' do
       post space_reservations_path(@space), params: { reservation:
-        { start_date: "2021-01-02 11:32:12",
-          end_date: "2021-01-02 11:32:12",
+        { start_date: '2021-01-02 11:32:12',
+          end_date: '2021-01-02 11:32:12',
           artwork_ids: [],
-          user_id: @user.id} }
+          user_id: @user.id } }
     end
     assert_not flash.empty?
     assert 'a[href=?]'
@@ -33,33 +35,45 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
           end_date: Date.today,
           space_id: @space.id,
           artwork_ids: [@artwork.id],
-          user_id: @user.id} }
+          user_id: @user.id } }
     end
     follow_redirect!
     # assert_template 'spaces/show'
   end
 
-  test "exhibition interface" do
+  test 'exhibition interface' do
     # See only current_exhibition and one_day_exhibition
     get exhibitions_path
-    assert_select "title", "Current Exhibitions | EXHYBYT"
-    assert_select 'p', text: @current_exhibition.start_date.strftime("%d %b %Y") + " to " + @current_exhibition.end_date.strftime("%d %b %Y")
-    assert_select 'p', text: @one_day_exhibition.start_date.strftime("%d %b %Y") + " to " + @one_day_exhibition.end_date.strftime("%d %b %Y")
-    assert_select 'p', text: @upcoming_exhibition.start_date.strftime("%d %b %Y") + " to " + @upcoming_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @past_exhibition.start_date.strftime("%d %b %Y") + " to " + @past_exhibition.end_date.strftime("%d %b %Y"), count: 0
+    assert_select 'title', 'Current Exhibitions | EXHYBYT'
+    assert_select 'p',
+                  text: @current_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @current_exhibition.end_date.strftime('%d %b %Y')
+    assert_select 'p',
+                  text: @one_day_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @one_day_exhibition.end_date.strftime('%d %b %Y')
+    assert_select 'p',
+                  text: @upcoming_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @upcoming_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @past_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @past_exhibition.end_date.strftime('%d %b %Y'), count: 0
     # See only upcoming_exhibition
     get upcoming_exhibitions_path
-    assert_select "title", "Upcoming Exhibitions | EXHYBYT"
-    assert_select 'p', text: @current_exhibition.start_date.strftime("%d %b %Y") + " to " + @current_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @one_day_exhibition.start_date.strftime("%d %b %Y") + " to " + @one_day_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @upcoming_exhibition.start_date.strftime("%d %b %Y") + " to " + @upcoming_exhibition.end_date.strftime("%d %b %Y")
-    assert_select 'p', text: @past_exhibition.start_date.strftime("%d %b %Y") + " to " + @past_exhibition.end_date.strftime("%d %b %Y"), count: 0
+    assert_select 'title', 'Upcoming Exhibitions | EXHYBYT'
+    assert_select 'p',
+                  text: @current_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @current_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @one_day_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @one_day_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @upcoming_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @upcoming_exhibition.end_date.strftime('%d %b %Y')
+    assert_select 'p',
+                  text: @past_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @past_exhibition.end_date.strftime('%d %b %Y'), count: 0
     # See only past_exhibition
     get past_exhibitions_path
-    assert_select "title", "Past Exhibitions | EXHYBYT"
-    assert_select 'p', text: @current_exhibition.start_date.strftime("%d %b %Y") + " to " + @current_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @one_day_exhibition.start_date.strftime("%d %b %Y") + " to " + @one_day_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @upcoming_exhibition.start_date.strftime("%d %b %Y") + " to " + @upcoming_exhibition.end_date.strftime("%d %b %Y"), count: 0
-    assert_select 'p', text: @past_exhibition.start_date.strftime("%d %b %Y") + " to " + @past_exhibition.end_date.strftime("%d %b %Y")
+    assert_select 'title', 'Past Exhibitions | EXHYBYT'
+    assert_select 'p',
+                  text: @current_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @current_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @one_day_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @one_day_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @upcoming_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @upcoming_exhibition.end_date.strftime('%d %b %Y'), count: 0
+    assert_select 'p',
+                  text: @past_exhibition.start_date.strftime('%d %b %Y') + ' to ' + @past_exhibition.end_date.strftime('%d %b %Y')
   end
 end

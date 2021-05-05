@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Preview all emails at http://localhost:3000/rails/mailers/user_mailer
 class ReservationMailerPreview < ActionMailer::Preview
-
   # Preview this email at http://localhost:3000/rails/mailers/reservation_mailer/request_notification
   def request_notification
     reservation = Reservation.first
@@ -24,5 +25,4 @@ class ReservationMailerPreview < ActionMailer::Preview
     reservation = Reservation.first
     ReservationMailer.request_rejection(reservation)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :space
@@ -6,8 +8,8 @@ class Reservation < ApplicationRecord
   has_many :artworks, through: :reservation_artworks
   has_many :reviews
 
-  validates :price, presence: true, numericality: {greater_than_or_equal_to: 5}
-  validates :total, presence: true, numericality: {greater_than_or_equal_to: 5}
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 5 }
+  validates :total, presence: true, numericality: { greater_than_or_equal_to: 5 }
   validates :user_id, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
@@ -26,7 +28,7 @@ class Reservation < ApplicationRecord
   # Rejects a reservation
   def reject
     update_columns(rejected: true, rejected_at: Time.zone.now,
-                   approved: false, status: "Rejected")
+                   approved: false, status: 'Rejected')
   end
 
   # Returns true if a password reset has expired
@@ -36,7 +38,7 @@ class Reservation < ApplicationRecord
 
   # Returns true if a payment_intent was cancelled
   def payment_intent_cancelled?
-    status == "Payment Intent Cancelled"
+    status == 'Payment Intent Cancelled'
   end
 
   # Sends booking request confirmation email
@@ -62,8 +64,6 @@ class Reservation < ApplicationRecord
   def end_date_after_start_date
     return if end_date.blank? || start_date.blank?
 
-    if end_date < start_date
-      errors.add(:end_date, "must be after the start date")
-    end
+    errors.add(:end_date, 'must be after the start date') if end_date < start_date
   end
 end

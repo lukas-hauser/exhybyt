@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReservationApprovalsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user
@@ -8,9 +10,9 @@ class ReservationApprovalsController < ApplicationController
   def edit
     reservation = Reservation.find(params[:id])
     if reservation.approved?
-      flash[:warning] = "You already approved this reservation."
+      flash[:warning] = 'You already approved this reservation.'
     elsif reservation.rejected?
-      flash[:danger] = "You already rejected this reservation."
+      flash[:danger] = 'You already rejected this reservation.'
     elsif reservation.payment_intent_cancelled?
       flash[:danger] = "Payment was cancelled. You can't approve this request anymore."
     else
@@ -19,7 +21,7 @@ class ReservationApprovalsController < ApplicationController
       )
       reservation.approve
       reservation.send_request_approval_email
-      flash[:success] = "Reservation approved."
+      flash[:success] = 'Reservation approved.'
     end
     redirect_to reservation
   end
@@ -29,28 +31,28 @@ class ReservationApprovalsController < ApplicationController
   # Confirms that user is reservation space listing owner
   def correct_user
     reservation = Reservation.find(params[:id])
-    if !current_user?(reservation.space.user)
-      redirect_to root_url
-      flash[:danger] = "You are not authorised."
-    end
+    return if current_user?(reservation.space.user)
+
+    redirect_to root_url
+    flash[:danger] = 'You are not authorised.'
   end
 
   # Checks expiration of the booking request
   def check_expiration
     reservation = Reservation.find(params[:id])
-    if reservation.booking_request_expired?
-      flash[:danger] = "Booking request has expired."
-      redirect_to your_reservations_path
-    end
+    return unless reservation.booking_request_expired?
+
+    flash[:danger] = 'Booking request has expired.'
+    redirect_to your_reservations_path
   end
 
   # Confirms a checkout session is completed
   def payment_completed
     reservation = Reservation.find(params[:id])
-    unless reservation.payment_completed?
-      flash[:danger] = "Can't approve this incomplete booking request."
-      redirect_to your_reservations_path
-    end
+    return if reservation.payment_completed?
+
+    flash[:danger] = "Can't approve this incomplete booking request."
+    redirect_to your_reservations_path
   end
 
   # Confirm that dates to approve are available
@@ -63,10 +65,10 @@ class ReservationApprovalsController < ApplicationController
 
     confirmed_bookings = space.reservations.where(approved: true)
 
-    check = confirmed_bookings.where("? <= DATE(start_date) AND DATE(end_date) <= ?", start_date, end_date)
-    if check.any?
-      flash[:danger] = "You already confirmed another booking request with overlapping dates."
-      redirect_to your_reservations_path
-    end
+    check = confirmed_bookings.where('? <= DATE(start_date) AND DATE(end_date) <= ?', start_date, end_date)
+    return unless check.any?
+
+    flash[:danger] = 'You already confirmed another booking request with overlapping dates.'
+    redirect_to your_reservations_path
   end
 end

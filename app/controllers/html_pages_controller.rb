@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HtmlPagesController < ApplicationController
   def home
     if logged_in?
@@ -9,17 +11,15 @@ class HtmlPagesController < ApplicationController
   end
 
   def search
-    if params[:search].present? && params[:search].strip != ""
-      session[:loc_search] = params[:search]
-    end
+    session[:loc_search] = params[:search] if params[:search].present? && params[:search].strip != ''
 
     arrResult = []
 
-    @spaces_address = if session[:loc_search] && session[:loc_search] != ""
-      Space.where(active: true).near(session[:loc_search], 5, order: "distance")
-    else
-      Space.where(active: true).all
-    end
+    @spaces_address = if session[:loc_search] && session[:loc_search] != ''
+                        Space.where(active: true).near(session[:loc_search], 5, order: 'distance')
+                      else
+                        Space.where(active: true).all
+                      end
 
     @search = @spaces_address.ransack(params[:q])
     @spaces = @search.result
@@ -41,9 +41,7 @@ class HtmlPagesController < ApplicationController
           start_date, end_date
         ).limit(1)
 
-        if not_available.length > 0
-          @arrSpaces.delete(space)
-        end
+        @arrSpaces.delete(space) if not_available.length > 0
       end
 
     end
@@ -58,23 +56,17 @@ class HtmlPagesController < ApplicationController
     @arrArtworks = @artworks.to_a
   end
 
-  def help
-  end
+  def help; end
 
-  def about
-  end
+  def about; end
 
-  def howitworks
-  end
+  def howitworks; end
 
-  def terms
-  end
+  def terms; end
 
-  def privacypolicy
-  end
+  def privacypolicy; end
 
-  def cookiepolicy
-  end
+  def cookiepolicy; end
 
   def faq
     @faqs = Faq.all

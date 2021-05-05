@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user_create,   only: [:create]
@@ -11,9 +13,9 @@ class ReviewsController < ApplicationController
     @review.reservation = @reservation
     @review.space = @reservation.space
     if @review.save
-      flash[:success] = "Thank you for leaving a review!"
+      flash[:success] = 'Thank you for leaving a review!'
     else
-      flash[:danger] = "Something went wrong."
+      flash[:danger] = 'Something went wrong.'
     end
     redirect_to @reservation
   end
@@ -22,7 +24,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     space = @review.space
     @review.destroy
-    flash[:success] = "Your review has been deleted."
+    flash[:success] = 'Your review has been deleted.'
     redirect_to space
   end
 
@@ -35,10 +37,10 @@ class ReviewsController < ApplicationController
   # User can only review create review for paid reservations
   def completed_reservation
     @reservation = Reservation.find_by(id: params[:reservation_id])
-    unless @reservation.payment_captured
-      redirect_to @reservation
-      flash[:danger] = "Can't review this reservation yet."
-    end
+    return if @reservation.payment_captured
+
+    redirect_to @reservation
+    flash[:danger] = "Can't review this reservation yet."
   end
 
   # Only reservation user can leave a review
@@ -50,10 +52,10 @@ class ReviewsController < ApplicationController
   # User can't leave more than 1 review per reservation
   def duplicate_review
     @reservation = Reservation.find_by(id: params[:reservation_id])
-    if @reservation.reviews.any?
-      redirect_to @reservation
-      flash[:danger] = "You already left a review for this booking."
-    end
+    return unless @reservation.reviews.any?
+
+    redirect_to @reservation
+    flash[:danger] = 'You already left a review for this booking.'
   end
 
   def correct_user_destroy

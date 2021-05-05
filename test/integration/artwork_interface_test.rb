@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
@@ -11,48 +13,48 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     @artwork   = artworks(:three)
   end
 
-  test "artwork interface" do
+  test 'artwork interface' do
     log_in_as(@user)
     get root_path
 
     # Invalid Submission
     assert_no_difference 'Artwork.count' do
       post artworks_path, params: { artwork:
-        {listing_name: "Moana Lisa",
-        description: "",
-        height: "60",
-        width: "50",
-        depth: "2.5",
-        year: "2020",
-        category: "Painting",
-        medium: "Oil on Canvas",
-        price: "5000",
-        status: "For Sale",
-        is_framed: true,
-        subject_id: @subject.id,
-        style_ids: [@style.id]} }
+        { listing_name: 'Moana Lisa',
+          description: '',
+          height: '60',
+          width: '50',
+          depth: '2.5',
+          year: '2020',
+          category: 'Painting',
+          medium: 'Oil on Canvas',
+          price: '5000',
+          status: 'For Sale',
+          is_framed: true,
+          subject_id: @subject.id,
+          style_ids: [@style.id] } }
     end
     assert_select 'div#error_explanation'
-    assert_select "title", "Add Art | EXHYBYT"
+    assert_select 'title', 'Add Art | EXHYBYT'
     assert 'a[href=?]'
 
     # Valid Submission
     assert_difference 'Artwork.count', 1 do
       post artworks_path, params: { artwork:
-        {listing_name: "Moana Lisa",
-        description: "This is the Hawaiian version of Mona Lisa",
-        height: "60",
-        width: "50",
-        depth: "2.5",
-        year: "2020",
-        category: "Painting",
-        medium: "Oil on Canvas",
-        price: "5000",
-        status: "For Sale",
-        is_framed: true,
-        subject_id: @subject.id,
-        style_ids: [@style.id],
-        images: fixture_file_upload("example.png", "image/png")} }
+        { listing_name: 'Moana Lisa',
+          description: 'This is the Hawaiian version of Mona Lisa',
+          height: '60',
+          width: '50',
+          depth: '2.5',
+          year: '2020',
+          category: 'Painting',
+          medium: 'Oil on Canvas',
+          price: '5000',
+          status: 'For Sale',
+          is_framed: true,
+          subject_id: @subject.id,
+          style_ids: [@style.id],
+          images: fixture_file_upload('example.png', 'image/png') } }
     end
     follow_redirect!
     assert_template 'artworks/show'
@@ -67,33 +69,33 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a', text: 'Delete'
     first_art = @user.artworks.paginate(page: 1).first
     get edit_artwork_path(first_art)
-    assert_select "title", "Edit Artwork | EXHYBYT"
-    listing_name = "Moana Lisa"
-    description = "Aloha! This is the Hawaiian version of Mona Lisa."
+    assert_select 'title', 'Edit Artwork | EXHYBYT'
+    listing_name = 'Moana Lisa'
+    description = 'Aloha! This is the Hawaiian version of Mona Lisa.'
     height = 60
     width = 50
     depth = 2.5
     year = 2020
-    category = "Painting"
-    medium = "Oil on Canvas"
+    category = 'Painting'
+    medium = 'Oil on Canvas'
     price = 5000
-    status = "For Sale"
+    status = 'For Sale'
     is_framed = true
     subject_id = @subject.id
     style_ids = [@style.id]
     patch artwork_path(first_art), params: { artwork: { listing_name: listing_name,
-      description: description,
-      height: height,
-      width: width,
-      depth: depth,
-      year: year,
-      category: category,
-      medium: medium,
-      price: price,
-      status: status,
-      is_framed: is_framed,
-      subject_id: @subject.id,
-      style_ids: style_ids } }
+                                                        description: description,
+                                                        height: height,
+                                                        width: width,
+                                                        depth: depth,
+                                                        year: year,
+                                                        category: category,
+                                                        medium: medium,
+                                                        price: price,
+                                                        status: status,
+                                                        is_framed: is_framed,
+                                                        subject_id: @subject.id,
+                                                        style_ids: style_ids } }
     assert_not flash.empty?
     assert_redirected_to first_art
     first_art.reload
@@ -132,37 +134,37 @@ class ArtworkInterfaceTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
 
     patch artwork_path(second_art), params: { artwork: { listing_name: listing_name,
-      description: description,
-      height: height,
-      width: width,
-      depth: depth,
-      year: year,
-      category: category,
-      medium: medium,
-      price: price,
-      status: status,
-      is_framed: is_framed,
-      subject_id: @subject.id,
-      style_ids: style_ids } }
-    assert flash.empty?
+                                                         description: description,
+                                                         height: height,
+                                                         width: width,
+                                                         depth: depth,
+                                                         year: year,
+                                                         category: category,
+                                                         medium: medium,
+                                                         price: price,
+                                                         status: status,
+                                                         is_framed: is_framed,
+                                                         subject_id: @subject.id,
+                                                         style_ids: style_ids } }
+    assert_empty flash
     assert_redirected_to root_url
   end
 
-  test "artwork show page" do
+  test 'artwork show page' do
     get artwork_path(@artwork)
     assert_template 'artworks/show'
     assert_select 'title', full_title(@artwork.listing_name)
     assert_select 'h5', text: @artwork.listing_name
-#    assert image
-#    assert_select 'h2', text: @artwork.category + " by " + @artwork.user.display_name
-#    assert_select 'p', text: 'Width: ' + @artwork.width.to_s + " cm | Height: " + @artwork.height.to_s + " cm"
-#    assert_select 'p', text: @artwork.medium + " | " + @artwork.year.to_s
-#    assert_select 'p', text: @artwork.depth
-#    assert_select 'p', text: 'Price: £ ' + @artwork.price.to_s
-#    assert_select 'p', text: @artwork.description
-#    assert_select 'p', text: @artwork.subject
-#    assert_select 'p', text: @artwork.status
-#    assert_select 'p', text: @artwork.is_framed
-#    assert_select 'h2', text: @artwork.styles
+    #    assert image
+    #    assert_select 'h2', text: @artwork.category + " by " + @artwork.user.display_name
+    #    assert_select 'p', text: 'Width: ' + @artwork.width.to_s + " cm | Height: " + @artwork.height.to_s + " cm"
+    #    assert_select 'p', text: @artwork.medium + " | " + @artwork.year.to_s
+    #    assert_select 'p', text: @artwork.depth
+    #    assert_select 'p', text: 'Price: £ ' + @artwork.price.to_s
+    #    assert_select 'p', text: @artwork.description
+    #    assert_select 'p', text: @artwork.subject
+    #    assert_select 'p', text: @artwork.status
+    #    assert_select 'p', text: @artwork.is_framed
+    #    assert_select 'h2', text: @artwork.styles
   end
 end

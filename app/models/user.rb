@@ -1,46 +1,49 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
+
   before_save :downcase_email
   before_create :create_activation_digest
-  before_create { self.display_name = firstname + " " + lastname }
+  before_create { self.display_name = firstname + ' ' + lastname }
   before_create :create_username
-  before_create { self.currency = "gbp" }
+  before_create { self.currency = 'gbp' }
 
   has_many :spaces, dependent: :destroy
   has_many :reservations, dependent: :destroy
   has_many :artworks, dependent: :destroy
   has_many :orders
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
                                   dependent: :destroy
-  has_many :passive_relationships, class_name: "Relationship",
-                                   foreign_key: "followed_id",
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :reviews
   has_one_attached :image
 
-  validates :firstname, presence: true, length: {maximum: 60}
-  validates :lastname, presence: true, length: {maximum: 60}
-  validates :display_name, presence: true, length: {maximum: 60}, allow_nil: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: {maximum: 255},
-                    format: {with: VALID_EMAIL_REGEX},
+  validates :firstname, presence: true, length: { maximum: 60 }
+  validates :lastname, presence: true, length: { maximum: 60 }
+  validates :display_name, presence: true, length: { maximum: 60 }, allow_nil: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: {minimum: 6}, allow_nil: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  validates :instagram, length: {maximum: 60}
-  validates :facebook, length: {maximum: 60}
-  validates :twitter, length: {maximum: 60}
-  validates :website, length: {maximum: 60}
-  validates :bio, length: {maximum: 1000}
-  validates :currency, length: {maximum: 3}, presence: true, allow_nil: true
-  validates :user_name, length: {maximum: 60}, presence: true, allow_nil: true
+  validates :instagram, length: { maximum: 60 }
+  validates :facebook, length: { maximum: 60 }
+  validates :twitter, length: { maximum: 60 }
+  validates :website, length: { maximum: 60 }
+  validates :bio, length: { maximum: 1000 }
+  validates :currency, length: { maximum: 3 }, presence: true, allow_nil: true
+  validates :user_name, length: { maximum: 60 }, presence: true, allow_nil: true
 
-  validates :image, content_type: {in: %w[image/jpeg image/jpg image/gif image/png], message: "Please upload a valid file type (jpeg, gif, png)."},
-                    size: {less_than: 5.megabytes, message: "exceeds 5MB."}
+  validates :image, content_type: { in: %w[image/jpeg image/jpg image/gif image/png], message: 'Please upload a valid file type (jpeg, gif, png).' },
+                    size: { less_than: 5.megabytes, message: 'exceeds 5MB.' }
 
   # Returns the hash digest of the given string.
   def self.digest(string)
@@ -84,6 +87,7 @@ class User < ApplicationRecord
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
+
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -98,7 +102,7 @@ class User < ApplicationRecord
   end
 
   def space_feed
-    followed_space = Space.where("user_id IN (?) OR user_id =?", following_ids, id)
+    followed_space = Space.where('user_id IN (?) OR user_id =?', following_ids, id)
     if followed_space.count >= 3
       followed_space
     else
@@ -107,7 +111,7 @@ class User < ApplicationRecord
   end
 
   def art_feed
-    followed_art = Artwork.where("user_id IN (?) OR user_id =?", following_ids, id)
+    followed_art = Artwork.where('user_id IN (?) OR user_id =?', following_ids, id)
     if followed_art.count >= 3
       followed_art
     else
@@ -142,9 +146,9 @@ class User < ApplicationRecord
 
   def create_username
     self.user_name = if User.any?
-      "user_" + (User.last.id + 1).to_s
-    else
-      "user_1"
-    end
+                       'user_' + (User.last.id + 1).to_s
+                     else
+                       'user_1'
+                     end
   end
 end

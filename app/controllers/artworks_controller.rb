@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 class ArtworksController < ApplicationController
-  before_action :set_artwork,       only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user,  except: [:show]
-  before_action :correct_user,      only: [:edit, :update, :destroy]
+  before_action :set_artwork,       only: %i[show edit update destroy]
+  before_action :logged_in_user, except: [:show]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def index
     @artworks = current_user.artworks.paginate(page: params[:page])
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @artwork = current_user.artworks.build if logged_in?
@@ -18,23 +19,20 @@ class ArtworksController < ApplicationController
     @artwork = current_user.artworks.build(artwork_params)
     @artwork.images.attach(params[:artwork][:images])
     if @artwork.save
-      flash[:success] = "artwork saved."
+      flash[:success] = 'artwork saved.'
       redirect_to @artwork
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    unless params[:artwork][:images].nil?
-      @artwork.images.attach(params[:artwork][:images])
-    end
+    @artwork.images.attach(params[:artwork][:images]) unless params[:artwork][:images].nil?
     if @artwork.update(artwork_params)
       redirect_to @artwork
-      flash[:primary] = "artwork updated."
+      flash[:primary] = 'artwork updated.'
     else
       render :edit
     end
@@ -45,7 +43,7 @@ class ArtworksController < ApplicationController
       flash[:warning] = "Artwork currently can't be deleted as it was used in a reservation."
     else
       @artwork.destroy
-      flash[:primary] = "artwork has been deleted"
+      flash[:primary] = 'artwork has been deleted'
     end
     redirect_to artworks_path
   end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class SpacesController < ApplicationController
-  before_action :set_space,         only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user,  except: [:show]
-  before_action :correct_user,      only: [:edit, :update, :destroy]
+  before_action :set_space, only: %i[show edit update destroy]
+  before_action :logged_in_user, except: [:show]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def index
     #    @spaces = Space.all
@@ -9,7 +11,7 @@ class SpacesController < ApplicationController
   end
 
   def show
-    @booked = Reservation.where("space_id = ? AND user_id = ?", @space.id, current_user.id).present? if current_user
+    @booked = Reservation.where('space_id = ? AND user_id = ?', @space.id, current_user.id).present? if current_user
     @reviews = @space.reviews
     @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
   end
@@ -22,23 +24,20 @@ class SpacesController < ApplicationController
     @space = current_user.spaces.build(space_params)
     @space.images.attach(params[:space][:images])
     if @space.save
-      flash[:success] = "Space saved."
+      flash[:success] = 'Space saved.'
       redirect_to @space
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    unless params[:space][:images].nil?
-      @space.images.attach(params[:space][:images])
-    end
+    @space.images.attach(params[:space][:images]) unless params[:space][:images].nil?
     if @space.update(space_params)
       redirect_to @space
-      flash[:primary] = "Space updated."
+      flash[:primary] = 'Space updated.'
     else
       render :edit
     end
@@ -46,10 +45,11 @@ class SpacesController < ApplicationController
 
   def destroy
     if @space.reservations.any?
-      flash[:warning] = "Space currently can't be deleted as there are reservations. However, you can inactivate it, so it's not searchable and bookable anymore."
+      flash[:warning] =
+        "Space currently can't be deleted as there are reservations. However, you can inactivate it, so it's not searchable and bookable anymore."
     else
       @space.destroy
-      flash[:primary] = "Space has been deleted"
+      flash[:primary] = 'Space has been deleted'
     end
     redirect_to spaces_path
   end
@@ -99,12 +99,12 @@ class SpacesController < ApplicationController
       :active,
       :days_min,
       :type_id,
-      schedules_attributes: [
-        :id,
-        :opens_at,
-        :closes_at,
-        :weekday,
-        :_destroy
+      schedules_attributes: %i[
+        id
+        opens_at
+        closes_at
+        weekday
+        _destroy
       ]
     )
   end

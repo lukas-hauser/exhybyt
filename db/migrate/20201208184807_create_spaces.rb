@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSpaces < ActiveRecord::Migration[6.0]
   def change
     create_table :spaces do |t|
@@ -30,6 +32,6 @@ class CreateSpaces < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :spaces, [:user_id, :created_at]
+    add_index :spaces, %i[user_id created_at]
   end
 end
