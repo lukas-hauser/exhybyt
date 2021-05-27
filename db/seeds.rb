@@ -264,7 +264,7 @@ CSV.foreach(Rails.root.join('lib/seed_csv/lukas_hauser_art.csv'), headers: true)
     price: row['price']
   )
   artwork.images.attach(
-    io: URI.open(row['image_url']),
+    io: URI.parse(row['image_url']).open,
     filename: 'photo.jpg',
     content_type: 'image/jpg'
   )
@@ -332,7 +332,7 @@ space_n = 1
     is_adverts: is_adverts
   )
   space.images.attach(
-    io: URI.open(space_images.sample),
+    io: URI.parse(space_images.sample).open,
     filename: 'photo.jpg',
     content_type: 'image/jpg'
   )

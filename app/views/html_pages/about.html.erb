@@ -1,8 +1,13 @@
 <% provide(:title, 'About') %>
 
-<h1>We are making exhibition space more accessible.</h1>
-<h2>
-  Showing art or photography to the public is an amazing experience. However, finding the right venue and organising an exhibition is often difficult, time-consuming and expensive.
-  <br>
-  We want to change that.
-</h2>
+<div class="media">
+  <img class="align-self-center mr-3">
+    <%= link_to gravatar_for(User.first, size: 200), User.first %>
+  </img>
+  <div class="media-body">
+    <h5 class="mt-0">About EXHYBYT</h5>
+
+    <p>EXHYBYT was started by Lukas, a passionate artist himself who is on the mission to make exhibition space more accessible. I organised my own debut exhibition in May 2019 and I found showing work to the public one of the greatest experiences as an artist and photographer. However, finding the right venue and organising the exhibition was difficult, time-consuming and quite expensive.</p>
+    <p class="mb-0">I built EXHYBYT to change that. I want to allow many more passionate artists and photographers to share the experience of exhibiting artwork to an audience, but without the hassle and the high cost. I built the platform myself and would love to hear your feedback, if something doesn’t work or if you are missing a feature. You can contact me via lukas@exhybyt.com. I look forward to hearing from you!</p>
+  </div>
+</div>
