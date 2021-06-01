@@ -4,7 +4,7 @@ class Space < ApplicationRecord
   belongs_to :user
   belongs_to :type
   has_many_attached :images
-  has_many :reservations, dependent: :destroy
+  has_many :reservations
   has_many :reviews
 
   def unavailable_dates
@@ -13,7 +13,7 @@ class Space < ApplicationRecord
     end
   end
 
-  has_many :schedules
+  has_many :schedules, dependent: :destroy
   accepts_nested_attributes_for :schedules, allow_destroy: true
 
   def open_weekends?
