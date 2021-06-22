@@ -99,6 +99,10 @@ class SpacesController < ApplicationController
       :active,
       :days_min,
       :type_id,
+      :instagram,
+      :facebook,
+      :website,
+      :twitter,
       schedules_attributes: %i[
         id
         opens_at

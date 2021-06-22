@@ -102,6 +102,10 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     wall_height = 50.0
     wall_width = 60.5
     type_id    = @type.id
+    instagram = 'test'
+    facebook = 'test'
+    website = 'test'
+    twitter = 'test'
     price = 25
     patch space_path(first_space), params: { space: {
       category: category,
@@ -111,6 +115,10 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
       wall_height: wall_height,
       wall_width: wall_width,
       price: price,
+      instagram: instagram,
+      facebook: facebook,
+      website: website,
+      twitter: twitter,
       type_id: @type.id
     } }
     assert_not flash.empty?
@@ -123,6 +131,10 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal wall_height,  first_space.wall_height
     assert_equal wall_width,   first_space.wall_width
     assert_equal price,        first_space.price
+    assert_equal instagram,    first_space.instagram
+    assert_equal facebook,     first_space.facebook
+    assert_equal website,      first_space.website
+    assert_equal twitter,      first_space.twitter
     assert_equal type_id,      first_space.type_id
 
     # Delete Space

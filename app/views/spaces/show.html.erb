@@ -6,6 +6,22 @@
     <div class="col-md-8">
       <h1 class="text-left"><%= @space.listing_name %></h1>
       <h2 class="text-left"><%= @space.type.name %> | <%= @space.category %></h2>
+      <ul class="list-unstyled text-small">
+        <div class="container-center">
+          <% if @space.instagram? %>
+            <a href="https://www.instagram.com/<%= @space.instagram %>/" target="_blank"> <i class="fab fa-instagram text-muted"></i></a>
+          <% end %>
+          <% if @space.facebook? %>
+            <a href="https://facebook.com/<%= @space.facebook %>" target="_blank"> <i class="fab fa-facebook-f text-muted"></i></a>
+          <% end %>
+          <% if @space.twitter? %>
+            <a href="https://twitter.com/<%= @space.twitter %>" target="_blank"> <i class="fab fa-twitter text-muted"></i></a>
+          <% end %>
+          <% if @space.website? %>
+            <a href="https://<%= @space.website %>" target="_blank"> <i class="fas fa-globe-europe text-muted"></i></a>
+          <% end %>
+        </div>
+      </ul>
       <p><%= @space.address %></p>
       <p>Width: <%= @space.wall_width %> cm | Height: <%= @space.wall_height %> cm</p>
       <p>Price: <%= @space.user.currency.upcase %> <%= @space.price %> per day</p>
