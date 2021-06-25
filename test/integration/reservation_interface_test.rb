@@ -28,8 +28,9 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert 'a[href=?]'
 
-    # Valid Submission
+    # Valid Submission for free space
     assert_difference 'Reservation.count', 1 do
+      @space.update_columns(for_free:true)
       post space_reservations_path(@space), params: { reservation:
         { start_date: Date.today,
           end_date: Date.today,
@@ -38,7 +39,7 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
           user_id: @user.id } }
     end
     follow_redirect!
-    # assert_template 'spaces/show'
+    assert_template 'reservations/show'
   end
 
   test 'exhibition interface' do

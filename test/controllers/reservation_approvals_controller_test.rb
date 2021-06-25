@@ -28,12 +28,12 @@ class ReservationApprovalsControllerTest < ActionDispatch::IntegrationTest
     assert @reservation.valid?
   end
 
-  test 'valid approval' do
-    #    log_in_as(@spaceuser)
-    #    get edit_reservation_approval_url(@reservation)
-    # => need valid payment intent id to get a successful approval.
-    #    assert_redirected_to @reservation
-    #    assert_not flash[:success].empty?
+  test 'valid approval without payment' do
+    @reservation.update_columns(total:0)
+    log_in_as(@spaceuser)
+    get edit_reservation_approval_url(@reservation)
+    assert_redirected_to your_reservations_path
+    assert_not flash[:success].empty?
   end
 
   test 'Should redirect edit when user not logged in' do
@@ -62,7 +62,7 @@ class ReservationApprovalsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@spaceuser)
     get edit_reservation_approval_url(@reservation)
     assert_not flash[:danger].empty?
-    assert_redirected_to @reservation
+    assert_redirected_to your_reservations_path
   end
 
   test 'when reservation has already been approved' do
@@ -86,7 +86,7 @@ class ReservationApprovalsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@spaceuser)
     get edit_reservation_approval_url(@reservation)
     assert_not flash[:danger].empty?
-    assert_redirected_to @reservation
+    assert_redirected_to your_reservations_path
   end
 
   test "don't let space user approve mutltiple reservations for same dates and same space." do

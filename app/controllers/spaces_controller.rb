@@ -24,6 +24,9 @@ class SpacesController < ApplicationController
     @space = current_user.spaces.build(space_params)
     @space.images.attach(params[:space][:images])
     if @space.save
+      if @space.for_free?
+        @space.update_columns(price:0)
+      end
       flash[:success] = 'Space saved.'
       redirect_to @space
     else
@@ -36,6 +39,9 @@ class SpacesController < ApplicationController
   def update
     @space.images.attach(params[:space][:images]) unless params[:space][:images].nil?
     if @space.update(space_params)
+      if @space.for_free?
+        @space.update_columns(price:0)
+      end
       redirect_to @space
       flash[:primary] = 'Space updated.'
     else
@@ -103,6 +109,7 @@ class SpacesController < ApplicationController
       :facebook,
       :website,
       :twitter,
+      :for_free,
       schedules_attributes: %i[
         id
         opens_at

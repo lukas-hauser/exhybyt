@@ -119,14 +119,4 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_url
     assert_not flash[:danger].empty?
   end
-
-  test 'valid submission' do
-    log_in_as(@user)
-    assert_difference 'Reservation.count', 1 do
-      post space_reservations_path(@space), params: { reservation:
-        { start_date: Date.today,
-          end_date: Date.today,
-          artwork_ids: [@artwork.id] } }
-    end
-  end
 end

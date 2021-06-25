@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_22_212946) do
+ActiveRecord::Schema.define(version: 2021_06_25_162139) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 2021_06_22_212946) do
     t.string "facebook"
     t.string "website"
     t.string "twitter"
+    t.boolean "for_free", default: false
     t.index ["type_id"], name: "index_spaces_on_type_id"
     t.index ["user_id", "created_at"], name: "index_spaces_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_spaces_on_user_id"

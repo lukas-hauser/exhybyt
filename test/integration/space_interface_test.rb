@@ -137,6 +137,18 @@ class SpaceInterfaceTest < ActionDispatch::IntegrationTest
     assert_equal twitter,      first_space.twitter
     assert_equal type_id,      first_space.type_id
 
+    # Price should be 0 when updated to for free
+    for_free = true
+    price    = 0
+    patch space_path(first_space), params: { space: {
+      for_free: true
+    } }
+    assert_not flash.empty?
+    assert_redirected_to first_space
+    first_space.reload
+    assert_equal for_free,     first_space.for_free
+    assert_equal price,        first_space.price
+
     # Delete Space
     assert_difference 'Space.count', -1 do
       delete space_path(first_space)

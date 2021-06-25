@@ -20,7 +20,7 @@ module UsersHelper
   end
 
   def needs_stripe?
-    !current_user.stripe_user_id? && (current_user.spaces.where(active: true).any? ||
+    !current_user.stripe_user_id? && (current_user.spaces.where("active = ? AND for_free = ?", true, false).any? ||
     current_user.artworks.where(status: 'For Sale').any?)
   end
 

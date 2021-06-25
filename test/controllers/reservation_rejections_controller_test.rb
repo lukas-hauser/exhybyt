@@ -28,12 +28,12 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
     assert @reservation.valid?
   end
 
-  test 'valid rejection' do
-    #    log_in_as(@spaceuser)
-    #    get edit_reservation_rejection_url(@reservation)
-    # => need valid payment intent id to get a successful rejection.
-    #    assert_redirected_to @reservation
-    #    assert_not flash[:success].empty?
+  test 'valid rejection without payment' do
+    @reservation.update_columns(total:0)
+    log_in_as(@spaceuser)
+    get edit_reservation_rejection_url(@reservation)
+    assert_redirected_to your_reservations_path
+    assert_not flash[:success].empty?
   end
 
   test 'Should redirect edit when user not logged in' do
@@ -62,7 +62,7 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@spaceuser)
     get edit_reservation_rejection_url(@reservation)
     assert_not flash[:danger].empty?
-    assert_redirected_to @reservation
+    assert_redirected_to your_reservations_path
   end
 
   test 'when reservation has already been rejected' do
@@ -70,7 +70,7 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@spaceuser)
     get edit_reservation_rejection_url(@reservation)
     assert_not flash[:warning].empty?
-    assert_redirected_to @reservation
+    assert_redirected_to your_reservations_path
   end
 
   test 'when booking request has already expired' do
@@ -86,6 +86,6 @@ class ReservationRejectionsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@spaceuser)
     get edit_reservation_rejection_url(@reservation)
     assert_not flash[:danger].empty?
-    assert_redirected_to @reservation
+    assert_redirected_to your_reservations_path
   end
 end

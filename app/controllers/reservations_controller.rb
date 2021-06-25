@@ -69,8 +69,18 @@ class ReservationsController < ApplicationController
     @reservation.price = @space.price
     @reservation.total = @space.price * days
     @reservation.status = 'Request incomplete'
+    if @space.for_free?
+      @reservation.payment_completed = true
+      @reservation.status = 'Awaiting response from space'
+    end
 
-    if @reservation.save
+    if @reservation.save && @space.for_free?
+      @reservation.send_request_confirmation_email
+      @reservation.send_request_notification_email
+      redirect_to @reservation
+      flash[:primary] =
+        "Thank you - we received your booking request and emailed you the details to #{@reservation.user.email}. #{@reservation.space.listing_name} has 48 hours to approve your request."
+    elsif @reservation.save
       session = Stripe::Checkout::Session.create({
                                                    payment_method_types: ['card'],
                                                    customer_email: @reservation.user.email,
@@ -158,7 +168,7 @@ class ReservationsController < ApplicationController
   # Confirms Space Listing Owner is ready to accept payments
   def stripe_ready
     @space = Space.find(params[:space_id])
-    return unless @space.user.stripe_user_id.nil?
+    return unless @space.user.stripe_user_id.nil? && !@space.for_free?
 
     redirect_to root_url
     flash[:danger] = 'This space is not ready yet to accept payments. Stay tuned..'

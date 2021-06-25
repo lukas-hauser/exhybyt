@@ -16,14 +16,16 @@ class ReservationApprovalsController < ApplicationController
     elsif reservation.payment_intent_cancelled?
       flash[:danger] = "Payment was cancelled. You can't approve this request anymore."
     else
-      Stripe::PaymentIntent.capture(
-        reservation.payment_intent_id
-      )
+      if reservation.total != 0
+        Stripe::PaymentIntent.capture(
+          reservation.payment_intent_id
+        )
+      end
       reservation.approve
       reservation.send_request_approval_email
       flash[:success] = 'Reservation approved.'
     end
-    redirect_to reservation
+    redirect_to your_reservations_path
   end
 
   private

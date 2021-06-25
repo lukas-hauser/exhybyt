@@ -20,7 +20,7 @@
     <div class="alert alert-warning" role="alert">
       Please log in to book.
     </div>
-  <% elsif @space.user.stripe_user_id.nil? %>
+  <% elsif @space.user.stripe_user_id.nil? && !@space.for_free? %>
     <div class="alert alert-warning" role="alert">
       This space is not ready yet to accept payments. Stay tuned.
     </div>
@@ -130,7 +130,9 @@
               $('#btn_book').attr('disabled',false);
 
               var total = days * <%= @space.price %>
-              $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
+              if (total != 0) {
+                $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
+              }
               $('#reservation_days').text(days);
               $('#reservation_sum').text(Math.round(total*100)/100);
               $('#reservation_total').val(total);
@@ -171,7 +173,9 @@
               $('#btn_book').attr('disabled',false);
 
               var total = days * <%= @space.price %>
-              $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
+              if (total != 0) {
+                $('#message').text("You will be asked to provide your payment card details. You will only be charged if your booking request will be accepted.");
+              }
               $('#reservation_days').text(days);
               $('#reservation_sum').text(Math.round(total*100)/100);
               $('#reservation_total').val(total);
