@@ -28,6 +28,17 @@ class ReservationInterfaceTest < ActionDispatch::IntegrationTest
     assert_not flash.empty?
     assert 'a[href=?]'
 
+    # Valid Submission
+    assert_difference 'Reservation.count', 1 do
+      post space_reservations_path(@space), params: { reservation:
+        { start_date: Date.today,
+          end_date: Date.today,
+          space_id: @space.id,
+          artwork_ids: [@artwork.id],
+          user_id: @user.id } }
+    end
+    # Assert redirect to Stripe Checkout
+
     # Valid Submission for free space
     assert_difference 'Reservation.count', 1 do
       @space.update_columns(for_free:true)
