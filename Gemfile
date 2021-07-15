@@ -49,6 +49,7 @@ group :development do
   gem 'rubocop-rails',            '~> 2.9', '>= 2.9.1'
   gem 'spring',                   '~> 2.1.1'
   gem 'spring-watcher-listen',    '~> 2.0.0'
+  gem 'brakeman',                 '~> 5.0', '>= 5.0.4'
 end
 
 group :test do

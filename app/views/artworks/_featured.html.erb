@@ -1,6 +1,4 @@
 <h1>Featured Art</h1>
-<h2><%= link_to "Browse all art", art_path, class: "text-muted" %></h2>
-
 <div class="row mb-5">
   <% if @featured_artworks.any? %>
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -47,3 +45,4 @@
     </div>
   <% end %>
 </div>
+<h2><%= link_to "Browse all art", art_path, class: "text-muted" %></h2>
